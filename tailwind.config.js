@@ -28,7 +28,10 @@ module.exports = {
       },
       boxShadow: {
           "jel-card": "2px 2px 4px 0px #0000001A",
-          "jel-badge": "0px 0px 25px 0px #0000001A"
+          "jel-badge": "0px 0px 25px 0px #0000001A",
+          "jel-nft": "0px 0px 25px 0px #0000001A",
+          "jel-dropdown": "0px 0px 15px 0px #0000001A"
+
       }
     },
   },

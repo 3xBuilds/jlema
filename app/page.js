@@ -1,3 +1,5 @@
+"use client"
+
 import Hero from "@/components/Hero";
 import ProfileInfo from "@/components/profile/ProfileInfo";
 import arrowLeft from "@/assets/icons/arrowl.svg";
@@ -8,7 +10,11 @@ import nft3 from '../assets/nft3.png'
 import nft4 from '../assets/nft4.png'
 import nft5 from '../assets/nft5.png'
 import nft6 from '../assets/nft6.png'
+import arrowd from '../assets/icons/arrowd.svg'
+import tick from '../assets/icons/tick.svg'
 import Image from "next/image";
+import { useState } from "react";
+import NftInfoModal from "@/components/profile/NftInfoModal";
 
 export default function Home() {
 
@@ -51,23 +57,50 @@ const DefaultScreen = () => {
     nft1,
   ]
 
+  const [selectedSort, setSelectedSort] = useState(null);
+  const [openSort, setOpenSort] = useState(false);
+
+  const sortOptions = [
+    {
+      label: "ID: Ascending",
+      value: "id_acc"
+    },
+    {
+      label: "ID: Descending",
+      value: "id_dec"
+    },
+    {
+      label: "Skin: Ascending",
+      value: "skin_acc"
+    },
+    {
+      label: "Skin: Descending",
+      value: "skin_dec"
+    }
+  ]
+
+  const [selectedType, setSelectedType] = useState("Jelema");
+
+  const [showNftInfo, setShowNftInfo] = useState(null);
+
   return(
     <>
-    <div className="w-full h-[1px] bg-jel-gray-3 mt-14 relative z-50"></div>
+    {showNftInfo && <NftInfoModal showNftInfo={showNftInfo} setShowNftInfo={setShowNftInfo}/>}
+    <div className="w-full h-[1px] bg-jel-gray-3 mt-16 relative z-30"></div>
       <div className="flex flex-row">
         <ProfileInfo/>
         <div className="pl-[328px] w-screen">
           <div className="px-5 py-4 flex flex-col gap-4 overflow-scroll w-full noscr">
 
             <div className="border-[1px] overflow-hidden border-jel-gray-3 rounded-xl w-full h-80 relative flex items-center justify-center">
-              <button className="absolute top-1/2 -translate-y-1/2 left-5">
+              <button className="absolute top-1/2 -translate-y-1/2 left-5 flex items-center justify-center w-12 h-12 rounded-lg duration-300 hover:bg-jel-gray-2">
                 <Image src={arrowLeft} className=""/>
               </button>
-              <button className="absolute top-1/2 -translate-y-1/2 right-5">
+              <button className="absolute top-1/2 -translate-y-1/2 right-5 flex items-center justify-center w-12 h-12 rounded-lg duration-300 hover:bg-jel-gray-2">
                 <Image src={arrowRight} className=""/>
               </button>
 
-              <div className=" grid grid-cols-2 w-[60%]">
+              <div onClick={()=>{setShowNftInfo({nftImage: nft1, number: 2})}} className=" grid grid-cols-2 w-[60%]">
                 <div className="h-80">
                   <Image src={nft1} className='w-full h-full object-cover'/>
                 </div>
@@ -88,34 +121,41 @@ const DefaultScreen = () => {
 
             <div className="w-full flex flex-row justify-between items-center">
               <div className=" bg-jel-gray-1 h-12 rounded-xl flex flex-row gap-2 p-1">
-                <div className="bg-white text-base rounded-lg font-semibold text-black px-4 py-2 shadow-jel-card">
+                <div onClick={()=>{setSelectedType("Normal")}} className={`cursor-pointer rounded-lg text-base px-4 py-2 ${selectedType =="Normal" ? "bg-white font-semibold text-black shadow-jel-card" : " font-medium text-jel-gray-4" }`}>
                   <h3 className="">Jelma</h3>
                 </div>
-                <div className=" rounded-lg text-base text-jel-gray-4 font-medium px-4 py-2">
+                <div onClick={()=>{setSelectedType("Legendary")}} className={`cursor-pointer rounded-lg text-base px-4 py-2 ${selectedType =="Legendary" ? "bg-white font-semibold text-black shadow-jel-card" : " font-medium text-jel-gray-4" }`}>
                   <h3 className="">Jelma Legendary</h3>
                 </div>
-                <div className=" rounded-lg text-base text-jel-gray-4 font-medium px-4 py-2">
+                <div onClick={()=>{setSelectedType("Special")}} className={`cursor-pointer rounded-lg text-base px-4 py-2 ${selectedType =="Special" ? "bg-white font-semibold text-black shadow-jel-card" : " font-medium text-jel-gray-4" }`}>
                   <h3 className="">Special Editions</h3>
                 </div>
               </div>
-              <div className="bg-white border-[1px] group group-focus:border-black h-12 border-jel-gray-3 rounded-xl flex flex-row gap-2 px-5 justify-between items-center">
-                <select className=" outline-none focus:outline-none">
-                  <option value="id_acc" >ID: Ascending</option>
-                  <option value="id_dec" >ID: Descending</option>
-                  <option value="skin_acc" >Skin: Ascending</option>
-                  <option value="skin_dec" >Skin: Descending</option>
-                </select>
+
+              <div className="relative">
+                <button onClick={()=>{setOpenSort((prev)=>!prev)}} className={`bg-white hover:border-black duration-200 cursor-pointer border-[1px] group group-focus:border-black ${openSort && " border-black "} h-12 border-jel-gray-3 rounded-xl flex flex-row gap-2 px-5 justify-between items-center`}>
+                  <h3 className="text-black font-semibold">{selectedSort!=null ? selectedSort.label : "Sort By ..."}</h3>
+                    <Image src={arrowd} className={`w-5 duration-300 ${openSort ? "rotate-180" : "rotate-0"}`}/>
+                </button>
+                {openSort && <div className="bg-white rounded-xl shadow-jel-dropdown p-4 w-52 px-4 flex flex-col absolute top-14 right-0">
+                  {sortOptions.map((option)=>(<button onClick={()=>{setSelectedSort(option); setOpenSort(false)}} className="w-full grid grid-cols-12 gap-2 justify-between items-center p-2">
+                    <h3 className="text-black font-medium text-left text-base text-nowrap col-span-10">{option.label}</h3>
+                    <div className="col-span-2">
+                      {selectedSort && option.value == selectedSort.value && <Image src={tick} className="w-5"/>}
+                    </div>
+                  </button>))}
+                </div>}
               </div>
             </div>
 
             <div className="grid max-sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 items-start justify-between gap-4">
                 {nfts.map((nft, index) => (
-                  <div key={index} className="rounded-xl border-[1px] border-jel-gray-3 overflow-hidden flex flex-col">
+                  <div onClick={()=>{setShowNftInfo({nftImage: nft, number: index+1})}} key={index} className="rounded-xl hover:shadow-jel-nft duration-200 cursor-pointer border-[1px] border-jel-gray-3 overflow-hidden flex flex-col">
                     <div className="h-40 w-full">
                       <Image src={nft} className="object-cover w-full h-full"/>
                     </div>
                     <div className="bg-white text-center py-2">
-                      <h3 className="text-sm font-normal text-black">{"Jelema #"}{index}</h3>
+                      <h3 className="text-sm font-normal text-black">{"Jelema #"}{index+1}</h3>
                     </div>
                 </div>
               ))}
