@@ -18,8 +18,10 @@ export const GlobalContextProvider = ({ children }) => {
   const [loader, setLoader] = useState(false);
   const [user, setUser] = useState({});
 
+  const[selected, setSelected] = useState(0);
+
   return (
-    <GlobalContext.Provider value={{ loader, setLoader, user, setUser}}>
+    <GlobalContext.Provider value={{ loader, setLoader, user, setUser, selected, setSelected}}>
       {children}
     </GlobalContext.Provider>
   );

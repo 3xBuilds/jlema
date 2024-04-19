@@ -15,6 +15,8 @@ import tick from '../assets/icons/tick.svg'
 import Image from "next/image";
 import { useState } from "react";
 import NftInfoModal from "@/components/profile/NftInfoModal";
+import { useGlobalContext } from "@/context/MainContext";
+import NFTFetcher from "@/components/fetcher/nftFetcher";
 
 export default function Home() {
 
@@ -79,7 +81,8 @@ const DefaultScreen = () => {
     }
   ]
 
-  const [selectedType, setSelectedType] = useState("Jlema");
+  // const [selectedType, setSelectedType] = useState("Jlema");
+  const{selected, setSelected} = useGlobalContext();
 
   const [showNftInfo, setShowNftInfo] = useState(null);
 
@@ -121,15 +124,15 @@ const DefaultScreen = () => {
 
             <div className="w-full flex flex-row justify-between items-center">
               <div className=" bg-jel-gray-1 h-12 rounded-xl flex flex-row gap-2 p-1">
-                <div onClick={()=>{setSelectedType("Normal")}} className={`cursor-pointer rounded-lg text-base px-4 py-2 ${selectedType =="Normal" ? "bg-white font-semibold text-black shadow-jel-card" : " font-medium text-jel-gray-4" }`}>
+                <button onClick={()=>{setSelected(0)}} className={`cursor-pointer rounded-lg text-base px-4 py-2 ${selected ==0 ? "bg-white font-semibold text-black shadow-jel-card" : " font-medium text-jel-gray-4" }`}>
                   <h3 className="">Jlema</h3>
-                </div>
-                <div onClick={()=>{setSelectedType("Legendary")}} className={`cursor-pointer rounded-lg text-base px-4 py-2 ${selectedType =="Legendary" ? "bg-white font-semibold text-black shadow-jel-card" : " font-medium text-jel-gray-4" }`}>
+                </button>
+                <button onClick={()=>{setSelected(1)}} className={`cursor-pointer rounded-lg text-base px-4 py-2 ${selected ==1 ? "bg-white font-semibold text-black shadow-jel-card" : " font-medium text-jel-gray-4" }`}>
                   <h3 className="">Jlema Legendary</h3>
-                </div>
-                <div onClick={()=>{setSelectedType("Special")}} className={`cursor-pointer rounded-lg text-base px-4 py-2 ${selectedType =="Special" ? "bg-white font-semibold text-black shadow-jel-card" : " font-medium text-jel-gray-4" }`}>
+                </button>
+                <button onClick={()=>{setSelected(2)}} className={`cursor-pointer rounded-lg text-base px-4 py-2 ${selected ==2 ? "bg-white font-semibold text-black shadow-jel-card" : " font-medium text-jel-gray-4" }`}>
                   <h3 className="">Special Editions</h3>
-                </div>
+                </button>
               </div>
 
               <div className="relative">
@@ -148,6 +151,8 @@ const DefaultScreen = () => {
               </div>
             </div>
 
+
+            <NFTFetcher/>
             <div className="grid max-sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 items-start justify-between gap-4">
                 {nfts.map((nft, index) => (
                   <div onClick={()=>{setShowNftInfo({nftImage: nft, number: index+1})}} key={index} className="rounded-xl hover:shadow-jel-nft duration-200 cursor-pointer border-[1px] border-jel-gray-3 overflow-hidden flex flex-col">

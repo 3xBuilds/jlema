@@ -7,6 +7,7 @@ import settings from '../../assets/icons/settings.svg'
 import power from '../../assets/icons/power.svg'
 import Image from 'next/image'
 import { WalletConnectButton } from '../buttons/walletConnectButton'
+import TokenFetcher from '../fetcher/tokenFetcher'
 
 const ProfileInfo = () => {
   return (
@@ -108,7 +109,7 @@ const ProfileInfo = () => {
             </div>
             <div className='flex flex-row justify-between relative'>
                 <p className='text-sm font-normal text-jel-gray-4'>{"CLEAN Token"}</p>
-                <p className='text-sm font-normal text-black'>{"30,000"}</p>
+                <TokenFetcher/>
             </div>
         </div>
         
