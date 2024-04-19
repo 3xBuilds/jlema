@@ -6,6 +6,7 @@ import share from '../../assets/icons/share2.svg'
 import settings from '../../assets/icons/settings.svg'
 import power from '../../assets/icons/power.svg'
 import Image from 'next/image'
+import { WalletConnectButton } from '../buttons/walletConnectButton'
 
 const ProfileInfo = () => {
   return (
@@ -127,10 +128,11 @@ const ProfileInfo = () => {
                 <Image src={settings} className='w-5'/>
                 <h3 className=' text-base font-semibold text-black'>Settings</h3>
             </button>
-            <button className='flex flex-row gap-2 bg-jel-gray-1 hover:bg-jel-gray-2 duration-150 w-full py-2 px-4 items-center justify-center rounded-lg text-black'>
+            <WalletConnectButton/>
+            {/* <button className='flex flex-row gap-2 bg-jel-gray-1 hover:bg-jel-gray-2 duration-150 w-full py-2 px-4 items-center justify-center rounded-lg text-black'>
                 <Image src={power} className='w-5'/>
                 <h3 className=' text-base font-semibold text-black'>Disconnect</h3>
-            </button>
+            </button> */}
         </div>
 
 

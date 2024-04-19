@@ -79,7 +79,7 @@ const DefaultScreen = () => {
     }
   ]
 
-  const [selectedType, setSelectedType] = useState("Jelema");
+  const [selectedType, setSelectedType] = useState("Jlema");
 
   const [showNftInfo, setShowNftInfo] = useState(null);
 
@@ -105,7 +105,7 @@ const DefaultScreen = () => {
                   <Image src={nft1} className='w-full h-full object-cover'/>
                 </div>
                 <div className="h-full flex flex-col items-start justify-center">
-                  <h3 className="font-medium text-jel-gray-4 text-lg">Jelma</h3>
+                  <h3 className="font-medium text-jel-gray-4 text-lg">Jlema</h3>
                   <h3 className="font-semibold text-black text-5xl">#2</h3>
                   <div className="mt-4 flex flex-row gap-2 flex-wrap">
                     <h3 className="text-xs font-normal text-jel-gray-4">Skin <span className="font-medium text-black">Old School Tattoos</span></h3>
@@ -122,10 +122,10 @@ const DefaultScreen = () => {
             <div className="w-full flex flex-row justify-between items-center">
               <div className=" bg-jel-gray-1 h-12 rounded-xl flex flex-row gap-2 p-1">
                 <div onClick={()=>{setSelectedType("Normal")}} className={`cursor-pointer rounded-lg text-base px-4 py-2 ${selectedType =="Normal" ? "bg-white font-semibold text-black shadow-jel-card" : " font-medium text-jel-gray-4" }`}>
-                  <h3 className="">Jelma</h3>
+                  <h3 className="">Jlema</h3>
                 </div>
                 <div onClick={()=>{setSelectedType("Legendary")}} className={`cursor-pointer rounded-lg text-base px-4 py-2 ${selectedType =="Legendary" ? "bg-white font-semibold text-black shadow-jel-card" : " font-medium text-jel-gray-4" }`}>
-                  <h3 className="">Jelma Legendary</h3>
+                  <h3 className="">Jlema Legendary</h3>
                 </div>
                 <div onClick={()=>{setSelectedType("Special")}} className={`cursor-pointer rounded-lg text-base px-4 py-2 ${selectedType =="Special" ? "bg-white font-semibold text-black shadow-jel-card" : " font-medium text-jel-gray-4" }`}>
                   <h3 className="">Special Editions</h3>
@@ -155,7 +155,7 @@ const DefaultScreen = () => {
                       <Image src={nft} className="object-cover w-full h-full"/>
                     </div>
                     <div className="bg-white text-center py-2">
-                      <h3 className="text-sm font-normal text-black">{"Jelema #"}{index+1}</h3>
+                      <h3 className="text-sm font-normal text-black">{"Jlema #"}{index+1}</h3>
                     </div>
                 </div>
               ))}
