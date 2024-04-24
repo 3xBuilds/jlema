@@ -10,12 +10,16 @@ import jlemaFetcher from "@/utils/abis/jlemaFetcher";
 import { ethers } from "ethers";
 import axios from "axios"
 import Image from "next/image";
+import { useAccount } from "wagmi";
+import {newYear} from "@/assets/newYear.png";
+import {lunarNY} from "@/assets/lunarNY.png";
+import {christmas} from "@/assets/christmas.png"
 
 export default function NFTFetcher(){
 
-    const{selected} = useGlobalContext();
-    const {showNftInfo, setShowNftInfo} = useGlobalContext(null);
-
+    const{selected, setShowNftInfo} = useGlobalContext();
+    const{address} = useAccount();
+    const[balance, setBalance] = useState([])
     const add = [contractAdds.Jlema, contractAdds.JlemaLegendary, contractAdds.JlemaSE];
     const abi = [jlemaabi, jlemaLegendary, jlemaSE];
 
@@ -72,7 +76,26 @@ export default function NFTFetcher(){
 
     async function jlemaLegendaryFetcher(){
         try{
+            const contract = await contractSetup();
+            const balance = Number(await contract.balanceOf(address));
 
+            for(let i = 0; i < balance; i++){
+                dataProvider(await contract.tokenOfOwnerByIndex(address, i));
+            }
+
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+
+    async function specialEditionFetcher(){
+        try{
+            const contract = await contractSetup();
+            for(let i = 0; i < 3; i++){
+                const balance = Number(await contract.balanceOf(address, i));
+                setBalance(oldArray => [...oldArray, balance]);
+            }
         }
         catch(err){
             console.log(err);
@@ -112,10 +135,12 @@ export default function NFTFetcher(){
 
     async function fetch(){
         try{
-            const contract = await contractSetup();
 
             if(selected == 1){
-                
+                jlemaLegendaryFetcher();
+            }
+            else if(selected == 2){
+                specialEditionFetcher();
             }
         }
         catch(err){
@@ -135,8 +160,9 @@ export default function NFTFetcher(){
         else{
             fetch();
         }
-    },[selected]);
+    },[selected, address]);
 
+    if(selected != 2)
     return (
         <div className="grid max-sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 items-start justify-between gap-4">
             {displayNFT.map((nft, index) => (
@@ -149,6 +175,27 @@ export default function NFTFetcher(){
                     </div>
                 </div>
               ))}
+
+        </div>
+    )
+
+    if(selected == 2)
+    return (
+        <div className="grid max-sm:grid-cols-1 sm:grid-cols-2 py-20 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 items-start justify-between gap-4">
+            <div className="text-center text-xl font-semibold hover:shadow-xl hover:shadow-black/50 duration-200 rounded-xl">
+                <Image className="rounded-xl" width={1080} height={1080} src={christmas}/>
+                <h2 className="py-4">{balance[0]}x</h2>
+            </div>
+
+            <div className="text-center text-xl font-semibold hover:shadow-xl hover:shadow-black/50 duration-200 rounded-xl">
+                <Image className="rounded-xl" width={1080} height={1080} src={lunarNY}/>
+                <h2 className="py-4">{balance[1]}x</h2>
+            </div>
+
+            <div className="text-center text-xl font-semibold hover:shadow-xl hover:shadow-black/50 duration-200 rounded-xl">
+                <Image className="rounded-xl" width={1080} height={1080} src={newYear}/>
+                <h2 className="py-4">{balance[2]}x</h2>
+            </div>
 
         </div>
     )
