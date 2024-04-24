@@ -78,9 +78,10 @@ export default function NFTFetcher(){
         try{
             const contract = await contractSetup();
             const balance = Number(await contract.balanceOf(address));
-
+            console.log(balance);
             for(let i = 0; i < balance; i++){
-                dataProvider(await contract.tokenOfOwnerByIndex(address, i));
+                let tokenId = Number(await contract.tokenOfOwnerByIndex(address, i));
+                dataProvider(tokenId);
             }
 
         }
@@ -182,19 +183,22 @@ export default function NFTFetcher(){
     if(selected == 2)
     return (
         <div className="grid max-sm:grid-cols-1 sm:grid-cols-2 pb-20 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 items-start justify-between gap-4">
-            <div className="text-center text-xl font-semibold shadow-xl shadow-black/10 hover:shadow-black/30 duration-200 rounded-xl">
+            <div className="text-center text-lg font-semibold shadow-xl shadow-black/10 hover:shadow-black/30 duration-200 rounded-xl">
                 <Image className="rounded-xl" width={1080} height={1080} src={christmas}/>
-                <h2 className="py-4">{balance[0]}x</h2>
+                <h2 className="text-xl pt-2 font-bold">Merry Christmas 2023</h2>
+                <h2 className="pt-2 pb-4">{balance[0]}x</h2>
             </div>
 
-            <div className="text-center text-xl font-semibold shadow-xl shadow-black/10 hover:shadow-black/30 duration-200 rounded-xl">
+            <div className="text-center text-lg font-semibold shadow-xl shadow-black/10 hover:shadow-black/30 duration-200 rounded-xl">
                 <Image className="rounded-xl" width={1080} height={1080} src={lunarNY}/>
-                <h2 className="py-4">{balance[1]}x</h2>
+                <h2 className="text-xl pt-2 font-bold">Happy Lunar New Year 2024</h2>
+                <h2 className="pt-2 pb-4">{balance[1]}x</h2>
             </div>
 
-            <div className="text-center text-xl font-semibold shadow-xl shadow-black/10 hover:shadow-black/30 duration-200 rounded-xl">
+            <div className="text-center text-lg font-semibold shadow-xl shadow-black/10 hover:shadow-black/30 duration-200 rounded-xl">
                 <Image className="rounded-xl" width={1080} height={1080} src={newYear}/>
-                <h2 className="py-4">{balance[2]}x</h2>
+                <h2 className="text-xl pt-2 font-bold">Welcome 2024</h2>
+                <h2 className="pt-2 pb-4">{balance[2]}x</h2>
             </div>
 
         </div>
