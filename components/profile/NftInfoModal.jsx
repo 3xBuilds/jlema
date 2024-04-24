@@ -13,7 +13,7 @@ const NftInfoModal = ({showNftInfo, setShowNftInfo}) => {
             <div className='w-full h-full relative grid grid-cols-2'>
                 <Image onClick={()=>{setShowNftInfo(null)}} src={cross} className='opacity-60 absolute top-5 right-5 cursor-pointer'/>
                 <div className='w-full h-full'>
-                    {showNftInfo && <Image src={showNftInfo?.nftImage} className='w-full h-full object-cover'/>}
+                    {showNftInfo && <Image width={1080} height={1080} src={showNftInfo?.nftImage} className='w-full h-full object-cover'/>}
                 </div>
                 <div className=' p-6 pt-16 flex flex-col justify-between'>
                   <h1 className='font-bold text-black text-[32px]'>Jlema #{showNftInfo.number}</h1>

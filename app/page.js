@@ -84,7 +84,7 @@ const DefaultScreen = () => {
   // const [selectedType, setSelectedType] = useState("Jlema");
   const{selected, setSelected} = useGlobalContext();
 
-  const [showNftInfo, setShowNftInfo] = useState(null);
+  const {showNftInfo, setShowNftInfo} = useGlobalContext();
 
   return(
     <>
@@ -153,7 +153,7 @@ const DefaultScreen = () => {
 
 
             <NFTFetcher/>
-            <div className="grid max-sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 items-start justify-between gap-4">
+            {/* <div className="grid max-sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 items-start justify-between gap-4">
                 {nfts.map((nft, index) => (
                   <div onClick={()=>{setShowNftInfo({nftImage: nft, number: index+1})}} key={index} className="rounded-xl hover:shadow-jel-nft duration-200 cursor-pointer border-[1px] border-jel-gray-3 overflow-hidden flex flex-col">
                     <div className="h-40 w-full">
@@ -164,7 +164,7 @@ const DefaultScreen = () => {
                     </div>
                 </div>
               ))}
-            </div>
+            </div> */}
           </div>
       </div>
       </div>

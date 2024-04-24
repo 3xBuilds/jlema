@@ -9,4 +9,6 @@ export const contractAdds = {
 
     CLEANToken : "0xeF2c6201f085E972fbaD4FA08beF4BaB660DAc33",
 
+    JlemaFetcher: "0x9f9aDE0dDE7a7FfB944EAe1F089Eb2B1874AF5c9"
+
 }

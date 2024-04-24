@@ -19,7 +19,7 @@ export default function TokenFetcher(){
     
         try {
           const contract = new ethers.Contract(add, abi, signer);
-          setLoader(false);
+        //   setLoader(false);
     
           return contract;
         }
