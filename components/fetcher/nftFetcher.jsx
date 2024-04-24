@@ -11,9 +11,9 @@ import { ethers } from "ethers";
 import axios from "axios"
 import Image from "next/image";
 import { useAccount } from "wagmi";
-import {newYear} from "@/assets/newYear.png";
-import {lunarNY} from "@/assets/lunarNY.png";
-import {christmas} from "@/assets/christmas.png"
+import newYear from "@/assets/newYear.png";
+import lunarNY from "@/assets/lunarNY.png";
+import christmas from "@/assets/christmas.png"
 
 export default function NFTFetcher(){
 
@@ -182,17 +182,17 @@ export default function NFTFetcher(){
     if(selected == 2)
     return (
         <div className="grid max-sm:grid-cols-1 sm:grid-cols-2 pb-20 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 items-start justify-between gap-4">
-            <div className="text-center text-xl font-semibold hover:shadow-xl hover:shadow-black/30 duration-200 rounded-xl">
+            <div className="text-center text-xl font-semibold shadow-xl shadow-black/10 hover:shadow-black/30 duration-200 rounded-xl">
                 <Image className="rounded-xl" width={1080} height={1080} src={christmas}/>
                 <h2 className="py-4">{balance[0]}x</h2>
             </div>
 
-            <div className="text-center text-xl font-semibold hover:shadow-xl hover:shadow-black/30 duration-200 rounded-xl">
+            <div className="text-center text-xl font-semibold shadow-xl shadow-black/10 hover:shadow-black/30 duration-200 rounded-xl">
                 <Image className="rounded-xl" width={1080} height={1080} src={lunarNY}/>
                 <h2 className="py-4">{balance[1]}x</h2>
             </div>
 
-            <div className="text-center text-xl font-semibold hover:shadow-xl hover:shadow-black/30 duration-200 rounded-xl">
+            <div className="text-center text-xl font-semibold shadow-xl shadow-black/10 hover:shadow-black/30 duration-200 rounded-xl">
                 <Image className="rounded-xl" width={1080} height={1080} src={newYear}/>
                 <h2 className="py-4">{balance[2]}x</h2>
             </div>
