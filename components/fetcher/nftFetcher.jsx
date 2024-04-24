@@ -26,18 +26,16 @@ export default function NFTFetcher(){
 
     async function dataProvider(tokenId){
         try{
-            
-            // const metadata = "https://ipfs.io/ipfs/bafybeihrih4s2buh3su7bq4awuqyllupmdvbkootnp6dahvikx6ptltzoq/json/"+tokenId+".json";
-            // const meta = await axios.get(metadata);
-            // console.log(meta);
-            // const json = await meta
-            // const name = "Jlema #"+tokenId;
-            // console.log(name);
-            const img = "https://cf-ipfs.com/ipfs/bafybeiduqtzpwdc6hwwwjg3rt35twynjwsq367wo5phobkb3iogmhincge/" + tokenId + ".png";
 
-            // const res = await fetch(img);
-            // console.log("Image res", res);
+            var img;
             
+            if(selected == 0){
+                img = "https://cf-ipfs.com/ipfs/bafybeiduqtzpwdc6hwwwjg3rt35twynjwsq367wo5phobkb3iogmhincge/" + tokenId + ".png";
+            }
+            else if(selected == 1){
+                img = "https://cf-ipfs.com/ipfs/QmTj3DP94SPwVMBousFo25dryL66mPgK8bjyGFPKT5tM5B/"+tokenId+".gif"
+            }
+
             setDisplayNFT(oldArray => [...oldArray, {img, tokenId}]);
 
             counter++;
@@ -66,6 +64,15 @@ export default function NFTFetcher(){
         //   setLoader(false);
     
           return contract;
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+
+    async function jlemaLegendaryFetcher(){
+        try{
+
         }
         catch(err){
             console.log(err);
@@ -117,6 +124,7 @@ export default function NFTFetcher(){
     }
 
     useEffect(()=>{
+        setDisplayNFT([])
         if(selected == 0){
             fetchJlema(0);
             fetchJlema(1);
