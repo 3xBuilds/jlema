@@ -5,7 +5,7 @@ import cleanToken from "@/utils/abis/cleanToken"
 import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 
-export default function TokenFetcher(){
+export default function TokenFetcher({wallet}){
 
     const add = contractAdds.CLEANToken;
     const abi = cleanToken;
@@ -13,6 +13,17 @@ export default function TokenFetcher(){
     const{address} = useAccount();
 
     const[balance, setBalance] = useState(0);
+
+    const[user, setUser] = useState(null);
+
+    useEffect(()=>{
+        if(wallet == null){
+            setUser(address)
+        }
+        else{
+            setUser(wallet);
+        }
+    },[wallet])
 
     async function contractSetup(){
         const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -32,7 +43,7 @@ export default function TokenFetcher(){
     async function getBalance(){
         try{
             const contract = await contractSetup();
-            setBalance(ethers.formatEther(String(await contract.balanceOf(address))));
+            setBalance(ethers.formatEther(String(await contract.balanceOf(user))));
         }
         catch(err){
 
@@ -40,8 +51,9 @@ export default function TokenFetcher(){
     }
 
     useEffect(()=>{
+        if(user)
         getBalance();
-    },[])
+    },[user])
 
     return(
         <h1 className="text-sm">
