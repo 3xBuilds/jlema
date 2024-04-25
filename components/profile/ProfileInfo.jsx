@@ -16,7 +16,8 @@ import { useGlobalContext } from '@/context/MainContext'
 const ProfileInfo = () => {
 
     const {isConnected} = useAccount();
-    const {openSettings, setOpenSettings, balances} = useGlobalContext();
+    const {openSettings, setOpenSettings, balances, user} = useGlobalContext();
+    const {address} = useAccount();
 
     const router = useRouter();
 
@@ -29,11 +30,11 @@ const ProfileInfo = () => {
   return (
     <div className='w-[328px] h-fit fixed bg-white top-14 left-0 flex flex-col shadow-jel-card items-center py-10 px-6'>
         <div className='w-[120px] h-[120px] border-[1px] border-jel-gray-3 rounded-full overflow-hidden'>
-            <Image src={nft1} className='w-full h-full object-cover'/>
+            {user && <Image width={1000} height={1000} src={user?.dp} className='w-full h-full object-cover'/>}
         </div>
         <div>
-            <h2 className=' font-medium text-2xl text-center mt-5'>{"MrSimpleETH"}</h2>
-            <h3 className=' font-normal text-sm text-jel-gray-4 text-center mt-2'>{"0x183b...96c1"}</h3>
+            <h2 className=' font-medium text-2xl text-center mt-5'>{user?.username || "---"}</h2>
+            <h3 className=' font-normal text-sm text-jel-gray-4 text-center mt-2'>{address.substring(0,5)}...{address.substring(address.length-4, address.length)}</h3>
         </div>
         <div className='mt-5 border-[1px] border-jel-gray-3 rounded-lg w-full grid grid-cols-3 divide-x-[1px] divide-jel-gray-3'>
             <div className='flex flex-col items-center justify-center gap-1 py-4'>

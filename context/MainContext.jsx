@@ -8,22 +8,44 @@ import {
 } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useAccount } from "wagmi";
 
 const GlobalContext = createContext();
 
 export const GlobalContextProvider = ({ children }) => {
 
   const router = useRouter();
+  const {address} = useAccount();
 
   const [loader, setLoader] = useState(false);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
   const [showNftInfo, setShowNftInfo] = useState(null);
   const [openSettings, setOpenSettings] = useState(false);
   const[selected, setSelected] = useState(0);
   const [balances, setBalances] = useState([]);
 
+  const getUser = async () => {
+    try{
+      const res = await axios.get(`/api/user/${address}`);
+      console.log("user", res.data);
+      if(res.data.user==null){
+        setOpenSettings(true);
+      }
+      setUser(res.data.user);
+    }
+    catch(err){
+      console.log("Error", err);
+    }
+  }
+
+  useEffect(()=>{
+    if(address){
+      getUser();
+    }
+  }, [address])
+
   return (
-    <GlobalContext.Provider value={{ loader, setLoader, balances, setBalances, user, setUser, selected, setSelected, showNftInfo, setShowNftInfo, openSettings, setOpenSettings}}>
+    <GlobalContext.Provider value={{ loader, setLoader, balances, setBalances, user, setUser, selected, setSelected, showNftInfo, setShowNftInfo, openSettings, setOpenSettings, getUser}}>
       {children}
     </GlobalContext.Provider>
   );
