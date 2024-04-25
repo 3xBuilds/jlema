@@ -14,7 +14,7 @@ import axios from 'axios'
 const SettingsModal = () => {
 
   const [settingType, setSettingType] = useState(0);
-  const {setOpenSettings, user, getUser} = useGlobalContext();
+  const {setOpenSettings, user, setUser} = useGlobalContext();
   const {address} = useAccount();
 
   const [selectedImage, setSelectedImage] = useState(null);
@@ -23,6 +23,20 @@ const SettingsModal = () => {
   const [username, setUsername] = useState("");
   const [twitter, setTwitter] = useState("");
   const [error, setError] = useState("");
+
+  const getUser = async () => {
+    try{
+      const res = await axios.get(`/api/user/${address}`);
+      console.log("user", res.data);
+      if(res.data.user==null){
+        setOpenSettings(true);
+      }
+      setUser(res.data.user);
+    }
+    catch(err){
+      console.log("Error", err);
+    }
+  }
 
 
   useEffect(()=>{
@@ -57,7 +71,7 @@ const SettingsModal = () => {
 
   const updateUserDetails = async () => {
     try{
-      const res = await axios.patch(`/api/user/${username}`, {
+      const res = await axios.patch(`/api/user/${user?.username}`, {
         username: username,
         twitter: twitter,
         dp: selectedImage

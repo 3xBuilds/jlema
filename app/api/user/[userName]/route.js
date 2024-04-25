@@ -29,10 +29,12 @@ export async function PATCH(req) {
         const {username, wallet="", ...rest} = body;
 
         await connectToDB();
-        const user = await User.findOneAndUpdate({userName},
+        const user = await User.findOneAndUpdate({username: userName},
             {username, ...rest},
             {new: true}
         )
+        console.log("userName: ", userName);
+        console.log("user: ", user);
         return new NextResponse(JSON.stringify({
             user
         }), { status: 200 });
