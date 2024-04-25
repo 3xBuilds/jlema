@@ -15,6 +15,7 @@ import nft6 from '@/assets/nft6.png'
 import arrowd from '@/assets/icons/arrowd.svg'
 import tick from '@/assets/icons/tick.svg'
 import { useState } from 'react';
+import SettingsModal from '@/components/settings/SettingsModal';
 
 const Profile = () => {
 
@@ -42,9 +43,12 @@ const Profile = () => {
 
   const{selected, setSelected} = useGlobalContext();
   const {showNftInfo, setShowNftInfo} = useGlobalContext();
+  const {openSettings} = useGlobalContext();
 
   return(
     <>
+
+    {openSettings && <SettingsModal/>}
     {showNftInfo && <NftInfoModal showNftInfo={showNftInfo} setShowNftInfo={setShowNftInfo}/>}
       <div className="flex flex-row mt-16 pt-1">
         <ProfileInfo/>

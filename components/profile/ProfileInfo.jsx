@@ -11,10 +11,13 @@ import TokenFetcher from '../fetcher/tokenFetcher'
 import { useAccount } from 'wagmi'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
+import { useGlobalContext } from '@/context/MainContext'
 
 const ProfileInfo = () => {
 
     const {isConnected} = useAccount();
+    const {openSettings, setOpenSettings} = useGlobalContext();
+
     const router = useRouter();
 
     useEffect(()=>{
@@ -138,7 +141,7 @@ const ProfileInfo = () => {
         </div>
 
         <div className='grid grid-cols-1 w-full gap-4 mt-5'>
-            <button className='flex flex-row gap-2 bg-jel-gray-1 hover:bg-jel-gray-2 duration-150 w-full py-2 px-4 items-center justify-center rounded-lg text-black'>
+            <button onClick={()=>{setOpenSettings(true)}} className='flex flex-row gap-2 bg-jel-gray-1 hover:bg-jel-gray-2 duration-150 w-full py-2 px-4 items-center justify-center rounded-lg text-black'>
                 <Image src={settings} className='w-5'/>
                 <h3 className=' text-base font-semibold text-black'>Settings</h3>
             </button>

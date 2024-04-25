@@ -121,7 +121,7 @@ export default function NFTFetcher(){
     async function fetchJlema(multiplier){
         try{
             const contract = await jlemaFetcherSetup();
-            const res = await contract.tokenOfOwnerJlema(multiplier);
+            const res = await contract.tokenOfOwnerJlema(multiplier, address);
             res.map((item)=>{
                 if(item != 0){
                     console.log(Number(item));
