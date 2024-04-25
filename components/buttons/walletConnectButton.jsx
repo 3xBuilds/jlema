@@ -85,8 +85,8 @@ export const WalletConnectButton = () => {
                   <button title='Click to view address' onClick={openAccountModal} type="button" className='text-center flex gap-1 bg-jel-gray-1 hover:bg-jel-gray-2 font-semibold duration-150 w-full py-2 px-4 items-center justify-center rounded-lg text-black'>
                     {/* {account.displayName} */}
                     <span className='flex gap-2 w-[50%] items-center justify-center'>
-                      <Image src={power} className='w-4'/>
-                      <h3 className=' text-sm font-semibold text-black'>Disconnect</h3>
+                      <Image src={power} className='w-5'/>
+                      <h3 className='  text-base font-semibold text-black'>Disconnect</h3>
                     </span>
                     {/* {account.displayBalance
                       ? ` ${account.displayBalance}`

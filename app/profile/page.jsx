@@ -16,31 +16,14 @@ import arrowd from '@/assets/icons/arrowd.svg'
 import tick from '@/assets/icons/tick.svg'
 import { useEffect, useState } from 'react';
 import SettingsModal from '@/components/settings/SettingsModal';
-import { useParams } from 'next/navigation';
+import { useAccount } from 'wagmi';
 import axios from 'axios';
 
-const Profile = () => {
+const ProfileUser = () => {
 
+  const {address} = useAccount();
   const [selectedSort, setSelectedSort] = useState(null);
   const [openSort, setOpenSort] = useState(false);
-  const {user, setUser} = useGlobalContext();
-
-  const path = useParams();
-
-  const getUserWithUsername = async () => {
-    try{
-      console.log("paht:", path.username);
-      const res = await axios.get(`/api/user/get/${path.username}`);
-      setUser(res.data.user);
-    }
-    catch(err){
-      console.log("Error", err);
-    }
-  }
-
-  useEffect(()=>{
-    getUserWithUsername();
-  },[])
 
   const sortOptions = [
     {
@@ -63,7 +46,27 @@ const Profile = () => {
 
   const{selected, setSelected} = useGlobalContext();
   const {showNftInfo, setShowNftInfo} = useGlobalContext();
-  const {openSettings} = useGlobalContext();
+  const {openSettings, user, setUser, setOpenSettings} = useGlobalContext();
+
+  const getUser = async () => {
+    try{
+      const res = await axios.get(`/api/user/${address}`);
+      console.log("user", res.data);
+      if(res.data.user==null){
+        setOpenSettings(true);
+      }
+      setUser(res.data.user);
+    }
+    catch(err){
+      console.log("Error", err);
+    }
+  }
+
+  useEffect(()=>{
+    if(address){
+      getUser();
+    }
+  }, [address])
 
   return(
     <>
@@ -132,8 +135,19 @@ const Profile = () => {
             </div>
 
 
-            <NFTFetcher wallet={user?.wallet}/>
-            
+            <NFTFetcher/>
+            {/* <div className="grid max-sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 items-start justify-between gap-4">
+                {nfts.map((nft, index) => (
+                  <div onClick={()=>{setShowNftInfo({nftImage: nft, number: index+1})}} key={index} className="rounded-xl hover:shadow-jel-nft duration-200 cursor-pointer border-[1px] border-jel-gray-3 overflow-hidden flex flex-col">
+                    <div className="h-40 w-full">
+                      <Image src={nft} className="object-cover w-full h-full"/>
+                    </div>
+                    <div className="bg-white text-center py-2">
+                      <h3 className="text-sm font-normal text-black">{"Jlema #"}{index+1}</h3>
+                    </div>
+                </div>
+              ))}
+            </div> */}
           </div>
       </div>
       </div>
@@ -141,4 +155,4 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default ProfileUser

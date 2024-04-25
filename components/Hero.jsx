@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { WalletConnectButton } from './buttons/walletConnectButton'
 
 const Hero = () => {
+
   return (
     <div className='grid grid-cols-2 w-full h-screen '>
         <div className='flex items-center justify-start h-full'>

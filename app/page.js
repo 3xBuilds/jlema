@@ -12,7 +12,7 @@ export default function Home() {
 
   useEffect(()=>{
     if(isConnected){
-      router.push("/profile/user");
+      router.push("/profile");
     }
   }, [isConnected])
 

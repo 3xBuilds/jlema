@@ -22,6 +22,7 @@ const SettingsModal = () => {
   const [showNftSelectModal, setShowNftSelectModal] = useState(false);
   const [username, setUsername] = useState("");
   const [twitter, setTwitter] = useState("");
+  const [error, setError] = useState("");
 
 
   useEffect(()=>{
@@ -47,6 +48,7 @@ const SettingsModal = () => {
       });
       console.log("user created successfully", res.data);
       setOpenSettings(false);
+      getUser();
     }
     catch(err){
       console.log("Error creating user", err);
@@ -69,7 +71,9 @@ const SettingsModal = () => {
     }
   }
 
-  
+  useEffect(()=>{
+      setError("");
+  },[username, twitter, selectedImage])
 
   return (
     <>
@@ -79,7 +83,7 @@ const SettingsModal = () => {
             <div className='fixed w-[50%] bg-white rounded-xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
                 <div className='w-full flex flex-row items-center justify-between p-6 border-b-[1px] border-jel-gray-3'>
                   <h2 className='text-black font-bold text-xl'>Settings</h2>
-                  <Image onClick={()=>{setOpenSettings(false)}} src={cross}/>
+                  <Image onClick={()=>{(address && user?.username) ? setOpenSettings(false) : setError("Set Profile Deatils First")}} src={cross}/>
                 </div>
                 <div className='p-6'>
                   <div className=" h-12 rounded-xl flex flex-row gap-2 p-1">
@@ -109,6 +113,8 @@ const SettingsModal = () => {
                     
                     <h3 className='text-base font-normal mt-4'>Twitter/X Username</h3>
                     <input value={twitter} onChange={(e)=>{setTwitter(e.target.value)}} className='border-jel-gray-3 px-4 outline-black border-[1px] rounded-xl w-full h-12 mt-2 flex items-center justify-center '/>
+                        
+                    <h3 className='text-sm font-normal mt-4 text-red-500'>{error}</h3>
                   </div>
                   }
 
@@ -148,16 +154,15 @@ const SettingsModal = () => {
                         <h3 className='text-base font-normal'>Highlight 4</h3>
                         <button className='bg-jel-gray-1 font-semibold hover:bg-jel-gray-2 text-black rounded-xl cursor-pointer py-3 px-6'>Select</button>
                       </div>
-                      
                     </div>
                   }
 
-                  <div className='pt-6 flex flex-row gap-4'>
+                  <div className='pt-4 flex flex-row gap-4'>
                     <button onClick={()=>{
                       settingType==0 && (user? updateUserDetails() : createUser())
                     }} className='bg-black text-white font-semibold rounded-xl cursor-pointer py-3 px-6'>Save</button>
                     <button onClick={()=>{
-                      setOpenSettings(false);
+                      (address && user?.username) ? setOpenSettings(false) : setError("Set Profile Deatils First");
                     }} className='bg-jel-gray-1 hover:bg-jel-gray-2 font-semibold text-black rounded-xl cursor-pointer py-3 px-6'>Cancel</button>
                   </div>
                 </div> 

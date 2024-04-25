@@ -10,10 +10,19 @@ import { WalletConnectButton } from '../buttons/walletConnectButton'
 import TokenFetcher from '../fetcher/tokenFetcher'
 import { useAccount } from 'wagmi'
 import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useGlobalContext } from '@/context/MainContext'
+import { useParams } from 'next/navigation'
 
 const ProfileInfo = () => {
+
+    const [isClient, setIsClient] = useState(false)
+ 
+    useEffect(() => {
+        setIsClient(true);
+    }, [])
+
+    const params = useParams();
 
     const {isConnected} = useAccount();
     const {openSettings, setOpenSettings, balances, user} = useGlobalContext();
@@ -23,7 +32,7 @@ const ProfileInfo = () => {
 
     useEffect(()=>{
         if(!isConnected){
-        router.push("/");
+            router.push("/");
         }
     }, [isConnected])
 
@@ -34,7 +43,7 @@ const ProfileInfo = () => {
         </div>
         <div>
             <h2 className=' font-medium text-2xl text-center mt-5'>{user?.username || "---"}</h2>
-            <h3 className=' font-normal text-sm text-jel-gray-4 text-center mt-2'>{address.substring(0,5)}...{address.substring(address.length-4, address.length)}</h3>
+            {isClient && <h3 className=' font-normal text-sm text-jel-gray-4 text-center mt-2'>{address?.substring(0,5)}...{address?.substring(address?.length-4, address?.length)}</h3>}
         </div>
         <div className='mt-5 border-[1px] border-jel-gray-3 rounded-lg w-full grid grid-cols-3 divide-x-[1px] divide-jel-gray-3'>
             <div className='flex flex-col items-center justify-center gap-1 py-4'>

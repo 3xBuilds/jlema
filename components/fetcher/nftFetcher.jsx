@@ -17,14 +17,14 @@ import christmas from "@/assets/christmas.png"
 
 export default function NFTFetcher({wallet}){
 
-    const{selected, setShowNftInfo, setBalances} = useGlobalContext();
+    const{selected, setShowNftInfo, setBalances, user:mainUser} = useGlobalContext();
     const{address} = useAccount();
     const[balance, setBalance] = useState([])
     const add = [contractAdds.Jlema, contractAdds.JlemaLegendary, contractAdds.JlemaSE];
     const abi = [jlemaabi, jlemaLegendary, jlemaSE];
     const[user, setUser] = useState(null);
     const [displayNFT, setDisplayNFT] = useState([]);
-
+ 
     var counter = 0;
 
     useEffect(()=>{
@@ -35,6 +35,10 @@ export default function NFTFetcher({wallet}){
             setUser(wallet);
         }
     },[wallet])
+
+    useEffect(()=>{
+        setDisplayNFT([])
+    },[mainUser])
 
     async function balanceFetchers(){
         const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -180,9 +184,9 @@ export default function NFTFetcher({wallet}){
     }
 
     useEffect(()=>{
+        setDisplayNFT([])
         if(user)
         balanceFetchers();
-        setDisplayNFT([])
         if(selected == 0){
             fetchJlema(0);
             fetchJlema(1);
