@@ -28,6 +28,7 @@ export default function NFTFetcher({wallet}){
     var counter = 0;
 
     useEffect(()=>{
+        setBalances([]);
         if(wallet == null){
             setUser(address)
         }
@@ -35,27 +36,25 @@ export default function NFTFetcher({wallet}){
             setUser(wallet);
         }
     },[wallet])
-
-    useEffect(()=>{
-        setDisplayNFT([])
-    },[mainUser])
-
+    
     async function balanceFetchers(){
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
         try{
+            let tempBalance = [];
             for(let i = 0; i<3; i++){
                 const contract = new ethers.Contract(add[i], abi[i], signer);
 
                 if(i!=2){
                     let balance = Number(await contract.balanceOf(user));
-                    setBalances(oldArray => [...oldArray, balance]);
+                    tempBalance[i] = balance;
                 }
                 else{
                     let balance = Number(await contract.balanceOf(user, 0)) + Number(await contract.balanceOf(user, 1)) + Number(await contract.balanceOf(user, 2));
-                    setBalances(oldArray => [...oldArray, balance]);
+                    tempBalance[i] = balance;
                 }
             }
+            setBalances(tempBalance);
         }
         catch(err){
             console.log(err)

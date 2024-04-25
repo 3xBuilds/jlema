@@ -43,7 +43,7 @@ const ProfileInfo = () => {
         </div>
         <div>
             <h2 className=' font-medium text-2xl text-center mt-5'>{user?.username || "---"}</h2>
-            {isClient && <h3 className=' font-normal text-sm text-jel-gray-4 text-center mt-2'>{address?.substring(0,5)}...{address?.substring(address?.length-4, address?.length)}</h3>}
+            {isClient && <h3 className=' font-normal text-sm text-jel-gray-4 text-center mt-2'>{user?.wallet?.substring(0,5)}...{user?.wallet?.substring(user?.wallet?.length-4, user?.wallet?.length)}</h3>}
         </div>
         <div className='mt-5 border-[1px] border-jel-gray-3 rounded-lg w-full grid grid-cols-3 divide-x-[1px] divide-jel-gray-3'>
             <div className='flex flex-col items-center justify-center gap-1 py-4'>
@@ -123,19 +123,19 @@ const ProfileInfo = () => {
             <h3 className='text-sm font-medium text-black'>Collected</h3>
             <div className='flex flex-row justify-between relative'>
                 <p className='text-sm font-normal text-jel-gray-4'>{"Jlema"}</p>
-                <p className='text-sm font-normal text-black'>{balances[0]}</p>
+                <p className='text-sm font-normal text-black'>{balances[0] || "0"}</p>
             </div>
             <div className='flex flex-row justify-between relative'>
                 <p className='text-sm font-normal text-jel-gray-4'>{"Jlema Legendary"}</p>
-                <p className='text-sm font-normal text-black'>{balances[1]}</p>
+                <p className='text-sm font-normal text-black'>{balances[1] || "0"}</p>
             </div>
             <div className='flex flex-row justify-between relative'>
                 <p className='text-sm font-normal text-jel-gray-4'>{"Spacial Editions"}</p>
-                <p className='text-sm font-normal text-black'>{balances[2]}</p>
+                <p className='text-sm font-normal text-black'>{balances[2] || "0"}</p>
             </div>
             <div className='flex flex-row justify-between relative'>
                 <p className='text-sm font-normal text-jel-gray-4'>{"CLEAN Token"}</p>
-                <TokenFetcher/>
+                {user && <TokenFetcher wallet={user?.wallet}/>}
             </div>
         </div>
         

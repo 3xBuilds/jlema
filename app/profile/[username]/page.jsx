@@ -132,7 +132,7 @@ const Profile = () => {
             </div>
 
 
-            <NFTFetcher wallet={user?.wallet}/>
+            {user && <NFTFetcher wallet={user?.wallet}/>}
             
           </div>
       </div>
