@@ -1,3 +1,4 @@
+"use client"
 import { ethers } from "ethers"
 import { contractAdds } from "@/utils/contractAdds"
 import cleanToken from "@/utils/abis/cleanToken"

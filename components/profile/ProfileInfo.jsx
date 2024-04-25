@@ -1,4 +1,4 @@
-import React from 'react'
+"use client"
 import nft1 from '../../assets/nft1.png'
 import image from '../../assets/icons/imagebadge.png'
 import tweet from '../../assets/icons/tweet.png'
@@ -8,10 +8,23 @@ import power from '../../assets/icons/power.svg'
 import Image from 'next/image'
 import { WalletConnectButton } from '../buttons/walletConnectButton'
 import TokenFetcher from '../fetcher/tokenFetcher'
+import { useAccount } from 'wagmi'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 const ProfileInfo = () => {
+
+    const {isConnected} = useAccount();
+    const router = useRouter();
+
+    useEffect(()=>{
+        if(!isConnected){
+        router.push("/");
+        }
+    }, [isConnected])
+
   return (
-    <div className='w-[328px] h-fit absolute bg-white top-14 left-0 flex flex-col shadow-jel-card items-center py-10 px-6'>
+    <div className='w-[328px] h-fit fixed bg-white top-14 left-0 flex flex-col shadow-jel-card items-center py-10 px-6'>
         <div className='w-[120px] h-[120px] border-[1px] border-jel-gray-3 rounded-full overflow-hidden'>
             <Image src={nft1} className='w-full h-full object-cover'/>
         </div>
@@ -124,7 +137,7 @@ const ProfileInfo = () => {
             </button>
         </div>
 
-        <div className='grid grid-cols-1 w-full gap-4 mt-16'>
+        <div className='grid grid-cols-1 w-full gap-4 mt-5'>
             <button className='flex flex-row gap-2 bg-jel-gray-1 hover:bg-jel-gray-2 duration-150 w-full py-2 px-4 items-center justify-center rounded-lg text-black'>
                 <Image src={settings} className='w-5'/>
                 <h3 className=' text-base font-semibold text-black'>Settings</h3>

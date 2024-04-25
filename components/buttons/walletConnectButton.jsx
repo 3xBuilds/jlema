@@ -40,7 +40,7 @@ export const WalletConnectButton = () => {
             {(() => {
               if (!connected) {
                 return (
-                  <button onClick={openConnectModal} type="button" className='bg-jel-gray-1 font-semibold hover:bg-jel-gray-2 duration-150 w-full py-2 px-4 items-center justify-center rounded-lg text-black'>
+                  <button onClick={openConnectModal} type="button" className='bg-black text-white rounded-xl cursor-pointer py-3 px-6'>
                     Connect Wallet
                   </button>
                 );
@@ -83,7 +83,8 @@ export const WalletConnectButton = () => {
                     {chain.name}
                   </button> */}
                   <button title='Click to view address' onClick={openAccountModal} type="button" className='text-center flex gap-1 bg-jel-gray-1 hover:bg-jel-gray-2 font-semibold duration-150 w-full py-2 px-4 items-center justify-center rounded-lg text-black'>
-                    {account.displayName} <span className='flex gap-2 w-[50%] items-center justify-center'>
+                    {/* {account.displayName} */}
+                    <span className='flex gap-2 w-[50%] items-center justify-center'>
                       <Image src={power} className='w-4'/>
                       <h3 className=' text-sm font-semibold text-black'>Disconnect</h3>
                     </span>

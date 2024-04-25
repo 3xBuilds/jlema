@@ -1,10 +1,14 @@
-import React from 'react'
+"use client"
 import Image from 'next/image'
 import logo from '../assets/mainLogo.png'
+import { usePathname } from 'next/navigation'
 
 const Navbar = () => {
+
+  const path = usePathname();
+
   return (
-    <div className='w-full px-8 py-3 flex justify-between absolute top-0 left-0'>
+    <div className={`w-full px-8 py-3 flex justify-between fixed bg-white z-40 top-0 left-0 ${path!=="/" && " border-b-[1px] border-jel-gray-3"} `}>
         <div>
           <Image src={logo} className='w-32'/>
         </div>
