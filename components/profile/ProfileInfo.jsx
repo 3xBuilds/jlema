@@ -16,7 +16,7 @@ import { useGlobalContext } from '@/context/MainContext'
 const ProfileInfo = () => {
 
     const {isConnected} = useAccount();
-    const {openSettings, setOpenSettings} = useGlobalContext();
+    const {openSettings, setOpenSettings, balances} = useGlobalContext();
 
     const router = useRouter();
 
@@ -113,15 +113,15 @@ const ProfileInfo = () => {
             <h3 className='text-sm font-medium text-black'>Collected</h3>
             <div className='flex flex-row justify-between relative'>
                 <p className='text-sm font-normal text-jel-gray-4'>{"Jlema"}</p>
-                <p className='text-sm font-normal text-black'>{16}</p>
+                <p className='text-sm font-normal text-black'>{balances[0]}</p>
             </div>
             <div className='flex flex-row justify-between relative'>
                 <p className='text-sm font-normal text-jel-gray-4'>{"Jlema Legendary"}</p>
-                <p className='text-sm font-normal text-black'>{12}</p>
+                <p className='text-sm font-normal text-black'>{balances[1]}</p>
             </div>
             <div className='flex flex-row justify-between relative'>
                 <p className='text-sm font-normal text-jel-gray-4'>{"Spacial Editions"}</p>
-                <p className='text-sm font-normal text-black'>{3}</p>
+                <p className='text-sm font-normal text-black'>{balances[2]}</p>
             </div>
             <div className='flex flex-row justify-between relative'>
                 <p className='text-sm font-normal text-jel-gray-4'>{"CLEAN Token"}</p>

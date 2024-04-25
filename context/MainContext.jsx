@@ -20,9 +20,10 @@ export const GlobalContextProvider = ({ children }) => {
   const [showNftInfo, setShowNftInfo] = useState(null);
   const [openSettings, setOpenSettings] = useState(false);
   const[selected, setSelected] = useState(0);
+  const [balances, setBalances] = useState([]);
 
   return (
-    <GlobalContext.Provider value={{ loader, setLoader, user, setUser, selected, setSelected, showNftInfo, setShowNftInfo, openSettings, setOpenSettings}}>
+    <GlobalContext.Provider value={{ loader, setLoader, balances, setBalances, user, setUser, selected, setSelected, showNftInfo, setShowNftInfo, openSettings, setOpenSettings}}>
       {children}
     </GlobalContext.Provider>
   );

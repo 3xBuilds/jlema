@@ -15,9 +15,9 @@ import newYear from "@/assets/newYear.png";
 import lunarNY from "@/assets/lunarNY.png";
 import christmas from "@/assets/christmas.png"
 
-export default function NFTFetcher(){
+export default function NFTFetcher({}){
 
-    const{selected, setShowNftInfo} = useGlobalContext();
+    const{selected, setShowNftInfo, setBalances} = useGlobalContext();
     const{address} = useAccount();
     const[balance, setBalance] = useState([])
     const add = [contractAdds.Jlema, contractAdds.JlemaLegendary, contractAdds.JlemaSE];
@@ -27,6 +27,27 @@ export default function NFTFetcher(){
 
     var counter = 0;
 
+    async function balanceFetchers(){
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        try{
+            for(let i = 0; i<3; i++){
+                const contract = new ethers.Contract(add[i], abi[i], signer);
+
+                if(i!=2){
+                    let balance = Number(await contract.balanceOf(address));
+                    setBalances(oldArray => [...oldArray, balance]);
+                }
+                else{
+                    let balance = Number(await contract.balanceOf(address, 0)) + Number(await contract.balanceOf(address, 1)) + Number(await contract.balanceOf(address, 2));
+                    setBalances(oldArray => [...oldArray, balance]);
+                }
+            }
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
 
     async function dataProvider(tokenId){
         try{
@@ -150,6 +171,7 @@ export default function NFTFetcher(){
     }
 
     useEffect(()=>{
+        balanceFetchers();
         setDisplayNFT([])
         if(selected == 0){
             fetchJlema(0);
