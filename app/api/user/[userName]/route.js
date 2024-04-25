@@ -4,10 +4,10 @@ import { NextResponse } from "next/server";
 
 export async function GET(req) {
     try{
-        const userName = req.nextUrl.pathname.split("/")[3];
+        const wallet = req.nextUrl.pathname.split("/")[3];
 
         await connectToDB();
-        const user = await User.findOne({username: userName})
+        const user = await User.findOne({wallet: wallet})
 
         return new NextResponse(JSON.stringify({
             user
