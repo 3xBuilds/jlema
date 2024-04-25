@@ -14,7 +14,7 @@ export async function POST(req) {
             username
         });
 
-        if(userNameExists != null || wallet != null){
+        if(userNameExists != null){
             return new NextResponse(JSON.stringify({success: false, error: "Username or wallet already exists"}), { status: 409 });
         }
 
