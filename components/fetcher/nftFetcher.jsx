@@ -15,17 +15,26 @@ import newYear from "@/assets/newYear.png";
 import lunarNY from "@/assets/lunarNY.png";
 import christmas from "@/assets/christmas.png"
 
-export default function NFTFetcher({}){
+export default function NFTFetcher({wallet}){
 
     const{selected, setShowNftInfo, setBalances} = useGlobalContext();
     const{address} = useAccount();
     const[balance, setBalance] = useState([])
     const add = [contractAdds.Jlema, contractAdds.JlemaLegendary, contractAdds.JlemaSE];
     const abi = [jlemaabi, jlemaLegendary, jlemaSE];
-
+    const[user, setUser] = useState(null);
     const [displayNFT, setDisplayNFT] = useState([]);
 
     var counter = 0;
+
+    useEffect(()=>{
+        if(wallet == null){
+            setUser(address)
+        }
+        else{
+            setUser(wallet);
+        }
+    },[wallet])
 
     async function balanceFetchers(){
         const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -35,11 +44,11 @@ export default function NFTFetcher({}){
                 const contract = new ethers.Contract(add[i], abi[i], signer);
 
                 if(i!=2){
-                    let balance = Number(await contract.balanceOf(address));
+                    let balance = Number(await contract.balanceOf(user));
                     setBalances(oldArray => [...oldArray, balance]);
                 }
                 else{
-                    let balance = Number(await contract.balanceOf(address, 0)) + Number(await contract.balanceOf(address, 1)) + Number(await contract.balanceOf(address, 2));
+                    let balance = Number(await contract.balanceOf(user, 0)) + Number(await contract.balanceOf(user, 1)) + Number(await contract.balanceOf(user, 2));
                     setBalances(oldArray => [...oldArray, balance]);
                 }
             }
@@ -98,10 +107,10 @@ export default function NFTFetcher({}){
     async function jlemaLegendaryFetcher(){
         try{
             const contract = await contractSetup();
-            const balance = Number(await contract.balanceOf(address));
+            const balance = Number(await contract.balanceOf(user));
             console.log(balance);
             for(let i = 0; i < balance; i++){
-                let tokenId = Number(await contract.tokenOfOwnerByIndex(address, i));
+                let tokenId = Number(await contract.tokenOfOwnerByIndex(user, i));
                 dataProvider(tokenId);
             }
 
@@ -115,7 +124,7 @@ export default function NFTFetcher({}){
         try{
             const contract = await contractSetup();
             for(let i = 0; i < 3; i++){
-                const balance = Number(await contract.balanceOf(address, i));
+                const balance = Number(await contract.balanceOf(user, i));
                 setBalance(oldArray => [...oldArray, balance]);
             }
         }
@@ -142,7 +151,7 @@ export default function NFTFetcher({}){
     async function fetchJlema(multiplier){
         try{
             const contract = await jlemaFetcherSetup();
-            const res = await contract.tokenOfOwnerJlema(multiplier, address);
+            const res = await contract.tokenOfOwnerJlema(multiplier, user);
             res.map((item)=>{
                 if(item != 0){
                     console.log(Number(item));
@@ -171,6 +180,7 @@ export default function NFTFetcher({}){
     }
 
     useEffect(()=>{
+        if(user)
         balanceFetchers();
         setDisplayNFT([])
         if(selected == 0){
@@ -183,7 +193,7 @@ export default function NFTFetcher({}){
         else{
             fetch();
         }
-    },[selected, address]);
+    },[selected, user]);
 
     if(selected != 2)
     return (
