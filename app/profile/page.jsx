@@ -18,6 +18,7 @@ import { useEffect, useState } from 'react';
 import SettingsModal from '@/components/settings/SettingsModal';
 import { useAccount } from 'wagmi';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 const ProfileUser = () => {
 
@@ -44,9 +45,19 @@ const ProfileUser = () => {
     }
   ]
 
+  const {isConnected} = useAccount();
+
   const{selected, setSelected} = useGlobalContext();
   const {showNftInfo, setShowNftInfo} = useGlobalContext();
   const {openSettings, user, setUser, setOpenSettings} = useGlobalContext();
+
+  const router = useRouter();
+
+  useEffect(()=>{
+    if(!isConnected){
+        router.push("/");
+    }
+  }, [isConnected])
 
   const getUser = async () => {
     try{

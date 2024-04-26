@@ -18,7 +18,7 @@ const Navbar = () => {
             <li className='px-6 py-2 cursor-pointer hover:bg-jel-gray-2 duration-200 rounded-xl'>Ecosystem</li>
             <li className='px-6 py-2 cursor-pointer hover:bg-jel-gray-2 duration-200 rounded-xl'>Community</li>
             <li className='px-6 py-2 cursor-pointer hover:bg-jel-gray-2 duration-200 rounded-xl'>Info</li>
-            <li className='px-6 py-2 cursor-pointer hover:bg-jel-gray-2 duration-200 rounded-xl'>Buy</li>
+            <a href="https://app.komet.me/nfts/Jlema/415" target='_blank'><li className='px-6 py-2 cursor-pointer hover:bg-jel-gray-2 duration-200 rounded-xl'>Buy</li></a>
             <li onClick={()=>{
               router.push('/profile');
             }} className='px-3 py-3 cursor-pointer hover:bg-jel-gray-2 duration-200 rounded-lg bg-secondary'>

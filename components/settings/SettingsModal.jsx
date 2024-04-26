@@ -14,7 +14,7 @@ import axios from 'axios'
 const SettingsModal = () => {
 
   const [settingType, setSettingType] = useState(0);
-  const {setOpenSettings, user, setUser} = useGlobalContext();
+  const {setOpenSettings, user, setUser, balances, selected} = useGlobalContext();
   const {address} = useAccount();
 
   const [selectedImage, setSelectedImage] = useState(null);
@@ -89,6 +89,23 @@ const SettingsModal = () => {
       setError("");
   },[username, twitter, selectedImage])
 
+  if(balances[0] <= 0) return (
+    <>
+      <div className='w-screen h-screen top-0 left-0 fixed z-40 flex flex-col'>
+        <div onClick={()=>{setOpenSettings(false)}} className='fixed w-screen h-screen bg-black/50'></div>
+        <div className='fixed w-[30%] bg-white rounded-xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
+          <div className='w-full flex flex-row items-center justify-center p-6 border-b-[1px] border-jel-gray-3'>
+            <h2 className='text-black font-bold text-xl text-center'>You dont have any NFTs</h2>
+          </div>
+            <div className='p-6 flex items-center justify-center'>
+                <a href="https://app.komet.me/nfts/Jlema/415"><button className='bg-black text-white font-semibold rounded-xl cursor-pointer py-3 px-12'>Buy NFTs</button></a>
+            </div>
+        </div>
+      </div>
+    </>
+  )
+
+  else
   return (
     <>
     {showNftSelectModal && <SelectNFT setSelectedImage={setSelectedImage} setShowNftSelectModal={setShowNftSelectModal}/>}
