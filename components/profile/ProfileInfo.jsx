@@ -146,7 +146,7 @@ const ProfileInfo = () => {
         <div className='grid grid-cols-2 w-full gap-4'>
             <button className='flex flex-row gap-2 bg-jel-gray-1 hover:bg-jel-gray-2 duration-150 w-full py-2 px-4 items-center justify-center rounded-lg text-black'>
                 <Image src={tweet} className='w-5'/>
-                <h3 className=' text-base font-semibold text-black'>Follow</h3>
+                <h3 className=' text-base font-semibold text-black'>Visit</h3>
             </button>
             <button className='flex flex-row gap-2 bg-jel-gray-1 hover:bg-jel-gray-2 duration-150 w-full py-2 px-4 items-center justify-center rounded-lg text-black'>
                 <Image src={share} className='w-5'/>

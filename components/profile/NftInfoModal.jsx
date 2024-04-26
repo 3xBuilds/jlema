@@ -5,6 +5,7 @@ import download from '../../assets/icons/downloadcircle.svg'
 import magiceden from '../../assets/icons/magiceden.png'
 import opensea from '../../assets/icons/opensea.png'
 
+
 const NftInfoModal = ({showNftInfo, setShowNftInfo}) => {
   return (
     <div className='w-screen h-screen top-0 left-0 fixed z-40'>
@@ -16,7 +17,7 @@ const NftInfoModal = ({showNftInfo, setShowNftInfo}) => {
                     {showNftInfo && <Image width={1080} height={1080} src={showNftInfo?.nftImage} className='w-full h-full object-cover'/>}
                 </div>
                 <div className=' p-6 pt-16 flex flex-col justify-between'>
-                  <h1 className='font-bold text-black text-[32px]'>Jlema #{showNftInfo.number}</h1>
+                  <h1 className='font-bold text-black text-[32px]'>Jlema #{showNftInfo.tokenId}</h1>
 
                   <div className='grid grid-cols-2 gap-5'>
                     <div className='border-[1px] border-jel-gray-3 rounded-lg p-4'>
