@@ -97,7 +97,7 @@ const SettingsModal = () => {
             <div className='fixed w-[50%] bg-white rounded-xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
                 <div className='w-full flex flex-row items-center justify-between p-6 border-b-[1px] border-jel-gray-3'>
                   <h2 className='text-black font-bold text-xl'>Settings</h2>
-                  <Image onClick={()=>{(address && user?.username) ? setOpenSettings(false) : setError("Set Profile Deatils First")}} src={cross}/>
+                  <Image onClick={()=>{(address && user?.username) ? setOpenSettings(false) : setError("Set Profile Details First")}} src={cross}/>
                 </div>
                 <div className='p-6'>
                   <div className=" h-12 rounded-xl flex flex-row gap-2 p-1">
@@ -176,7 +176,7 @@ const SettingsModal = () => {
                       settingType==0 && (user? updateUserDetails() : createUser())
                     }} className='bg-black text-white font-semibold rounded-xl cursor-pointer py-3 px-6'>Save</button>
                     <button onClick={()=>{
-                      (address && user?.username) ? setOpenSettings(false) : setError("Set Profile Deatils First");
+                      (address && user?.username) ? setOpenSettings(false) : setError("Set Profile Details First");
                     }} className='bg-jel-gray-1 hover:bg-jel-gray-2 font-semibold text-black rounded-xl cursor-pointer py-3 px-6'>Cancel</button>
                   </div>
                 </div> 

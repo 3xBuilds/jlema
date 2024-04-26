@@ -134,7 +134,7 @@ const ProfileInfo = () => {
                 <p className='text-sm font-normal text-black'>{balances[1] || "0"}</p>
             </div>
             <div className='flex flex-row justify-between relative'>
-                <p className='text-sm font-normal text-jel-gray-4'>{"Spacial Editions"}</p>
+                <p className='text-sm font-normal text-jel-gray-4'>{"Special Editions"}</p>
                 <p className='text-sm font-normal text-black'>{balances[2] || "0"}</p>
             </div>
             <div className='flex flex-row justify-between relative'>
