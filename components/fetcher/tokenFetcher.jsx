@@ -17,10 +17,12 @@ export default function TokenFetcher({wallet}){
     const[user, setUser] = useState(null);
 
     useEffect(()=>{
+        console.log("TOKENFETCHER", wallet);
         if(wallet == null){
             setUser(address)
         }
         else{
+            console.log("done")
             setUser(wallet);
         }
     },[wallet])
@@ -43,15 +45,18 @@ export default function TokenFetcher({wallet}){
     async function getBalance(){
         try{
             const contract = await contractSetup();
-            setBalance(ethers.formatEther(String(await contract.balanceOf(user))));
+            console.log(contract);
+            const bal = ethers.utils.formatEther(String(await contract.balanceOf(user)));
+            console.log("bal",bal);
+
+            setBalance(Number(bal).toFixed(0));
         }
         catch(err){
-
+            console.log(err);
         }
     }
 
     useEffect(()=>{
-        if(user)
         getBalance();
     },[user])
 

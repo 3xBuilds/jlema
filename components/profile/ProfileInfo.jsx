@@ -34,6 +34,8 @@ const ProfileInfo = () => {
 
     const router = useRouter();
 
+
+    console.log(user?.wallet);
     useEffect(()=>{
         if(!isConnected){
             router.push("/");
