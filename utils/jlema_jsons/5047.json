@@ -1,0 +1,32 @@
+{
+  "name": "Jlema #5047",
+  "description": "Jlema is a community-driven Web 3 brand created by and for black-and-white art enthusiasts. #5047",
+  "attributes": [
+    {
+      "trait_type": "Skin",
+      "value": "Old School Tattoos"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Big Striped Shirt"
+    },
+    {
+      "trait_type": "Mouth",
+      "value": "Leaf"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Trucker"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Sad Note"
+    }
+  ],
+  "collection": {
+    "name": "Jlema",
+    "family": ""
+  },
+  "symbol": "JLEMA",
+  "image": "https://metadata.jlema.xyz/api/jlema/image/5047"
+}

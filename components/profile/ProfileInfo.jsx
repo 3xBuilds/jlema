@@ -38,8 +38,6 @@ const ProfileInfo = () => {
     const {openSettings, setOpenSettings, balances, user} = useGlobalContext();
     const {address} = useAccount();
 
-
-    console.log(user?.wallet);
     
 
   return (
@@ -58,7 +56,7 @@ const ProfileInfo = () => {
             </div>
             <div className='flex flex-col items-center justify-center gap-1 py-4'>
                 <h2 className=' font-normal text-xs text-jel-gray-4 text-center'>Points</h2>
-                <h3 className=' font-medium text-sm text-black text-center'>{"100,000"}</h3>
+                <h3 className=' font-medium text-sm text-black text-center'>{user?.points}</h3>
             </div>
             <div className='flex flex-col items-center justify-center gap-1 py-4'>
                 <h2 className=' font-normal text-xs text-jel-gray-4 text-center'>Badges</h2>

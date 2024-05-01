@@ -1,0 +1,32 @@
+{
+  "name": "Jlema #3413",
+  "description": "Jlema is a community-driven Web 3 brand created by and for black-and-white art enthusiasts. #3413",
+  "attributes": [
+    {
+      "trait_type": "Skin",
+      "value": "Zombie"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Bandana Vest"
+    },
+    {
+      "trait_type": "Mouth",
+      "value": "Short Beard-Smile"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Classic Snapback"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Virtual Reality Headset"
+    }
+  ],
+  "collection": {
+    "name": "Jlema",
+    "family": ""
+  },
+  "symbol": "JLEMA",
+  "image": "https://metadata.jlema.xyz/api/jlema/image/3413"
+}

@@ -27,6 +27,18 @@ export default function NFTFetcher({wallet}){
  
     var counter = 0;
 
+    async function checkPointsFromContract(tokenId){
+        try{
+            const metadata = await fetch('../../utils/jlema_jsons/500.json');
+            console.log(metadata);
+            const json = await metadata.json();
+            console.log(json);
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+
     useEffect(()=>{
         setBalances([]);
         if(wallet == null){
@@ -67,12 +79,12 @@ export default function NFTFetcher({wallet}){
             var img;
             
             if(selected == 0){
-                img = "https://cf-ipfs.com/ipfs/bafybeiduqtzpwdc6hwwwjg3rt35twynjwsq367wo5phobkb3iogmhincge/" + tokenId + ".png";
+                img = "https://metadata.jlema.xyz/api/jlema/image/" + tokenId;
             }
             else if(selected == 1){
                 img = "https://cf-ipfs.com/ipfs/QmTj3DP94SPwVMBousFo25dryL66mPgK8bjyGFPKT5tM5B/"+tokenId+".gif"
             }
-
+            checkPointsFromContract(tokenId);
             setDisplayNFT(oldArray => [...oldArray, {img, tokenId}]);
 
             counter++;

@@ -1,0 +1,32 @@
+{
+  "name": "Jlema #2318",
+  "description": "Jlema is a community-driven Web 3 brand created by and for black-and-white art enthusiasts. #2318",
+  "attributes": [
+    {
+      "trait_type": "Skin",
+      "value": "Neutral"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Viking Black Tee"
+    },
+    {
+      "trait_type": "Mouth",
+      "value": "Smile"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Dark Fedora"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Suspicious"
+    }
+  ],
+  "collection": {
+    "name": "Jlema",
+    "family": ""
+  },
+  "symbol": "JLEMA",
+  "image": "https://metadata.jlema.xyz/api/jlema/image/2318"
+}
