@@ -19,6 +19,10 @@ const UserSchema = new Schema({
     twitter: {
         type: String,
     },
+    highlights: {
+        type: Array,
+        default: [0,0,0]
+    },
     points: {
         type: Number,
         default: 0

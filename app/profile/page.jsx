@@ -19,6 +19,7 @@ import SettingsModal from '@/components/settings/SettingsModal';
 import { useAccount } from 'wagmi';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import Highlights from '@/components/profile/Highlights';
 
 const ProfileUser = () => {
 
@@ -89,32 +90,7 @@ const ProfileUser = () => {
         <div className="pl-[328px] w-screen">
           <div className="px-5 py-4 flex flex-col gap-4 overflow-scroll w-full noscr">
 
-            <div className="border-[1px] overflow-hidden border-jel-gray-3 rounded-xl w-full h-80 relative flex items-center justify-center">
-              <button className="absolute top-1/2 -translate-y-1/2 left-5 flex items-center justify-center w-12 h-12 rounded-lg duration-300 hover:bg-jel-gray-2">
-                <Image src={arrowLeft} className=""/>
-              </button>
-              <button className="absolute top-1/2 -translate-y-1/2 right-5 flex items-center justify-center w-12 h-12 rounded-lg duration-300 hover:bg-jel-gray-2">
-                <Image src={arrowRight} className=""/>
-              </button>
-
-              <div onClick={()=>{setShowNftInfo({nftImage: nft1, number: 2})}} className=" grid grid-cols-2 w-[60%]">
-                <div className="h-80">
-                  <Image src={nft1} className='w-full h-full object-cover'/>
-                </div>
-                <div className="h-full flex flex-col items-start justify-center">
-                  <h3 className="font-medium text-jel-gray-4 text-lg">Jlema</h3>
-                  <h3 className="font-semibold text-black text-5xl">#2</h3>
-                  <div className="mt-4 flex flex-row gap-2 flex-wrap">
-                    <h3 className="text-xs font-normal text-jel-gray-4">Skin <span className="font-medium text-black">Old School Tattoos</span></h3>
-                    <h3 className="text-xs font-normal text-jel-gray-4">Cloth <span className="font-medium text-black">Topless</span></h3>
-                    <h3 className="text-xs font-normal text-jel-gray-4">Mouth <span className="font-medium text-black">Short Light Stubble Beard</span></h3>
-                    <h3 className="text-xs font-normal text-jel-gray-4">Head <span className="font-medium text-black">Pepe Bucket Hat</span></h3>
-                    <h3 className="text-xs font-normal text-jel-gray-4">Eyes <span className="font-medium text-black">Rectangular Sunglasses</span></h3>
-                  </div>
-                </div>
-              </div>
-
-            </div>
+          <Highlights/>
 
             <div className="w-full flex flex-row justify-between items-center">
               <div className=" bg-jel-gray-1 h-12 rounded-xl flex flex-row gap-2 p-1">

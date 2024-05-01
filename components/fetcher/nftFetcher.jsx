@@ -14,6 +14,7 @@ import { useAccount } from "wagmi";
 import newYear from "@/assets/newYear.png";
 import lunarNY from "@/assets/lunarNY.png";
 import christmas from "@/assets/christmas.png"
+import nftData from "../../utils/mapNfts.json"
 
 export default function NFTFetcher({wallet}){
 
@@ -28,15 +29,7 @@ export default function NFTFetcher({wallet}){
     var counter = 0;
 
     async function checkPointsFromContract(tokenId){
-        try{
-            const metadata = await fetch('../../utils/jlema_jsons/500.json');
-            console.log(metadata);
-            const json = await metadata.json();
-            console.log(json);
-        }
-        catch(err){
-            console.log(err);
-        }
+        return await nftData[tokenId];
     }
 
     useEffect(()=>{
@@ -84,9 +77,9 @@ export default function NFTFetcher({wallet}){
             else if(selected == 1){
                 img = "https://cf-ipfs.com/ipfs/QmTj3DP94SPwVMBousFo25dryL66mPgK8bjyGFPKT5tM5B/"+tokenId+".gif"
             }
-            checkPointsFromContract(tokenId);
-            setDisplayNFT(oldArray => [...oldArray, {img, tokenId}]);
-
+            const data = await checkPointsFromContract(tokenId);
+            console.log("hoh ", data);
+            setDisplayNFT(oldArray => [...oldArray, {img, tokenId, data}]);
             counter++;
             
         }
@@ -214,7 +207,7 @@ export default function NFTFetcher({wallet}){
     return (
         <div className="grid max-sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 items-start justify-between gap-4">
             {displayNFT.map((nft, index) => (
-                  <div onClick={()=>{setShowNftInfo({nftImage: nft.img, number: index+1, tokenId: nft.tokenId})}} key={index} className="rounded-xl hover:shadow-jel-nft duration-200 w-44 h-[12.5rem] cursor-pointer border-[1px] border-jel-gray-3 overflow-hidden flex flex-col">
+                  <div onClick={()=>{setShowNftInfo(nft); console.log("hih",nft)}} key={index} className="rounded-xl hover:shadow-jel-nft duration-200 w-44 h-[12.5rem] cursor-pointer border-[1px] border-jel-gray-3 overflow-hidden flex flex-col">
                     <div className="h-40 w-full">
                       <Image width={1920} height={1080} src={nft.img} className="object-cover w-full h-full"/>
                     </div>
