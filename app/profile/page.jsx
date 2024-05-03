@@ -1,5 +1,6 @@
 "use client"
 import NFTFetcher from '@/components/fetcher/nftFetcher';
+import pointsFetcher from '@/hooks/pointsFetcher';
 import NftInfoModal from '@/components/profile/NftInfoModal';
 import ProfileInfo from '@/components/profile/ProfileInfo';
 import { useGlobalContext } from '@/context/MainContext';
@@ -62,12 +63,14 @@ const ProfileUser = () => {
 
   const getUser = async () => {
     try{
+
       const res = await axios.get(`/api/user/${address}`);
       console.log("user", res.data);
       if(res.data.user==null){
         setOpenSettings(true);
       }
       setUser(res.data.user);
+      pointsFetcher(address, res.data.user);
     }
     catch(err){
       console.log("Error", err);

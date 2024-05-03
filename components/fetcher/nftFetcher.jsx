@@ -28,10 +28,6 @@ export default function NFTFetcher({wallet}){
  
     var counter = 0;
 
-    async function checkPointsFromContract(tokenId){
-        return await nftData[tokenId];
-    }
-
     useEffect(()=>{
         setBalances([]);
         if(wallet == null){
@@ -77,7 +73,7 @@ export default function NFTFetcher({wallet}){
             else if(selected == 1){
                 img = "https://cf-ipfs.com/ipfs/QmTj3DP94SPwVMBousFo25dryL66mPgK8bjyGFPKT5tM5B/"+tokenId+".gif"
             }
-            const data = await checkPointsFromContract(tokenId);
+            const data = nftData[tokenId];
             console.log("hoh ", data);
             setDisplayNFT(oldArray => [...oldArray, {img, tokenId, data}]);
             counter++;
@@ -85,13 +81,13 @@ export default function NFTFetcher({wallet}){
         }
         catch(err){
             console.log(err);
-            dataProvider(uri, tokenId);
-            if(gatewayNum < 3){
-                gatewayNum++;
-            }
-            else{
-                gatewayNum = 0;
-            }
+            // dataProvider(tokenId);
+            // if(gatewayNum < 3){
+            //     gatewayNum++;
+            // }
+            // else{
+            //     gatewayNum = 0;
+            // }
         }
 
 
