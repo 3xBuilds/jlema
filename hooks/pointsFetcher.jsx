@@ -6,6 +6,7 @@ import jlemaFetcher from "@/utils/abis/jlemaFetcher";
 import jlemaLegendary from "@/utils/abis/jlemaLegendary";
 import jlemaSE from "@/utils/abis/jlemaSE";
 import nftData from "../utils/mapNfts.json"
+import legendaryData from "../utils/mapLegendary.json";
 import { useAccount } from "wagmi";
 
 
@@ -219,20 +220,17 @@ export default async function pointsFetcher(address, user){
     
                         //trait based
                         arr.map(async(tokenId)=>{
-                            console.log(tokenId);
-                            const tokenURI = "https://metadata.jlema.xyz/config/jlema-legendary/"+tokenId+".json";
-                            const meta = await axios.get(tokenURI);
-                            const json = await meta.json();
+                            const type = legendaryData[tokenId].attributes[1].value;
+                            // console.log(type);
+                            
 
-                            const attributes = json["attributes"];
-
-                            if(attributes[1].value == "Special"){
+                            if(type == "Special"){
                                 points += 5000;
                             }
-                            else if(attributes[1].value == "Collaboration"){
+                            else if(type == "Collaboration"){
                                 points += 1000;
                             }
-                            else if(attributes[1].value == "Uncommon"){
+                            else if(type == "Uncommon"){
                                 points += 5000;
                             }
                         })
