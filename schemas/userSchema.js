@@ -26,7 +26,19 @@ const UserSchema = new Schema({
     points: {
         type: Number,
         default: 0
-    }, 
+    },
+    jlema: {
+        type: Number,
+        default: 0
+    },
+    jlemalegendary: {
+        type: Number,
+        default: 0
+    },
+    specialEdition:{
+        type: Number,
+        default: 0
+    },
     badges: {
         type: Number,
         default: 0
