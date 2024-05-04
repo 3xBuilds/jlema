@@ -331,7 +331,7 @@ export default async function pointsFetcher(address, user){
             points += 2000;
         }
         // console.log(user?.points, points);
-        if(user?.points != points){
+        if(user?.points != points || user?.badges != badge){
             axios.patch(`/api/user/${user?.username}`, {points: points, badges: badge}).then((res)=>{console.log(res)}).catch((err)=>{console.log(err)});
         }
 
