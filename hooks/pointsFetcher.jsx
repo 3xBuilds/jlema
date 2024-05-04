@@ -111,6 +111,7 @@ async function specialEditionFetcher(address){
 export default async function pointsFetcher(address, user){
     try{
         var points = 0;
+        var badge = 0;
         var oldSchool = 0;
         for(let i = 0; i<3; i++){
             const contract = await contractSetup(i);
@@ -130,24 +131,29 @@ export default async function pointsFetcher(address, user){
 
                     if(final.length > 0){
                         badges.Jlema = true;
+                        badge += 1;
                         //balance based
                         points = points + 1000*final.length;
     
                         //holding tier based
                         if(final.length>=5 && final.length<10){
                             badges.Fren = true;
+                            badge += 1;
                             points +=1000;
                         }
                         else if(final.length>=10 && final.length<20){
                             badges.Fren = true;
                             badges.XGang = true;
+                            badge += 2;
+
                             points +=2000;
                         }
                         else if(final.length>=20 && final.length<40){
                             badges.Fren = true;
                             badges.XGang = true;
                             badges.MiniWhale = true;
-
+                            badge += 3;
+                            
                             points +=4000;
                         }
                         else if(final.length>=40){
@@ -155,6 +161,7 @@ export default async function pointsFetcher(address, user){
                             badges.XGang = true;
                             badges.MiniWhale = true;
                             badges.Whale = true;
+                            badge += 4;
                             points +=8000;
                         }
     
@@ -165,42 +172,62 @@ export default async function pointsFetcher(address, user){
                             switch(attributes.value){
                                 case "1 of 1":
                                     badges.OneofOne = true;
+                                    badge += 1;
+
                                     points+=5000;
                                     break;
                                 case "Snake":
                                     badges.Snake = true;
+                                    badge += 1;
+
                                     points+=200;
                                     break;
                                 case "Superhero":
                                     badges.Hero = true;
+                                    badge += 1;
+
                                     points+=200;
                                     break;
                                 case "Astronaut":
                                     badges.Space = true;
+                                    badge += 1;
+
                                     points+=200;
                                     break;
                                 case "Graphic Tee Peace":
                                     badges.Peace = true;
+                                    badge += 1;
+
                                     points+=200;
                                     break;
                                 case "Crown":
                                     badges.King = true;
+                                    badge += 1;
+
                                     points+=200;
                                     break;
                                 case "Penguin Hat":
                                     badges.Penguin = true;
+                                    badge += 1;
+
                                     points+=200;
                                     break;
                                 case "Punk hair":
                                     badges.Punker = true;
+                                    badge += 1;
+
                                     points+=200;
                                     break;
                                 case "Rose":
                                     badges.Romeo = true;
+                                    badge += 1;
+
                                     points+=200;
                                     break;
                                 case "Old School Tattoos":
                                     badges.Yakkuza = true;
+                                    badge += 1;
+
                                     oldSchool++;
                                     break;
                                 
@@ -222,24 +249,30 @@ export default async function pointsFetcher(address, user){
                     const arr = await jlemaLegendaryFetcher(address);
 
                     if(arr.length > 0){
+                        badge += 1;
                         badges.Legendary = true;
                         //balance based
                         points += 1000*arr.length;
                         
                         //tier based
                         if(arr.length>=10 && arr.length<20){
+                            badge += 1;
                             badges.LegendShrimp = true;
                             points +=2000;
                         }
                         else if(arr.length>=20 && arr.length<40){
                             badges.LegendShrimp = true;
                             badges.LegendDolphin = true;
+                            badge += 2;
+
                             points +=4000;
                         }
                         else if(arr.length>=40){
                             badges.LegendShrimp = true;
                             badges.LegendDolphin = true;
                             badges.LegendWhale = true;
+                            badge += 3;
+
                             points +=8000;
                         }
     
@@ -251,14 +284,17 @@ export default async function pointsFetcher(address, user){
 
                             if(type == "Special"){
                                 badges.Special = true;
+                                badge += 1;
                                 points += 5000;
                             }
                             if(type == "Collaboration"){
                                 badges.Collab = true;
+                                badge += 1;
                                 points += 1000;
                             }
                             if(type == "Uncommon"){
                                 badges.Unique = true;
+                                badge += 1;
                                 points += 5000;
                             }
                         })
@@ -272,10 +308,14 @@ export default async function pointsFetcher(address, user){
 
                     if(holding > 0){
                         badges.Edition = true;
+                        badge += 1;
+
                         points += holding*100;
     
                         if(holding>10){
                             badges.XEditions = true;
+                            badge += 1;
+
                             points+=2000;
                         }
                     }
@@ -286,12 +326,13 @@ export default async function pointsFetcher(address, user){
             }
         }
         if(badges.Jlema == true && badges.Legendary == true && badges.Edition == true){
+            badge += 1;
             badges.Homies = true;
             points += 2000;
         }
         // console.log(user?.points, points);
         if(user?.points != points){
-            axios.patch(`/api/user/${user?.username}`, {points: points}).then((res)=>{console.log(res)}).catch((err)=>{console.log(err)});
+            axios.patch(`/api/user/${user?.username}`, {points: points, badges: badge}).then((res)=>{console.log(res)}).catch((err)=>{console.log(err)});
         }
 
         return badges;
