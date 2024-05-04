@@ -26,6 +26,10 @@ const UserSchema = new Schema({
     points: {
         type: Number,
         default: 0
+    }, 
+    badges: {
+        type: Number,
+        default: 0
     }
   }, {collection: "users"})
 

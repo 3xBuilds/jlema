@@ -60,7 +60,7 @@ const ProfileInfo = () => {
             </div>
             <div className='flex flex-col items-center justify-center gap-1 py-4'>
                 <h2 className=' font-normal text-xs text-jel-gray-4 text-center'>Badges</h2>
-                <h3 className=' font-medium text-sm text-black text-center'>{14}</h3>
+                <h3 className=' font-medium text-sm text-black text-center'>{user?.badges}</h3>
             </div>
         </div>
 

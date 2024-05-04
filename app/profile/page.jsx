@@ -70,7 +70,8 @@ const ProfileUser = () => {
         setOpenSettings(true);
       }
       setUser(res.data.user);
-      pointsFetcher(address, res.data.user);
+      const response = await pointsFetcher(address, res.data.user);
+      console.log(response);
     }
     catch(err){
       console.log("Error", err);

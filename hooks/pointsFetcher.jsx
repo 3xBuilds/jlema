@@ -39,7 +39,6 @@ var badges = {
     "Special": false,
     "Collab": false,
     "Unique": false,
-
 }
 
 async function contractSetup(selected){

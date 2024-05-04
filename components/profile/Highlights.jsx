@@ -52,7 +52,7 @@ const Highlights = () => {
     }, [user])
 
 
-
+  if(displayNFT[currentNft]?.data)
   return (
     <div className="border-[1px] overflow-hidden border-jel-gray-3 rounded-xl w-full h-80 relative flex items-center justify-center">
         <button className="absolute top-1/2 -translate-y-1/2 left-5 flex items-center justify-center w-12 h-12 rounded-lg duration-300 hover:bg-jel-gray-2">
@@ -66,7 +66,7 @@ const Highlights = () => {
         <div className="h-80">
             <Image src={displayNFT[currentNft]?.img} width={1000} height={1000} className=' h-full object-contain'/>
         </div>
-        <div className="h-full flex flex-col items-start justify-center">
+         <div className="h-full flex flex-col items-start justify-center">
             <h3 className="font-medium text-jel-gray-4 text-lg">Jlema</h3>
             <h3 className="font-semibold text-black text-5xl">#{displayNFT[currentNft]?.tokenId}</h3>
             <div className="mt-4 flex flex-row gap-2 flex-wrap">
@@ -80,6 +80,7 @@ const Highlights = () => {
         </div>
     </div>
   )
+  
 }
 
 export default Highlights
