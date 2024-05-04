@@ -47,19 +47,50 @@ const Highlights = () => {
     useEffect(()=>{
       setDisplayNFT([]);
       user?.highlights?.map((nft)=>{
+        if(nft!=0){
           dataProvider(nft);
+        }
       })
     }, [user])
+
+    useEffect(()=>{
+      console.log("ggg: ", displayNFT);
+    }, [displayNFT])
+
+    const next = () => {
+      const start = 0;
+      const end = displayNFT.length-1;
+
+      if(currentNft>=end){
+        setCurrentNft(start);
+      }
+      else{
+        setCurrentNft(prev=>prev+1);
+      }
+
+    }
+
+    const previous = () => {
+      const start = 0;
+      const end = displayNFT.length-1;
+
+      if(currentNft<=start){
+        setCurrentNft(end);
+      }
+      else{
+        setCurrentNft(prev=>prev-1);
+      }
+    }
 
 
   if(displayNFT[currentNft]?.data)
   return (
     <div className="border-[1px] overflow-hidden border-jel-gray-3 rounded-xl w-full h-80 relative flex items-center justify-center">
         <button className="absolute top-1/2 -translate-y-1/2 left-5 flex items-center justify-center w-12 h-12 rounded-lg duration-300 hover:bg-jel-gray-2">
-          <Image src={arrowLeft} onClick={()=>{setCurrentNft(prev=>prev==0 ? 2 : prev-1)}} className=""/>
+          <Image src={arrowLeft} onClick={previous} className=""/>
         </button>
         <button className="absolute top-1/2 -translate-y-1/2 right-5 flex items-center justify-center w-12 h-12 rounded-lg duration-300 hover:bg-jel-gray-2">
-          <Image src={arrowRight} onClick={()=>{setCurrentNft(prev=>prev==2 ? 0 : prev+1)}} className=""/>
+          <Image src={arrowRight} onClick={next} className=""/>
         </button>
 
         <div onClick={()=>{setShowNftInfo({nftImage: nft1, number: 2})}} className=" grid grid-cols-2 w-[60%]">
