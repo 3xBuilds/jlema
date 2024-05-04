@@ -16,7 +16,7 @@ import nftData from "../../utils/mapNfts.json"
 
 const Highlights = () => {
 
-  const {user} = useGlobalContext();
+  const {user, setShowNftInfo} = useGlobalContext();
   const [currentNft, setCurrentNft] = useState(0);
 
   const [displayNFT, setDisplayNFT] = useState([]);
@@ -53,9 +53,9 @@ const Highlights = () => {
       })
     }, [user])
 
-    useEffect(()=>{
-      console.log("ggg: ", displayNFT);
-    }, [displayNFT])
+    // useEffect(()=>{
+    //   console.log("currrr: ", displayNFT[currentNft]);
+    // }, [displayNFT, currentNft])
 
     const next = () => {
       const start = 0;
@@ -93,11 +93,11 @@ const Highlights = () => {
           <Image src={arrowRight} onClick={next} className=""/>
         </button>
 
-        <div onClick={()=>{setShowNftInfo({nftImage: nft1, number: 2})}} className=" grid grid-cols-2 w-[60%]">
+        <div onClick={()=>{setShowNftInfo(displayNFT[currentNft])}} className=" grid grid-cols-2 w-[60%]">
         <div className="h-80">
             <Image src={displayNFT[currentNft]?.img} width={1000} height={1000} className=' h-full object-contain'/>
         </div>
-         <div className="h-full flex flex-col items-start justify-center">
+         <div  className="h-full flex flex-col items-start justify-center">
             <h3 className="font-medium text-jel-gray-4 text-lg">Jlema</h3>
             <h3 className="font-semibold text-black text-5xl">#{displayNFT[currentNft]?.tokenId}</h3>
             <div className="mt-4 flex flex-row gap-2 flex-wrap">

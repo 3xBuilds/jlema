@@ -203,7 +203,7 @@ export default function NFTFetcher({wallet}){
     return (
         <div className="grid max-sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 items-start justify-between gap-4">
             {displayNFT.map((nft, index) => (
-                  <div onClick={()=>{setShowNftInfo(nft); console.log("hih",nft)}} key={index} className="rounded-xl hover:shadow-jel-nft duration-200 w-44 h-[12.5rem] cursor-pointer border-[1px] border-jel-gray-3 overflow-hidden flex flex-col">
+                  <div onClick={()=>{setShowNftInfo(nft)}} key={index} className="rounded-xl hover:shadow-jel-nft duration-200 w-44 h-[12.5rem] cursor-pointer border-[1px] border-jel-gray-3 overflow-hidden flex flex-col">
                     <div className="h-40 w-full">
                       <Image width={1920} height={1080} src={nft.img} className="object-cover w-full h-full"/>
                     </div>

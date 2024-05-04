@@ -4,9 +4,11 @@ import cross from '../../assets/icons/cross.svg'
 import download from '../../assets/icons/downloadcircle.svg'
 import magiceden from '../../assets/icons/magiceden.png'
 import opensea from '../../assets/icons/opensea.png'
+import { useEffect } from 'react'
 
 
 const NftInfoModal = ({showNftInfo, setShowNftInfo}) => {
+  
   return (
     <div className='w-screen h-screen top-0 left-0 fixed z-40'>
         <div className='fixed w-screen h-screen bg-black/50'></div>
@@ -14,10 +16,10 @@ const NftInfoModal = ({showNftInfo, setShowNftInfo}) => {
             <div className='w-full h-full relative grid grid-cols-2'>
                 <Image onClick={()=>{setShowNftInfo(null)}} src={cross} className='opacity-60 absolute top-5 right-5 cursor-pointer'/>
                 <div className='w-full h-full overflow-hidden flex items-center justify-center'>
-                    {showNftInfo && <Image width={1080} height={1080} src={showNftInfo?.data.image} className='w-full h-full object-cover'/>}
+                    {showNftInfo && <Image width={1080} height={1080} src={showNftInfo?.data?.image} className='w-full h-full object-cover'/>}
                 </div>
                 <div className=' p-6 pt-16 flex flex-col justify-between'>
-                  <h1 className='font-bold text-black text-[32px]'>{showNftInfo?.data.name}</h1>
+                  <h1 className='font-bold text-black text-[32px]'>{showNftInfo?.data?.name}</h1>
 
                   <div className='grid grid-cols-2 gap-5'>
                     <div className='border-[1px] border-jel-gray-3 rounded-lg p-4'>
