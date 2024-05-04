@@ -19,6 +19,7 @@ import SettingsModal from '@/components/settings/SettingsModal';
 import { useParams } from 'next/navigation';
 import axios from 'axios';
 import Highlights from '@/components/profile/Highlights';
+import pointsFetcher from '@/hooks/pointsFetcher';
 
 const Profile = () => {
 
@@ -33,6 +34,8 @@ const Profile = () => {
       console.log("paht:", path.username);
       const res = await axios.get(`/api/user/get/${path.username}`);
       setUser(res.data.user);
+      const response = await pointsFetcher(res.data.user.wallet, res.data.user);
+      console.log(response);
     }
     catch(err){
       console.log("Error", err);
