@@ -113,6 +113,12 @@ export default async function pointsFetcher(address, user){
         var points = 0;
         var badge = 0;
         var oldSchool = 0;
+
+        let jlemaNfts = 0;
+        let legendaryNfts = 0;
+        let specialNfts = 0;
+
+
         for(let i = 0; i<3; i++){
             const contract = await contractSetup(i);
 
@@ -127,6 +133,8 @@ export default async function pointsFetcher(address, user){
 
                     
                     const final = arr1.concat(arr2, arr3, arr4, arr5);
+
+                    jlemaNfts = final?.length;
                     // console.log(final);
 
                     if(final.length > 0){
@@ -248,6 +256,8 @@ export default async function pointsFetcher(address, user){
                 case 1:
                     const arr = await jlemaLegendaryFetcher(address);
 
+                    legendaryNfts = arr?.length;
+
                     if(arr.length > 0){
                         badge += 1;
                         badges.Legendary = true;
@@ -304,7 +314,9 @@ export default async function pointsFetcher(address, user){
 
                 //special edition
                 case 2:
-                    const holding = specialEditionFetcher(address);
+                    const holding = await specialEditionFetcher(address);
+
+                    specialNfts = holding;
 
                     if(holding > 0){
                         badges.Edition = true;
@@ -330,9 +342,15 @@ export default async function pointsFetcher(address, user){
             badges.Homies = true;
             points += 2000;
         }
-        // console.log(user?.points, points);
-        if(user?.points != points || user?.badges != badge){
-            axios.patch(`/api/user/${user?.username}`, {points: points, badges: badge}).then((res)=>{console.log(res)}).catch((err)=>{console.log(err)});
+        console.log(
+            points,
+            badge,
+            jlemaNfts,
+            legendaryNfts,
+            specialNfts
+        );
+        if(user?.points != points || user?.badges != badge || user?.jlema != jlemaNfts || user?.legendaryNfts != legendaryNfts || user?.specialEdition != specialNfts){
+            axios.patch(`/api/user/${user?.username}`, { points: points, badges: badge, jlema:jlemaNfts, jlemalegendary:legendaryNfts, specialEdition:specialNfts }).then((res)=>{console.log(res)}).catch((err)=>{console.log(err)});
         }
 
         return badges;

@@ -27,19 +27,19 @@ export async function PATCH(req) {
         
         const body = await req.json();
         const {username, wallet="", ...rest} = body;
+        console.log("rest of data: ", body.jlemalegendary);
 
         await connectToDB();
         const user = await User.findOneAndUpdate({username: userName},
             {username, ...rest},
             {new: true}
         )
-        console.log("userName: ", userName);
-        console.log("user: ", user);
         return new NextResponse(JSON.stringify({
             user
         }), { status: 200 });
     }
     catch (error) {
+        // console.log(error);
         return new NextResponse(JSON.stringify(error), {
             status: 500,
         });

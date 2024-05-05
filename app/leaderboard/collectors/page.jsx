@@ -87,11 +87,11 @@ const Collectors = () => {
                     <h3 className=" text-jel-gray-4  font-normal text-sm flex flex-row gap-1 items-center justify-center "> <span> <Image src={twitter} className="w-4 opacity-70"/> </span> {holder?.twitter} </h3>
                     </div>
                 </div>
-                <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-3 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">--</h3></div>
-                <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-3 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">--</h3></div>
-                <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-3 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">--</h3></div>
-                <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-3 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.badges}</h3></div>
-                <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-3 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.points}</h3></div>
+                <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-3 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.jlema || "--"}</h3></div>
+                <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-3 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.jlemalegendary || "--"}</h3></div>
+                <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-3 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.specialEdition || "--"}</h3></div>
+                <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-3 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.badges || "--"}</h3></div>
+                <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-3 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.points || "--"}</h3></div>
                 </>
                 ))}
 
