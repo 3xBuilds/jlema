@@ -6,26 +6,43 @@ import searchIcon from "@/assets/icons/search.svg"
 import image from "@/assets/icons/imagebadge.png";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const Collectors = () => {
 
     const [leaderboard, setLeaderboard] = useState();
     const [search, setSearch] = useState();
+    const router = useRouter();
 
     const handleSearch = (e) => {
         setSearch(e.target.value);
     }
 
+    const filterArray = (leaderboard, searchTerm) => {
+        if (!searchTerm) {
+          return leaderboard;
+        }
+      
+        const lowercaseSearchTerm = searchTerm.toLowerCase();
+        return leaderboard.filter((holder) => {
+          const lowercaseWallet = holder.wallet?.toLowerCase();
+          const lowercaseUsername = holder.username?.toLowerCase();
+      
+          return lowercaseWallet?.includes(lowercaseSearchTerm) || lowercaseUsername?.includes(lowercaseSearchTerm);
+        });
+      };
+
     const getLeaderboard = async () => {
         try{
         const res = await axios.get("/api/leaderboard");
-        console.log("leader: ", res.data.leaderboard);
         setLeaderboard(res.data.leaderboard);
         }
         catch(err){
         console.log(err);
         }
     }
+
+    const filteredLeaderboard = filterArray(leaderboard, search);
 
     useEffect(()=>{
         getLeaderboard();
@@ -58,10 +75,10 @@ const Collectors = () => {
                 <div className=" col-span-3 border-b-[1px] pb-3 border-jel-gray-3 px-2"><h3 className="text-center font-normal text-sm text-jel-gray-4">Points</h3></div>
 
 
-                {leaderboard?.map((holder)=>(
+                {filteredLeaderboard?.map((holder)=>(
                 <>
-                <div className="col-span-1 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.rank}</h3></div>
-                <div className="col-span-3 flex flex-row justify-start items-center p-2">
+                <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-1 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.rank}</h3></div>
+                <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-3 flex flex-row justify-start items-center p-2">
                     <div className="border-[1px] overflow-hidden rounded-md border-jel-gray-3 w-16 h-16 aspect-square">
                     <Image src={holder?.dp} width={300} height={300} className=" object-contain w-full h-full"/>
                     </div>
@@ -70,13 +87,17 @@ const Collectors = () => {
                     <h3 className=" text-jel-gray-4  font-normal text-sm flex flex-row gap-1 items-center justify-center "> <span> <Image src={twitter} className="w-4 opacity-70"/> </span> {holder?.twitter} </h3>
                     </div>
                 </div>
-                <div className="col-span-3 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">--</h3></div>
-                <div className="col-span-3 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">--</h3></div>
-                <div className="col-span-3 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">--</h3></div>
-                <div className="col-span-3 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.badges}</h3></div>
-                <div className="col-span-3 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.points}</h3></div>
+                <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-3 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">--</h3></div>
+                <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-3 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">--</h3></div>
+                <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-3 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">--</h3></div>
+                <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-3 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.badges}</h3></div>
+                <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-3 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.points}</h3></div>
                 </>
                 ))}
+
+                {
+                    filteredLeaderboard?.length==0 && <div className=" col-span-full flex items-center justify-center"><h3 className=" font-semibold text-lg text-jel-gray-4 opacity-60 mt-10">No results found</h3></div>
+                }
 
             </div>
 

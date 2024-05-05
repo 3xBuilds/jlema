@@ -15,7 +15,6 @@ const Leaderboard = () => {
   const getLeaderboard = async () => {
     try{
       const res = await axios.get("/api/leaderboard");
-      console.log("leader: ", res.data.leaderboard);
       setLeaderboard(res.data.leaderboard);
     }
     catch(err){
