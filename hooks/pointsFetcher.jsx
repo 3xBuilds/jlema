@@ -349,7 +349,7 @@ export default async function pointsFetcher(address, user){
             legendaryNfts,
             specialNfts
         );
-        if(user?.points != points || user?.badges != badge || user?.jlema != jlemaNfts || user?.legendaryNfts != legendaryNfts || user?.specialEdition != specialNfts){
+        if(user?.points != points || user?.badges != badge || user?.jlema != jlemaNfts || user?.jlemalegendary != legendaryNfts || user?.specialEdition != specialNfts){
             axios.patch(`/api/user/${user?.username}`, { points: points, badges: badge, jlema:jlemaNfts, jlemalegendary:legendaryNfts, specialEdition:specialNfts }).then((res)=>{console.log(res)}).catch((err)=>{console.log(err)});
         }
 
