@@ -21,7 +21,6 @@ const UserSchema = new Schema({
     },
     highlights: {
         type: Array,
-        default: [0,0,0]
     },
     points: {
         type: Number,
