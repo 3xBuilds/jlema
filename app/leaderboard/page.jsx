@@ -37,8 +37,10 @@ const Leaderboard = () => {
       </div>
       <div className="w-full h-[1px] bg-jel-gray-3 my-4"></div>
       <div className="grid grid-cols-3 gap-4 h-96">
-      {leaderboard?.map((holder)=>(
-        <TopperCard holder={holder}/>
+      {leaderboard?.map((holder, i)=>(
+
+          <TopperCard holder={holder} ind = {i}/>
+
       ))}
       </div>
       <div className="mt-10 flex flex-row justify-between items-center">
@@ -103,7 +105,8 @@ const Leaderboard = () => {
   );
 };
 
-const TopperCard = ({holder}) => {
+const TopperCard = ({holder, ind}) => {
+  if(ind < 3)
     return(
         <div className="border-[1px] border-jel-gray-3 rounded-xl flex items-end justify-center overflow-hidden relative">
           <Image src={holder?.dp} width={1000} height={1000} className=" h-full object-contain" />
