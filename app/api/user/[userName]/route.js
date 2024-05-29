@@ -1,8 +1,10 @@
 import User from "@/schemas/userSchema";
 import { connectToDB } from "@/utils/db";
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
 export async function GET(req) {
+    revalidatePath('/', 'layout') 
     try{
         const wallet = req.nextUrl.pathname.split("/")[3];
 
