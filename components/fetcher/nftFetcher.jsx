@@ -15,6 +15,7 @@ import newYear from "@/assets/newYear.png";
 import lunarNY from "@/assets/lunarNY.png";
 import christmas from "@/assets/christmas.png"
 import nftData from "../../utils/mapNfts.json"
+import nftDataLeg from "../../utils/mapLegendary.json"
 
 export default function NFTFetcher({wallet}){
 
@@ -66,16 +67,27 @@ export default function NFTFetcher({wallet}){
         try{
 
             var img;
+            var data;
+            var name;
+            var melink;
+            var openlink;
             
             if(selected == 0){
                 img = "https://metadata.jlema.xyz/api/jlema/image/" + tokenId;
+                data = nftData[tokenId];
+                name = "Jlema"
+                melink = "https://magiceden.io/collections/polygon/0x71d9943cb18d9cb3605bc63dc6ce659eb7a78ced?evmItemDetailsModal=137%7E0x71d9943cb18d9cb3605bc63dc6ce659eb7a78ced%7E"+tokenId;
+                openlink = "https://opensea.io/assets/matic/0x71d9943cb18d9cb3605bc63dc6ce659eb7a78ced/" + tokenId
             }
             else if(selected == 1){
-                img = "https://cf-ipfs.com/ipfs/QmTj3DP94SPwVMBousFo25dryL66mPgK8bjyGFPKT5tM5B/"+tokenId+".gif"
+                img = "https://cf-ipfs.com/ipfs/QmTj3DP94SPwVMBousFo25dryL66mPgK8bjyGFPKT5tM5B/"+tokenId+".gif";
+                data = nftDataLeg[tokenId]
+                name = "Jlema Legendary"
+                melink = "https://magiceden.io/collections/polygon/0xc2f53f1d1c37c543b7a6440a247e4146d2e2c468?evmItemDetailsModal=137%7E0xc2f53f1d1c37c543b7a6440a247e4146d2e2c468%7E"+tokenId
+                openlink = "https://opensea.io/assets/matic/0xc2f53f1d1c37c543b7a6440a247e4146d2e2c468/" + tokenId
             }
-            const data = nftData[tokenId];
             console.log("hoh ", data);
-            setDisplayNFT(oldArray => [...oldArray, {img, tokenId, data}]);
+            setDisplayNFT(oldArray => [...oldArray, {name, img, tokenId, data, melink, openlink}]);
             counter++;
             
         }
@@ -208,7 +220,7 @@ export default function NFTFetcher({wallet}){
                       <Image width={1920} height={1080} src={nft.img} className="object-cover w-full h-full"/>
                     </div>
                     <div className="bg-white text-center py-2">
-                      <h3 className="text-sm font-normal text-black">{"Jlema #"}{nft.tokenId}</h3>
+                      <h3 className="text-sm font-normal text-black">{`${nft.name} #`}{nft.tokenId}</h3>
                     </div>
                 </div>
               ))}
