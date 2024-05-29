@@ -1,5 +1,7 @@
 "use client";
 import Image from "next/image";
+// import { useRouter } from "next/navigation";
+
 import nft1 from "@/assets/nft1.png";
 import twitter from "@/assets/icons/tweet.png"
 import image from "@/assets/icons/imagebadge.png";
@@ -58,7 +60,7 @@ const Leaderboard = () => {
         
           {leaderboard?.slice(0,5)?.map((holder)=>(
             <>
-              <div className="col-span-1 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.rank}</h3></div>
+              <div  className="col-span-1 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.rank}</h3></div>
               <div className="col-span-5 flex flex-row justify-start items-center p-2">
                 <div className="border-[1px] overflow-hidden rounded-md border-jel-gray-3 w-16 h-16 aspect-square">
                   <Image src={holder?.dp} width={300} height={300} className=" object-contain w-full h-full"/>
@@ -106,9 +108,10 @@ const Leaderboard = () => {
 };
 
 const TopperCard = ({holder, ind}) => {
+  const router = useRouter();
   if(ind < 3)
     return(
-        <div className="border-[1px] border-jel-gray-3 rounded-xl flex items-end justify-center overflow-hidden relative">
+        <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className="border-[1px] hover:cursor-cell border-jel-gray-3 rounded-xl flex items-end justify-center overflow-hidden relative">
           <Image src={holder?.dp} width={1000} height={1000} className=" h-full object-contain" />
           <div className="absolute bottom-0 left-0 bg-gradient-to-t from-white via-transparent to-transparent z-10 w-full h-full"></div>
           <h3 className="text-black top-4 left-5 font-semibold text-lg absolute z-20">
@@ -117,7 +120,7 @@ const TopperCard = ({holder, ind}) => {
 
           <div className="absolute top-4 right-5 w-40 m flex flex-row justify-end">
             {/* holder.badges is a number map the following that many times accorign to tha number */}
-            {Array(holder.badges)?.fill()?.slice(0.4)?.map((_, i) => (<>
+            {Array(holder.badges)?.fill()?.slice(0,4)?.map((_, i) => (<>
             <div className="relative group">
               <div className="absolute opacity-0 duration-300 w-20 z-50 left-1/2 -translate-x-1/2 -top-8 flex flex-col items-center justify-center">
                 <svg
