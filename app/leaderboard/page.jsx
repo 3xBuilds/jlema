@@ -59,7 +59,7 @@ const Leaderboard = () => {
           <div className=" col-span-3 border-b-[1px] pb-3 border-jel-gray-3 px-2"><h3 className="text-center font-normal text-sm text-jel-gray-4">Points</h3></div>
         
           {leaderboard?.slice(0,5)?.map((holder)=>(
-            <>
+            <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className="col-span-10 grid grid-cols-10 hover:cursor-crosshair duration-100 hover:bg-black/10">
               <div  className="col-span-1 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.rank}</h3></div>
               <div className="col-span-5 flex flex-row justify-start items-center p-2">
                 <div className="border-[1px] overflow-hidden rounded-md border-jel-gray-3 w-16 h-16 aspect-square">
@@ -72,7 +72,7 @@ const Leaderboard = () => {
               </div>
               <div className="col-span-1 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.badges}</h3></div>
               <div className="col-span-3 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.points}</h3></div>
-            </>
+            </div>
             ))}
         
         </div>
@@ -85,7 +85,7 @@ const Leaderboard = () => {
           <div className=" col-span-3 border-b-[1px] pb-3 border-jel-gray-3 px-2"><h3 className="text-center font-normal text-sm text-jel-gray-4">Points</h3></div>
         
           {leaderboard?.slice(6,10)?.map((holder)=>(
-            <>
+            <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className="col-span-10 grid grid-cols-10 hover:cursor-crosshair duration-100 hover:bg-black/10">
               <div className="col-span-1 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.rank}</h3></div>
               <div className="col-span-5 flex flex-row justify-start items-center p-2">
                 <div className="border-[1px] overflow-hidden rounded-md border-jel-gray-3 w-16 h-16 aspect-square">
@@ -98,7 +98,7 @@ const Leaderboard = () => {
               </div>
               <div className="col-span-1 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.badges}</h3></div>
               <div className="col-span-3 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.points}</h3></div>
-            </>
+            </div>
             ))}
         
         </div>
