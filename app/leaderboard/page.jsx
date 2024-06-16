@@ -8,7 +8,7 @@ import image from "@/assets/icons/imagebadge.png";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { IoLogoDiscord, IoLogoTwitter } from "react-icons/io5";
+import { IoLogoTwitter } from "react-icons/io5";
 import { FaDiscord } from "react-icons/fa";
 
 const Leaderboard = () => {
