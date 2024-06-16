@@ -75,8 +75,14 @@ const Profile = () => {
     {openSettings && <SettingsModal/>}
     {showNftInfo && <NftInfoModal showNftInfo={showNftInfo} setShowNftInfo={setShowNftInfo}/>}
       <div className="flex flex-row mt-16 pt-1">
-        <ProfileInfo/>
-        <div className="pl-[328px] w-screen">
+        <div className='w-[328px] max-md:w-screen pb-20 h-full fixed noscr bg-white top-14 left-0 shadow-jel-card items-center py-10 px-6'>
+          <ProfileInfo/>
+          <div className="md:hidden">
+            <Highlights/>
+          </div>
+          
+        </div>
+        <div className="pl-[328px] w-screen max-md:hidden">
           <div className="px-5 py-4 flex flex-col gap-4 overflow-scroll w-full noscr">
 
             <Highlights/>

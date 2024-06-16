@@ -41,8 +41,8 @@ const ProfileInfo = () => {
     
 
   return (
-    <div className='w-[328px] h-full fixed bg-white top-14 left-0 flex flex-col shadow-jel-card items-center py-10 px-6'>
-        <div className='w-[120px] h-[120px] border-[1px] border-jel-gray-3 rounded-full overflow-hidden'>
+    < >
+        <div className='w-[120px] h-[120px] mx-auto border-[1px] border-jel-gray-3 rounded-full overflow-hidden'>
             {user && <Image width={1000} height={1000} src={user?.dp} className='w-full h-full object-cover'/>}
         </div>
         <div>
@@ -167,7 +167,7 @@ const ProfileInfo = () => {
         </div>
 
 
-    </div>
+    </>
   )
 }
 

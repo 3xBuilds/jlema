@@ -57,7 +57,7 @@ const Leaderboard = () => {
       </div>
       </div>
       <div className="mt-10 flex flex-row justify-between items-center">
-        <h1 className="font-bold text-black text-2xl">Community</h1>
+        <h1 className="font-bold text-black text-2xl">Collectors</h1>
         <button onClick={()=>{router.push("/leaderboard/collectors")}} className='px-6 py-2 text-black cursor-pointer bg-jel-gray-3 hover:bg-jel-gray-2 duration-200 rounded-xl'>View All</button>
       </div>
       <div className="grid grid-cols-2 gap-4 mt-5">
