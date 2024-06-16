@@ -29,7 +29,7 @@ const Navbar = () => {
               <li className='px-6 py-2 cursor-pointer hover:bg-jel-gray-2 duration-200 rounded-xl'>Info</li>
               <a href="https://app.komet.me/nfts/Jlema/415" target='_blank'><li className='px-6 py-2 bg-black text-white cursor-pointer hover:bg-jel-gray-2 duration-200 rounded-xl'>Buy</li></a>
           </ul>
-          <h3 className=' py-2 text-sm font-semibold lg:hidden relative z-50'>Buy now</h3>
+          <h3 className=' py-2 text-sm font-semibold md:hidden relative z-50'>Buy now</h3>
           {/* Opens on clicking hamburger and shows only for phones */}
           <div className={`w-screen z-40 shadow-lg shadow-black/50 -translate-y-80 rounded-xl bg-white pt-20 pb-5 fixed top-0 left-0 flex flex-col items-start px-5 justify-center gap-4 duration-300 transition-all ${isOpen ? "translate-y-0" : ""}`}>
             <div className="flex flex-col items-start gap-4">
