@@ -139,13 +139,13 @@ const SettingsModal = () => {
     {showHighlighSelectModal && <SelectHighLight highlights={highlights} setHighlights={setHighlights} highNumber={highNumber} setShowHighlighSelectModal={setShowHighlighSelectModal}/>}
         <div className='w-screen h-screen top-0 left-0 fixed z-40 flex flex-col'>
             <div onClick={()=>{setOpenSettings(false)}} className='fixed w-screen h-screen bg-black/50'></div>
-            <div className='fixed w-[50%] bg-white rounded-xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
+            <div className='fixed sm:w-[50%] w-[95%] h-[98%] bg-white rounded-xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
                 <div className='w-full flex flex-row items-center justify-between p-6 border-b-[1px] border-jel-gray-3'>
                   <h2 className='text-black font-bold text-xl'>Settings</h2>
                   <Image onClick={()=>{(address && user?.username) ? setOpenSettings(false) : setError("Set Profile Details First")}} src={cross}/>
                 </div>
                 <div className='p-6'>
-                  <div className=" h-12 rounded-xl flex flex-row gap-2 p-1">
+                  <div className=" h-12 hidden rounded-xl sm:flex flex-row gap-2 p-1">
                     <button onClick={()=>{setSettingType(0)}} className={`cursor-pointer rounded-lg text-base px-4 py-2 ${settingType ==0 ? " bg-jel-gray-1 font-semibold text-black" : " font-medium text-jel-gray-4" }`}>
                       <h3 className="">Profile</h3>
                     </button>
@@ -156,6 +156,20 @@ const SettingsModal = () => {
                       <h3 className="">Badge Highlights</h3>
                     </button>
                   </div>
+
+                <div className="p-4 w-full overflow-hidden noscr">
+                  <div className=" h-12 rounded-xl w-[430px] flex flex-row gap-2 p-1">
+                    <button onClick={()=>{setSettingType(0)}} className={`cursor-pointer rounded-lg text-base px-4 py-2 ${settingType ==0 ? " bg-jel-gray-1 font-semibold text-black" : " font-medium text-jel-gray-4" }`}>
+                      <h3 className="">Profile</h3>
+                    </button>
+                    <button onClick={()=>{setSettingType(1)}} className={`cursor-pointer rounded-lg text-base px-4 py-2 ${settingType ==1 ? "bg-jel-gray-1 font-semibold text-black" : " font-medium text-jel-gray-4" }`}>
+                      <h3 className="">NFT Highlights</h3>
+                    </button>
+                    <button onClick={()=>{setSettingType(2)}} className={`cursor-pointer rounded-lg text-base px-4 py-2 ${settingType ==2 ? "bg-jel-gray-1 font-semibold text-black" : " font-medium text-jel-gray-4" }`}>
+                      <h3 className="">Badge Highlights</h3>
+                    </button>
+                  </div>
+                </div>
 
                   {settingType == 0 && 
                   <div className='pt-6'>

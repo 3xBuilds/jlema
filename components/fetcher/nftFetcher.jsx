@@ -213,7 +213,7 @@ export default function NFTFetcher({wallet}){
 
     if(selected != 2)
     return (
-        <div className="grid max-sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 items-start justify-between gap-4">
+        <div className="flex flex-wrap gap-4 ml-3 mt-4">
             {displayNFT.map((nft, index) => (
                   <div onClick={()=>{setShowNftInfo(nft)}} key={index} className="rounded-xl hover:shadow-jel-nft duration-200 w-44 h-[12.5rem] cursor-pointer border-[1px] border-jel-gray-3 overflow-hidden flex flex-col">
                     <div className="h-40 w-full">
@@ -230,7 +230,7 @@ export default function NFTFetcher({wallet}){
 
     if(selected == 2)
     return (
-        <div className="grid max-sm:grid-cols-1 sm:grid-cols-2 pb-20 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 items-start justify-between gap-4">
+        <div className="grid max-sm:grid-cols-1 my-4 sm:grid-cols-2 pb-20 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 items-start justify-between gap-4">
             <div className="text-center text-lg font-semibold shadow-xl shadow-black/10 hover:shadow-black/30 duration-200 rounded-xl">
                 <Image className="rounded-xl" width={1080} height={1080} src={christmas}/>
                 <h2 className="text-xl pt-2 font-bold">Merry Christmas 2023</h2>
