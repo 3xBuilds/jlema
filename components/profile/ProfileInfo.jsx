@@ -93,7 +93,7 @@ const ProfileInfo = () => {
                                     </svg>
                                 </div>
                                 <div className='w-16 h-16  cursor-pointer bg-white text-jel-gray-4 rounded-full shadow-jel-badge flex items-center justify-center'>
-                                    <Image src={require(`../../assets/badges/${item}.png`)} className='w-7'/>
+                                    <Image src={require(`../../assets/badges/${item}.png`)} className='w-9'/>
                                 </div>
                             </div>
                             <div>
