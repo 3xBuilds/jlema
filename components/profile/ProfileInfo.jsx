@@ -15,6 +15,9 @@ import { useGlobalContext } from '@/context/MainContext'
 import { useParams } from 'next/navigation'
 import {toast} from 'react-toastify'
 import pointsFetcher from '@/hooks/pointsFetcher'
+import { FaCross } from 'react-icons/fa'
+import BadgesModal from './BadgesModal'
+import cross from '@/assets/icons/cross.svg'
 
 
 const ProfileInfo = () => {
@@ -23,6 +26,7 @@ const ProfileInfo = () => {
     const {address} = useAccount();
     const [isClient, setIsClient] = useState(false)
     const [displayArr, setDisplayArr] = useState([])
+    const [expandBadges, setExpandBadges] = useState(false)
 
     async function copyToClip() {
         await navigator.clipboard.writeText(location.href + "/" + user?.username);
@@ -68,6 +72,39 @@ const ProfileInfo = () => {
 
   return (
     < >
+        {expandBadges && <div className="flex items-center justify-center fixed top-[-20px] z-[100] left-0 w-screen h-screen">
+            <div className="rounded-xl p-6 bg-white shadow-xl w-[32rem] shadow-black/20">
+                <div className="flex flex-row border-b-[1px] pb-4 border-black  items-center justify-center gap-10">
+                    <h3 className="text-[1.5rem] font-bold">Badges</h3>
+                    <div className="w-full">
+                        <button onClick={()=>{setExpandBadges(false)}} className="float-right">
+                            <Image className="float-right" src={cross}/>
+                        </button>
+                    </div>
+                </div>
+                <div className="flex gap-10 flex-wrap mt-4 items-center justify-center">
+                    {displayArr?.map((item)=>(
+                        <div className="flex flex-col justify-center items-center">
+                            <div className=' group'>
+                                <div className='absolute opacity-0 duration-300 w-20 group-hover:opacity-100 z-50 left-1/2 -translate-x-1/2 -top-8 flex flex-col items-center justify-center'>
+                                    <h3 className='text-sm font-medium text-black bg-white px-2 py-1 rounded shadow-black/10 shadow-lg'>{item}</h3>
+                                    <svg width="10" height="5" viewBox="0 0 10 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M5 5L0 0L10 0L5 5Z" fill="white"/>
+                                    </svg>
+                                </div>
+                                <div className='w-16 h-16  cursor-pointer bg-white text-jel-gray-4 rounded-full shadow-jel-badge flex items-center justify-center'>
+                                    <Image src={require(`../../assets/badges/${item}.png`)} className='w-7'/>
+                                </div>
+                            </div>
+                            <div>
+                                <h3>{item}</h3>
+                                </div>
+                            
+                            </div>
+                    ))}
+                </div>
+            </div>
+        </div>}
         <div className='w-[120px] h-[120px] mx-auto border-[1px] border-jel-gray-3 rounded-full overflow-hidden'>
             {user && <Image width={1000} height={1000} src={user?.dp} className='w-full h-full object-cover'/>}
         </div>
@@ -105,7 +142,7 @@ const ProfileInfo = () => {
                         <Image src={require(`../../assets/badges/${item}.png`)} className='w-7'/>
                     </div>
                 </div>}
-                {i >= 4 && <button className='relative group'>
+                {i >= 4 && <button onClick={()=>{setExpandBadges(true)}} className='relative group'>
                 <div className='absolute opacity-0 duration-300 w-24 group-hover:opacity-100 z-50 left-1/2 -translate-x-1/2 -top-8 flex flex-col items-center justify-center'>
                     <h3 className='text-sm font-medium text-black bg-white px-2 py-1 rounded shadow-black/10 shadow-lg'>View More</h3>
                     <svg width="10" height="5" viewBox="0 0 10 5" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -119,65 +156,8 @@ const ProfileInfo = () => {
             </div>
 ))}
 
-            
-            {/* <div className='relative group'>
-                <div className='absolute opacity-0 duration-300 w-20 group-hover:opacity-100 z-50 left-1/2 -translate-x-1/2 -top-8 flex flex-col items-center justify-center'>
-                    <h3 className='text-sm font-medium text-black bg-white px-2 py-1 rounded shadow-black/10 shadow-lg'>Badge 1</h3>
-                    <svg width="10" height="5" viewBox="0 0 10 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5 5L0 0L10 0L5 5Z" fill="white"/>
-                    </svg>
-                </div>
-                <div className='w-16 h-16 -ml-2 cursor-pointer bg-white text-jel-gray-4 rounded-full shadow-jel-badge flex items-center justify-center'>
-                    <Image src={image} className='w-7'/>
-                </div>
-            </div>
-
-
-            <div className='relative group'>
-                <div className='absolute opacity-0 duration-300 w-20 group-hover:opacity-100 z-50 left-1/2 -translate-x-1/2 -top-8 flex flex-col items-center justify-center'>
-                    <h3 className='text-sm font-medium text-black bg-white px-2 py-1 rounded shadow-black/10 shadow-lg'>Badge 2</h3>
-                    <svg width="10" height="5" viewBox="0 0 10 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5 5L0 0L10 0L5 5Z" fill="white"/>
-                    </svg>
-                </div>
-                <div className='w-16 h-16 -ml-2 cursor-pointer bg-white text-jel-gray-4 rounded-full shadow-jel-badge flex items-center justify-center'>
-                    <Image src={image} className='w-7'/>
-                </div>
-            </div>
-            <div className='relative group'>
-                <div className='absolute opacity-0 duration-300 w-20 group-hover:opacity-100 z-50 left-1/2 -translate-x-1/2 -top-8 flex flex-col items-center justify-center'>
-                    <h3 className='text-sm font-medium text-black bg-white px-2 py-1 rounded shadow-black/10 shadow-lg'>Badge 3</h3>
-                    <svg width="10" height="5" viewBox="0 0 10 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5 5L0 0L10 0L5 5Z" fill="white"/>
-                    </svg>
-                </div>
-                <div className='w-16 h-16 -ml-2 cursor-pointer bg-white text-jel-gray-4 rounded-full shadow-jel-badge flex items-center justify-center'>
-                    <Image src={image} className='w-7'/>
-                </div>
-            </div>
-            <div className='relative group'>
-                <div className='absolute opacity-0 duration-300 w-20 group-hover:opacity-100 z-50 left-1/2 -translate-x-1/2 -top-8 flex flex-col items-center justify-center'>
-                    <h3 className='text-sm font-medium text-black bg-white px-2 py-1 rounded shadow-black/10 shadow-lg'>Badge 4</h3>
-                    <svg width="10" height="5" viewBox="0 0 10 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5 5L0 0L10 0L5 5Z" fill="white"/>
-                    </svg>
-                </div>
-                <div className='w-16 h-16 -ml-2 cursor-pointer bg-white text-jel-gray-4 rounded-full shadow-jel-badge flex items-center justify-center'>
-                    <Image src={image} className='w-7'/>
-                </div>
-            </div>
-            <div className='relative group'>
-                <div className='absolute opacity-0 duration-300 w-24 group-hover:opacity-100 z-50 left-1/2 -translate-x-1/2 -top-8 flex flex-col items-center justify-center'>
-                    <h3 className='text-sm font-medium text-black bg-white px-2 py-1 rounded shadow-black/10 shadow-lg'>View More</h3>
-                    <svg width="10" height="5" viewBox="0 0 10 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5 5L0 0L10 0L5 5Z" fill="white"/>
-                    </svg>
-                </div>
-                <div className='w-16 h-16 -ml-2 cursor-pointer bg-white text-jel-gray-4 rounded-full shadow-jel-badge flex items-center justify-center'>
-                    <h3 className='font-medium text-base'>+10</h3>
-                </div>
-            </div> */}
         </div>
+
 
         <div className='w-full my-8 flex flex-col gap-3'>
             <h3 className='text-sm font-medium text-black'>Collected</h3>
