@@ -10,6 +10,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { IoLogoTwitter } from "react-icons/io5";
 import { FaDiscord } from "react-icons/fa";
+import pointsFetcher from "@/hooks/pointsFetcher";
+import { useGlobalContext } from "@/context/MainContext";
 
 const Leaderboard = () => {
 
@@ -19,6 +21,7 @@ const Leaderboard = () => {
   const getLeaderboard = async () => {
     try{
       const res = await axios.get("/api/leaderboard");
+      
       setLeaderboard(res.data.leaderboard);
     }
     catch(err){
@@ -82,7 +85,7 @@ const Leaderboard = () => {
                   <h3 className=" text-jel-gray-4  font-normal text-sm flex flex-row gap-1 items-center justify-center "> <span> <Image src={twitter} className="w-4 opacity-70"/> </span> {holder?.twitter} </h3>
                 </div>
               </div>
-              <div className="col-span-1 flex items-center justify-center"><h3 className=" font-semibold text-base text-black max-md:hidden">{holder?.badges}</h3></div>
+              <div className="col-span-1 flex items-center justify-center"><h3 className=" font-semibold text-base text-black max-md:hidden">{holder?.badges.length}</h3></div>
               <div className="col-span-3 flex items-center justify-center max-md:justify-end"><h3 className=" font-semibold text-base text-black max-md:text-right">{holder?.points}</h3></div>
             </div>
             ))}
@@ -125,7 +128,7 @@ const Leaderboard = () => {
                   <h3 className=" text-jel-gray-4  font-normal text-sm flex flex-row gap-1 items-center justify-center "> <span> <Image src={twitter} className="w-4 opacity-70"/> </span> {holder?.twitter} </h3>
                 </div>
               </div>
-              <div className="col-span-1 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.badges}</h3></div>
+              <div className="col-span-1 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.badges.length}</h3></div>
               <div className="col-span-3 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.points}</h3></div>
             </div>
             ))}
@@ -145,6 +148,8 @@ const Leaderboard = () => {
 
 const TopperCard = ({holder, ind}) => {
   const router = useRouter();
+
+  
   if(ind < 3)
     return(
         <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className="border-[1px] hover:cursor-cell border-jel-gray-3 rounded-xl flex items-end justify-center overflow-hidden relative">
@@ -156,7 +161,7 @@ const TopperCard = ({holder, ind}) => {
 
           <div className="absolute top-4 right-5 w-40 m flex flex-row justify-end">
             {/* holder.badges is a number map the following that many times accorign to tha number */}
-            {Array(holder.badges)?.fill()?.slice(0,4)?.map((_, i) => (<>
+            {/* {Array(holder.badges)?.fill()?.slice(0,4)?.map((_, i) => (<>
             <div className="relative group">
               <div className="absolute opacity-0 duration-300 w-20 z-50 left-1/2 -translate-x-1/2 -top-8 flex flex-col items-center justify-center">
                 <svg
@@ -175,8 +180,36 @@ const TopperCard = ({holder, ind}) => {
             </div>
             
             </>
+          ))} */}
+          {holder?.badges.map((item, i)=>(
+            <div>
+              {item != "" && i<4 && <div className='relative group'>
+                    <div className='absolute opacity-0 duration-300 w-20 group-hover:opacity-100 z-50 left-1/2 -translate-x-1/2 -top-8 flex flex-col items-center justify-center'>
+                        <h3 className='text-sm font-medium text-black bg-white px-2 py-1 rounded shadow-black/10 shadow-lg'>{item}</h3>
+                        <svg width="10" height="5" viewBox="0 0 10 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 5L0 0L10 0L5 5Z" fill="white"/>
+                        </svg>
+                    </div>
+                    <div className='w-12 h-12 -ml-2 cursor-pointer bg-white text-jel-gray-4 rounded-full shadow-jel-badge flex items-center justify-center'>
+                        <Image src={require(`../../assets/badges/${item}.png`)} className='w-7'/>
+                    </div>
+                </div>}
+                {i>=4 && 
+                  <div className='relative group'>
+                  <div className='absolute opacity-0 duration-300 w-20 group-hover:opacity-100 z-50 left-1/2 -translate-x-1/2 -top-8 flex flex-col items-center justify-center'>
+                      <h3 className='text-sm font-medium text-black bg-white px-2 py-1 rounded shadow-black/10 shadow-lg'>{item}</h3>
+                      <svg width="10" height="5" viewBox="0 0 10 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M5 5L0 0L10 0L5 5Z" fill="white"/>
+                      </svg>
+                  </div>
+                  <div className='w-12 h-12 -ml-2 cursor-pointer bg-white text-jel-gray-4 rounded-full shadow-jel-badge flex items-center justify-center'>
+                      +{holder?.badges.length - 4}
+                  </div>
+              </div>
+                }
+              </div>
           ))}
-          {holder?.badges > 4 &&
+          {/* {holder?.badges > 4 &&
             <div className="relative group">
               <div className="absolute opacity-0 duration-300 w-24 group-hover:opacity-100 z-50 left-1/2 -translate-x-1/2 -top-8 flex flex-col items-center justify-center">
                 <h3 className="text-xs font-medium text-black bg-white px-2 py-1 rounded shadow-black/10 shadow-lg">
@@ -195,7 +228,7 @@ const TopperCard = ({holder, ind}) => {
               <div className="w-10 h-10 -ml-2 cursor-pointer bg-white text-jel-gray-4 rounded-full shadow-jel-badge flex items-center justify-center">
                 <h3 className="font-medium text-xs">{holder.badges-4}+</h3>
               </div>
-            </div>}
+            </div>} */}
 
           </div>
 

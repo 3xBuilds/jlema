@@ -39,8 +39,8 @@ const UserSchema = new Schema({
         default: 0
     },
     badges: {
-        type: Number,
-        default: 0
+        type: Array,
+        default: []
     }
   }, {collection: "users"})
 

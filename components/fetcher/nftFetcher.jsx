@@ -86,7 +86,7 @@ export default function NFTFetcher({wallet}){
                 melink = "https://magiceden.io/collections/polygon/0xc2f53f1d1c37c543b7a6440a247e4146d2e2c468?evmItemDetailsModal=137%7E0xc2f53f1d1c37c543b7a6440a247e4146d2e2c468%7E"+tokenId
                 openlink = "https://opensea.io/assets/matic/0xc2f53f1d1c37c543b7a6440a247e4146d2e2c468/" + tokenId
             }
-            console.log("hoh ", data);
+
             setDisplayNFT(oldArray => [...oldArray, {name, img, tokenId, data, melink, openlink}]);
             counter++;
             
@@ -124,7 +124,7 @@ export default function NFTFetcher({wallet}){
         try{
             const contract = await contractSetup();
             const balance = Number(await contract.balanceOf(user));
-            console.log(balance);
+
             for(let i = 0; i < balance; i++){
                 let tokenId = Number(await contract.tokenOfOwnerByIndex(user, i));
                 dataProvider(tokenId);
@@ -170,7 +170,7 @@ export default function NFTFetcher({wallet}){
             const res = await contract.tokenOfOwnerJlema(multiplier, user);
             res.map((item)=>{
                 if(item != 0){
-                    console.log(Number(item));
+
                     dataProvider(Number(item));
                 }
             })

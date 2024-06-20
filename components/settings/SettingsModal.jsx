@@ -157,7 +157,7 @@ const SettingsModal = () => {
                     </button>
                   </div>
 
-                <div className="p-4 w-full overflow-hidden noscr">
+                <div className="p-4 w-full sm:hidden overflow-hidden noscr">
                   <div className=" h-12 rounded-xl w-[430px] flex flex-row gap-2 p-1">
                     <button onClick={()=>{setSettingType(0)}} className={`cursor-pointer rounded-lg text-base px-4 py-2 ${settingType ==0 ? " bg-jel-gray-1 font-semibold text-black" : " font-medium text-jel-gray-4" }`}>
                       <h3 className="">Profile</h3>

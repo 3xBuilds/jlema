@@ -70,8 +70,6 @@ const ProfileUser = () => {
         setOpenSettings(true);
       }
       setUser(res.data.user);
-      const response = await pointsFetcher(address, res.data.user);
-      console.log(response);
     }
     catch(err){
       console.log("Error", err);
@@ -92,11 +90,11 @@ const ProfileUser = () => {
       <div className="flex flex-row mt-16 pt-1">
       <div className='w-[328px] max-md:w-screen pb-20 h-full fixed noscr bg-white top-14 left-0 shadow-jel-card items-center py-10 px-6'>
           <ProfileInfo/>
-          <div className="md:hidden my-4">
+          <div className="sm:hidden my-4">
             <Highlights/>
             
           </div>        
-          <div>
+          <div className="sm:hidden">
             <div className="w-full flex flex-col gap-2 justify-between items-center">
               <div className="overflow-hidden noscr w-full">
                 <div className=" bg-jel-gray-1 w-[450px] h-12 rounded-xl flex flex-row gap-2 p-1">
@@ -127,10 +125,10 @@ const ProfileUser = () => {
                   </div>}
                 </div>
               </div>
+            <NFTFetcher/>
           </div>
 
 
-            <NFTFetcher/>
 
 
 

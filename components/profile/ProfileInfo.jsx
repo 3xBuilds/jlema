@@ -14,10 +14,15 @@ import { useEffect, useState } from 'react'
 import { useGlobalContext } from '@/context/MainContext'
 import { useParams } from 'next/navigation'
 import {toast} from 'react-toastify'
+import pointsFetcher from '@/hooks/pointsFetcher'
+
 
 const ProfileInfo = () => {
 
+    const {openSettings, setOpenSettings, balances, user} = useGlobalContext();
+    const {address} = useAccount();
     const [isClient, setIsClient] = useState(false)
+    const [displayArr, setDisplayArr] = useState([])
 
     async function copyToClip() {
         await navigator.clipboard.writeText(location.href + "/" + user?.username);
@@ -30,13 +35,34 @@ const ProfileInfo = () => {
 
     const params = useParams();
 
+    async function points(){
+        if(user?.wallet == address){
+            const response = await pointsFetcher(user);
+            console.log(response);
+    
+    
+            setDisplayArr(response)
+        }
+
+        else{
+            setDisplayArr(user?.badges)
+        }
+        // for(let i = 0; i<25; i++){
+        //     console.log(response[keyArr[i]]);
+        //     if(!response[keyArr[i]]){
+        //         keyArr[i] = "";
+        //     }
+        // }
+
+        // console.log("after modification", keyArr)
+        // setDisplayArr(keyArr);
+    }
+
     useEffect(()=>{
-        console.log("params", params);
-    },[params])
+        if(user)
+        points();
+    },[user])
 
-
-    const {openSettings, setOpenSettings, balances, user} = useGlobalContext();
-    const {address} = useAccount();
 
     
 
@@ -60,13 +86,41 @@ const ProfileInfo = () => {
             </div>
             <div className='flex flex-col items-center justify-center gap-1 py-4'>
                 <h2 className=' font-normal text-xs text-jel-gray-4 text-center'>Badges</h2>
-                <h3 className=' font-medium text-sm text-black text-center'>{user?.badges}</h3>
+                <h3 className=' font-medium text-sm text-black text-center'>{user?.badges.length}</h3>
             </div>
         </div>
 
-        <div className='mt-6 flex flex-row w-full justify-between'>
+        <div className='mt-6 flex flex-row w-full justify-center'>
+
+        {displayArr?.map((item, i)=>(
+            <div>
+            {item != "" && i<4 && <div className='relative group'>
+                    <div className='absolute opacity-0 duration-300 w-20 group-hover:opacity-100 z-50 left-1/2 -translate-x-1/2 -top-8 flex flex-col items-center justify-center'>
+                        <h3 className='text-sm font-medium text-black bg-white px-2 py-1 rounded shadow-black/10 shadow-lg'>{item}</h3>
+                        <svg width="10" height="5" viewBox="0 0 10 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 5L0 0L10 0L5 5Z" fill="white"/>
+                        </svg>
+                    </div>
+                    <div className='w-16 h-16 -ml-2 cursor-pointer bg-white text-jel-gray-4 rounded-full shadow-jel-badge flex items-center justify-center'>
+                        <Image src={require(`../../assets/badges/${item}.png`)} className='w-7'/>
+                    </div>
+                </div>}
+                {i >= 4 && <button className='relative group'>
+                <div className='absolute opacity-0 duration-300 w-24 group-hover:opacity-100 z-50 left-1/2 -translate-x-1/2 -top-8 flex flex-col items-center justify-center'>
+                    <h3 className='text-sm font-medium text-black bg-white px-2 py-1 rounded shadow-black/10 shadow-lg'>View More</h3>
+                    <svg width="10" height="5" viewBox="0 0 10 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 5L0 0L10 0L5 5Z" fill="white"/>
+                    </svg>
+                </div>
+                <div className='w-16 h-16 -ml-2 cursor-pointer bg-white text-jel-gray-4 rounded-full shadow-jel-badge flex items-center justify-center'>
+                    <h3 className='font-medium text-base'>+{displayArr.length - 4}</h3>
+                </div>
+            </button> }
+            </div>
+))}
+
             
-            <div className='relative group'>
+            {/* <div className='relative group'>
                 <div className='absolute opacity-0 duration-300 w-20 group-hover:opacity-100 z-50 left-1/2 -translate-x-1/2 -top-8 flex flex-col items-center justify-center'>
                     <h3 className='text-sm font-medium text-black bg-white px-2 py-1 rounded shadow-black/10 shadow-lg'>Badge 1</h3>
                     <svg width="10" height="5" viewBox="0 0 10 5" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -77,6 +131,8 @@ const ProfileInfo = () => {
                     <Image src={image} className='w-7'/>
                 </div>
             </div>
+
+
             <div className='relative group'>
                 <div className='absolute opacity-0 duration-300 w-20 group-hover:opacity-100 z-50 left-1/2 -translate-x-1/2 -top-8 flex flex-col items-center justify-center'>
                     <h3 className='text-sm font-medium text-black bg-white px-2 py-1 rounded shadow-black/10 shadow-lg'>Badge 2</h3>
@@ -120,7 +176,7 @@ const ProfileInfo = () => {
                 <div className='w-16 h-16 -ml-2 cursor-pointer bg-white text-jel-gray-4 rounded-full shadow-jel-badge flex items-center justify-center'>
                     <h3 className='font-medium text-base'>+10</h3>
                 </div>
-            </div>
+            </div> */}
         </div>
 
         <div className='w-full my-8 flex flex-col gap-3'>
