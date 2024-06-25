@@ -13,7 +13,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className={`w-full px-8 max-md:px-4 py-3 flex justify-between fixed bg-white z-40 top-0 left-0 ${(path=="/" | path=="/leaderboard") ? "" : " border-b-[1px] border-jel-gray-3"} `}>
+      <div className={`w-full px-8 max-md:px-4 py-3 flex justify-between fixed bg-white z-40 top-0 left-0 ${(path=="/" | path=="/leaderboard" | path=="/raffle") ? "" : " border-b-[1px] border-jel-gray-3"} `}>
           <div className="max-lg:flex flex-row items-center justify-center gap-2 z-50">
             <div className="lg:hidden" 
             onClick={()=>setIsOpen(prev=>!prev)}
