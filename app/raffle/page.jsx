@@ -9,13 +9,14 @@ import RaffleHighlights from '@/components/raffles/RaffleHighlights'
 import CurrentRaffles from '@/components/raffles/CurrentRaffles'
 import Footer from '@/components/Footer'
 import { useState } from 'react'
+import { useAccount } from 'wagmi'
 
 const Raffle = () => {
 
     const [selected, setSelected] = useState(0);
+    const {isConnected} = useAccount();
 
     const goToMyTickets = () => {
-        // Function to scroll to currentraffles component using ref
         setSelected(1);
         const currentRaffles = document.getElementById('current-raffles');
         currentRaffles.scrollIntoView({ behavior: 'smooth' });
@@ -30,7 +31,7 @@ const Raffle = () => {
                     Win CLEAN tokens or your favorite Polygon NFTs. Enter the Raffle Now!
                 </h2>
             </div>
-            <WalletConnectButton/>
+            {!isConnected && <WalletConnectButton/>}
         </div>
 
         
