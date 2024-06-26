@@ -10,8 +10,8 @@ import wallet from '../../assets/icons/wallet.svg'
 import { useAccount } from "wagmi";
 import { WalletConnectButton } from "../buttons/walletConnectButton";
 
-const CurrentRaffles = () => {
-  const [selected, setSelected] = useState(0);
+const CurrentRaffles = ({selected, setSelected}) => {
+  
   const scrollContainerRef = useRef(null);
   const {isConnected} = useAccount();
 
@@ -34,7 +34,7 @@ const CurrentRaffles = () => {
   }
 
   return (
-    <div className="my-10">
+    <div id="current-raffles" className="my-10">
       <div className="flex flex-row items-center justify-between">
         <div className=" bg-jel-gray-1 w-fit h-12 rounded-xl flex flex-row gap-2 p-1">
           <button onClick={() => { setSelected(0) }} className={`cursor-pointer rounded-lg text-base px-4 py-2 ${selected == 0 ? "bg-white font-semibold text-black shadow-jel-card" : " font-medium text-jel-gray-4"}`}>

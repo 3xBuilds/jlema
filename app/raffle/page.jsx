@@ -1,3 +1,4 @@
+"use client"
 import { WalletConnectButton } from '@/components/buttons/walletConnectButton'
 import React from 'react'
 import raffleBanner from '../../assets/rafbanner.png'
@@ -7,8 +8,19 @@ import arrow from '../../assets/icons/arrow.svg'
 import RaffleHighlights from '@/components/raffles/RaffleHighlights'
 import CurrentRaffles from '@/components/raffles/CurrentRaffles'
 import Footer from '@/components/Footer'
+import { useState } from 'react'
 
 const Raffle = () => {
+
+    const [selected, setSelected] = useState(0);
+
+    const goToMyTickets = () => {
+        // Function to scroll to currentraffles component using ref
+        setSelected(1);
+        const currentRaffles = document.getElementById('current-raffles');
+        currentRaffles.scrollIntoView({ behavior: 'smooth' });
+    }
+
   return (
     <div className="w-[97%] max-md:w-[90%] mx-auto">
         <div className="mt-24 flex flex-row items-center justify-between border-b-[1px] border-jel-gray-3 pb-2">
@@ -30,9 +42,9 @@ const Raffle = () => {
             </div> */}
 
             {/* Ended Raffles */}
-            <RaffleHighlights/>
+            <RaffleHighlights goToMyTickets={goToMyTickets}/>
 
-            <CurrentRaffles/>
+            <CurrentRaffles selected={selected} setSelected={setSelected}/>
 
             <Footer/>
 
