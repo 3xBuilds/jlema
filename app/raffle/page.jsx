@@ -10,10 +10,15 @@ import CurrentRaffles from '@/components/raffles/CurrentRaffles'
 import Footer from '@/components/Footer'
 import { useState } from 'react'
 import { useAccount } from 'wagmi'
+import SelectedRaffle from '@/components/raffles/SelectedRaffle'
 
 const Raffle = () => {
 
+    const [selectedRaffle, setSelectedRaffle] = useState(nft1);
+
+    // Ended Raffle:0 & My Tickets:0
     const [selected, setSelected] = useState(0);
+    
     const {isConnected} = useAccount();
 
     const goToMyTickets = () => {
@@ -35,6 +40,10 @@ const Raffle = () => {
         </div>
 
         
+        {
+            selectedRaffle!=null ? <SelectedRaffle selectedRaffle={selectedRaffle} setSelectedRaffle={setSelectedRaffle}/>
+        :
+        <>
             {/* No ended raffles */}
             {/* <div className="my-5 relative">
                 <div className="w-full mx-auto h-96 overflow-hidden rounded-xl">
@@ -43,11 +52,10 @@ const Raffle = () => {
             </div> */}
 
             {/* Ended Raffles */}
-            <RaffleHighlights goToMyTickets={goToMyTickets}/>
-
+            <RaffleHighlights goToMyTickets={goToMyTickets} setSelectedRaffle={setSelectedRaffle}/>
             <CurrentRaffles selected={selected} setSelected={setSelected}/>
-
             <Footer/>
+        </>}
 
     </div>
   )

@@ -7,7 +7,7 @@ import arrow from '../../assets/icons/arrow.svg'
 import { useState } from 'react'
 import BuyTicketsModal from './BuyTicketsModal'
 
-const RaffleHighlights = ({goToMyTickets}) => {
+const RaffleHighlights = ({goToMyTickets, setSelectedRaffle}) => {
 
     const [showBuyModal, setShowBuyModal] = useState(false);
 
@@ -42,7 +42,7 @@ const RaffleHighlights = ({goToMyTickets}) => {
                             <div className="h-[1px] bg-white w-full mb-5"></div>
                             <div className="flex flex-row gap-3">
                                 <button onClick={()=>setShowBuyModal(true)} className="px-5 py-2 rounded-xl bg-black text-white font-semibold">Buy Ticket</button>
-                                <button className="px-5 py-2 rounded-xl bg-white text-black hover:bg-jel-gray-2 font-semibold">View details</button>
+                                <button onClick={()=>{setSelectedRaffle(nft1)}} className="px-5 py-2 rounded-xl bg-white text-black hover:bg-jel-gray-2 font-semibold">View details</button>
                             </div>
                         </div>
                     </div>
