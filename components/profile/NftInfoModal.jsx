@@ -8,6 +8,27 @@ import { useEffect } from 'react'
 
 
 const NftInfoModal = ({showNftInfo, setShowNftInfo}) => {
+
+  const downloadImage = async () => {
+    if (!showNftInfo?.img) return;
+    
+    try {
+      const response = await fetch(showNftInfo.img);
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'nft-image.png'; // You can set a default filename here
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Failed to download image:', error);
+    }
+  }
   
   return (
     <div className='w-screen h-screen top-0 left-0 fixed z-40'>
@@ -46,12 +67,12 @@ const NftInfoModal = ({showNftInfo, setShowNftInfo}) => {
                   </div>
 
                   <div className=' w-full mt-2'>
-                  <button className=' col-span-2 flex flex-row gap-2 bg-jel-gray-1 hover:bg-jel-gray-2 duration-150 w-full py-3 px-6 items-center justify-center rounded-lg text-black'>
+                  <button onClick={downloadImage} className=' col-span-2 flex flex-row gap-2 bg-jel-gray-1 hover:bg-jel-gray-2 duration-150 w-full py-3 px-6 items-center justify-center rounded-lg text-black'>
                       <Image src={download} className='w-5'/>
                       <h3 className=' text-base font-semibold text-black'>Download Image</h3>
                   </button>
 
-                  <div className="flex gap-4 sm:flex-row flex-col mt-4">
+                  <div className="w-full grid grid-cols-2 mt-2 gap-2 max-lg:grid-cols-1">
                     <a href={`${showNftInfo?.melink}`} target='_blank'>
                       <button className='flex flex-row gap-2 bg-jel-gray-1 hover:bg-jel-gray-2 duration-150 w-full py-3 px-6 items-center justify-center rounded-lg text-black'>
                         <Image src={magiceden} className='w-5'/>
