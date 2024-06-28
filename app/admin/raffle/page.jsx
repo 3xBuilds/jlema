@@ -4,30 +4,34 @@ import { contractAdds } from '@/utils/contractAdds';
 import abi from "@/utils/abis/jlemaRaffle"
 import erc721abi from "@/utils/abis/erc721abi"
 import { ethers } from 'ethers';
-
+import axios from 'axios';
 import { AiOutlineLoading } from "react-icons/ai";
 import { useAccount } from 'wagmi';
+import ActiveRaffle from '@/components/admin/activeRaffle';
+import { useGlobalContext } from '@/context/MainContext';
 
 
 const RaffleAdmin = () => {
 
     const {address} = useAccount();
+    const {openModal, setOpenModal} = useGlobalContext()
 
-  const [selected, setSelected] = useState(0);
-  const [active, setActive] = useState(0);
-  const [ended, setEnded] = useState(0);
+    const [modalItem, setModalItem] = useState(null);
+    const [selected, setSelected] = useState(0);
+    const [active, setActive] = useState(0);
+    const [ended, setEnded] = useState(0);
 
-  const [contractAdd, setContractAdd] = useState("");
-  const [tokenId, setTokenId] = useState(null);
-  const [ticketPrice, setTicketPrice] = useState(null);
-  const [tokenSelected, setTokenSelected] = useState("CLEAN")
-  const [ticketAmount, setTicketAmount] = useState(null);
-  const [ticketsPerWallet, setTicketsPerWallet] = useState(null);
-  const [opensea, setOpensea] = useState("")
+    const [contractAdd, setContractAdd] = useState("");
+    const [tokenId, setTokenId] = useState(null);
+    const [ticketPrice, setTicketPrice] = useState(null);
+    const [tokenSelected, setTokenSelected] = useState("CLEAN")
+    const [ticketAmount, setTicketAmount] = useState(null);
+    const [ticketsPerWallet, setTicketsPerWallet] = useState(null);
+    const [opensea, setOpensea] = useState("");
 
-  const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
 
-  const [activeRaffleInfo, setActiveRaffleInfo] = useState([])
+    const [activeRaffleInfo, setActiveRaffleInfo] = useState([])
 
   async function contractSetup(){
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -94,11 +98,13 @@ async function approval(){
             if(contractAdd!="" && tokenId && ticketPrice && ticketAmount && ticketsPerWallet && opensea != ""){
                 const contract = await contractSetup();
 
-                if(setTokenSelected == "CLEAN"){
-                    await contract.setRaffleItem(active, contractAdd, ticketsPerWallet, opensea, tokenId, ticketAmount, ticketPrice, 0).then((res)=>{setLoading(false)})
+                if(tokenSelected == "CLEAN"){
+                    const txn = await contract.setRaffleItem(active, contractAdd, ticketsPerWallet, opensea, tokenId, ticketAmount, ticketPrice, 0);
+                    txn.wait().then((res)=>{setLoading(false); window.location.reload()} );
                 }
                 else{
-                    await contract.setRaffleItem(active, contractAdd, ticketsPerWallet, opensea, tokenId, ticketAmount, 0, ticketPrice).then((res)=>{setLoading(false)})
+                    const txn = await contract.setRaffleItem(active, contractAdd, ticketsPerWallet, opensea, tokenId, ticketAmount, 0, ticketPrice).then((res)=>{setLoading(false)})
+                    txn.wait().then((res)=>{setLoading(false); window.location.reload()});
                 }
             }
         }
@@ -109,20 +115,17 @@ async function approval(){
     }
 
     async function fetchActiveEnded(){
+        setActiveRaffleInfo([]);
         const contract = await contractSetup();
-
+         await contract.activeRaffles().catch((err)=>{console.log(err)});
         setActive(Number(await contract.activeRaffles()));
         setEnded(Number(await contract.endedRaffles()));
-        
+        console.log("hello");
         const active = await contract.fetchActiveRaffles();
-        const displayActive = []
 
         for(let i = 0; i<active.length; i++){
             const add = active[i][0];
-            const tokenId = active[i][1];
-
-            const contract = await setERC721Contract(add);
-            const name = await contract.name();
+            const tokenId = Number(active[i][1]);
 
             const totalEntrants = Number(active[i][2]);
             const ticketsSold = Number(active[i][3]);
@@ -133,10 +136,58 @@ async function approval(){
             const raffleEntryMaticCost = Number(active[i][8]);
             const collectionLink = active[i][9];
 
-            displayActive.push({name, add, tokenId, totalEntrants, ticketsSold, ticketLimit, walletHolding, ticketLimitPerWallet, raffleEntryCleanCost, raffleEntryMaticCost, collectionLink});
+            const contract = await setERC721Contract(add);
+            const tokenURI = await contract.tokenURI(tokenId);
+            const name = await contract.name();
+            // console.log(tokenURI)
+
+            if(tokenURI[0] == "h"){
+                    try{
+                        const metadata = tokenURI;
+    
+                        const meta = await fetch(metadata , {
+                            signal: AbortSignal.timeout(1000)
+                          });
+                        const json = await meta.json();
+                        const image = json["image"];
+                        const newimage = `https://cloudflare-ipfs.com/ipfs/${image.substr(7)}`
+                        setActiveRaffleInfo(oldArr => [...oldArr ,{name, newimage, add, tokenId, totalEntrants, ticketsSold, ticketLimit, walletHolding, ticketLimitPerWallet, raffleEntryCleanCost, raffleEntryMaticCost, collectionLink}]);
+        
+                        // console.log(newimage);
+                    }
+                    catch(err){
+                        const image = "";
+                        setActiveRaffleInfo(oldArr => [...oldArr ,{name, image, add, tokenId, totalEntrants, ticketsSold, ticketLimit, walletHolding, ticketLimitPerWallet, raffleEntryCleanCost, raffleEntryMaticCost, collectionLink}]);
+
+                    }
+        
+
+                }
+
+                else{
+                    try{
+                        const metadata = `https://cloudflare-ipfs.com/ipfs/${tokenURI.substr(7)}`;
+                        // console.log(metadata);
+                        const meta = await fetch(metadata , {
+                            signal: AbortSignal.timeout(1000)
+                          });
+                        // console.log(meta);
+                        const json = await meta.json();
+                        const image = json["image"];
+                        const newimage = `https://cloudflare-ipfs.com/ipfs/${image.substr(7)}`
+                        setActiveRaffleInfo(oldArr => [...oldArr ,{name, newimage, add, tokenId, totalEntrants, ticketsSold, ticketLimit, walletHolding, ticketLimitPerWallet, raffleEntryCleanCost, raffleEntryMaticCost, collectionLink}]);
+        
+                        // console.log(newimage);
+                    }
+                    catch(err){
+                        const image = ""
+                        setActiveRaffleInfo(oldArr => [...oldArr ,{name, image, add, tokenId, totalEntrants, ticketsSold, ticketLimit, walletHolding, ticketLimitPerWallet, raffleEntryCleanCost, raffleEntryMaticCost, collectionLink}]);
+
+                    }
+        
+                }
+        
         }
-        console.log(displayActive);
-        setActiveRaffleInfo(displayActive)
     }
 
     useEffect(()=>{
@@ -144,14 +195,14 @@ async function approval(){
     },[])
 
   return (
-    <div className='grid grid-cols-12'>
+    <div className='grid grid-cols-12 '>
         <div className=' col-span-2 border-r-[1px] border-jel-gray-3 h-screen flex flex-col gap-2 items-center justify-start pt-20 p-4'>
             <div onClick={()=>{setSelected(0)}} className={`w-full h-12 flex items-center justify-start px-5 font-medium rounded-lg ${ selected==0 ? "bg-jel-gray-1 text-black" : "text-jel-gray-4"} cursor-pointer`}>Overview</div>
             <div onClick={()=>{setSelected(1)}} className={`w-full h-12 flex items-center justify-start px-5 font-medium rounded-lg ${ selected==1 ? "bg-jel-gray-1 text-black" : "text-jel-gray-4"} cursor-pointer`}>Add new raffle</div>
         </div>
 
 
-        {selected==0 ? <div className=' col-span-10  p-10 pt-20 w-full'>
+        {selected==0 ? <div className='relative col-span-10  p-10 pt-20 w-full'>
             <div className='grid grid-cols-3 gap-5 w-full'>
                 <div className=' border-[1px] border-jel-gray-3 rounded-lg w-full h-24 p-5 px-10 flex flex-col items-start justify-center'>
                     <h3 className='text-sm text-jel-gray-4'>Total Raffles</h3>
@@ -174,20 +225,23 @@ async function approval(){
                     <h2 className='col-span-1'>Status</h2>
                     <h2 className='col-span-2'>Actions</h2>
                 </div>
-                {activeRaffleInfo.map((item)=>(
+                {openModal && <ActiveRaffle obj = {activeRaffleInfo[modalItem]} index={modalItem} />}
+                {activeRaffleInfo.map((item, i)=>(
                     <div className=" grid grid-flow-col border-x-2 border-b-2 border-jel-gray-2 text-sm grid-cols-10 py-4 text-jel-gray-4 px-6">
-                        <h2 className=' text-left col-span-4'>{item.name}</h2>
+                        <h2 className=' text-left col-span-4'>{item.name} #{item.tokenId}</h2>
                         <h2 className='col-span-2'>{item.ticketLimit-item.ticketsSold}/{item.ticketLimit}</h2>
                         <h2 className='col-span-1'>{item.totalEntrants}</h2>
-                        <h2 className=' text-green-400 col-span-1'>Live</h2>
-                        <h2 className='col-span-2'>View</h2>
-                </div>
+                        <h2 className=' text-green-400 font-bold col-span-1'>Live</h2>
+                        <button onClick={()=>{setOpenModal(true); setModalItem(i)}} className='col-span-2 text-indigo-700 underline'>View</button>
+               
+               </div>
                 ))}
             </div>
         </div>:
         
         <div className=' col-span-10  p-10 pt-20 w-full'>
-            {loading && <div className='w-screen bg-black/10 flex items-center justify-center gap-8 flex-col absolute top-0 left-0 z-50 h-screen'>
+            
+            {loading && <div className='w-screen h-screen bg-black/10 flex items-center justify-center gap-8 flex-col fixed top-0 left-0 z-50 '>
                 <AiOutlineLoading className='text-6xl text-black animate-spin'/>
                 Loading...
                 </div>}
