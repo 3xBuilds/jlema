@@ -32,14 +32,14 @@ const Navbar = () => {
           </ul>
           <h3 className=' py-2 text-sm font-semibold md:hidden relative z-50'>Buy now</h3>
           {/* Opens on clicking hamburger and shows only for phones */}
-          <div className={`w-screen z-40 shadow-lg shadow-black/50 -translate-y-80 rounded-xl bg-white pt-20 pb-5 fixed top-0 left-0 flex flex-col items-start px-5 justify-center gap-4 duration-300 transition-all ${isOpen ? "translate-y-0" : ""}`}>
-            <div className="flex flex-col items-start gap-4">
-              <div className='flex flex-col gap-4'>
-                <h3 onClick={()=>{setIsOpen(prev=>!prev)}} className='text-base font-medium cursor-pointer'>Home</h3>
-              <h3 className='px-6 py-2 cursor-pointer hover:bg-jel-gray-2 duration-200 rounded-xl'><button onClick={()=>{router.push("/leaderboard")}}>Leaderboard</button></h3>
-                <h3 onClick={()=>{setIsOpen(prev=>!prev)}} className='text-base font-medium cursor-pointer'>Ecosystem</h3>
-                <h3 onClick={()=>{setIsOpen(prev=>!prev)}} className='text-base font-medium cursor-pointer'>Community</h3>
-                <h3 onClick={()=>{setIsOpen(prev=>!prev)}} className='text-base font-medium cursor-pointer'>Info</h3>
+          <div className={`w-screen z-40 shadow-lg shadow-black/50 -translate-y-96 rounded-xl bg-white pt-20 pb-5 fixed top-0 left-0 flex flex-col items-start px-5 justify-center gap-4 duration-300 transition-all ${isOpen ? "translate-y-1" : ""}`}>
+            <div className="flex flex-col items-start w-full gap-4">
+              <div className='flex flex-col w-full gap-4'>
+                <h3 onClick={()=>{setIsOpen(prev=>!prev)}} className=' px-2 py-2 text-base font-medium cursor-pointer'>Home</h3>
+              <h3 className=' px-2 py-2 cursor-pointer hover:bg-jel-gray-2 duration-200 w-full'><button onClick={()=>{router.push("/leaderboard")}} className='w-full text-start'>Leaderboard</button></h3>
+                <h3 onClick={()=>{setIsOpen(prev=>!prev)}} className=' px-2 py-2 text-base font-medium cursor-pointer'>Ecosystem</h3>
+                <h3 onClick={()=>{setIsOpen(prev=>!prev)}} className=' px-2 py-2 text-base font-medium cursor-pointer'>Community</h3>
+                <h3 onClick={()=>{setIsOpen(prev=>!prev)}} className=' px-2 py-2 text-base font-medium cursor-pointer'>Info</h3>
               </div>
             </div>
           </div>

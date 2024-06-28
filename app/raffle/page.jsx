@@ -1,7 +1,8 @@
 "use client"
 import { WalletConnectButton } from '@/components/buttons/walletConnectButton'
 import React from 'react'
-import raffleBanner from '../../assets/rafbanner.png'
+import { IoWalletOutline } from "react-icons/io5";
+
 import Image from 'next/image'
 import nft1 from '../../assets/nft1.png'
 import arrow from '../../assets/icons/arrow.svg'
@@ -11,6 +12,7 @@ import Footer from '@/components/Footer'
 import { useState } from 'react'
 import { useAccount } from 'wagmi'
 import SelectedRaffle from '@/components/raffles/SelectedRaffle'
+import { WalletConnectButtonRaffle } from '@/components/buttons/walletConnectButtonRaffle'
 
 const Raffle = () => {
 
@@ -36,7 +38,7 @@ const Raffle = () => {
                     Win CLEAN tokens or your favorite Polygon NFTs. Enter the Raffle Now!
                 </h2>
             </div>
-            {!isConnected && <WalletConnectButton/>}
+            <WalletConnectButtonRaffle/>
         </div>
 
         
