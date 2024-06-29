@@ -10,7 +10,7 @@ import wallet from '../../assets/icons/wallet.svg'
 import { useAccount } from "wagmi";
 import { WalletConnectButton } from "../buttons/walletConnectButton";
 
-const CurrentRaffles = ({selected, setSelected}) => {
+const CurrentRaffles = ({selected, setSelected, activeArr, endArr}) => {
   
   const scrollContainerRef = useRef(null);
   const {isConnected} = useAccount();
@@ -57,20 +57,20 @@ const CurrentRaffles = ({selected, setSelected}) => {
           </button>
           <div className="mt-5 w-full overflow-hidden">
             <div ref={scrollContainerRef} className="grid grid-rows-1 grid-flow-col gap-3 items-center noscr justify-start min-w-[2000px] w-full overflow-x-auto scrollbar-hide pr-20">
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((ob, index) => (
+              {endArr.map((ob, index) => (
                 <div key={index} onClick={() => { }} className="rounded-xl hover:shadow-jel-nft duration-200 w-64 h-fit cursor-pointer border-[1px] border-jel-gray-3 overflow-hidden flex flex-col">
                   <div className="h-64 w-full">
-                    <Image width={1920} height={1080} src={nft1} className="object-cover w-full h-full" alt={`NFT ${index + 1}`} />
+                    {ob.image != "" && <Image width={1920} height={1080} src={ob.image} className="object-cover w-full h-full" alt={`NFT ${index + 1}`} />}
                   </div>
                   <div className="bg-white text-start py-2 px-4">
-                    <h3 className="text-sm font-normal text-black">{`${"Jlema"} #`}{"12"}</h3>
+                    <h3 className="text-sm font-normal text-black">{ob.name} #{ob.tokenId}</h3>
                   </div>
                   <div className=" bg-jel-gray-1 border-t-[1px] border-jel-gray-3 text-center py-3 flex flex-row items-center justify-between px-4">
                     <div className="flex flex-row gap-2">
                       <Image src={trophy} className="w-4" alt="Trophy" />
                       <h3 className="text-sm font-normal text-black">Winner</h3>
                     </div>
-                    <h3 className="text-sm font-bold text-black">0x82c3...3214</h3>
+                    <h3 className="text-sm font-bold text-black">{ob.winner}</h3>
                   </div>
                 </div>
               ))}
@@ -95,23 +95,30 @@ const CurrentRaffles = ({selected, setSelected}) => {
       </button>
       <div className="mt-5 w-full overflow-hidden">
         <div ref={scrollContainerRef} className="grid grid-rows-1 grid-flow-col gap-3 items-center noscr justify-start min-w-[2000px] w-full overflow-x-auto scrollbar-hide pr-20">
-          {[1, 2, 3, 4].map((ob, index) => (
+          
+          
+          {activeArr.map((ob, index) => (
+            <>
+            {ob.walletHolding > 0 &&
             <div key={index} onClick={() => { }} className="rounded-xl hover:shadow-jel-nft duration-200 w-64 h-fit cursor-pointer border-[1px] border-jel-gray-3 overflow-hidden flex flex-col">
               <div className="h-64 w-full">
-                <Image width={1920} height={1080} src={nft1} className="object-cover w-full h-full" alt={`NFT ${index + 1}`} />
+                {ob.image != "" && <Image width={1920} height={1080} src={ob.image} className="object-cover w-full h-full" alt={`NFT ${index + 1}`} />}
               </div>
               <div className="bg-white text-start py-2 px-4">
-                <h3 className="text-sm font-normal text-black">{`${"Jlema"} #`}{"12"}</h3>
+                <h3 className="text-sm font-normal text-black">{ob.name} #{ob.tokenId}</h3>
               </div>
               <div className=" border-t-[1px] border-jel-gray-3 text-center py-3 flex flex-row items-center justify-between px-4">
                 <div className="flex flex-row gap-2">
                   <Image src={ticket} className="w-4" alt="Trophy" />
                   <h3 className="text-sm font-normal text-black">Tickets</h3>
                 </div>
-                <h3 className="text-sm font-bold text-black">4</h3>
+                <h3 className="text-sm font-bold text-black">{ob.walletHolding}</h3>
               </div>
-            </div>
+            </div>}
+            </>
           ))}
+
+
         </div>
       </div>
     </div>

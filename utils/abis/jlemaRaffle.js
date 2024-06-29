@@ -351,6 +351,23 @@ export default [
 						"internalType": "string",
 						"name": "collectionLink",
 						"type": "string"
+					},
+					{
+						"components": [
+							{
+								"internalType": "address",
+								"name": "wallet",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "tickets",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct walletHoldings[]",
+						"name": "holders",
+						"type": "tuple[]"
 					}
 				],
 				"internalType": "struct returnRaffle[]",

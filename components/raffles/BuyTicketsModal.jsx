@@ -5,15 +5,109 @@ import { RxCross2 } from "react-icons/rx";
 import loader from '../../assets/icons/loading.png'
 import tick from '../../assets/icons/tick.svg'
 import Image from 'next/image';
+import { contractAdds } from '@/utils/contractAdds';
+import abi from "@/utils/abis/jlemaRaffle"
+import erc20abi from "@/utils/abis/erc20abi"
+import { ethers } from 'ethers';
+import { useAccount } from 'wagmi';
 
-
-const BuyTicketsModal = ({showBuyModal, setShowBuyModal, goToMyTickets}) => {
-
+const BuyTicketsModal = ({showBuyModal, setShowBuyModal, goToMyTickets, info, index}) => {
+    const {address} = useAccount();
     const [number, setNumber] = useState(1);
-    const [cleanCost, setCleanCost] = useState(100);
-    const [maticCost, setMaticCost] = useState(2);
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
+
+    async function setERC20() {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+    
+        const signer = provider.getSigner();
+    
+        try {
+          const contract = new ethers.Contract(contractAdds.CLEANToken, erc20abi, signer);
+    
+          return contract;
+        }
+        catch (err) {
+          console.log(err);
+        }
+      }
+
+      async function approve(price) {
+        try {
+          setLoading(true)
+          const contract = await setERC20();
+    
+          const allowance = await contract.allowance(address, contractAdds.JlemaRaffle);
+          console.log(Number(allowance));
+    
+          if (allowance < ethers.utils.parseEther(String(price))) {
+    
+            const resp = await contract.approve(contractAdds.JlemaRaffle, ethers.utils.parseEther(String(price)));
+            resp.wait().then((res) => {
+              enterCleanRaffle();
+            })
+          }
+    
+          else {
+            enterCleanRaffle()
+          }
+    
+        }
+    
+        catch (err) {
+          console.log(err);
+          setLoading(false);
+        }
+    
+      }
+
+    async function contractSetup(){
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+    
+        try {
+          const contract = new ethers.Contract(contractAdds.JlemaRaffle, abi, signer);
+    
+          return contract;
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+
+    async function enterCleanRaffle(){
+        try{
+            console.log(index, number);
+            const contract = await contractSetup();
+            const txn = await contract.enterCleanRaffle(index, number);
+
+            txn.wait().then((res)=>{
+                setLoading(false);
+                setSuccess(true);
+            })
+        }
+        catch(err){
+            console.log(err);
+            setLoading(false);
+        }
+    }
+
+    async function enterMaticRaffle(){
+        try{
+            console.log(index, number);
+            const contract = await contractSetup();
+            const txn = await contract.enterMaticRaffle(index, number);
+
+            txn.wait().then((res)=>{
+                setLoading(false);
+                setSuccess(true);
+            })
+        }
+        catch(err){
+            console.log(err);
+            setLoading(false);
+        }
+    }
 
   if(showBuyModal) return (
     <div className="fixed top-0 left-0 z-50 bg-black/40 backdrop-blur-sm w-screen h-screen flex items-center justify-center">
@@ -23,23 +117,23 @@ const BuyTicketsModal = ({showBuyModal, setShowBuyModal, goToMyTickets}) => {
             <div className="flex flex-col gap-3 mt-5 border-jel-gray-3 border rounded-lg p-4">
             <div className="">
                 <h2 className="text-jel-gray-4">Ticket Price</h2>
-                <h2 className="text-black font-bold text-lg">{cleanCost} CLEAN / {maticCost} MATIC</h2>
+                <h2 className="text-black font-bold text-lg">{info.raffleEntryCleanCost == 0 ? info.raffleEntryMaticCost : info.raffleEntryCleanCost} {info.raffleEntryCleanCost == 0 ? "MATIC" : "CLEAN"}</h2>
             </div>
             <div className="">
                 <h2 className="text-jel-gray-4">Ticket Remaining</h2>
-                <h2 className="text-black font-bold text-lg">5/100</h2>
+                <h2 className="text-black font-bold text-lg">{info.ticketLimit-info.ticketsSold}/{info.ticketLimit}</h2>
             </div>
             </div>
             <div className="flex flex-row justify-between gap-3 mt-3 border-jel-gray-3 border rounded-lg p-4">
                 <button className=" text-xl font-semibold " onClick={()=>{ number>1 && setNumber(prev=>Number(prev)-1)}}>-</button>
                 <input type="number" className="text-black font-bold text-lg text-center outline-none" value={number} onChange={(e)=>{setNumber(e.target.value)}}/>
-                <button className=" text-xl font-semibold " onClick={()=>{ setNumber(prev=>Number(prev)+1)}}>+</button>
+                <button className=" text-xl font-semibold " onClick={()=>{if(number<info.ticketLimitPerWallet)setNumber(prev=>Number(prev)+1)}}>+</button>
             </div>
             <h2 className="text-jel-gray-4 mt-4">Total Costs</h2>
-            {!loading && <button onClick={()=>{setLoading(true)}} className="bg-black text-white rounded-xl text-center mt-2 font-semibold py-3 w-full flex items-center justify-center ">{number * cleanCost} CLEAN</button>}
-            {!loading && <button onClick={()=>{setLoading(true)}} className="bg-jel-gray-1 hover:bg-jel-gray-2 text-black rounded-xl text-center mt-2 font-semibold py-3 w-full flex items-center justify-center">{number * maticCost} MATIC</button>}
+            {!loading && info.raffleEntryCleanCost != 0 && <button onClick={()=>{setLoading(true); approve(info.raffleEntryCleanCost)}} className="bg-black text-white rounded-xl text-center mt-2 font-semibold py-3 w-full flex items-center justify-center ">{number * info.raffleEntryCleanCost} CLEAN</button>}
+            {!loading && info.raffleEntryMaticCost != 0 && <button onClick={()=>{setLoading(true); enterMaticRaffle()}} className="bg-jel-gray-1 hover:bg-jel-gray-2 text-black rounded-xl text-center mt-2 font-semibold py-3 w-full flex items-center justify-center">{number * info.raffleEntryMaticCost} MATIC</button>}
             {loading &&
-            <button onClick={()=>{setLoading(false);setSuccess(true)}} className="bg-jel-gray-2 text-jel-gray-4 rounded-xl text-center mt-2 font-semibold py-3 w-full flex items-center justify-center">
+            <button className="bg-jel-gray-2 text-jel-gray-4 rounded-xl text-center mt-2 font-semibold py-3 w-full flex items-center justify-center">
                 <Image className=" animate-spin" src={loader}/>
                 <h3 className="ml-2">Loading</h3>
             </button>}

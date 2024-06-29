@@ -103,7 +103,7 @@ async function approval(){
                     txn.wait().then((res)=>{setLoading(false); window.location.reload()} );
                 }
                 else{
-                    const txn = await contract.setRaffleItem(active, contractAdd, ticketsPerWallet, opensea, tokenId, ticketAmount, 0, ticketPrice).then((res)=>{setLoading(false)})
+                    const txn = await contract.setRaffleItem(active, contractAdd, ticketsPerWallet, opensea, tokenId, ticketAmount, 0, ticketPrice)
                     txn.wait().then((res)=>{setLoading(false); window.location.reload()});
                 }
             }
@@ -146,12 +146,14 @@ async function approval(){
                         const metadata = tokenURI;
     
                         const meta = await fetch(metadata , {
-                            signal: AbortSignal.timeout(1000)
+                            signal: AbortSignal.timeout(2000)
                           });
+
+                          console.log(meta);
                         const json = await meta.json();
-                        const image = json["image"];
-                        const newimage = `https://cloudflare-ipfs.com/ipfs/${image.substr(7)}`
-                        setActiveRaffleInfo(oldArr => [...oldArr ,{name, newimage, add, tokenId, totalEntrants, ticketsSold, ticketLimit, walletHolding, ticketLimitPerWallet, raffleEntryCleanCost, raffleEntryMaticCost, collectionLink}]);
+                        const newimage = json["image"];
+                        const image = `https://cloudflare-ipfs.com/ipfs/${newimage.substr(7)}`
+                        setActiveRaffleInfo(oldArr => [...oldArr ,{name, image, add, tokenId, totalEntrants, ticketsSold, ticketLimit, walletHolding, ticketLimitPerWallet, raffleEntryCleanCost, raffleEntryMaticCost, collectionLink}]);
         
                         // console.log(newimage);
                     }
@@ -169,13 +171,13 @@ async function approval(){
                         const metadata = `https://cloudflare-ipfs.com/ipfs/${tokenURI.substr(7)}`;
                         // console.log(metadata);
                         const meta = await fetch(metadata , {
-                            signal: AbortSignal.timeout(1000)
+                            signal: AbortSignal.timeout(2000)
                           });
                         // console.log(meta);
                         const json = await meta.json();
-                        const image = json["image"];
-                        const newimage = `https://cloudflare-ipfs.com/ipfs/${image.substr(7)}`
-                        setActiveRaffleInfo(oldArr => [...oldArr ,{name, newimage, add, tokenId, totalEntrants, ticketsSold, ticketLimit, walletHolding, ticketLimitPerWallet, raffleEntryCleanCost, raffleEntryMaticCost, collectionLink}]);
+                        const newimage = json["image"];
+                        const image = `https://cloudflare-ipfs.com/ipfs/${newimage.substr(7)}`
+                        setActiveRaffleInfo(oldArr => [...oldArr ,{name, image, add, tokenId, totalEntrants, ticketsSold, ticketLimit, walletHolding, ticketLimitPerWallet, raffleEntryCleanCost, raffleEntryMaticCost, collectionLink}]);
         
                         // console.log(newimage);
                     }
@@ -265,9 +267,9 @@ async function approval(){
                 </div>
                 <div className=' col-span-3'>
                     <h2 className='mb-2 text-sm '>Token</h2>
-                    <select className='w-full h-12 font-medium outline-black border-[1px] border-jel-gray-3 rounded-lg px-5'>
-                        <option onClick={()=>{setTokenSelected("CLEAN")}} value='ETH'>CLEAN</option>
-                        <option onClick={()=>{setTokenSelected("MATIC")}} value='BNB'>MATIC</option>
+                    <select onChange={(e)=>{setTokenSelected(e.target.value)}} className='w-full h-12 font-medium outline-black border-[1px] border-jel-gray-3 rounded-lg px-5'>
+                        <option value='CLEAN'>CLEAN</option>
+                        <option value='MATIC'>MATIC</option>
                     </select> 
                 </div>
                 <div className=' col-span-3'>
