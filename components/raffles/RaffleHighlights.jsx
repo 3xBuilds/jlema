@@ -27,12 +27,11 @@ const RaffleHighlights = ({goToMyTickets, setSelectedRaffle, activeArr}) => {
 
             {activeArr.map((item, i)=>(
                 <>
-                {i == showRaffle && <div className="w-full relative h-[600px] rounded-xl overflow-hidden">
-                    {console.log(i)}
+                {i == showRaffle && <div className="w-full relative sm:h-[600px] h-[840px] rounded-xl overflow-hidden">
                     <Image src={item.image} className="w-full h-full object-cover relative z-10" />
-                    <div className="z-20 absolute w-full h-full bg-black/40 top-0 left-0 backdrop-blur-lg p-16 grid grid-cols-2 items-center justify-center gap-0">
-                        <div className="h-full mx-auto aspect-square overflow-hidden rounded-xl ">
-                            <Image src={item.image} className="w-full h-full object-cover" />
+                    <div className="z-20 absolute w-full sm:h-full bg-black/40 top-0 left-0 backdrop-blur-lg sm:p-16 p-8 sm:grid sm:grid-cols-2 items-center justify-center gap-0">
+                        <div className="h-96 w-96 mx-auto aspect-square overflow-hidden rounded-xl ">
+                            <Image src={item.image} className="sm:w-full sm:h-full object-cover" />
                         </div>
 
                         <div className="w-full">
@@ -44,9 +43,9 @@ const RaffleHighlights = ({goToMyTickets, setSelectedRaffle, activeArr}) => {
                             <h2 className="mt-5 text-white ">Ticket Remaining</h2>
                             <h2 className="mb-5 text-xl text-white font-bold">{item.ticketLimit-item.ticketsSold}/{item.ticketLimit}</h2>
                             <div className="h-[1px] bg-white w-full mb-5"></div>
-                            <div className="flex flex-row gap-3">
-                                <button onClick={()=>{setShowBuyModal(true);  setButtonModalInfo(item);}} className="px-5 py-2 rounded-xl bg-black text-white font-semibold">Buy Ticket</button>
-                                <button onClick={()=>{setSelectedRaffle(item); }} className="px-5 py-2 rounded-xl bg-white text-black hover:bg-jel-gray-2 font-semibold">View details</button>
+                            <div className="flex flex-row gap-3 items-center w-full justify-center">
+                                <button onClick={()=>{setShowBuyModal(true);  setButtonModalInfo(item);}} className="sm:px-5 sm:py-2 px-6 py-4 rounded-xl bg-black text-white font-semibold">Buy Ticket</button>
+                                <button onClick={()=>{setSelectedRaffle(item); }} className="sm:px-5 sm:py-2 px-6 py-4 rounded-xl bg-white text-black hover:bg-jel-gray-2 font-semibold">View details</button>
                             </div>
                         </div>
                     </div>

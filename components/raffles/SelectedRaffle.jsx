@@ -17,15 +17,15 @@ const SelectedRaffle = ({selectedRaffle, setSelectedRaffle}) => {
 
   return (
     <div>
-        <div className="my-5 relative flex flex-row gap-5 w-full">
-            <div className="border-jel-gray-3 w-1/2 border-[1px] rounded-xl h-full overflow-hidden">
+        <div className="my-5 relative flex sm:flex-row flex-col gap-5 w-full">
+            <div className="border-jel-gray-3 sm:w-1/2 border-[1px] rounded-xl h-full overflow-hidden">
                 {selectedRaffle.image != "" && <Image src={selectedRaffle.image} className="w-full h-full object-cover"/>}
                 
                 <button onClick={()=>{setSelectedRaffle(null)}} className="rounded-lg bg-jel-gray-2 hover:bg-jel-gray-3 cursor-pointer absolute top-3 left-3 w-10 h-10 p-2">
                     <Image src={back} className="w-full h-full "/>
                 </button>
             </div>
-            <div className="w-1/2">
+            <div className="sm:w-1/2">
                 <h3 className="px-3 py-1 mb-5 w-fit rounded-xl border-[1px] border-jel-gray-3 text-black">Jlema</h3>
                 <h2 className="mb-5 text-5xl text-black font-bold">{selectedRaffle.name} #{selectedRaffle.tokenId}</h2>
                 <div className="grid grid-cols-2 gap-5 mt-5 border-jel-gray-3 border rounded-lg py-4">
@@ -48,12 +48,12 @@ const SelectedRaffle = ({selectedRaffle, setSelectedRaffle}) => {
                     </div>
                 </div>
                 <div className="my-5">
-            <div className="flex flex-row items-center justify-start">
-                <div className=" bg-jel-gray-1 w-fit h-12 rounded-xl flex flex-row gap-2 p-1">
-                <button onClick={() => { setSelected(0) }} className={`cursor-pointer rounded-lg text-base px-4 py-2 ${selected == 0 ? "bg-white font-semibold text-black shadow-jel-card" : " font-medium text-jel-gray-4"}`}>
+            <div className="flex flex-row items-center max-sm:w-full justify-center sm:justify-start">
+                <div className=" bg-jel-gray-1 max-sm:w-full h-12 rounded-xl flex flex-row gap-2 p-1">
+                <button onClick={() => { setSelected(0) }} className={`cursor-pointer rounded-lg max-sm:w-1/2 text-base px-4 py-2 ${selected == 0 ? "bg-white font-semibold text-black shadow-jel-card" : " font-medium text-jel-gray-4"}`}>
                     <h3 className="">Participants</h3>
                 </button>
-                <button onClick={() => { setSelected(1) }} className={`cursor-pointer rounded-lg text-base px-4 py-2 ${selected == 1 ? "bg-white font-semibold text-black shadow-jel-card" : " font-medium text-jel-gray-4"}`}>
+                <button onClick={() => { setSelected(1) }} className={`cursor-pointer rounded-lg max-sm:w-1/2 text-base px-4 py-2 ${selected == 1 ? "bg-white font-semibold text-black shadow-jel-card" : " font-medium text-jel-gray-4"}`}>
                     <h3 className="">Term & Conditions</h3>
                 </button>
                 </div>

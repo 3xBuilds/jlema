@@ -35,7 +35,7 @@ const CurrentRaffles = ({selected, setSelected, activeArr, endArr}) => {
 
   return (
     <div id="current-raffles" className="my-10">
-      <div className="flex flex-row items-center justify-between">
+      <div className="flex sm:flex-row flex-col max-sm:gap-4 items-center justify-between">
         <div className=" bg-jel-gray-1 w-fit h-12 rounded-xl flex flex-row gap-2 p-1">
           <button onClick={() => { setSelected(0) }} className={`cursor-pointer rounded-lg text-base px-4 py-2 ${selected == 0 ? "bg-white font-semibold text-black shadow-jel-card" : " font-medium text-jel-gray-4"}`}>
             <h3 className="">Ended Raffles</h3>
@@ -44,7 +44,7 @@ const CurrentRaffles = ({selected, setSelected, activeArr, endArr}) => {
             <h3 className="">My Tickets</h3>
           </button>
         </div>
-        <h3 className=" text-jel-gray-4">Showing the latest 10 raffles</h3>
+        <h3 className="max-sm:w-full max-sm:text-left text-jel-gray-4">Showing the latest 10 raffles</h3>
       </div>
 
       {selected==0 ? 

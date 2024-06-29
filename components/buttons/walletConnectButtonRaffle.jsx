@@ -100,7 +100,7 @@ export const WalletConnectButtonRaffle = () => {
                         </h2>
                       </div>
                       
-                      <button className='flex items-center bg-jel-gray-3 w-12 h-12 border-jel-gray-3 justify-center rounded-xl'>
+                      <button onClick={openAccountModal} className='flex items-center bg-jel-gray-3 w-12 h-12 border-jel-gray-3 justify-center rounded-xl'>
                         <IoWalletOutline className='text-xl'/>  
                       </button>
                   </div>
