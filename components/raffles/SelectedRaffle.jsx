@@ -7,6 +7,8 @@ import { useState } from 'react'
 import { useAccount } from 'wagmi'
 import { WalletConnectButton } from '../buttons/walletConnectButton'
 import defaultimage from "@/assets/defaultimage.png"
+import { SiOpensea } from "react-icons/si";
+
 
 const SelectedRaffle = ({selectedRaffle, setSelectedRaffle}) => {
 
@@ -27,7 +29,14 @@ const SelectedRaffle = ({selectedRaffle, setSelectedRaffle}) => {
                 </button>
             </div>
             <div className="sm:w-1/2">
-                <h3 className="px-3 py-1 mb-5 w-fit rounded-xl border-[1px] border-jel-gray-3 text-black">Jlema</h3>
+            <div className='flex mb-5'>
+                <h3 className="px-3 py-1 w-fit rounded-xl border-[1px] border-jel-gray-3 text-black">{selectedRaffle.name}</h3>
+                <div className='w-full justify-end items-end flex'>
+                    <a href={selectedRaffle.collectionLink} target='_blank' className='cursor-pointer rounded-xl flex p-2 w-9 items-center justify-end bg-jel-gray-3'>
+                        <SiOpensea className='text-xl'/>
+                    </a>
+                </div>
+            </div>
                 <h2 className="mb-5 text-5xl text-black font-bold">{selectedRaffle.name} #{selectedRaffle.tokenId}</h2>
                 <div className="grid grid-cols-2 gap-5 mt-5 border-jel-gray-3 border rounded-lg py-4">
                     

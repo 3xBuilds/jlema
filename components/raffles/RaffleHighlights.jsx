@@ -1,13 +1,14 @@
 "use client"
 
 import Image from 'next/image'
-import raffleBanner from '../../assets/rafbanner.png'
 import nft1 from '../../assets/nft1.png'
 import arrow from '../../assets/icons/arrow.svg'
 import { useState } from 'react'
 import BuyTicketsModal from './BuyTicketsModal'
 import defaultimage from "@/assets/defaultimage.png"
 import noRaffle from "@/assets/noRaffleBanner.png"
+import noRafflephone from "@/assets/raffleBanner.png"
+
 const RaffleHighlights = ({goToMyTickets, setSelectedRaffle, activeArr}) => {
 
     const [showBuyModal, setShowBuyModal] = useState(false);
@@ -56,7 +57,8 @@ const RaffleHighlights = ({goToMyTickets, setSelectedRaffle, activeArr}) => {
                 </>
                 )) : 
                 <div className="w-full relative sm:h-[600px] h-[840px] rounded-xl overflow-hidden">
-                    <Image src={noRaffle} className='object-cover w-full h-full'/>
+                    <Image src={noRaffle} className='object-cover w-full h-full max-sm:hidden'/>
+                    <Image src={noRafflephone} className='object-cover w-full h-full max-sm:hidden'/>
                 </div>
                 }
 

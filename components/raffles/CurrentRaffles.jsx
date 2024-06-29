@@ -9,6 +9,9 @@ import arrow from '../../assets/icons/arrow.svg'
 import wallet from '../../assets/icons/wallet.svg'
 import { useAccount } from "wagmi";
 import { WalletConnectButton } from "../buttons/walletConnectButton";
+import defaultimage from "@/assets/defaultimage.png"
+import { GoInbox } from "react-icons/go";
+
 
 const CurrentRaffles = ({selected, setSelected, activeArr, endArr}) => {
   
@@ -58,11 +61,11 @@ const CurrentRaffles = ({selected, setSelected, activeArr, endArr}) => {
           </button>
         </>}
           <div className="mt-5 w-full overflow-hidden">
-            <div ref={scrollContainerRef} className="grid grid-rows-1 grid-flow-col gap-3 items-center noscr justify-start min-w-[2000px] w-full overflow-x-auto scrollbar-hide pr-20">
-              {endArr.map((ob, index) => (
+            <div ref={scrollContainerRef} className={`${endArr.length != 0 ? "grid grid-col-1 grid-flow-col pr-20 min-w-[2000px]" : "flex"} gap-3 items-center noscr justify-start w-full overflow-x-auto scrollbar-hide`}>
+              { endArr.length != 0 ? endArr.map((ob, index) => (
                 <div key={index} onClick={() => { }} className="rounded-xl hover:shadow-jel-nft duration-200 w-64 h-fit cursor-pointer border-[1px] border-jel-gray-3 overflow-hidden flex flex-col">
                   <div className="h-64 w-full">
-                    {ob.image != "" && <Image width={1920} height={1080} src={ob.image} className="object-cover w-full h-full" alt={`NFT ${index + 1}`} />}
+                    <Image width={1920} height={1080} src={ob.image != "" ? obj.image : defaultimage } className="object-cover w-full h-full" alt={`NFT ${index + 1}`} />
                   </div>
                   <div className="bg-white text-start py-2 px-4">
                     <h3 className="text-sm font-normal text-black">{ob.name} #{ob.tokenId}</h3>
@@ -72,10 +75,17 @@ const CurrentRaffles = ({selected, setSelected, activeArr, endArr}) => {
                       <Image src={trophy} className="w-4" alt="Trophy" />
                       <h3 className="text-sm font-normal text-black">Winner</h3>
                     </div>
-                    <h3 className="text-sm font-bold text-black">{ob.winner}</h3>
+                    <h3 className="text-sm font-bold text-black">{ob.winner.substring(0,5)+"..."+ob.winner.substring(ob.winner.length-4,ob.winner.length)}</h3>
                   </div>
                 </div>
-              ))}
+              )):
+              <div className="w-full mx-auto my-10 items-center justify-center flex flex-col">
+                <GoInbox className="text-6xl" />
+                <h3 className="font-bold my-5">No ended raffle yet.</h3>
+                <h3 className="font-bold mb-5 text-jel-gray-4/50">Stay up to date on our Discord for the upcoming raffles.</h3>
+                <a href="https://discord.gg/Kp9WdpUh3a" className="text-white bg-black hover:cursor-pointer hover:translate-y-[-2px] duration-150 px-6 py-3 rounded-xl">Join Discord</a>
+                </div>
+              }
             </div>
           </div>
         </div>
@@ -84,7 +94,7 @@ const CurrentRaffles = ({selected, setSelected, activeArr, endArr}) => {
       <div className="flex flex-col gap-3 items-center justify-center w-full text-center my-10 mb-20">
         <Image src={wallet} className="w-20"/>
         <h3 className=" text-black font-semibold">Wallet not connected yet</h3>
-        <h3 className=" text-jel-gray-4">Connect your wallet to see your tickets.</h3>
+        <h3 className=" text-jel-gray-4 text-center">Connect your wallet to see your tickets.</h3>
         <WalletConnectButton/>
       </div>
       :
@@ -104,7 +114,7 @@ const CurrentRaffles = ({selected, setSelected, activeArr, endArr}) => {
             {ob.walletHolding > 0 &&
             <div key={index} onClick={() => { }} className="rounded-xl hover:shadow-jel-nft duration-200 w-64 h-fit cursor-pointer border-[1px] border-jel-gray-3 overflow-hidden flex flex-col">
               <div className="h-64 w-full">
-                {ob.image != "" && <Image width={1920} height={1080} src={ob.image} className="object-cover w-full h-full" alt={`NFT ${index + 1}`} />}
+                <Image width={1920} height={1080} src={ob.image != "" ? ob.image : defaultimage} className="object-cover w-full h-full" alt={`NFT ${index + 1}`} />
               </div>
               <div className="bg-white text-start py-2 px-4">
                 <h3 className="text-sm font-normal text-black">{ob.name} #{ob.tokenId}</h3>

@@ -29,6 +29,24 @@ export default function ActiveRaffle({obj, index}){
         }
     }
 
+    async function declareWinner(index){
+        try{
+            setLoading(true);
+            const contract = await contractSetup();
+            const txn = await contract.declareWinner(index);
+
+            txn.wait().then((res)=>{
+                console.log(res);
+                setLoading(false);
+                window.location.reload();
+            })
+        }
+        catch(err){
+            console.log(err);
+            setLoading(false);
+        }
+    }
+
     async function deleteRaffle(index){
         try{
             setLoading(true);
@@ -101,7 +119,7 @@ export default function ActiveRaffle({obj, index}){
                 </div>
 
                 <div className="flex gap-5">
-                    <button className=' col-span-2 w-32 py-3 px-3 font-medium text-white rounded-xl hover:-translate-y-[0.3rem] duration-200 bg-black text-nowrap'>Winner</button>
+                    <button onClick={()=>{declareWinner(index)}} className=' col-span-2 w-32 py-3 px-3 font-medium text-white rounded-xl hover:-translate-y-[0.3rem] duration-200 bg-black text-nowrap'>Winner</button>
                     <button onClick={()=>{deleteRaffle(index)}} className=' col-span-2 w-32 py-3 px-3 font-medium text-white rounded-xl hover:-translate-y-[0.3rem] duration-200 bg-red-500 text-nowrap'>Delete</button>
                 </div>
 

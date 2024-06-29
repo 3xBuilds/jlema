@@ -15,7 +15,7 @@ const RaffleAdmin = () => {
 
     const {address} = useAccount();
     const {openModal, setOpenModal} = useGlobalContext()
-
+    const[endedRaffleInfo, setEndedRaffleInfo] = useState([]);
     const [modalItem, setModalItem] = useState(null);
     const [selected, setSelected] = useState(0);
     const [active, setActive] = useState(0);
@@ -192,8 +192,81 @@ async function approval(){
         }
     }
 
+    async function fetchEnded(){
+        try{
+            setEndedRaffleInfo([]);
+          const contract = await contractSetup();
+          const ended = await contract.fetchEndedRaffles();
+  
+          for(let i = 0; i<ended.length; i++){
+            const add = ended[i][0];
+            const tokenId = Number(ended[i][1]);
+            const winner = ended[i][2];
+  
+            const contract = await setERC721Contract(add);
+              const tokenURI = await contract.tokenURI(tokenId);
+              const name = await contract.name();
+              // console.log(tokenURI)
+  
+              if(tokenURI[0] == "h"){
+                      try{
+                          const metadata = tokenURI;
+      
+                          const meta = await fetch(metadata , {
+                              signal: AbortSignal.timeout(2000)
+                            });
+  
+                            console.log(meta);
+                          const json = await meta.json();
+                          const newimage = json["image"];
+                          const image = `https://cloudflare-ipfs.com/ipfs/${newimage.substr(7)}`
+                          setEndedRaffleInfo(oldArr => [...oldArr ,{name, image, tokenId, winner}]);
+          
+                          // console.log(newimage);
+                      }
+                      catch(err){
+                          const image = "";
+                          setEndedRaffleInfo(oldArr => [...oldArr ,{name, image, tokenId, winner}]);
+  
+                      }
+          
+  
+                  }
+  
+                  else{
+                      try{
+                          const metadata = `https://cloudflare-ipfs.com/ipfs/${tokenURI.substr(7)}`;
+                          // console.log(metadata);
+                          const meta = await fetch(metadata , {
+                              signal: AbortSignal.timeout(2000)
+                            });
+                          // console.log(meta);
+                          const json = await meta.json();
+                          const newimage = json["image"];
+                          const image = `https://cloudflare-ipfs.com/ipfs/${newimage.substr(7)}`
+                          setEndedRaffleInfo(oldArr => [...oldArr ,{name, image, tokenId, winner}]);
+          
+                          // console.log(newimage);
+                      }
+                      catch(err){
+                          const image = ""
+                          setEndedRaffleInfo(oldArr => [...oldArr ,{name, image, tokenId, winner}]);
+  
+                      }
+          
+                  }
+  
+          }
+  
+        }
+        catch(err){
+          console.log(err);
+        }
+      }
+
     useEffect(()=>{
         fetchActiveEnded();
+        fetchEnded();
     },[])
 
   return (
@@ -219,31 +292,58 @@ async function approval(){
                     <h3 className='text-2xl font-semibold'>{ended}</h3>
                 </div>
             </div>
-            <div className='p-10 text-center'>
-                <div className="bg-jel-gray-2 grid border-2 text-md border-jel-gray-3 grid-flow-col grid-cols-10 py-4 rounded-t-xl text-jel-gray-4 px-6">
-                    <h2 className=' text-left col-span-4'>Raffles</h2>
-                    <h2 className='col-span-2'>Tickets Remaining</h2>
-                    <h2 className='col-span-1'>Participants</h2>
-                    <h2 className='col-span-1'>Status</h2>
-                    <h2 className='col-span-2'>Actions</h2>
+            <h2 className='text-jel-gray-4 font-bold text-2xl w-full text-left mt-5'>Live</h2>
+            <div className='px-8 py-4 text-center '>
+                <div className='border-[1px] border-jel-gray-2 rounded-2xl'>
+                    <div className="bg-jel-gray-2 grid border-b-2 text-md border-jel-gray-3 grid-flow-col grid-cols-10 py-4 rounded-t-xl text-jel-gray-4 px-6">
+                        <h2 className=' text-left col-span-4'>Raffles</h2>
+                        <h2 className='col-span-2'>Tickets Remaining</h2>
+                        <h2 className='col-span-2'>Participants</h2>
+
+                        <h2 className='col-span-2'>Actions</h2>
+                    </div>
+                    {openModal && <ActiveRaffle obj = {activeRaffleInfo[modalItem]} index={modalItem} />}
+                    
+                    <div className='h-40 overflow-scroll'>
+                    {activeRaffleInfo.map((item, i)=>(
+                        <div className={`grid grid-flow-col border-b-2 border-jel-gray-2 ${i==activeRaffleInfo.length-1 && "rounded-b-2xl"} text-sm grid-cols-10 py-4 text-jel-gray-4 px-6`}>
+                            <h2 className=' text-left col-span-4'>{item.name} #{item.tokenId}</h2>
+                            <h2 className='col-span-2'>{item.ticketLimit-item.ticketsSold}/{item.ticketLimit}</h2>
+                            <h2 className='col-span-2'>{item.totalEntrants}</h2>
+                            {/* <h2 className=' text-green-400 font-bold col-span-1'>Live</h2> */}
+                            <button onClick={()=>{setOpenModal(true); setModalItem(i)}} className='col-span-2 text-indigo-700 underline'>View</button>
+                
                 </div>
-                {openModal && <ActiveRaffle obj = {activeRaffleInfo[modalItem]} index={modalItem} />}
-                {activeRaffleInfo.map((item, i)=>(
-                    <div className=" grid grid-flow-col border-x-2 border-b-2 border-jel-gray-2 text-sm grid-cols-10 py-4 text-jel-gray-4 px-6">
-                        <h2 className=' text-left col-span-4'>{item.name} #{item.tokenId}</h2>
-                        <h2 className='col-span-2'>{item.ticketLimit-item.ticketsSold}/{item.ticketLimit}</h2>
-                        <h2 className='col-span-1'>{item.totalEntrants}</h2>
-                        <h2 className=' text-green-400 font-bold col-span-1'>Live</h2>
-                        <button onClick={()=>{setOpenModal(true); setModalItem(i)}} className='col-span-2 text-indigo-700 underline'>View</button>
-               
-               </div>
-                ))}
+                    ))}
+                    </div>
+                </div>
+            </div>
+
+            <h2 className='text-jel-gray-4 font-bold text-2xl w-full text-left mt-5'>Ended</h2>
+            <div className='px-8 py-4 text-center '>
+                <div className='border-[1px] border-jel-gray-2 rounded-2xl'>
+                    <div className="bg-jel-gray-2 grid border-b-2 text-md border-jel-gray-3 grid-flow-col grid-cols-2 py-4 rounded-t-xl text-jel-gray-4 px-6">
+                        <h2 className=' text-left'>Raffles</h2>
+                        <h2 className=''>Winners</h2>
+                        
+                    </div>
+                    {openModal && <ActiveRaffle obj = {activeRaffleInfo[modalItem]} index={modalItem} />}
+                    
+                    <div className='h-40 overflow-scroll'>
+                    {endedRaffleInfo.map((item, i)=>(
+                        <div className={`grid grid-flow-col border-b-2 border-jel-gray-2 ${i==activeRaffleInfo.length-1 && "rounded-b-2xl"} text-sm grid-cols-2 py-4 text-jel-gray-4 px-6`}>
+                            <h2 className=' text-left'>{item.name} #{item.tokenId}</h2>
+                            <h2 className='text-sm text-center font-bold'>{item.winner}</h2>
+                </div>
+                    ))}
+                    </div>
+                </div>
             </div>
         </div>:
         
         <div className=' col-span-10  p-10 pt-20 w-full'>
             
-            {loading && <div className='w-screen h-screen bg-black/10 flex items-center justify-center gap-8 flex-col fixed top-0 left-0 z-50 '>
+            {loading && <div className='w-screen h-screen bg-black/20 flex items-center justify-center gap-8 flex-col fixed top-0 left-0 z-50 '>
                 <AiOutlineLoading className='text-6xl text-black animate-spin'/>
                 Loading...
                 </div>}
