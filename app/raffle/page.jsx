@@ -226,15 +226,17 @@ const Raffle = () => {
     },[])
 
   return (
-    <div className="w-[97%] max-md:w-[90%] mx-auto">
-        <div className="mt-24 flex flex-row items-center justify-between border-b-[1px] border-jel-gray-3 pb-2">
-            <div>
-                <h1 className="font-bold text-black text-2xl max-md:text-xl">Raffles</h1>
-                <h2 className="font-normal text-jel-gray-4 text-base max-md:text-sm">
+    <div className="w-[95%] max-md:w-[90%] mx-auto">
+        <div className="mt-24 max-md:w-full flex flex-row items-center justify-between border-b-[1px] border-jel-gray-3 pb-2">
+            <div className='max-md:hidden'>
+                <h1 className=" font-bold text-black text-2xl max-md:text-xl">Raffles</h1>
+                <h2 className=" font-normal text-jel-gray-4 text-base max-w-[50vw]">
                     Win CLEAN tokens or your favorite Polygon NFTs. Enter the Raffle Now!
                 </h2>
             </div>
+            
             <WalletConnectButtonRaffle/>
+            
         </div>
 
         
