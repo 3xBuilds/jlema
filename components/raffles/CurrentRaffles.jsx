@@ -49,12 +49,14 @@ const CurrentRaffles = ({selected, setSelected, activeArr, endArr}) => {
 
       {selected==0 ? 
         <div className="w-full relative">
+          {endArr.length > 0 &&<>
           <button onClick={moveForward} className=" absolute z-40 top-1/2 right-2 translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-lg bg-jel-gray-3 hover:bg-jel-gray-2 flex items-center justify-center">
             <Image src={arrow} className="w-2" alt="Move forward" />
           </button>
           <button onClick={moveBackward} className=" absolute z-40 top-1/2 left-2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-lg bg-jel-gray-3 hover:bg-jel-gray-2 flex items-center justify-center">
             <Image src={arrow} className="w-2 rotate-180" alt="Move backward" />
           </button>
+        </>}
           <div className="mt-5 w-full overflow-hidden">
             <div ref={scrollContainerRef} className="grid grid-rows-1 grid-flow-col gap-3 items-center noscr justify-start min-w-[2000px] w-full overflow-x-auto scrollbar-hide pr-20">
               {endArr.map((ob, index) => (

@@ -42,7 +42,7 @@ const BuyTicketsModal = ({showBuyModal, setShowBuyModal, goToMyTickets, info, in
     
           if (allowance < ethers.utils.parseEther(String(price))) {
     
-            const resp = await contract.approve(contractAdds.JlemaRaffle, ethers.utils.parseEther(String(price)));
+            const resp = await contract.approve(contractAdds.JlemaRaffle, ethers.utils.parseEther(String(price*number)));
             resp.wait().then((res) => {
               enterCleanRaffle();
             })

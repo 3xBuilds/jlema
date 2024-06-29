@@ -19,20 +19,22 @@ const RaffleHighlights = ({goToMyTickets, setSelectedRaffle, activeArr}) => {
             <BuyTicketsModal goToMyTickets={goToMyTickets} showBuyModal={showBuyModal} setShowBuyModal={setShowBuyModal} info={buttonModalInfo} index={showRaffle}/>
 
             <div className="my-5 relative">
-                <button onClick={()=>{if(showRaffle<activeArr.length-1){setShowRaffle(showRaffle+1)}}} className=" absolute z-30 top-1/2 right-2 translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-lg bg-jel-gray-3 hover:bg-jel-gray-2 flex items-center justify-center">
-                    <Image src={arrow} className="w-2" />
-                </button>
-                <button onClick={()=>{if(showRaffle>0){setShowRaffle(showRaffle-1)};}} className="absolute z-30 top-1/2 left-2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-lg bg-jel-gray-3 hover:bg-jel-gray-2 flex items-center justify-center">
-                    <Image src={arrow} className="w-2 rotate-180" />
-                </button>
+                {activeArr.length > 0 && <>
+                    <button onClick={()=>{if(showRaffle<activeArr.length-1){setShowRaffle(showRaffle+1)}}} className=" absolute z-30 top-1/2 right-2 translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-lg bg-jel-gray-3 hover:bg-jel-gray-2 flex items-center justify-center">
+                        <Image src={arrow} className="w-2" />
+                    </button>
+                    <button onClick={()=>{if(showRaffle>0){setShowRaffle(showRaffle-1)};}} className="absolute z-30 top-1/2 left-2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-lg bg-jel-gray-3 hover:bg-jel-gray-2 flex items-center justify-center">
+                        <Image src={arrow} className="w-2 rotate-180" />
+                    </button>
+                </>}
 
             { activeArr.length > 0 ? activeArr.map((item, i)=>(
                 <>
                 {i == showRaffle && <div className="w-full relative sm:h-[600px] h-[840px] rounded-xl overflow-hidden">
                     <Image src={item.image == "" ? defaultimage : item.image} className="w-full h-full object-cover relative z-10" />
                     <div className="z-20 absolute w-full h-full bg-black/40 top-0 left-0 backdrop-blur-lg sm:p-16 p-8 sm:grid sm:grid-cols-2 items-center justify-center gap-0">
-                        <div className="h-96 w-96 mx-auto aspect-square overflow-hidden rounded-xl ">
-                            <Image src={item.image == "" ? defaultimage : item.image} className="sm:w-full sm:h-full object-cover" />
+                        <div className="sm:h-96 sm:w-96 w-fit max-sm:mb-5 mx-auto aspect-square overflow-hidden rounded-xl ">
+                            <Image src={item.image == "" ? defaultimage : item.image} className="sm:w-full sm:h-full rounded-xl object-cover" />
                         </div>
 
                         <div className="w-full">
@@ -45,8 +47,8 @@ const RaffleHighlights = ({goToMyTickets, setSelectedRaffle, activeArr}) => {
                             <h2 className="mb-5 text-xl text-white font-bold">{item.ticketLimit-item.ticketsSold}/{item.ticketLimit}</h2>
                             <div className="h-[1px] bg-white w-full mb-5"></div>
                             <div className="flex flex-row gap-3 items-center w-full sm:justify-start justify-center">
-                                <button onClick={()=>{setShowBuyModal(true);  setButtonModalInfo(item);}} className="sm:px-5 sm:py-2 px-6 py-4 rounded-xl bg-black text-white font-semibold">Buy Ticket</button>
-                                <button onClick={()=>{setSelectedRaffle(item); }} className="sm:px-5 sm:py-2 px-6 py-4 rounded-xl bg-white text-black hover:bg-jel-gray-2 font-semibold">View details</button>
+                                <button onClick={()=>{setShowBuyModal(true);  setButtonModalInfo(item);}} className="sm:px-5 hover:translate-y-[-1px] duration-150 sm:py-2 px-6 py-4 rounded-xl bg-black text-white font-semibold">Buy Ticket</button>
+                                <button onClick={()=>{setSelectedRaffle(item); }} className="sm:px-5 sm:py-2 px-6 py-4 hover:translate-y-[-1px] duration-150 rounded-xl bg-white text-black hover:bg-jel-gray-2 font-semibold">View details</button>
                             </div>
                         </div>
                     </div>
@@ -54,7 +56,7 @@ const RaffleHighlights = ({goToMyTickets, setSelectedRaffle, activeArr}) => {
                 </>
                 )) : 
                 <div className="w-full relative sm:h-[600px] h-[840px] rounded-xl overflow-hidden">
-                    <Image src={noRaffle} className='object-contain w-full h-full'/>
+                    <Image src={noRaffle} className='object-cover w-full h-full'/>
                 </div>
                 }
 

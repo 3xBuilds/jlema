@@ -70,7 +70,7 @@ const SelectedRaffle = ({selectedRaffle, setSelectedRaffle}) => {
                             selectedRaffle.participants?.map((participant, index)=>(
                                 <>
                                     <div className="w-full text-start px-5 text-black py-2">{participant[0]}</div>
-                                    <div className="w-full text-center px-5 text-black py-2">{participant[1]}</div>
+                                    <div className="w-full text-center px-5 text-black py-2">{Number(participant[1])}</div>
                                     {index<participants.length-1 && <div className="w-[95%] mx-auto col-span-2 bg-jel-gray-3 h-[1px]"></div>}
                                 </>
                             ))
