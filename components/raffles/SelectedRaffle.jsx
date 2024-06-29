@@ -62,19 +62,22 @@ const SelectedRaffle = ({selectedRaffle, setSelectedRaffle}) => {
             <div className="w-full rounded-xl border-[1px] border-jel-gray-3 mt-4">
                 {
                     selected==0 ?
-                    <div className="grid grid-cols-2 h-80">
-                        <div className="w-full text-start px-5 border-b-[1px] border-jel-gray-3 py-2 font-semibold">Participants ({selectedRaffle.totalEntrants})</div>
-                        <div className="w-full text-center border-b-[1px] border-jel-gray-3 py-2 font-semibold">Tickets Bought</div>
-                        
+                    <div className="flex flex-col h-32 overflow-scroll noscr">
+                        <div className='grid grid-cols-2'>
+                            <div className="w-full text-start px-5 border-b-[1px] h-12 border-jel-gray-3 py-2 font-semibold">Participants ({selectedRaffle.totalEntrants})</div>
+                            <div className="w-full text-center border-b-[1px] h-12 border-jel-gray-3 py-2 font-semibold">Tickets Bought</div>
+                        </div>
                         {
                             selectedRaffle.participants?.map((participant, index)=>(
-                                <>
-                                    <div className="w-full text-start px-5 text-black py-2">{participant[0]}</div>
-                                    <div className="w-full text-center px-5 text-black py-2">{Number(participant[1])}</div>
+                                <div className='grid grid-cols-2'>
+                                    <div className="w-full text-start px-5 h-10 text-black py-2">{participant[0].substring(0,5)+"..."+participant[0].substring(participant[0].length-4, participant[0].length)}</div>
+                                    <div className="w-full text-center px-5 h-10 text-black py-2">{Number(participant[1])}</div>
                                     {index<participants.length-1 && <div className="w-[95%] mx-auto col-span-2 bg-jel-gray-3 h-[1px]"></div>}
-                                </>
+                                </div>
                             ))
                         }
+
+
                         
                     </div>
                     :
