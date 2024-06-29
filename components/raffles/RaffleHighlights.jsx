@@ -30,7 +30,7 @@ const RaffleHighlights = ({goToMyTickets, setSelectedRaffle, activeArr}) => {
                 <>
                 {i == showRaffle && <div className="w-full relative sm:h-[600px] h-[840px] rounded-xl overflow-hidden">
                     <Image src={item.image == "" ? defaultimage : item.image} className="w-full h-full object-cover relative z-10" />
-                    <div className="z-20 absolute w-full sm:h-full bg-black/40 top-0 left-0 backdrop-blur-lg sm:p-16 p-8 sm:grid sm:grid-cols-2 items-center justify-center gap-0">
+                    <div className="z-20 absolute w-full h-full bg-black/40 top-0 left-0 backdrop-blur-lg sm:p-16 p-8 sm:grid sm:grid-cols-2 items-center justify-center gap-0">
                         <div className="h-96 w-96 mx-auto aspect-square overflow-hidden rounded-xl ">
                             <Image src={item.image == "" ? defaultimage : item.image} className="sm:w-full sm:h-full object-cover" />
                         </div>
