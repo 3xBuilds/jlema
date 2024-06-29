@@ -7,7 +7,7 @@ import arrow from '../../assets/icons/arrow.svg'
 import { useState } from 'react'
 import BuyTicketsModal from './BuyTicketsModal'
 import defaultimage from "@/assets/defaultimage.png"
-
+import noRaffle from "@/assets/noRaffleBanner.png"
 const RaffleHighlights = ({goToMyTickets, setSelectedRaffle, activeArr}) => {
 
     const [showBuyModal, setShowBuyModal] = useState(false);
@@ -26,7 +26,7 @@ const RaffleHighlights = ({goToMyTickets, setSelectedRaffle, activeArr}) => {
                     <Image src={arrow} className="w-2 rotate-180" />
                 </button>
 
-            {activeArr.map((item, i)=>(
+            { activeArr.length > 0 ? activeArr.map((item, i)=>(
                 <>
                 {i == showRaffle && <div className="w-full relative sm:h-[600px] h-[840px] rounded-xl overflow-hidden">
                     <Image src={item.image == "" ? defaultimage : item.image} className="w-full h-full object-cover relative z-10" />
@@ -52,7 +52,11 @@ const RaffleHighlights = ({goToMyTickets, setSelectedRaffle, activeArr}) => {
                     </div>
                 </div>}
                 </>
-                ))}
+                )) : 
+                <div className="w-full relative sm:h-[600px] h-[840px] rounded-xl overflow-hidden">
+                    <Image src={noRaffle} className='object-contain w-full h-full'/>
+                </div>
+                }
 
                 <div className="flex flex-row gap-2 w-fit mx-auto mt-5">
                     <div className="w-12 h-1 bg-jel-gray-4 rounded-full"></div>
