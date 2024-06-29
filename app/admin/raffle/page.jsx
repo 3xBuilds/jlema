@@ -99,11 +99,11 @@ async function approval(){
                 const contract = await contractSetup();
 
                 if(tokenSelected == "CLEAN"){
-                    const txn = await contract.setRaffleItem(active, contractAdd, ticketsPerWallet, opensea, tokenId, ticketAmount, ticketPrice, 0);
+                    const txn = await contract.setRaffleItem(active, contractAdd, ticketsPerWallet, opensea, tokenId, ticketAmount, ethers.utils.parseEther(String(ticketPrice)), 0);
                     txn.wait().then((res)=>{setLoading(false); window.location.reload()} );
                 }
                 else{
-                    const txn = await contract.setRaffleItem(active, contractAdd, ticketsPerWallet, opensea, tokenId, ticketAmount, 0, ticketPrice)
+                    const txn = await contract.setRaffleItem(active, contractAdd, ticketsPerWallet, opensea, tokenId, ticketAmount, 0, ethers.utils.parseEther(String(ticketPrice)))
                     txn.wait().then((res)=>{setLoading(false); window.location.reload()});
                 }
             }
@@ -132,8 +132,8 @@ async function approval(){
             const ticketLimit = Number(active[i][4]);
             const walletHolding = Number(active[i][5]);
             const ticketLimitPerWallet = Number(active[i][6]);
-            const raffleEntryCleanCost = Number(active[i][7]);
-            const raffleEntryMaticCost = Number(active[i][8]);
+            const raffleEntryCleanCost = Number(ethers.utils.formatEther(active[i][7]));
+            const raffleEntryMaticCost = Number(ethers.utils.formatEther(active[i][8]));
             const collectionLink = active[i][9];
 
             const contract = await setERC721Contract(add);

@@ -61,7 +61,7 @@ const Raffle = () => {
     
 
             const contract = new ethers.Contract(address, erc721abi, signer);
-            console.log(contract);
+            // console.log(contract);
             return contract;
     
           
@@ -76,7 +76,7 @@ const Raffle = () => {
         const contract = await contractSetup();
          await contract.activeRaffles().catch((err)=>{console.log(err)});
         setActive(Number(await contract.activeRaffles()));
-        console.log("hello");
+        // console.log("hello");
         const active = await contract.fetchActiveRaffles();
 
         for(let i = 0; i<active.length; i++){
@@ -88,8 +88,8 @@ const Raffle = () => {
             const ticketLimit = Number(active[i][4]);
             const walletHolding = Number(active[i][5]);
             const ticketLimitPerWallet = Number(active[i][6]);
-            const raffleEntryCleanCost = Number(active[i][7]);
-            const raffleEntryMaticCost = Number(active[i][8]);
+            const raffleEntryCleanCost = Number(ethers.utils.formatEther(active[i][7]));
+            const raffleEntryMaticCost = Number(ethers.utils.formatEther(active[i][8]));
             const collectionLink = active[i][9];
             const participants = active[i][10];
 

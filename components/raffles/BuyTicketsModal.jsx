@@ -96,7 +96,7 @@ const BuyTicketsModal = ({showBuyModal, setShowBuyModal, goToMyTickets, info, in
         try{
             console.log(index, number);
             const contract = await contractSetup();
-            const txn = await contract.enterMaticRaffle(index, number);
+            const txn = await contract.enterMaticRaffle(index, number, {value: ethers.utils.parseEther(String(number*info.raffleEntryMaticCost))});
 
             txn.wait().then((res)=>{
                 setLoading(false);
