@@ -126,7 +126,7 @@ const CurrentRaffles = ({selected, setSelected, activeArr, endArr}) => {
               </div>
             </div>}
             </>
-          ))} max-md:hidden
+          ))}
         </div>
       </div>
     </div>
