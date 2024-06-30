@@ -194,67 +194,70 @@ async function approval(){
 
     async function fetchEnded(){
         try{
-            setEndedRaffleInfo([]);
+        setEndedRaffleInfo([]);
           const contract = await contractSetup();
           const ended = await contract.fetchEndedRaffles();
-  
           for(let i = 0; i<ended.length; i++){
+            
             const add = ended[i][0];
-            const tokenId = Number(ended[i][1]);
-            const winner = ended[i][2];
-  
-            const contract = await setERC721Contract(add);
-              const tokenURI = await contract.tokenURI(tokenId);
-              const name = await contract.name();
-              // console.log(tokenURI)
-  
-              if(tokenURI[0] == "h"){
-                      try{
-                          const metadata = tokenURI;
+
+            if(add.toUpperCase() != "0X0000000000000000000000000000000000000000"){
+                const tokenId = Number(ended[i][1]);
+                const winner = ended[i][2];
       
-                          const meta = await fetch(metadata , {
-                              signal: AbortSignal.timeout(2000)
-                            });
-  
-                            console.log(meta);
-                          const json = await meta.json();
-                          const newimage = json["image"];
-                          const image = `https://cloudflare-ipfs.com/ipfs/${newimage.substr(7)}`
-                          setEndedRaffleInfo(oldArr => [...oldArr ,{name, image, tokenId, winner}]);
+                const contract = await setERC721Contract(add);
+                  const tokenURI = await contract.tokenURI(tokenId);
+                  const name = await contract.name();
+                  // console.log(tokenURI)
+      
+                  if(tokenURI[0] == "h"){
+                          try{
+                              const metadata = tokenURI;
           
-                          // console.log(newimage);
+                              const meta = await fetch(metadata , {
+                                  signal: AbortSignal.timeout(2000)
+                                });
+      
+                                console.log(meta);
+                              const json = await meta.json();
+                              const newimage = json["image"];
+                              const image = `https://cloudflare-ipfs.com/ipfs/${newimage.substr(7)}`
+                              setEndedRaffleInfo(oldArr => [...oldArr ,{name, image, tokenId, winner}]);
+              
+                              // console.log(newimage);
+                          }
+                          catch(err){
+                              const image = "";
+                              setEndedRaffleInfo(oldArr => [...oldArr ,{name, image, tokenId, winner}]);
+      
+                          }
+              
+      
                       }
-                      catch(err){
-                          const image = "";
-                          setEndedRaffleInfo(oldArr => [...oldArr ,{name, image, tokenId, winner}]);
-  
+      
+                      else{
+                          try{
+                              const metadata = `https://cloudflare-ipfs.com/ipfs/${tokenURI.substr(7)}`;
+                              // console.log(metadata);
+                              const meta = await fetch(metadata , {
+                                  signal: AbortSignal.timeout(2000)
+                                });
+                              // console.log(meta);
+                              const json = await meta.json();
+                              const newimage = json["image"];
+                              const image = `https://cloudflare-ipfs.com/ipfs/${newimage.substr(7)}`
+                              setEndedRaffleInfo(oldArr => [...oldArr ,{name, image, tokenId, winner}]);
+              
+                              // console.log(newimage);
+                          }
+                          catch(err){
+                              const image = ""
+                              setEndedRaffleInfo(oldArr => [...oldArr ,{name, image, tokenId, winner}]);
+      
+                          }
+              
                       }
-          
-  
-                  }
-  
-                  else{
-                      try{
-                          const metadata = `https://cloudflare-ipfs.com/ipfs/${tokenURI.substr(7)}`;
-                          // console.log(metadata);
-                          const meta = await fetch(metadata , {
-                              signal: AbortSignal.timeout(2000)
-                            });
-                          // console.log(meta);
-                          const json = await meta.json();
-                          const newimage = json["image"];
-                          const image = `https://cloudflare-ipfs.com/ipfs/${newimage.substr(7)}`
-                          setEndedRaffleInfo(oldArr => [...oldArr ,{name, image, tokenId, winner}]);
-          
-                          // console.log(newimage);
-                      }
-                      catch(err){
-                          const image = ""
-                          setEndedRaffleInfo(oldArr => [...oldArr ,{name, image, tokenId, winner}]);
-  
-                      }
-          
-                  }
+            }
   
           }
   
