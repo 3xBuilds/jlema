@@ -10,7 +10,7 @@ import defaultimage from "@/assets/defaultimage.png"
 import { SiOpensea } from "react-icons/si";
 
 
-const SelectedRaffle = ({selectedRaffle, setSelectedRaffle}) => {
+const SelectedRaffle = ({selectedRaffle, setSelectedRaffle, setShowBuyModal, setButtonModalInfo}) => {
 
     const {isConnected} = useAccount();
 
@@ -54,7 +54,7 @@ const SelectedRaffle = ({selectedRaffle, setSelectedRaffle}) => {
                     </div>
                     <div></div>
                     <div className=" col-span-2 border-t-[1px] border-jel-gray-3 pt-4 px-4">
-                        {isConnected ? <button onClick={()=>setShowBuyModal(true)} className=" w-full px-5 py-3 rounded-xl bg-black text-white font-semibold">Buy Ticket</button>: <WalletConnectButton/>}
+                        {isConnected ? <button onClick={()=>{setShowBuyModal(true); setButtonModalInfo(selectedRaffle)}} className=" w-full px-5 py-3 rounded-xl bg-black text-white font-semibold">Buy Ticket</button>: <WalletConnectButton/>}
                     </div>
                 </div>
                 <div className="my-5">

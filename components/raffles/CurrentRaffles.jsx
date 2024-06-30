@@ -53,15 +53,15 @@ const CurrentRaffles = ({selected, setSelected, activeArr, endArr}) => {
       {selected==0 ? 
         <div className="w-full relative">
           {endArr.length > 0 &&<>
-          <button onClick={moveForward} className=" absolute z-40 top-1/2 right-2 translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-lg bg-jel-gray-3 hover:bg-jel-gray-2 flex items-center justify-center">
+          <button onClick={moveForward} className=" max-md:hidden absolute z-40 top-1/2 right-2 translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-lg bg-jel-gray-3 hover:bg-jel-gray-2 flex items-center justify-center">
             <Image src={arrow} className="w-2" alt="Move forward" />
           </button>
-          <button onClick={moveBackward} className=" absolute z-40 top-1/2 left-2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-lg bg-jel-gray-3 hover:bg-jel-gray-2 flex items-center justify-center">
+          <button onClick={moveBackward} className=" max-md:hidden absolute z-40 top-1/2 left-2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-lg bg-jel-gray-3 hover:bg-jel-gray-2 flex items-center justify-center">
             <Image src={arrow} className="w-2 rotate-180" alt="Move backward" />
           </button>
         </>}
           <div className="mt-5 w-full overflow-hidden">
-            <div ref={scrollContainerRef} className={`${endArr.length != 0 ? "grid grid-col-1 grid-flow-col pr-20 min-w-[2000px]" : "flex"} gap-3 items-center noscr justify-start w-full overflow-x-auto scrollbar-hide`}>
+            <div ref={scrollContainerRef} className={`${endArr.length != 0 ? "grid grid-col-1 grid-flow-col pr-20" : "flex"} gap-3 items-center noscr justify-start w-full overflow-x-auto scrollbar-hide`}>
               { endArr.length != 0 ? endArr.map((ob, index) => (
                 <div key={index} onClick={() => { }} className="rounded-xl hover:shadow-jel-nft duration-200 w-64 h-fit cursor-pointer border-[1px] border-jel-gray-3 overflow-hidden flex flex-col">
                   <div className="h-64 w-full">
@@ -99,16 +99,14 @@ const CurrentRaffles = ({selected, setSelected, activeArr, endArr}) => {
       </div>
       :
       <div className="w-full relative">
-      <button onClick={moveForward} className=" absolute z-40 top-1/2 right-2 translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-lg bg-jel-gray-3 hover:bg-jel-gray-2 flex items-center justify-center">
+      <button onClick={moveForward} className=" max-md:hidden absolute z-40 top-1/2 right-2 translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-lg bg-jel-gray-3 hover:bg-jel-gray-2 flex items-center justify-center">
         <Image src={arrow} className="w-2" alt="Move forward" />
       </button>
-      <button onClick={moveBackward} className=" absolute z-40 top-1/2 left-2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-lg bg-jel-gray-3 hover:bg-jel-gray-2 flex items-center justify-center">
+      <button onClick={moveBackward} className=" max-md:hidden absolute z-40 top-1/2 left-2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-lg bg-jel-gray-3 hover:bg-jel-gray-2 flex items-center justify-center">
         <Image src={arrow} className="w-2 rotate-180" alt="Move backward" />
       </button>
       <div className="mt-5 w-full overflow-hidden">
-        <div ref={scrollContainerRef} className="grid grid-rows-1 grid-flow-col gap-3 items-center noscr justify-start min-w-[2000px] w-full overflow-x-auto scrollbar-hide pr-20">
-          
-          
+        <div ref={scrollContainerRef} className="grid grid-rows-1 grid-flow-col gap-3 items-center noscr justify-start w-full overflow-x-auto scrollbar-hide pr-20">
           {activeArr.map((ob, index) => (
             <>
             {ob.walletHolding > 0 &&
@@ -128,9 +126,7 @@ const CurrentRaffles = ({selected, setSelected, activeArr, endArr}) => {
               </div>
             </div>}
             </>
-          ))}
-
-
+          ))} max-md:hidden
         </div>
       </div>
     </div>

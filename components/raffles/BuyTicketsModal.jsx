@@ -11,7 +11,7 @@ import erc20abi from "@/utils/abis/erc20abi"
 import { ethers } from 'ethers';
 import { useAccount } from 'wagmi';
 
-const BuyTicketsModal = ({showBuyModal, setShowBuyModal, goToMyTickets, info, index}) => {
+const BuyTicketsModal = ({fetchActive, setSelectedRaffle, showBuyModal, setShowBuyModal, goToMyTickets, info, index}) => {
     const {address} = useAccount();
     const [number, setNumber] = useState(1);
     const [loading, setLoading] = useState(false);
@@ -143,7 +143,7 @@ const BuyTicketsModal = ({showBuyModal, setShowBuyModal, goToMyTickets, info, in
             <RxCross2 onClick={()=>setShowBuyModal(false)} className="absolute cursor-pointer top-5 right-5 text-2xl text-jel-gray-4"/>
             <h2 className=" text-lg text-center text-black font-bold">Ticket Purchase Successfully</h2>
             <div className=" mx-auto my-16 border-black border-[6px] rounded-full flex items-center justify-center w-24 h-24 p-2"><Image src={tick} className="w-20"/></div>
-            <button onClick={()=>{setShowBuyModal(false); setSuccess(false); goToMyTickets()}} className="bg-black text-white rounded-xl text-center mt-2 font-semibold py-3 w-full flex items-center justify-center">View my ticket</button>
+            <button onClick={()=>{fetchActive(); setSelectedRaffle(null); setShowBuyModal(false); setSuccess(false); goToMyTickets()}} className="bg-black text-white rounded-xl text-center mt-2 font-semibold py-3 w-full flex items-center justify-center">View my ticket</button>
         </div>}
         
     </div>

@@ -16,6 +16,7 @@ import { useState, useEffect } from 'react'
 import { useAccount } from 'wagmi'
 import SelectedRaffle from '@/components/raffles/SelectedRaffle'
 import { WalletConnectButtonRaffle } from '@/components/buttons/walletConnectButtonRaffle'
+import BuyTicketsModal from '@/components/raffles/BuyTicketsModal';
 
 const Raffle = () => {
 
@@ -29,10 +30,14 @@ const Raffle = () => {
     const [ended, setEnded] = useState(0);
     const {isConnected} = useAccount();
 
+    const [showBuyModal, setShowBuyModal] = useState(false);
+    const [buttonModalInfo, setButtonModalInfo] = useState({});
+    const [showRaffle, setShowRaffle] = useState(0);
+
     const goToMyTickets = () => {
         setSelected(1);
         const currentRaffles = document.getElementById('current-raffles');
-        currentRaffles.scrollIntoView({ behavior: 'smooth' });
+        currentRaffles?.scrollIntoView({ behavior: 'smooth' });
     }
 
     async function contractSetup(){
@@ -239,15 +244,13 @@ const Raffle = () => {
             
         </div>
 
+        <BuyTicketsModal setSelectedRaffle={setSelectedRaffle} fetchActive={fetchActive} goToMyTickets={goToMyTickets} showBuyModal={showBuyModal} setShowBuyModal={setShowBuyModal} info={buttonModalInfo} index={showRaffle}/>
         
         {
-            selectedRaffle!=null ? <SelectedRaffle selectedRaffle={selectedRaffle} setSelectedRaffle={setSelectedRaffle}/>
+            selectedRaffle!=null ? <SelectedRaffle setButtonModalInfo={setButtonModalInfo} setShowBuyModal={setShowBuyModal} selectedRaffle={selectedRaffle} setSelectedRaffle={setSelectedRaffle}/>
         :
         <>
-            
-                <RaffleHighlights goToMyTickets={goToMyTickets} setSelectedRaffle={setSelectedRaffle} activeArr={activeRaffleInfo}/>
-            
-
+            <RaffleHighlights setShowBuyModal={setShowBuyModal} showRaffle={showRaffle} setShowRaffle={setShowRaffle} setButtonModalInfo={setButtonModalInfo} fetchActive={fetchActive} goToMyTickets={goToMyTickets} setSelectedRaffle={setSelectedRaffle} activeArr={activeRaffleInfo}/>
             <CurrentRaffles selected={selected} setSelected={setSelected} activeArr={activeRaffleInfo} endArr={endedRaffleInfo}/>
             <Footer/>
         </>}

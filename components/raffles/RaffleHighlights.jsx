@@ -9,15 +9,10 @@ import defaultimage from "@/assets/defaultimage.png"
 import noRaffle from "@/assets/noRaffleBanner.png"
 import noRafflephone from "@/assets/raffleBanner.png"
 
-const RaffleHighlights = ({goToMyTickets, setSelectedRaffle, activeArr}) => {
-
-    const [showBuyModal, setShowBuyModal] = useState(false);
-    const [showRaffle, setShowRaffle] = useState(0);
-    const [buttonModalInfo, setButtonModalInfo] = useState({});
+const RaffleHighlights = ({fetchActive, goToMyTickets, setShowBuyModal, showRaffle, setShowRaffle, setSelectedRaffle, activeArr, setButtonModalInfo}) => {
 
     return (
         <>
-            <BuyTicketsModal goToMyTickets={goToMyTickets} showBuyModal={showBuyModal} setShowBuyModal={setShowBuyModal} info={buttonModalInfo} index={showRaffle}/>
 
             <div className="my-5 relative">
                 {activeArr.length > 0 && <>
@@ -49,7 +44,7 @@ const RaffleHighlights = ({goToMyTickets, setSelectedRaffle, activeArr}) => {
                             <div className="h-[1px] bg-white w-full mb-5"></div>
                             <div className="flex flex-row gap-3 items-center w-full sm:justify-start justify-center">
                                 <button onClick={()=>{setShowBuyModal(true);  setButtonModalInfo(item);}} className="sm:px-5 hover:translate-y-[-1px] duration-150 sm:py-2 px-6 py-4 rounded-xl bg-black text-white font-semibold">Buy Ticket</button>
-                                <button onClick={()=>{setSelectedRaffle(item); }} className="sm:px-5 sm:py-2 px-6 py-4 hover:translate-y-[-1px] duration-150 rounded-xl bg-white text-black hover:bg-jel-gray-2 font-semibold">View details</button>
+                                <button onClick={()=>{setSelectedRaffle(item); setShowRaffle(i) }} className="sm:px-5 sm:py-2 px-6 py-4 hover:translate-y-[-1px] duration-150 rounded-xl bg-white text-black hover:bg-jel-gray-2 font-semibold">View details</button>
                             </div>
                         </div>
                     </div>
@@ -63,10 +58,7 @@ const RaffleHighlights = ({goToMyTickets, setSelectedRaffle, activeArr}) => {
                 }
 
                 <div className="flex flex-row gap-2 w-fit mx-auto mt-5">
-                    <div className="w-12 h-1 bg-jel-gray-4 rounded-full"></div>
-                    <div className="w-12 h-1 bg-jel-gray-3 rounded-full"></div>
-                    <div className="w-12 h-1 bg-jel-gray-3 rounded-full"></div>
-                    <div className="w-12 h-1 bg-jel-gray-3 rounded-full"></div>
+                    {activeArr.map((ob,index)=>(<div className={`w-12 h-1 ${showRaffle==index ? "bg-jel-gray-4" : "bg-jel-gray-3"} rounded-full`}></div>))}
                 </div>
             </div>
         </>
