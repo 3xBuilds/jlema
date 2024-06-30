@@ -11,6 +11,6 @@ export const contractAdds = {
 
     JlemaFetcher: "0xa5b2534a51Db2DEd5f342Cd19059828A2B3cdfd3",
 
-    JlemaRaffle: "0xE8Db184aB09e9aD6809A81a0751866aEDb780bCa"
+    JlemaRaffle: "0x19E2de8506FD9422eC30DFe789A11d09997736a8"
 
 }
