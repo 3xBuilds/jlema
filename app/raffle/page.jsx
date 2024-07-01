@@ -77,6 +77,8 @@ const Raffle = () => {
       }
 
     async function fetchActive(){
+      try{
+
         setActiveRaffleInfo([]);
         const contract = await contractSetup();
          await contract.activeRaffles().catch((err)=>{console.log(err)});
@@ -152,6 +154,10 @@ const Raffle = () => {
                 }
         
         }
+      }
+      catch(err){
+        console.log(err);
+      }
     }
 
     async function fetchEnded(){

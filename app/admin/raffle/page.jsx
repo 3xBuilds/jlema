@@ -127,80 +127,87 @@ async function approval(){
     }
 
     async function fetchActiveEnded(){
-        setActiveRaffleInfo([]);
-        const contract = await contractSetup();
-         await contract.activeRaffles().catch((err)=>{console.log(err)});
-        setActive(Number(await contract.activeRaffles()));
-        setEnded(Number(await contract.endedRaffles()));
-        console.log("hello");
-        const active = await contract.fetchActiveRaffles();
+        try{
 
-        for(let i = 0; i<active.length; i++){
-            const add = active[i][0];
-            const tokenId = Number(active[i][1]);
-
-            const totalEntrants = Number(active[i][2]);
-            const ticketsSold = Number(active[i][3]);
-            const ticketLimit = Number(active[i][4]);
-            const walletHolding = Number(active[i][5]);
-            const ticketLimitPerWallet = Number(active[i][6]);
-            const raffleEntryCleanCost = Number(ethers.utils.formatEther(active[i][7]));
-            const raffleEntryMaticCost = Number(ethers.utils.formatEther(active[i][8]));
-            const collectionLink = active[i][9];
-
-            const contract = await setERC721Contract(add);
-            const tokenURI = await contract.tokenURI(tokenId);
-            const name = await contract.name();
-            // console.log(tokenURI)
-
-            if(tokenURI[0] == "h"){
-                    try{
-                        const metadata = tokenURI;
+            setActiveRaffleInfo([]);
+            const contract = await contractSetup();
+             await contract.activeRaffles().catch((err)=>{console.log(err)});
+            setActive(Number(await contract.activeRaffles()));
+            setEnded(Number(await contract.endedRaffles()));
+            console.log("hello");
+            const active = await contract.fetchActiveRaffles();
     
-                        const meta = await fetch(metadata , {
-                            signal: AbortSignal.timeout(2000)
-                          });
-
-                          console.log(meta);
-                        const json = await meta.json();
-                        const newimage = json["image"];
-                        const image = `https://cloudflare-ipfs.com/ipfs/${newimage.substr(7)}`
-                        setActiveRaffleInfo(oldArr => [...oldArr ,{name, image, add, tokenId, totalEntrants, ticketsSold, ticketLimit, walletHolding, ticketLimitPerWallet, raffleEntryCleanCost, raffleEntryMaticCost, collectionLink}]);
+            for(let i = 0; i<active.length; i++){
+                const add = active[i][0];
+                const tokenId = Number(active[i][1]);
+    
+                const totalEntrants = Number(active[i][2]);
+                const ticketsSold = Number(active[i][3]);
+                const ticketLimit = Number(active[i][4]);
+                const walletHolding = Number(active[i][5]);
+                const ticketLimitPerWallet = Number(active[i][6]);
+                const raffleEntryCleanCost = Number(ethers.utils.formatEther(active[i][7]));
+                const raffleEntryMaticCost = Number(ethers.utils.formatEther(active[i][8]));
+                const collectionLink = active[i][9];
+    
+                const contract = await setERC721Contract(add);
+                const tokenURI = await contract.tokenURI(tokenId);
+                const name = await contract.name();
+                // console.log(tokenURI)
+    
+                if(tokenURI[0] == "h"){
+                        try{
+                            const metadata = tokenURI;
         
-                        // console.log(newimage);
+                            const meta = await fetch(metadata , {
+                                signal: AbortSignal.timeout(2000)
+                              });
+    
+                              console.log(meta);
+                            const json = await meta.json();
+                            const newimage = json["image"];
+                            const image = `https://cloudflare-ipfs.com/ipfs/${newimage.substr(7)}`
+                            setActiveRaffleInfo(oldArr => [...oldArr ,{name, image, add, tokenId, totalEntrants, ticketsSold, ticketLimit, walletHolding, ticketLimitPerWallet, raffleEntryCleanCost, raffleEntryMaticCost, collectionLink}]);
+            
+                            // console.log(newimage);
+                        }
+                        catch(err){
+                            const image = "";
+                            setActiveRaffleInfo(oldArr => [...oldArr ,{name, image, add, tokenId, totalEntrants, ticketsSold, ticketLimit, walletHolding, ticketLimitPerWallet, raffleEntryCleanCost, raffleEntryMaticCost, collectionLink}]);
+    
+                        }
+            
+    
                     }
-                    catch(err){
-                        const image = "";
-                        setActiveRaffleInfo(oldArr => [...oldArr ,{name, image, add, tokenId, totalEntrants, ticketsSold, ticketLimit, walletHolding, ticketLimitPerWallet, raffleEntryCleanCost, raffleEntryMaticCost, collectionLink}]);
-
+    
+                    else{
+                        try{
+                            const metadata = `https://cloudflare-ipfs.com/ipfs/${tokenURI.substr(7)}`;
+                            // console.log(metadata);
+                            const meta = await fetch(metadata , {
+                                signal: AbortSignal.timeout(2000)
+                              });
+                            // console.log(meta);
+                            const json = await meta.json();
+                            const newimage = json["image"];
+                            const image = `https://cloudflare-ipfs.com/ipfs/${newimage.substr(7)}`
+                            setActiveRaffleInfo(oldArr => [...oldArr ,{name, image, add, tokenId, totalEntrants, ticketsSold, ticketLimit, walletHolding, ticketLimitPerWallet, raffleEntryCleanCost, raffleEntryMaticCost, collectionLink}]);
+            
+                            // console.log(newimage);
+                        }
+                        catch(err){
+                            const image = ""
+                            setActiveRaffleInfo(oldArr => [...oldArr ,{name, image, add, tokenId, totalEntrants, ticketsSold, ticketLimit, walletHolding, ticketLimitPerWallet, raffleEntryCleanCost, raffleEntryMaticCost, collectionLink}]);
+    
+                        }
+            
                     }
-        
+            
+            }
+        }
 
-                }
-
-                else{
-                    try{
-                        const metadata = `https://cloudflare-ipfs.com/ipfs/${tokenURI.substr(7)}`;
-                        // console.log(metadata);
-                        const meta = await fetch(metadata , {
-                            signal: AbortSignal.timeout(2000)
-                          });
-                        // console.log(meta);
-                        const json = await meta.json();
-                        const newimage = json["image"];
-                        const image = `https://cloudflare-ipfs.com/ipfs/${newimage.substr(7)}`
-                        setActiveRaffleInfo(oldArr => [...oldArr ,{name, image, add, tokenId, totalEntrants, ticketsSold, ticketLimit, walletHolding, ticketLimitPerWallet, raffleEntryCleanCost, raffleEntryMaticCost, collectionLink}]);
-        
-                        // console.log(newimage);
-                    }
-                    catch(err){
-                        const image = ""
-                        setActiveRaffleInfo(oldArr => [...oldArr ,{name, image, add, tokenId, totalEntrants, ticketsSold, ticketLimit, walletHolding, ticketLimitPerWallet, raffleEntryCleanCost, raffleEntryMaticCost, collectionLink}]);
-
-                    }
-        
-                }
-        
+        catch(err){
+            console.log(err);
         }
     }
 
