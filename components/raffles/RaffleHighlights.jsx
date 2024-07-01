@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import nft1 from '../../assets/nft1.png'
 import arrow from '../../assets/icons/arrow.svg'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import BuyTicketsModal from './BuyTicketsModal'
 import defaultimage from "@/assets/defaultimage.png"
 import noRaffle from "@/assets/noRaffleBanner.png"
@@ -11,15 +11,39 @@ import noRafflephone from "@/assets/raffleBanner.png"
 
 const RaffleHighlights = ({fetchActive, goToMyTickets, setShowBuyModal, showRaffle, setShowRaffle, setSelectedRaffle, activeArr, setButtonModalInfo}) => {
 
+    useEffect(()=>{
+        const interval = setInterval(()=>{
+            goNext();
+        }, 2000)
+        return ()=>clearInterval(interval);
+    }, [activeArr, showRaffle])
+
+
+    const goNext = () => {
+        if (showRaffle == activeArr.length - 1) {
+            setShowRaffle(0);
+        } else {
+            setShowRaffle(prev=>prev+1)
+        }
+    }
+
+    const goBack = () => {
+        if (showRaffle === 0) {
+            setShowRaffle(activeArr.length - 1);
+        } else {
+            setShowRaffle(prev=>prev-1)
+        }
+
+    }
+
     return (
         <>
-
             <div className="my-5 relative">
                 {activeArr.length > 0 && <>
-                    <button onClick={()=>{if(showRaffle<activeArr.length-1){setShowRaffle(showRaffle+1)}}} className=" absolute z-30 top-1/2 right-2 translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-lg bg-jel-gray-3 hover:bg-jel-gray-2 flex items-center justify-center">
+                    <button onClick={goNext} className=" absolute z-30 top-1/2 right-2 translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-lg bg-jel-gray-3 hover:bg-jel-gray-2 flex items-center justify-center">
                         <Image src={arrow} className="w-2" />
                     </button>
-                    <button onClick={()=>{if(showRaffle>0){setShowRaffle(showRaffle-1)};}} className="absolute z-30 top-1/2 left-2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-lg bg-jel-gray-3 hover:bg-jel-gray-2 flex items-center justify-center">
+                    <button onClick={goBack} className="absolute z-30 top-1/2 left-2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-lg bg-jel-gray-3 hover:bg-jel-gray-2 flex items-center justify-center">
                         <Image src={arrow} className="w-2 rotate-180" />
                     </button>
                 </>}
