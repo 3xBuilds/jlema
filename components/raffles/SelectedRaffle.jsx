@@ -30,7 +30,7 @@ const SelectedRaffle = ({selectedRaffle, setSelectedRaffle, setShowBuyModal, set
             </div>
             <div className="sm:w-1/2">
             <div className='flex mb-5'>
-                <h3 className="px-3 py-1 w-fit rounded-xl border-[1px] border-jel-gray-3 text-black">{selectedRaffle.name}</h3>
+                <h3 className="px-3 py-1 rounded-xl max-w-1/2 text-nowrap border-[1px] border-jel-gray-3 text-black">{selectedRaffle.name}</h3>
                 <div className='w-full justify-end items-end flex'>
                     <a href={selectedRaffle.collectionLink} target='_blank' className='cursor-pointer rounded-xl flex p-2 w-9 items-center justify-end bg-jel-gray-3'>
                         <SiOpensea className='text-xl'/>
@@ -71,11 +71,12 @@ const SelectedRaffle = ({selectedRaffle, setSelectedRaffle, setShowBuyModal, set
             <div className="w-full rounded-xl border-[1px] border-jel-gray-3 mt-4">
                 {
                     selected==0 ?
-                    <div className="flex flex-col h-32 overflow-scroll noscr">
+                    <div className="flex flex-col h-32 ">
                         <div className='grid grid-cols-2'>
                             <div className="w-full text-start px-5 border-b-[1px] h-12 border-jel-gray-3 py-2 font-semibold">Participants ({selectedRaffle.totalEntrants})</div>
                             <div className="w-full text-center border-b-[1px] h-12 border-jel-gray-3 py-2 font-semibold">Tickets Bought</div>
                         </div>
+                        <div className='overflow-scroll noscr'>
                         {
                             selectedRaffle.participants?.map((participant, index)=>(
                                 <div className='grid grid-cols-2'>
@@ -85,6 +86,7 @@ const SelectedRaffle = ({selectedRaffle, setSelectedRaffle, setShowBuyModal, set
                                 </div>
                             ))
                         }
+                        </div>
 
 
                         

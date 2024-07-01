@@ -236,7 +236,7 @@ const Raffle = () => {
             <div className='max-md:hidden'>
                 <h1 className=" font-bold text-black text-2xl max-md:text-xl">Raffles</h1>
                 <h2 className=" font-normal text-jel-gray-4 text-base max-w-[50vw]">
-                    Win CLEAN tokens or your favorite Polygon NFTs. Enter the Raffle Now!
+                    Win your favorite Polygon NFTs. Enter the Raffle Now!
                 </h2>
             </div>
             
