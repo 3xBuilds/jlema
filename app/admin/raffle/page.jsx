@@ -315,8 +315,8 @@ const RaffleAdmin = () => {
         if (!file) return;
     
         setUploading(true);
-    
-        const customFileName = `Jlema_${contractAdds.JlemaRaffle}_${tokenID}`;
+        const contractAdd = opensea.split("/")[5];
+        const customFileName = `Jlema_${contractAdd}_${tokenID}`;
         const customFile = new File([file], customFileName, { type: file.type });
     
         const formData = new FormData();

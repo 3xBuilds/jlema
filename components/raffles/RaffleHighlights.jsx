@@ -41,20 +41,20 @@ const RaffleHighlights = ({fetchActive, goToMyTickets, setShowBuyModal, showRaff
             <div className="my-5 relative">
                 {activeArr.length > 0 && <>
                     <button onClick={goNext} className=" absolute z-30 top-1/2 right-2 translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-lg bg-jel-gray-3 hover:bg-jel-gray-2 flex items-center justify-center">
-                        <Image src={arrow} className="w-2" />
+                        <Image width={1080} height={1080} src={arrow} className="w-2" />
                     </button>
                     <button onClick={goBack} className="absolute z-30 top-1/2 left-2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-lg bg-jel-gray-3 hover:bg-jel-gray-2 flex items-center justify-center">
-                        <Image src={arrow} className="w-2 rotate-180" />
+                        <Image width={1080} height={1080} src={arrow} className="w-2 rotate-180" />
                     </button>
                 </>}
 
             { activeArr.length > 0 ? activeArr.map((item, i)=>(
                 <>
                 {i == showRaffle && <div className="w-full relative sm:h-[600px] h-[840px] rounded-xl overflow-hidden">
-                    <Image src={item.image == "" ? defaultimage : item.image} className="w-full h-full object-cover relative z-10" />
+                    <Image width={1080} height={1080} src={item.image == "" ? defaultimage : item.image} className="w-full h-full object-cover relative z-10" />
                     <div className="z-20 absolute w-full h-full bg-black/40 top-0 left-0 backdrop-blur-lg sm:p-16 p-8 sm:grid sm:grid-cols-2 items-center justify-center gap-0">
                         <div className="sm:h-96 sm:w-96 w-fit max-sm:mb-5 mx-auto aspect-square overflow-hidden rounded-xl ">
-                            <Image src={item.image == "" ? defaultimage : item.image} className="sm:w-full sm:h-full rounded-xl object-cover" />
+                            <Image width={1080} height={1080} src={item.image == "" ? defaultimage : item.image} className="sm:w-full sm:h-full rounded-xl object-cover" />
                         </div>
 
                         <div className="w-full">
@@ -76,8 +76,8 @@ const RaffleHighlights = ({fetchActive, goToMyTickets, setShowBuyModal, showRaff
                 </>
                 )) : 
                 <div className="w-full relative sm:h-[600px] h-[840px] rounded-xl overflow-hidden">
-                    <Image src={noRaffle} className='object-cover w-full h-full max-sm:hidden'/>
-                    <Image src={noRafflephone} className='object-cover w-full h-full max-sm:hidden'/>
+                    <Image width={1080} height={1080} src={noRaffle} className='object-cover w-full h-full max-sm:hidden'/>
+                    <Image width={1080} height={1080} src={noRafflephone} className='object-cover w-full h-full max-sm:hidden'/>
                 </div>
                 }
 

@@ -101,57 +101,13 @@ const Raffle = () => {
             const participants = active[i][10];
 
             const contract = await setERC721Contract(add);
-            const tokenURI = await contract.tokenURI(tokenId);
+
             const name = await contract.name();
+
+            const image = "https://jlema-raffle-storage.s3.ap-south-1.amazonaws.com/raffles/Jlema_"+add+"_"+tokenId
+            console.log(image);
+            setActiveRaffleInfo(oldArr => [...oldArr ,{name, image, add, tokenId, totalEntrants, ticketsSold, ticketLimit, walletHolding, ticketLimitPerWallet, raffleEntryCleanCost, raffleEntryMaticCost, collectionLink, participants}]);
             // console.log(tokenURI)
-
-            if(tokenURI[0] == "h"){
-                    try{
-                        const metadata = tokenURI;
-    
-                        const meta = await fetch(metadata , {
-                            signal: AbortSignal.timeout(2000)
-                          });
-
-                          console.log(meta);
-                        const json = await meta.json();
-                        const newimage = json["image"];
-                        const image = `https://cloudflare-ipfs.com/ipfs/${newimage.substr(7)}`
-                        setActiveRaffleInfo(oldArr => [...oldArr ,{name, image, add, tokenId, totalEntrants, ticketsSold, ticketLimit, walletHolding, ticketLimitPerWallet, raffleEntryCleanCost, raffleEntryMaticCost, collectionLink, participants}]);
-        
-                        // console.log(newimage);
-                    }
-                    catch(err){
-                        const image = "";
-                        setActiveRaffleInfo(oldArr => [...oldArr ,{name, image, add, tokenId, totalEntrants, ticketsSold, ticketLimit, walletHolding, ticketLimitPerWallet, raffleEntryCleanCost, raffleEntryMaticCost, collectionLink, participants}]);
-
-                    }
-        
-
-                }
-
-                else{
-                    try{
-                        const metadata = `https://cloudflare-ipfs.com/ipfs/${tokenURI.substr(7)}`;
-                        // console.log(metadata);
-                        const meta = await fetch(metadata , {
-                            signal: AbortSignal.timeout(2000)
-                          });
-                        // console.log(meta);
-                        const json = await meta.json();
-                        const newimage = json["image"];
-                        const image = `https://cloudflare-ipfs.com/ipfs/${newimage.substr(7)}`
-                        setActiveRaffleInfo(oldArr => [...oldArr ,{name, image, add, tokenId, totalEntrants, ticketsSold, ticketLimit, walletHolding, ticketLimitPerWallet, raffleEntryCleanCost, raffleEntryMaticCost, collectionLink, participants}]);
-        
-                        // console.log(newimage);
-                    }
-                    catch(err){
-                        const image = ""
-                        setActiveRaffleInfo(oldArr => [...oldArr ,{name, image, add, tokenId, totalEntrants, ticketsSold, ticketLimit, walletHolding, ticketLimitPerWallet, raffleEntryCleanCost, raffleEntryMaticCost, collectionLink, participants}]);
-
-                    }
-        
-                }
         
         }
       }

@@ -54,10 +54,10 @@ const CurrentRaffles = ({selected, setSelected, activeArr, endArr}) => {
         <div className="w-full relative">
           {endArr.length > 0 &&<>
           <button onClick={moveForward} className=" max-md:hidden absolute z-40 top-1/2 right-2 translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-lg bg-jel-gray-3 hover:bg-jel-gray-2 flex items-center justify-center">
-            <Image src={arrow} className="w-2" alt="Move forward" />
+            <Image width={1080} height={1080} src={arrow} className="w-2" alt="Move forward" />
           </button>
           <button onClick={moveBackward} className=" max-md:hidden absolute z-40 top-1/2 left-2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-lg bg-jel-gray-3 hover:bg-jel-gray-2 flex items-center justify-center">
-            <Image src={arrow} className="w-2 rotate-180" alt="Move backward" />
+            <Image width={1080} height={1080} src={arrow} className="w-2 rotate-180" alt="Move backward" />
           </button>
         </>}
           <div className="mt-5 w-full overflow-hidden">
@@ -65,14 +65,14 @@ const CurrentRaffles = ({selected, setSelected, activeArr, endArr}) => {
               { endArr.length != 0 ? endArr.map((ob, index) => (
                 <div key={index} onClick={() => { }} className="rounded-xl hover:shadow-jel-nft duration-200 w-64 h-fit cursor-pointer border-[1px] border-jel-gray-3 overflow-hidden flex flex-col">
                   <div className="h-64 w-full">
-                    <Image width={1920} height={1080} src={ob.image != "" ? obj.image : defaultimage } className="object-cover w-full h-full" alt={`NFT ${index + 1}`} />
+                    <Image width={1080} height={1080} src={ob.image != "" ? obj.image : defaultimage } className="object-cover w-full h-full" alt={`NFT ${index + 1}`} />
                   </div>
                   <div className="bg-white text-start py-2 px-4">
                     <h3 className="text-sm font-normal text-black">{ob.name} #{ob.tokenId}</h3>
                   </div>
                   <div className=" bg-jel-gray-1 border-t-[1px] border-jel-gray-3 text-center py-3 flex flex-row items-center justify-between px-4">
                     <div className="flex flex-row gap-2">
-                      <Image src={trophy} className="w-4" alt="Trophy" />
+                      <Image width={1080} height={1080} src={trophy} className="w-4" alt="Trophy" />
                       <h3 className="text-sm font-normal text-black">Winner</h3>
                     </div>
                     <h3 className="text-sm font-bold text-black">{ob.winner.substring(0,5)+"..."+ob.winner.substring(ob.winner.length-4,ob.winner.length)}</h3>
@@ -92,7 +92,7 @@ const CurrentRaffles = ({selected, setSelected, activeArr, endArr}) => {
         :
         !isConnected ?
       <div className="flex flex-col gap-3 items-center justify-center w-full text-center my-10 mb-20">
-        <Image src={wallet} className="w-20"/>
+        <Image width={1080} height={1080} src={wallet} className="w-20"/>
         <h3 className=" text-black font-semibold">Wallet not connected yet</h3>
         <h3 className=" text-jel-gray-4 text-center">Connect your wallet to see your tickets.</h3>
         <WalletConnectButton/>
@@ -100,10 +100,10 @@ const CurrentRaffles = ({selected, setSelected, activeArr, endArr}) => {
       :
       <div className="w-full relative">
       <button onClick={moveForward} className=" max-md:hidden absolute z-40 top-1/2 right-2 translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-lg bg-jel-gray-3 hover:bg-jel-gray-2 flex items-center justify-center">
-        <Image src={arrow} className="w-2" alt="Move forward" />
+        <Image width={1080} height={1080} src={arrow} className="w-2" alt="Move forward" />
       </button>
       <button onClick={moveBackward} className=" max-md:hidden absolute z-40 top-1/2 left-2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-lg bg-jel-gray-3 hover:bg-jel-gray-2 flex items-center justify-center">
-        <Image src={arrow} className="w-2 rotate-180" alt="Move backward" />
+        <Image width={1080} height={1080} src={arrow} className="w-2 rotate-180" alt="Move backward" />
       </button>
       <div className="mt-5 w-full overflow-hidden">
         <div ref={scrollContainerRef} className="grid grid-rows-1 grid-flow-col gap-3 items-center noscr justify-start w-full overflow-x-auto scrollbar-hide pr-20">
@@ -112,14 +112,14 @@ const CurrentRaffles = ({selected, setSelected, activeArr, endArr}) => {
             {ob.walletHolding > 0 &&
             <div key={index} onClick={() => { }} className="rounded-xl hover:shadow-jel-nft duration-200 w-64 h-fit cursor-pointer border-[1px] border-jel-gray-3 overflow-hidden flex flex-col">
               <div className="h-64 w-full">
-                <Image width={1920} height={1080} src={ob.image != "" ? ob.image : defaultimage} className="object-cover w-full h-full" alt={`NFT ${index + 1}`} />
+                <Image width={1080} height={1080} src={ob.image != "" ? ob.image : defaultimage} className="object-cover w-full h-full" alt={`NFT ${index + 1}`} />
               </div>
               <div className="bg-white text-start py-2 px-4">
                 <h3 className="text-sm font-normal text-black">{ob.name} #{ob.tokenId}</h3>
               </div>
               <div className=" border-t-[1px] border-jel-gray-3 text-center py-3 flex flex-row items-center justify-between px-4">
                 <div className="flex flex-row gap-2">
-                  <Image src={ticket} className="w-4" alt="Trophy" />
+                  <Image width={1080} height={1080} src={ticket} className="w-4" alt="Trophy" />
                   <h3 className="text-sm font-normal text-black">Tickets</h3>
                 </div>
                 <h3 className="text-sm font-bold text-black">{ob.walletHolding}</h3>
