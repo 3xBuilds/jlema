@@ -104,7 +104,7 @@ const Raffle = () => {
 
             const name = await contract.name();
             console.log("ADDRESS",add, typeof(add));
-            const image = "https://jlema-raffle-storage.s3.ap-south-1.amazonaws.com/raffles/Jlema_"+"0x1a90102b680807CE176bE575479e4b824fD1F392"+"_"+String(tokenId)
+            const image = "https://jlema-raffle-storage.s3.ap-south-1.amazonaws.com/raffles/Jlema_"+String(add).toLowerCase()+"_"+String(tokenId)
             console.log(image);
             setActiveRaffleInfo(oldArr => [...oldArr ,{name, image, add, tokenId, totalEntrants, ticketsSold, ticketLimit, walletHolding, ticketLimitPerWallet, raffleEntryCleanCost, raffleEntryMaticCost, collectionLink, participants}]);
             // console.log(tokenURI)
