@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { contractAdds } from '@/utils/contractAdds';
 import abi from "@/utils/abis/jlemaRaffle"
 import erc721abi from "@/utils/abis/erc721abi"
+import Image from 'next/image';
 import { ethers } from 'ethers';
 import axios from 'axios';
 import { AiOutlineLoading } from "react-icons/ai";
@@ -20,6 +21,7 @@ const RaffleAdmin = () => {
     const [selected, setSelected] = useState(0);
     const [active, setActive] = useState(0);
     const [ended, setEnded] = useState(0);
+    const [tokenID, setTokenID] = useState(0);
 
     // const [contractAdd, setContractAdd] = useState("");
     // const [tokenId, setTokenId] = useState(null);
@@ -31,75 +33,82 @@ const RaffleAdmin = () => {
 
     const [loading, setLoading] = useState(false);
 
+    useEffect(()=>{
+        setTokenID(Number(opensea.split("/")[6]));
+        console.log("tokeeeen: ", (Number(opensea.split("/")[6])));
+    },[opensea])
+
     const [activeRaffleInfo, setActiveRaffleInfo] = useState([])
 
-  async function contractSetup(){
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
+    async function contractSetup(){
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
 
-    try {
-      const contract = new ethers.Contract(contractAdds.JlemaRaffle, abi, signer);
+        try {
+        const contract = new ethers.Contract(contractAdds.JlemaRaffle, abi, signer);
 
-      return contract;
-    }
-    catch(err){
-        console.log(err);
-    }
-}
-
-async function setERC721Contract(address){
-    try{
-
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
-
-      const contractAdd = opensea.split("/")[5];
-    const tokenId = Number(opensea.split("/")[6]);
-
-    console.log(contractAdd, tokenId);
-
-    //   const contract1 = new ethers.Contract(raffleAdd, raffleabi, signer);
-    //   const address = await contract1?.raffleContract(number);
-    //   console.log(address);
-      if(address.toUpperCase() == "0X0000000000000000000000000000000000000000"){
-        const contract = new ethers.Contract(contractAdd, erc721abi, signer);
-        return contract
-      }
-
-      else{
-        const contract = new ethers.Contract(address, erc721abi, signer)
         return contract;
-
-      }
+        }
+        catch(err){
+            console.log(err);
+        }
     }
-    catch(err){
-      console.log(err);
+
+    async function setERC721Contract(address){
+        try{
+
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+
+        const contractAdd = opensea.split("/")[5];
+        const tokenId = Number(opensea.split("/")[6]);
+
+        console.log(contractAdd, tokenId);
+
+        //   const contract1 = new ethers.Contract(raffleAdd, raffleabi, signer);
+        //   const address = await contract1?.raffleContract(number);
+        //   console.log(address);
+        if(address.toUpperCase() == "0X0000000000000000000000000000000000000000"){
+            const contract = new ethers.Contract(contractAdd, erc721abi, signer);
+            return contract
+        }
+
+        else{
+            const contract = new ethers.Contract(address, erc721abi, signer)
+            return contract;
+
+        }
+        }
+        catch(err){
+        console.log(err);
+        }
     }
-  }
 
-async function approval(){
+    async function approval(e){
+        e.preventDefault();
+        try {
 
-    try {
+        await handleSubmit();
+            
+        const tokenId = Number(opensea.split("/")[6]);
+
+        setLoading(true);
+        const contract = await setERC721Contract("0X0000000000000000000000000000000000000000");
+        const approval = await contract?.approve(contractAdds.JlemaRaffle, tokenId);
+
+        approval.wait().then((res)=>{
+            createRaffle();
+
+        });
+
+
+        }
+        catch (err) {
+        console.log("Error", err)
+        setLoading(false);
         
-    const tokenId = Number(opensea.split("/")[6]);
 
-    setLoading(true);
-    const contract = await setERC721Contract("0X0000000000000000000000000000000000000000");
-    const approval = await contract?.approve(contractAdds.JlemaRaffle, tokenId);
-
-    approval.wait().then((res)=>{
-        createRaffle();
-
-    });
-
-
-    }
-    catch (err) {
-    console.log("Error", err)
-    setLoading(false);
-    
-
-}}
+    }}
 
     async function createRaffle(){
         try{
@@ -284,12 +293,53 @@ async function approval(){
         catch(err){
           console.log(err);
         }
-      }
+    }
 
     useEffect(()=>{
         fetchActiveEnded();
         fetchEnded();
     },[])
+
+
+    // ------------------------[ File Uploading To S3 ]--------------------------
+
+    const [file, setFile] = useState(null);
+    const [uploading, setUploading] = useState(false);
+
+    const handleFileChange = (e) => {
+        setFile(e.target.files[0]);
+    }
+
+    const handleSubmit = async (e) => {
+        // e.preventDefault();
+        if (!file) return;
+    
+        setUploading(true);
+    
+        const customFileName = `Jlema_${contractAdds.JlemaRaffle}_${tokenID}`;
+        const customFile = new File([file], customFileName, { type: file.type });
+    
+        const formData = new FormData();
+        formData.append("file", customFile);
+    
+        try {
+            const response = await axios.post("/api/s3-upload", formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+    
+            console.log(response?.data);
+            setUploading(false);
+        } catch (error) {
+            console.log(error);
+            setUploading(false);
+        }
+    };
+    
+
+    // ------------------------------------------------------------------------
+    
 
   return (
     <div className='grid grid-cols-12 '>
@@ -370,7 +420,7 @@ async function approval(){
                 Loading...
                 </div>}
             <h1 className='font-bold text-black text-3xl'>New Raffle</h1>
-            <div className='grid grid-cols-7 gap-5 mt-10 w-[70%]'>
+            <form onSubmit={handleSubmit} className='grid grid-cols-7 gap-5 mt-10 w-[70%]'>
                 {/* <div className=' col-span-3'>
                     <h2 className='mb-2 text-sm '>NFT contract address</h2>
                     <input onChange={(e)=>{setContractAdd(e.target.value)}} value={contractAdd} type='text' placeholder='Contract Address' className='w-full h-12 outline-black border-[1px] border-jel-gray-3 rounded-lg px-5'/>
@@ -406,22 +456,29 @@ async function approval(){
                     <h2 className='mb-2 text-sm '>Opensea URL</h2>
                     <input onChange={(e)=>{setOpensea(e.target.value)}} value={opensea} type='text' placeholder='Opensea URL' className='w-full h-12 outline-black border-[1px] border-jel-gray-3 rounded-lg px-5'/>
                 </div>
-                {/* <div className=' col-span-6'>
+                <div className=' col-span-6'>
                     <h2 className='mb-2 text-sm '>Raffle Image</h2>
+
+                    <div>
                         <label for="dropzone-file" class="flex flex-col items-center justify-center w-40 h-40 border-2 border-jel-gray-3 border-dashed rounded-lg cursor-pointer hover:bg-jel-gray-1">
-                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                <svg class="w-8 h-8 text-jel-gray-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                            <div class="flex flex-col items-center h-full w-full p-2 overflow-hidden justify-center rounded-lg">
+                                {!file ? <svg class="w-8 h-8 text-jel-gray-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-                                </svg>
+                                </svg>:
+                                <Image className='w-ful h-full object-cover rounded-md hover:scale-110 hover:opacity-30 duration-300' width={1000} height={1000} src={!file ? "" : (file instanceof File ? URL.createObjectURL(file) : file)}/>}
                             </div>
-                            <input id="dropzone-file" type="file" class="hidden" />
+                            <input id="dropzone-file" type="file" accept='image/*' onChange={handleFileChange} class="hidden" />
                         </label>
-                </div> */}
+                        {/* <button onClick={handleSubmit} disabled={uploading} className=' col-span-2 w-32 py-2 font-medium text-black rounded-xl hover:-translate-y-[0.3rem] duration-200 bg-jel-gray-3 hover:bg-jel-gray-2 text-nowrap mt-2'>{uploading ? "Uploading..." : "Upload"}</button> */}
+                    </div>
+
+                </div>
                 <div></div>
+                
                 <button onClick={approval} className=' col-span-2 w-32 py-3 font-medium text-white rounded-xl hover:-translate-y-[0.3rem] duration-200 bg-black text-nowrap'>Create raffle</button>
 
 
-            </div>
+            </form>
         </div>
         }
     </div>
