@@ -65,7 +65,7 @@ const CurrentRaffles = ({selected, setSelected, activeArr, endArr}) => {
               { endArr.length != 0 ? endArr.map((ob, index) => (
                 <div key={index} onClick={() => { }} className="rounded-xl hover:shadow-jel-nft duration-200 w-64 h-fit cursor-pointer border-[1px] border-jel-gray-3 overflow-hidden flex flex-col">
                   <div className="h-64 w-full">
-                    <Image width={1080} height={1080} src={ob.image != "" ? obj.image : defaultimage } className="object-cover w-full h-full" alt={`NFT ${index + 1}`} />
+                    <Image width={1080} height={1080} src={ob.image != "" ? ob.image : defaultimage } className="object-cover w-full h-full" alt={`NFT ${index + 1}`} />
                   </div>
                   <div className="bg-white text-start py-2 px-4">
                     <h3 className="text-sm font-normal text-black">{ob.name} #{ob.tokenId}</h3>
