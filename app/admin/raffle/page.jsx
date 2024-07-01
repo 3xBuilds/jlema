@@ -21,8 +21,8 @@ const RaffleAdmin = () => {
     const [active, setActive] = useState(0);
     const [ended, setEnded] = useState(0);
 
-    const [contractAdd, setContractAdd] = useState("");
-    const [tokenId, setTokenId] = useState(null);
+    // const [contractAdd, setContractAdd] = useState("");
+    // const [tokenId, setTokenId] = useState(null);
     const [ticketPrice, setTicketPrice] = useState(null);
     const [tokenSelected, setTokenSelected] = useState("CLEAN")
     const [ticketAmount, setTicketAmount] = useState(null);
@@ -53,6 +53,11 @@ async function setERC721Contract(address){
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
 
+      const contractAdd = opensea.split("/")[5];
+    const tokenId = Number(opensea.split("/")[6]);
+
+    console.log(contractAdd, tokenId);
+
     //   const contract1 = new ethers.Contract(raffleAdd, raffleabi, signer);
     //   const address = await contract1?.raffleContract(number);
     //   console.log(address);
@@ -75,6 +80,9 @@ async function setERC721Contract(address){
 async function approval(){
 
     try {
+        
+    const tokenId = Number(opensea.split("/")[6]);
+
     setLoading(true);
     const contract = await setERC721Contract("0X0000000000000000000000000000000000000000");
     const approval = await contract?.approve(contractAdds.JlemaRaffle, tokenId);
@@ -95,7 +103,11 @@ async function approval(){
 
     async function createRaffle(){
         try{
-            if(contractAdd!="" && tokenId && ticketPrice && ticketAmount && ticketsPerWallet && opensea != ""){
+            if(ticketPrice && ticketAmount && ticketsPerWallet && opensea != ""){
+                const contractAdd = opensea.split("/")[5];
+                const tokenId = Number(opensea.split("/")[6]);
+
+                console.log(contractAdd, tokenId);
                 const contract = await contractSetup();
 
                 if(tokenSelected == "CLEAN"){
@@ -352,17 +364,17 @@ async function approval(){
                 </div>}
             <h1 className='font-bold text-black text-3xl'>New Raffle</h1>
             <div className='grid grid-cols-7 gap-5 mt-10 w-[70%]'>
-                <div className=' col-span-3'>
+                {/* <div className=' col-span-3'>
                     <h2 className='mb-2 text-sm '>NFT contract address</h2>
                     <input onChange={(e)=>{setContractAdd(e.target.value)}} value={contractAdd} type='text' placeholder='Contract Address' className='w-full h-12 outline-black border-[1px] border-jel-gray-3 rounded-lg px-5'/>
                 </div>
                 <div className=' col-span-3'>
                     <h2 className='mb-2 text-sm '>Token ID</h2>
                     <input onChange={(e)=>{setTokenId(e.target.value)}} value={tokenId} type='text' placeholder='Token ID' className='w-full h-12 outline-black border-[1px] border-jel-gray-3 rounded-lg px-5'/>
-                </div>
-                <div className='w-full h-full flex items-end'>
+                </div> */}
+                {/* <div className='w-full h-full flex items-end'>
                     <button className=' w-full py-3 font-medium rounded-lg bg-jel-gray-1 hover:bg-jel-gray-2'>Check</button>
-                </div>
+                </div> */}
 
                 <div className=' col-span-3'>
                     <h2 className='mb-2 text-sm '>Ticket Price</h2>
