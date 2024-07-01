@@ -69,7 +69,7 @@ export default function ActiveRaffle({obj, index}){
         <div className="w-full h-full absolute text-left bg-white top-0 left-0">
         {loading && <div className='w-screen h-screen bg-black/10 flex items-center justify-center gap-8 flex-col fixed top-0 left-0 z-50 '>
                 <AiOutlineLoading className='text-6xl text-black animate-spin'/>
-                Loading...
+                Please don't change the screen
                 </div>}
         <div className=' col-span-10  p-10 pt-20 w-full'>
             <div className="flex gap-4 items-center ">

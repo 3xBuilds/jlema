@@ -331,7 +331,7 @@ const RaffleAdmin = () => {
             
             {loading && <div className='w-screen h-screen bg-black/20 flex items-center justify-center gap-8 flex-col fixed top-0 left-0 z-50 '>
                 <AiOutlineLoading className='text-6xl text-black animate-spin'/>
-                Loading...
+                Please don't change the screen
                 </div>}
             <h1 className='font-bold text-black text-3xl'>New Raffle</h1>
             <form onSubmit={handleSubmit} className='grid grid-cols-7 gap-5 mt-10 w-[70%]'>
