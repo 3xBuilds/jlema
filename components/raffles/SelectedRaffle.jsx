@@ -22,7 +22,7 @@ const SelectedRaffle = ({selectedRaffle, setSelectedRaffle, setShowBuyModal, set
     <div>
         <div className="my-5 relative flex sm:flex-row flex-col gap-5 w-full">
             <div className="border-jel-gray-3 sm:w-1/2 border-[1px] rounded-xl h-full overflow-hidden">
-                <Image src={selectedRaffle.image == "" ? defaultimage : selectedRaffle.image} className="w-full h-full object-cover"/>
+                <Image width={1080} height={1080} src={selectedRaffle.image == "" ? defaultimage : selectedRaffle.image} className="w-full h-full object-cover"/>
                 
                 <button onClick={()=>{setSelectedRaffle(null)}} className="rounded-lg bg-jel-gray-2 hover:bg-jel-gray-3 cursor-pointer absolute top-3 left-3 w-10 h-10 p-2">
                     <Image src={back} className="w-full h-full "/>
