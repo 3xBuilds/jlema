@@ -14,7 +14,7 @@ const RaffleHighlights = ({fetchActive, goToMyTickets, setShowBuyModal, showRaff
     useEffect(()=>{
         const interval = setInterval(()=>{
             goNext();
-        }, 2000)
+        }, 7000)
         return ()=>clearInterval(interval);
     }, [activeArr, showRaffle])
 
