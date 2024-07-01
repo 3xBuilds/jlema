@@ -112,7 +112,7 @@ export default function ActiveRaffle({obj, index}){
                     <input value={obj.collectionLink} type='text' placeholder='Opensea URL' className='w-full h-12 outline-black border-[1px] border-jel-gray-3 rounded-lg px-5'/>
                 </div>
                 <div className='col-span-6 border-[1px] h-44 w-44 rounded-xl border-jel-gray-2'>
-                    {obj.image != "" && <Image src={obj.image} className="h-44 w-44 rounded-xl" />}
+                    {obj.image != "" && <Image width={1080} height={1080} src={obj.image} className="h-44 w-44 rounded-xl" />}
                 </div>
 
                 <div>

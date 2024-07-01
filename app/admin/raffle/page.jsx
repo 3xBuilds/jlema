@@ -160,57 +160,14 @@ const RaffleAdmin = () => {
                 const collectionLink = active[i][9];
     
                 const contract = await setERC721Contract(add);
-                const tokenURI = await contract.tokenURI(tokenId);
+
                 const name = await contract.name();
-                // console.log(tokenURI)
+
+                const image = "https://jlema-raffle-storage.s3.ap-south-1.amazonaws.com/raffles/Jlema_"+String(add).toLowerCase()+"_"+String(tokenId)
+
+                setActiveRaffleInfo(oldArr => [...oldArr ,{name, image, add, tokenId, totalEntrants, ticketsSold, ticketLimit, walletHolding, ticketLimitPerWallet, raffleEntryCleanCost, raffleEntryMaticCost, collectionLink}]);
     
-                if(tokenURI[0] == "h"){
-                        try{
-                            const metadata = tokenURI;
-        
-                            const meta = await fetch(metadata , {
-                                signal: AbortSignal.timeout(2000)
-                              });
-    
-                              console.log(meta);
-                            const json = await meta.json();
-                            const newimage = json["image"];
-                            const image = `https://cloudflare-ipfs.com/ipfs/${newimage.substr(7)}`
-                            setActiveRaffleInfo(oldArr => [...oldArr ,{name, image, add, tokenId, totalEntrants, ticketsSold, ticketLimit, walletHolding, ticketLimitPerWallet, raffleEntryCleanCost, raffleEntryMaticCost, collectionLink}]);
-            
-                            // console.log(newimage);
-                        }
-                        catch(err){
-                            const image = "";
-                            setActiveRaffleInfo(oldArr => [...oldArr ,{name, image, add, tokenId, totalEntrants, ticketsSold, ticketLimit, walletHolding, ticketLimitPerWallet, raffleEntryCleanCost, raffleEntryMaticCost, collectionLink}]);
-    
-                        }
-            
-    
-                    }
-    
-                    else{
-                        try{
-                            const metadata = `https://cloudflare-ipfs.com/ipfs/${tokenURI.substr(7)}`;
-                            // console.log(metadata);
-                            const meta = await fetch(metadata , {
-                                signal: AbortSignal.timeout(2000)
-                              });
-                            // console.log(meta);
-                            const json = await meta.json();
-                            const newimage = json["image"];
-                            const image = `https://cloudflare-ipfs.com/ipfs/${newimage.substr(7)}`
-                            setActiveRaffleInfo(oldArr => [...oldArr ,{name, image, add, tokenId, totalEntrants, ticketsSold, ticketLimit, walletHolding, ticketLimitPerWallet, raffleEntryCleanCost, raffleEntryMaticCost, collectionLink}]);
-            
-                            // console.log(newimage);
-                        }
-                        catch(err){
-                            const image = ""
-                            setActiveRaffleInfo(oldArr => [...oldArr ,{name, image, add, tokenId, totalEntrants, ticketsSold, ticketLimit, walletHolding, ticketLimitPerWallet, raffleEntryCleanCost, raffleEntryMaticCost, collectionLink}]);
-    
-                        }
-            
-                    }
+                
             
             }
         }
@@ -234,57 +191,14 @@ const RaffleAdmin = () => {
                 const winner = ended[i][2];
       
                 const contract = await setERC721Contract(add);
-                  const tokenURI = await contract.tokenURI(tokenId);
+                const image = "https://jlema-raffle-storage.s3.ap-south-1.amazonaws.com/raffles/Jlema_"+String(add).toLowerCase()+"_"+String(tokenId)
+
                   const name = await contract.name();
                   // console.log(tokenURI)
+
+                  setEndedRaffleInfo(oldArr => [...oldArr ,{name, image, tokenId, winner}]);
+
       
-                  if(tokenURI[0] == "h"){
-                          try{
-                              const metadata = tokenURI;
-          
-                              const meta = await fetch(metadata , {
-                                  signal: AbortSignal.timeout(2000)
-                                });
-      
-                                console.log(meta);
-                              const json = await meta.json();
-                              const newimage = json["image"];
-                              const image = `https://cloudflare-ipfs.com/ipfs/${newimage.substr(7)}`
-                              setEndedRaffleInfo(oldArr => [...oldArr ,{name, image, tokenId, winner}]);
-              
-                              // console.log(newimage);
-                          }
-                          catch(err){
-                              const image = "";
-                              setEndedRaffleInfo(oldArr => [...oldArr ,{name, image, tokenId, winner}]);
-      
-                          }
-              
-      
-                      }
-      
-                      else{
-                          try{
-                              const metadata = `https://cloudflare-ipfs.com/ipfs/${tokenURI.substr(7)}`;
-                              // console.log(metadata);
-                              const meta = await fetch(metadata , {
-                                  signal: AbortSignal.timeout(2000)
-                                });
-                              // console.log(meta);
-                              const json = await meta.json();
-                              const newimage = json["image"];
-                              const image = `https://cloudflare-ipfs.com/ipfs/${newimage.substr(7)}`
-                              setEndedRaffleInfo(oldArr => [...oldArr ,{name, image, tokenId, winner}]);
-              
-                              // console.log(newimage);
-                          }
-                          catch(err){
-                              const image = ""
-                              setEndedRaffleInfo(oldArr => [...oldArr ,{name, image, tokenId, winner}]);
-      
-                          }
-              
-                      }
             }
   
           }
