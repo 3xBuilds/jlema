@@ -40,16 +40,19 @@ const ProfileInfo = () => {
     const params = useParams();
 
     async function points(){
-        if(user?.wallet == address){
-            const response = await pointsFetcher(user);
-            console.log(response);
-    
-    
-            setDisplayArr(response)
-        }
+        if(displayArr.length == 0){
 
-        else{
-            setDisplayArr(user?.badges)
+            if(user?.wallet == address){
+                const response = await pointsFetcher(user);
+                console.log(response);
+        
+        
+                setDisplayArr(response)
+            }
+    
+            else{
+                setDisplayArr(user?.badges)
+            }
         }
         // for(let i = 0; i<25; i++){
         //     console.log(response[keyArr[i]]);
