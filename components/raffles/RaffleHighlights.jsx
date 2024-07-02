@@ -78,7 +78,7 @@ const RaffleHighlights = ({fetchActive, goToMyTickets, setShowBuyModal, showBuyM
                 )) : 
                 <div className="w-full relative sm:h-[600px] h-[840px] rounded-xl overflow-hidden">
                     <Image width={1080} height={1080} src={noRaffle} className='object-cover w-full h-full max-sm:hidden'/>
-                    <Image width={1080} height={1080} src={noRafflephone} className='object-cover w-full h-full max-sm:hidden'/>
+                    <Image width={1080} height={1080} src={noRafflephone} className='object-cover w-full h-full sm:hidden'/>
                 </div>
                 }
 
