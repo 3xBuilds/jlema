@@ -9,14 +9,15 @@ import defaultimage from "@/assets/defaultimage.png"
 import noRaffle from "@/assets/noRaffleBanner.png"
 import noRafflephone from "@/assets/raffleBanner.png"
 
-const RaffleHighlights = ({fetchActive, goToMyTickets, setShowBuyModal, showRaffle, setShowRaffle, setSelectedRaffle, activeArr, setButtonModalInfo}) => {
+const RaffleHighlights = ({fetchActive, goToMyTickets, setShowBuyModal, showBuyModal, showRaffle, setShowRaffle, setSelectedRaffle, activeArr, setButtonModalInfo}) => {
 
     useEffect(()=>{
         const interval = setInterval(()=>{
+            if(!showBuyModal)
             goNext();
         }, 7000)
         return ()=>clearInterval(interval);
-    }, [activeArr, showRaffle])
+    }, [activeArr, showRaffle, showBuyModal])
 
 
     const goNext = () => {

@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { RxCross2 } from "react-icons/rx";
 import loader from '../../assets/icons/loading.png'
@@ -16,6 +16,10 @@ const BuyTicketsModal = ({fetchActive, setSelectedRaffle, showBuyModal, setShowB
     const [number, setNumber] = useState(1);
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
+
+    useEffect(()=>{
+      console.log("INFO",info, index)
+    },[info, index]);
 
     async function setERC20() {
         const provider = new ethers.providers.Web3Provider(window.ethereum);

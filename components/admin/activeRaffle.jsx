@@ -49,6 +49,7 @@ export default function ActiveRaffle({obj, index}){
 
     async function deleteRaffle(index){
         try{
+            console.log(index)
             setLoading(true);
             const contract = await contractSetup();
             const txn = await contract.deleteRaffle(index);

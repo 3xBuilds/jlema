@@ -166,7 +166,7 @@ const Raffle = () => {
             selectedRaffle!=null ? <SelectedRaffle setButtonModalInfo={setButtonModalInfo} setShowBuyModal={setShowBuyModal} selectedRaffle={selectedRaffle} setSelectedRaffle={setSelectedRaffle}/>
         :
         <>
-            <RaffleHighlights setShowBuyModal={setShowBuyModal} showRaffle={showRaffle} setShowRaffle={setShowRaffle} setButtonModalInfo={setButtonModalInfo} fetchActive={fetchActive} goToMyTickets={goToMyTickets} setSelectedRaffle={setSelectedRaffle} activeArr={activeRaffleInfo}/>
+            <RaffleHighlights showBuyModal={showBuyModal} setShowBuyModal={setShowBuyModal} showRaffle={showRaffle} setShowRaffle={setShowRaffle} setButtonModalInfo={setButtonModalInfo} fetchActive={fetchActive} goToMyTickets={goToMyTickets} setSelectedRaffle={setSelectedRaffle} activeArr={activeRaffleInfo}/>
             <CurrentRaffles selected={selected} setSelected={setSelected} activeArr={activeRaffleInfo} endArr={endedRaffleInfo}/>
             <Footer/>
         </>}

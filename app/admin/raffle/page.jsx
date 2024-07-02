@@ -15,6 +15,15 @@ import { useGlobalContext } from '@/context/MainContext';
 const RaffleAdmin = () => {
 
     const {address} = useAccount();
+
+    useEffect(()=>{
+        if(address?.toUpperCase() == "0xdb278b793ddb8670373812db721301778e40fc32".toUpperCase()){
+            setAdmin(true);
+        }
+    },[address])
+
+    const [admin, setAdmin] = useState(false);
+
     const {openModal, setOpenModal} = useGlobalContext()
     const[endedRaffleInfo, setEndedRaffleInfo] = useState([]);
     const [modalItem, setModalItem] = useState(null);
@@ -254,7 +263,7 @@ const RaffleAdmin = () => {
 
     // ------------------------------------------------------------------------
     
-
+if(admin)
   return (
     <div className='grid grid-cols-12 '>
         <div className=' col-span-2 border-r-[1px] border-jel-gray-3 h-screen flex flex-col gap-2 items-center justify-start pt-20 p-4'>
@@ -397,6 +406,7 @@ const RaffleAdmin = () => {
         }
     </div>
   )
+
 }
 
 export default RaffleAdmin

@@ -4,6 +4,7 @@ import Image from 'next/image'
 import logo from '../assets/mainLogo.png'
 import { usePathname, useRouter } from 'next/navigation'
 import { IoClose, IoMenuOutline } from "react-icons/io5";
+import { WalletConnectButtonRaffle } from './buttons/walletConnectButtonRaffle'
 
 const Navbar = () => {
 
@@ -14,15 +15,26 @@ const Navbar = () => {
   return (
     <>
       <div className={`w-full px-8 max-md:px-4 py-3 flex justify-between fixed bg-white z-40 top-0 left-0 ${(path=="/" | path=="/leaderboard" | path=="/raffle") ? "" : " border-b-[1px] border-jel-gray-3"} `}>
-          <div className="flex flex-row items-center justify-center gap-2 z-50">
+          {!path.includes("admin") && <div className="flex flex-row items-center justify-center gap-2 z-50">
             <div className="lg:hidden" 
             onClick={()=>setIsOpen(prev=>!prev)}
             >
               { isOpen ? <IoClose className="text-3xl"/> : <IoMenuOutline className="text-3xl"/>}
             </div>
             <Image src={logo} className='w-32 max-lg:w-28'/>
-            {path.includes("admin") && <h3 className='text-xl ml-2'>Raffle Dashboard</h3> }
-          </div>
+            
+          </div>}
+
+          {path.includes("admin") && <div className='grid grid-flow-col grid-cols-2 w-full'>
+            <div className='flex gap-4 items-center justify-start'>
+              <Image src={logo} className='w-32 max-lg:w-28'/>
+              {path.includes("admin") && <h3 className='text-xl ml-2'>Raffle Dashboard</h3> }
+            </div>
+            <div className='flex justify-end items-center'>
+              <WalletConnectButtonRaffle/>
+            </div>
+          </div>}
+
           {!path.includes("admin") && <>
             <ul className='flex flex-row gap-2 font-semibold items-center max-md:hidden'>
                 <li className='px-6 py-2 cursor-pointer hover:bg-jel-gray-2 duration-200 rounded-xl'>Home</li>
