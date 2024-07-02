@@ -1,6 +1,5 @@
 "use client"
 import NFTFetcher from '@/components/fetcher/nftFetcher';
-import pointsFetcher from '@/hooks/pointsFetcher';
 import NftInfoModal from '@/components/profile/NftInfoModal';
 import ProfileInfo from '@/components/profile/ProfileInfo';
 import { useGlobalContext } from '@/context/MainContext';

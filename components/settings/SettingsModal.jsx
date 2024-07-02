@@ -45,7 +45,6 @@ const SettingsModal = () => {
     }
   }
 
-
   useEffect(()=>{
     if(address && (user==null)){
       setSettingType(0);

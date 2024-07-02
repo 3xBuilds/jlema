@@ -8,8 +8,15 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Footer from "@/components/Footer";
+import { useGlobalContext } from "@/context/MainContext";
+import { useAccount } from "wagmi";
 
 const Leaderboard = () => {
+
+  const {user, setUser} = useGlobalContext();
+  // console.log(user);
+
+  const{address} = useAccount();
 
   const [leaderboard, setLeaderboard] = useState();
   const router = useRouter();
@@ -26,8 +33,21 @@ const Leaderboard = () => {
 
   }
 
+  const getUser = async () => {
+    try{
+      const res = await axios.get(`/api/user/${address}`);
+      console.log("user", res.data);
+      
+      setUser(res.data.user);
+    }
+    catch(err){
+      console.log("Error", err);
+    }
+  }
+
   useEffect(()=>{
     getLeaderboard();
+    getUser();
   }, [])
 
   return (
@@ -70,7 +90,14 @@ const Leaderboard = () => {
           <div className=" col-span-3 border-b-[1px] pb-3 border-jel-gray-3 px-2"><h3 className="text-center font-normal text-sm text-jel-gray-4 max-md:text-right">Points</h3></div>
         
           {leaderboard?.slice(0,5)?.map((holder)=>(
-            <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className="col-span-10 grid grid-cols-10 hover:cursor-crosshair duration-100 hover:bg-black/10 max-md:hidden">
+            <div onClick={()=>{
+              if(holder?.username != user?.username)
+            {router.push(`/profile/${holder?.username}`)}
+              
+              else{
+                router.push("/profile");
+              }
+            }} className="col-span-10 grid grid-cols-10 hover:cursor-crosshair duration-100 hover:bg-black/10 max-md:hidden">
               <div  className="col-span-1 flex items-center justify-center max-md:justify-start"><h3 className=" font-semibold text-base text-black">{holder?.rank}</h3></div>
               <div className="col-span-5 flex flex-row justify-start items-center p-2">
                 <div className="border-[1px] overflow-hidden rounded-md border-jel-gray-3 w-16 h-16 aspect-square">
@@ -87,7 +114,12 @@ const Leaderboard = () => {
             ))}
 
             {leaderboard?.slice(0,10)?.map((holder)=>(
-            <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className="col-span-10 grid grid-cols-10 hover:cursor-crosshair duration-100 hover:bg-black/10 md:hidden">
+            <div onClick={()=>{if(holder?.username != user?.username)
+              {router.push(`/profile/${holder?.username}`)}
+                
+                else{
+                  router.push("/profile");
+                }}} className="col-span-10 grid grid-cols-10 hover:cursor-crosshair duration-100 hover:bg-black/10 md:hidden">
               <div  className="col-span-1 flex items-center justify-center max-md:justify-start"><h3 className=" font-semibold text-base text-black">{holder?.rank}</h3></div>
               <div className="col-span-5 flex flex-row justify-start items-center p-2">
                 <div className="border-[1px] overflow-hidden rounded-md border-jel-gray-3 w-16 h-16 aspect-square">
@@ -113,7 +145,12 @@ const Leaderboard = () => {
           <div className=" col-span-3 border-b-[1px] pb-3 border-jel-gray-3 px-2"><h3 className="text-center font-normal text-sm text-jel-gray-4">Points</h3></div>
         
           {leaderboard?.slice(6,10)?.map((holder)=>(
-            <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className="col-span-10 grid grid-cols-10 hover:cursor-crosshair duration-100 hover:bg-black/10">
+            <div onClick={()=>{if(holder?.username != user?.username)
+              {router.push(`/profile/${holder?.username}`)}
+                
+                else{
+                  router.push("/profile");
+                }}} className="col-span-10 grid grid-cols-10 hover:cursor-crosshair duration-100 hover:bg-black/10">
               <div className="col-span-1 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.rank}</h3></div>
               <div className="col-span-5 flex flex-row justify-start items-center p-2">
                 <div className="border-[1px] overflow-hidden rounded-md border-jel-gray-3 w-16 h-16 aspect-square">
@@ -139,10 +176,16 @@ const Leaderboard = () => {
 const TopperCard = ({holder, ind}) => {
   const router = useRouter();
 
+  const {user} = useGlobalContext();
   
   if(ind < 3)
     return(
-        <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className="border-[1px] hover:cursor-cell border-jel-gray-3 rounded-xl flex items-end justify-center overflow-hidden relative">
+        <div onClick={()=>{if(holder?.username != user?.username)
+          {router.push(`/profile/${holder?.username}`)}
+            
+            else{
+              router.push("/profile");
+            }}} className="border-[1px] hover:cursor-cell border-jel-gray-3 rounded-xl flex items-end justify-center overflow-hidden relative">
           <Image src={holder?.dp} width={1000} height={1000} className=" h-full object-contain" />
           <div className="absolute bottom-0 left-0 bg-gradient-to-t from-white via-transparent to-transparent z-10 w-full h-full"></div>
           <h3 className="text-black top-4 left-5 font-semibold text-lg absolute z-20">
@@ -184,7 +227,7 @@ const TopperCard = ({holder, ind}) => {
                         <Image src={require(`../../assets/badges/${item}.png`)} className='w-7'/>
                     </div>
                 </div>}
-                {i>=4 && 
+                {i==4 && 
                   <div className='relative group'>
                   <div className='absolute opacity-0 duration-300 w-20 group-hover:opacity-100 z-50 left-1/2 -translate-x-1/2 -top-8 flex flex-col items-center justify-center'>
                       <h3 className='text-sm font-medium text-black bg-white px-2 py-1 rounded shadow-black/10 shadow-lg'>{item}</h3>

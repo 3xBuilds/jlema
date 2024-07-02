@@ -19,10 +19,11 @@ import SettingsModal from '@/components/settings/SettingsModal';
 import { useParams } from 'next/navigation';
 import axios from 'axios';
 import Highlights from '@/components/profile/Highlights';
-import pointsFetcher from '@/hooks/pointsFetcher';
+import { useAccount } from 'wagmi';
 
 const Profile = () => {
 
+  const {address} = useAccount();
   const [selectedSort, setSelectedSort] = useState(null);
   const [openSort, setOpenSort] = useState(false);
   const {user, setUser} = useGlobalContext();
@@ -31,11 +32,10 @@ const Profile = () => {
 
   const getUserWithUsername = async () => {
     try{
-      console.log("paht:", path.username);
+      console.log("path:", path.username);
       const res = await axios.get(`/api/user/get/${path.username}`);
       setUser(res.data.user);
-      // const response = await pointsFetcher(res.data.user.wallet, res.data.user);
-      // console.log(response);
+
     }
     catch(err){
       console.log("Error", err);
@@ -44,7 +44,7 @@ const Profile = () => {
 
   useEffect(()=>{
     getUserWithUsername();
-  },[])
+  },[address])
 
   const sortOptions = [
     {

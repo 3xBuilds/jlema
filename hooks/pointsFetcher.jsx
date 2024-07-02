@@ -29,7 +29,7 @@ async function contractSetup(selected){
 }
 
 async function fetchJlema(contract, multiplier, address){
-
+    
     try{
 
         const res = await contract.tokenOfOwnerJlema(multiplier, address);
@@ -83,6 +83,9 @@ async function specialEditionFetcher(address){
 }
 
 export default async function pointsFetcher(user){
+
+    
+
     try{
         var points = 0;
         var badge = 0;
@@ -111,38 +114,38 @@ export default async function pointsFetcher(user){
                     // // console.log(final);
 
                     if(final.length > 0){
-                        badges.push("Jlema");
+                        badges[0] = "Jlema";
                         badge += 1;
                         //balance based
                         points = points + 1000*final.length;
     
                         //holding tier based
                         if(final.length>=5 && final.length<10){
-                            badges.push("Fren");
+                            badges[1]="Fren";
                             badge += 1;
                             points +=1000;
                         }
                         else if(final.length>=10 && final.length<20){
-                            badges.push("Fren");
-                            badges.push("XGang");
+                            badges[1]="Fren";
+                            badges[2]="XGang";
                             badge += 2;
 
                             points +=2000;
                         }
                         else if(final.length>=20 && final.length<40){
-                            badges.push("Fren");
-                            badges.push("XGang");
-                            badges.push("MiniWhale");
+                            badges[1] = "Fren";
+                            badges[2] = "XGang";
+                            badges[3] = "MiniWhale";
 
                             badge += 3;
                             
                             points +=4000;
                         }
                         else if(final.length>=40){
-                            badges.push("Fren");
-                            badges.push("XGang");
-                            badges.push("MiniWhale");
-                            badges.push("Whale");
+                            badges[1] = "Fren";
+                            badges[2] = "XGang";
+                            badges[3] = "MiniWhale";
+                            badges[4] = "Whale";
                             badge += 4;
                             points +=8000;
                         }
@@ -153,66 +156,66 @@ export default async function pointsFetcher(user){
                             // console.log (attributes.value);
                             switch(attributes.value){
                                 case "1 of 1":
-                                    badges.push("OneofOne");
+                                    badges[5] = "OneofOne";
                                     badge += 1;
 
                                     points+=5000;
                                     break;
                                 case "Snake":
-                                    badges.push("Snake");
+                                    badges[6] = "Snake";
                                     badge += 1;
 
                                     points+=200;
                                     break;
                                 case "Superhero":
-                                    badges.push("Hero");
+                                    badges[7] = "Hero";
 
                                     badge += 1;
 
                                     points+=200;
                                     break;
                                 case "Astronaut":
-                                    badges.push("Space");
+                                    badges[8] = "Space";
 
                                     badge += 1;
 
                                     points+=200;
                                     break;
                                 case "Graphic Tee Peace":
-                                    badges.push("Peace");
+                                    badges[9] = "Peace";
 
                                     badge += 1;
 
                                     points+=200;
                                     break;
                                 case "Crown":
-                                    badges.push("King");
+                                    badges[10] = "King";
 
                                     badge += 1;
 
                                     points+=200;
                                     break;
                                 case "Penguin Hat":
-                                    badges.push("Penguin");
+                                    badges[11] = "Penguin";
 
                                     badge += 1;
 
                                     points+=200;
                                     break;
                                 case "Punk hair":
-                                    badges.push("Punker");
+                                    badges[12] = "Punker";
                                     badge += 1;
 
                                     points+=200;
                                     break;
                                 case "Rose":
-                                    badges.push("Romeo");
+                                    badges[13] = "Romeo";
                                     badge += 1;
 
                                     points+=200;
                                     break;
                                 case "Old School Tattoos":
-                                    badges.push("Yakkuza");
+                                    badges[14] = "Yakkuza";
                                     badge += 1;
 
                                     oldSchool++;
@@ -239,27 +242,28 @@ export default async function pointsFetcher(user){
 
                     if(arr.length > 0){
                         badge += 1;
-                        badges.push("Legendary");
+                        badges[15] = "Legendary";
                         //balance based
                         points += 1000*arr.length;
                         
                         //tier based
                         if(arr.length>=10 && arr.length<20){
                             badge += 1;
-                            badges.push("LegendShrimp");
+                            badges[16] = "LegendShrimp";
                             points +=2000;
                         }
                         else if(arr.length>=20 && arr.length<40){
-                            badges.push("LegendShrimp");
-                            badges.push("LegendDolphin");
+                            badges[16] = "LegendShrimp";
+                            badges[17] = "LegendDolphin";
                             badge += 2;
 
                             points +=4000;
                         }
                         else if(arr.length>=40){
-                            badges.push("LegendShrimp");
-                            badges.push("LegendDolphin");
-                            badges.push("LegendWhale");
+                            badges[16] = "LegendShrimp";
+                            badges[17] = "LegendDolphin";
+                            badges[18] = "LegendWhale";
+
                             badge += 3;
 
                             points +=8000;
@@ -272,17 +276,20 @@ export default async function pointsFetcher(user){
                             
 
                             if(type == "Special"){
-                                badges.push("Special");
+                                badges[19] = "Special";
+
                                 badge += 1;
                                 points += 5000;
                             }
                             if(type == "Collaboration"){
-                                badges.push("Collab");
+                                badges[20] = "Collab";
+
                                 badge += 1;
                                 points += 1000;
                             }
                             if(type == "Uncommon"){
-                                badges.push("Unique");
+                                badges[21] = "Unique";
+
                                 badge += 1;
                                 points += 5000;
                             }
@@ -298,13 +305,14 @@ export default async function pointsFetcher(user){
                     specialNfts = holding;
 
                     if(holding > 0){
-                        badges.push("Edition");
+                        badges[22] = "Edition";
+
                         badge += 1;
 
                         points += holding*100;
     
                         if(holding>10){
-                            badges.push("XEditions");
+                            badges[23] = "XEditions";
                             badge += 1;
 
                             points+=2000;
@@ -312,7 +320,6 @@ export default async function pointsFetcher(user){
                     }
                     break;
                 default:
-                    // console.log("Nothing to show");
                     break;
             }
         }
@@ -322,23 +329,26 @@ export default async function pointsFetcher(user){
         const sub3 = badges.indexOf("Edition")
 
 
-        if(sub1 && sub2 && sub3){
+        if(sub1>=0 && sub2>=0 && sub3>=0){
             badge += 1;
-            badges.push("Homies");
+            badges[24] = "Homies";
             points += 2000;
         }
-        // console.log(
-        //     points,
-        //     badge,
-        //     jlemaNfts,
-        //     legendaryNfts,
-        //     specialNfts
-        // );
-        if(user?.points != points || user?.badges.length != badge || user?.jlema != jlemaNfts || user?.jlemalegendary != legendaryNfts || user?.specialEdition != specialNfts){
-            axios.patch(`/api/user/${user?.username}`, { points: points, badges: badges, jlema:jlemaNfts, jlemalegendary:legendaryNfts, specialEdition:specialNfts }).then((res)=>{ console.log(res)}).catch((err)=>{console.log(err)});
-        }
 
-        return badges;
+        var arr = []
+
+        for(let i = 0; i<25; i++){
+            if(badges[i]){
+                arr.push(badges[i]);
+            }
+        }
+       
+        if(user?.points != points || user?.badges.length != badge || user?.jlema != jlemaNfts || user?.jlemalegendary != legendaryNfts || user?.specialEdition != specialNfts){
+            axios.patch(`/api/user/${user?.username}`, { points: points, badges: arr, jlema:jlemaNfts, jlemalegendary:legendaryNfts, specialEdition:specialNfts }).then((res)=>{ console.log(res)}).catch((err)=>{console.log(err)});
+            await axios.get("/api/leaderboard");
+        }
+        console.log("POINTS FETCHER BEING CALLED")
+        return arr;
     }
 
     catch(err){

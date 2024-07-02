@@ -9,7 +9,7 @@ import Image from 'next/image'
 import { WalletConnectButton } from '../buttons/walletConnectButton'
 import TokenFetcher from '../fetcher/tokenFetcher'
 import { useAccount } from 'wagmi'
-import { useRouter } from 'next/navigation'
+// import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useGlobalContext } from '@/context/MainContext'
 import { useParams } from 'next/navigation'
@@ -18,9 +18,13 @@ import pointsFetcher from '@/hooks/pointsFetcher'
 import { FaCross } from 'react-icons/fa'
 import BadgesModal from './BadgesModal'
 import cross from '@/assets/icons/cross.svg'
+import { usePathname, useRouter } from 'next/navigation'
 
 
 const ProfileInfo = () => {
+
+    const path = usePathname();
+
 
     const {openSettings, setOpenSettings, balances, user} = useGlobalContext();
     const {address} = useAccount();
@@ -40,34 +44,28 @@ const ProfileInfo = () => {
     const params = useParams();
 
     async function points(){
-        if(displayArr.length == 0){
+        
+            const response = await pointsFetcher(user);
+            console.log(response);
 
-            if(user?.wallet == address){
-                const response = await pointsFetcher(user);
-                console.log(response);
-        
-        
-                setDisplayArr(response)
+            
+                    setDisplayArr(response) ;  
+                
             }
     
+
+    useEffect(()=>{
+        if(user != null){
+            setDisplayArr([])
+
+            if(user?.wallet == address && path.substring(1, path.length) == "profile"){
+                points();
+            }
             else{
+    
                 setDisplayArr(user?.badges)
             }
         }
-        // for(let i = 0; i<25; i++){
-        //     console.log(response[keyArr[i]]);
-        //     if(!response[keyArr[i]]){
-        //         keyArr[i] = "";
-        //     }
-        // }
-
-        // console.log("after modification", keyArr)
-        // setDisplayArr(keyArr);
-    }
-
-    useEffect(()=>{
-        if(user)
-        points();
     },[user])
 
 
@@ -118,7 +116,7 @@ const ProfileInfo = () => {
         <div className='mt-5 border-[1px] border-jel-gray-3 rounded-lg w-full grid grid-cols-3 divide-x-[1px] divide-jel-gray-3'>
             <div className='flex flex-col items-center justify-center gap-1 py-4'>
                 <h2 className=' font-normal text-xs text-jel-gray-4 text-center'>Rank</h2>
-                <h3 className=' font-medium text-sm text-black text-center'>#{1}</h3>
+                <h3 className=' font-medium text-sm text-black text-center'>#{user?.rank}</h3>
             </div>
             <div className='flex flex-col items-center justify-center gap-1 py-4'>
                 <h2 className=' font-normal text-xs text-jel-gray-4 text-center'>Points</h2>
@@ -145,7 +143,7 @@ const ProfileInfo = () => {
                         <Image src={require(`../../assets/badges/${item}.png`)} className='w-7'/>
                     </div>
                 </div>}
-                {i >= 4 && <button onClick={()=>{setExpandBadges(true)}} className='relative group'>
+                {i == 4 && <button onClick={()=>{setExpandBadges(true)}} className='relative group'>
                 <div className='absolute opacity-0 duration-300 w-24 group-hover:opacity-100 z-50 left-1/2 -translate-x-1/2 -top-8 flex flex-col items-center justify-center'>
                     <h3 className='text-sm font-medium text-black bg-white px-2 py-1 rounded shadow-black/10 shadow-lg'>View More</h3>
                     <svg width="10" height="5" viewBox="0 0 10 5" fill="none" xmlns="http://www.w3.org/2000/svg">

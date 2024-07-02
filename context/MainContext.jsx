@@ -14,9 +14,6 @@ const GlobalContext = createContext();
 
 export const GlobalContextProvider = ({ children }) => {
 
-  const router = useRouter();
-  const {address} = useAccount();
-
   const [loader, setLoader] = useState(false);
   const [user, setUser] = useState(null);
   const [showNftInfo, setShowNftInfo] = useState(null);
@@ -25,6 +22,7 @@ export const GlobalContextProvider = ({ children }) => {
   const [balances, setBalances] = useState([]);
 
   const [openModal, setOpenModal] = useState(false);
+
 
   return (
     <GlobalContext.Provider value={{ loader, setLoader, balances, setBalances, user, setUser, selected, setSelected, showNftInfo, setShowNftInfo, openSettings, setOpenSettings, openModal, setOpenModal}}>
