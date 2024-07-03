@@ -12,11 +12,14 @@ import noRafflephone from "@/assets/raffleBanner.png"
 const RaffleHighlights = ({fetchActive, goToMyTickets, setShowBuyModal, showBuyModal, showRaffle, setShowRaffle, setSelectedRaffle, activeArr, setButtonModalInfo}) => {
 
     useEffect(()=>{
-        const interval = setInterval(()=>{
-            if(!showBuyModal)
-            goNext();
-        }, 7000)
-        return ()=>clearInterval(interval);
+        if(activeArr.length > 1){
+
+            const interval = setInterval(()=>{
+                if(!showBuyModal)
+                goNext();
+            }, 7000)
+            return ()=>clearInterval(interval);
+        }
     }, [activeArr, showRaffle, showBuyModal])
 
 

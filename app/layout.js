@@ -4,6 +4,7 @@ import Providers from "@/utils/Providers";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Navbar from "@/components/Navbar";
+import Watermark from "@/components/watermark";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -22,6 +23,7 @@ export default function RootLayout({ children }) {
           <Navbar/>
           {children}
         </Providers>
+        <Watermark/>
       </body>
     </html>
   );
