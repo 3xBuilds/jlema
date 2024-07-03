@@ -99,7 +99,7 @@ const SelectedRaffle = ({selectedRaffle, setSelectedRaffle, setShowBuyModal, set
                             <li>The draw countdown begins when all tickets are sold.</li>
                             <li>Raffle tickets are non-refundable, whether you win or not.</li>
                             <li>Purchasing one ticket will grant you an opportunity to win in the raffle, more tickets represent a higher probability of winning.</li>
-                            <li>You can only buy 20% of total tickets.</li>
+                            <li>You can only buy 10% of total tickets.</li>
                        </ul>
                         
                     </div>
