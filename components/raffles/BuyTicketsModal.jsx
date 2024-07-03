@@ -113,27 +113,44 @@ const BuyTicketsModal = ({fetchActive, setSelectedRaffle, showBuyModal, setShowB
         }
     }
 
-  if(showBuyModal) return (
+    async function fillMax(){
+      setNumber(info.ticketLimitPerWallet - info.walletHolding);
+    }
+
+  if(showBuyModal)
+     return (
     <div className="fixed top-0 left-0 z-50 bg-black/40 backdrop-blur-sm w-screen h-screen flex items-center justify-center">
         {!success ? <div className="w-[400px] bg-white rounded-xl shadow-2xl p-5 relative">
             <RxCross2 onClick={()=>setShowBuyModal(false)} className="absolute cursor-pointer top-5 right-5 text-2xl text-jel-gray-4"/>
             <h2 className=" text-lg text-center text-black font-bold">Buy Tickets</h2>
             <div className="flex flex-col gap-3 mt-5 border-jel-gray-3 border rounded-lg p-4">
-            <div className="">
-                <h2 className="text-jel-gray-4">Ticket Price</h2>
-                <h2 className="text-black font-bold text-lg">{info.raffleEntryCleanCost == 0 ? info.raffleEntryMaticCost : info.raffleEntryCleanCost} {info.raffleEntryCleanCost == 0 ? "MATIC" : "CLEAN"}</h2>
+            <div className='flex gap-10 w-full'>
+                <div className="w-1/2">
+                    <h2 className="text-jel-gray-4">Ticket Price</h2>
+                    <h2 className="text-black font-bold text-lg">{info.raffleEntryCleanCost == 0 ? info.raffleEntryMaticCost : info.raffleEntryCleanCost} {info.raffleEntryCleanCost == 0 ? "MATIC" : "CLEAN"}</h2>
+                </div>
+                <div className="flex flex-col justify-end w-1/2">
+                    <h2 className="text-jel-gray-4">You Own</h2>
+                    <h2 className="text-black font-bold text-lg">{info.walletHolding}/{info.ticketLimitPerWallet}</h2>
+                </div>
             </div>
             <div className="">
                 <h2 className="text-jel-gray-4">Ticket Remaining</h2>
                 <h2 className="text-black font-bold text-lg">{info.ticketLimit-info.ticketsSold}/{info.ticketLimit}</h2>
             </div>
+            
             </div>
             <div className="flex flex-row justify-between gap-3 mt-3 border-jel-gray-3 border rounded-lg p-4">
                 <button className=" text-xl font-semibold " onClick={()=>{ number>1 && setNumber(prev=>Number(prev)-1)}}>-</button>
                 <input type="number" className="text-black font-bold text-lg text-center outline-none" value={number} onChange={(e)=>{setNumber(e.target.value)}}/>
                 <button className=" text-xl font-semibold " onClick={()=>{if(number<info.ticketLimitPerWallet)setNumber(prev=>Number(prev)+1)}}>+</button>
             </div>
-            <h2 className="text-jel-gray-4 mt-4">Total Costs</h2>
+            <div className='flex w-full items-center mt-4'>
+              <h2 className="text-jel-gray-4 w-1/2">Total Costs</h2>
+              <div className='w-1/2 flex items-center  my-auto justify-end'>
+                <button onClick={fillMax} className='px-4 font-bold'>MAX</button>
+              </div>
+            </div>
             {!loading && info.raffleEntryCleanCost != 0 && <button onClick={()=>{setLoading(true); approve(info.raffleEntryCleanCost)}} className="bg-black text-white rounded-xl text-center mt-2 font-semibold py-3 w-full flex items-center justify-center ">{number * info.raffleEntryCleanCost} CLEAN</button>}
             {!loading && info.raffleEntryMaticCost != 0 && <button onClick={()=>{setLoading(true); enterMaticRaffle()}} className="bg-jel-gray-1 hover:bg-jel-gray-2 text-black rounded-xl text-center mt-2 font-semibold py-3 w-full flex items-center justify-center">{number * info.raffleEntryMaticCost} MATIC</button>}
             {loading &&
