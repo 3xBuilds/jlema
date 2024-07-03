@@ -68,22 +68,31 @@ const ProfileInfo = () => {
         }
     },[user])
 
+    function bringModal(){
+        document.getElementById("badges").classList.remove("-translate-y-[30rem]");
+        document.getElementById("badges").classList.add("translate-y-0");
+    }
 
+    function removeModal(){
+        document.getElementById("badges").classList.remove("translate-y-0");
+        document.getElementById("badges").classList.add("-translate-y-[30rem]");
+
+    }
     
 
   return (
     < >
-        {expandBadges && <div className="flex items-center justify-center fixed top-[-20px] z-[100] left-0 w-screen h-screen">
-            <div className="rounded-xl p-6 bg-white shadow-xl w-[32rem] shadow-black/20">
-                <div className="flex flex-row border-b-[1px] pb-4 border-black  items-center justify-center gap-10">
+        <div id="badges" className="flex items-start justify-start fixed -translate-y-[30rem] duration-500 top-[40px] z-50 sm:left-1 max-sm:left-0 w-screen h-screen">
+            <div className="rounded-xl p-6 bg-white shadow-xl sm:w-[20rem] w-[90%] max-sm:mx-auto shadow-black/20">
+                <div className="flex flex-row border-b-[1px] pb-2 border-black  items-center justify-center gap-10">
                     <h3 className="text-[1.5rem] font-bold">Badges</h3>
                     <div className="w-full">
-                        <button onClick={()=>{setExpandBadges(false)}} className="float-right">
+                        <button onClick={()=>{removeModal()}} className="float-right">
                             <Image className="float-right" src={cross}/>
                         </button>
                     </div>
                 </div>
-                <div className="flex gap-10 flex-wrap mt-4 items-center justify-center">
+                <div className="flex gap-2 flex-wrap mt-4 items-center justify-center">
                     {displayArr?.map((item)=>(
                         <div className="flex flex-col justify-center items-center">
                             <div className=' group'>
@@ -105,7 +114,9 @@ const ProfileInfo = () => {
                     ))}
                 </div>
             </div>
-        </div>}
+        </div>
+
+
         <div className='w-[120px] h-[120px] mx-auto border-[1px] border-jel-gray-3 rounded-full overflow-hidden'>
             {user && <Image width={1000} height={1000} src={user?.dp} className='w-full h-full object-cover'/>}
         </div>
@@ -143,7 +154,7 @@ const ProfileInfo = () => {
                         <Image src={require(`../../assets/badges/${item}.png`)} className='w-7'/>
                     </div>
                 </div>}
-                {i == 4 && <button onClick={()=>{setExpandBadges(true)}} className='relative group'>
+                {i == 4 && <button onClick={()=>{bringModal()}} className='relative group'>
                 <div className='absolute opacity-0 duration-300 w-24 group-hover:opacity-100 z-50 left-1/2 -translate-x-1/2 -top-8 flex flex-col items-center justify-center'>
                     <h3 className='text-sm font-medium text-black bg-white px-2 py-1 rounded shadow-black/10 shadow-lg'>View More</h3>
                     <svg width="10" height="5" viewBox="0 0 10 5" fill="none" xmlns="http://www.w3.org/2000/svg">
