@@ -83,7 +83,7 @@ const ProfileInfo = () => {
 
   return (
     < >
-        <div id="badges" className="flex items-start justify-start fixed -translate-y-[30rem] duration-500 top-[40px] z-50 sm:left-1 max-sm:left-0 w-screen h-screen">
+        <div id="badges" className="flex items-start justify-start fixed -translate-y-[30rem] duration-500 top-[40px] z-50 sm:left-1 max-sm:left-0">
             <div className="rounded-xl p-6 bg-white shadow-xl sm:w-[20rem] w-[90%] max-sm:mx-auto shadow-black/20">
                 <div className="flex flex-row border-b-[1px] pb-2 border-black  items-center justify-center gap-10">
                     <h3 className="text-[1.5rem] font-bold">Badges</h3>

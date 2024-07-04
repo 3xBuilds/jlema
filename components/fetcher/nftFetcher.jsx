@@ -213,7 +213,7 @@ export default function NFTFetcher({wallet}){
 
     if(selected != 2)
     return (
-        <div className="flex flex-wrap gap-4 justify-center ml-3 mt-4">
+        <div className="flex flex-wrap gap-4 justify-start ml-3 mt-4">
             {displayNFT.map((nft, index) => (
                   <div onClick={()=>{setShowNftInfo(nft)}} key={index} className="rounded-xl hover:shadow-jel-nft duration-200 w-44 h-[12.5rem] cursor-pointer border-[1px] border-jel-gray-3 overflow-hidden flex flex-col">
                     <div className="h-40 w-full">
