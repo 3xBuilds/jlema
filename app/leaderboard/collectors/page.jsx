@@ -6,7 +6,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Footer from "@/components/Footer";
-import defaultImage from "@/assets/defaultImage.png"
+import defImg from "@/assets/defImg.png"
 
 const Collectors = () => {
 
@@ -82,7 +82,7 @@ const Collectors = () => {
                 <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-1 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.rank}</h3></div>
                 <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-3 flex flex-row justify-start items-center p-2">
                     <div className="border-[1px] overflow-hidden rounded-md border-jel-gray-3 w-16 h-16 aspect-square">
-                    <Image src={holder?.dp == null ? defaultImage : holder.dp} width={300} height={300} className=" object-contain w-full h-full"/>
+                    <Image src={holder?.dp == null ? defImg : holder.dp} width={300} height={300} className=" object-contain w-full h-full"/>
                     </div>
                     <div className="pl-2">
                     <h3 className="text-black  font-semibold text-base "> {holder?.username} </h3>
@@ -117,7 +117,7 @@ const Collectors = () => {
               <div  className="col-span-1 flex items-center justify-center max-md:justify-start"><h3 className=" font-semibold text-base text-black">{holder?.rank}</h3></div>
               <div className="col-span-5 flex flex-row justify-start items-center p-2">
                 <div className="border-[1px] overflow-hidden rounded-md border-jel-gray-3 w-16 h-16 aspect-square">
-                  <Image src={holder?.dp == null ? defaultImage : holder.dp} width={300} height={300} className=" object-contain w-full h-full"/>
+                  <Image src={holder?.dp == null ? defImg : holder.dp} width={300} height={300} className=" object-contain w-full h-full"/>
                 </div>
                 <div className="pl-2">
                   <h3 className="text-black  font-semibold text-base "> {holder?.username} </h3>

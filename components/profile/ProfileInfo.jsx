@@ -19,7 +19,7 @@ import { FaCross } from 'react-icons/fa'
 import BadgesModal from './BadgesModal'
 import cross from '@/assets/icons/cross.svg'
 import { usePathname, useRouter } from 'next/navigation'
-import defaultImage from "@/assets/defaultImage.png"
+import defImg from "@/assets/defImg.png"
 
 
 const ProfileInfo = () => {
@@ -119,7 +119,7 @@ const ProfileInfo = () => {
 
 
         <div className='w-[120px] h-[120px] mx-auto border-[1px] border-jel-gray-3 rounded-full overflow-hidden'>
-            {user && <Image width={1000} height={1000} src={user?.dp == null ? defaultImage : user.dp} className='w-full h-full object-cover'/>}
+            {user && <Image width={1000} height={1000} src={user?.dp == null ? defImg : user.dp} className='w-full h-full object-cover'/>}
         </div>
         <div>
             <h2 className=' font-medium text-2xl text-center mt-5'>{user?.username || "---"}</h2>

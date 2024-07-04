@@ -5,7 +5,7 @@ import nft1 from '../../assets/nft1.png'
 import arrow from '../../assets/icons/arrow.svg'
 import { useEffect, useState } from 'react'
 import BuyTicketsModal from './BuyTicketsModal'
-import defaultimage from "@/assets/defaultimage.png"
+import defImg from "@/assets/defImg.png"
 import noRaffle from "@/assets/noRaffleBanner.png"
 import noRafflephone from "@/assets/raffleBanner.png"
 
@@ -55,10 +55,10 @@ const RaffleHighlights = ({fetchActive, goToMyTickets, setShowBuyModal, showBuyM
             { activeArr.length > 0 ? activeArr.map((item, i)=>(
                 <>
                 {i == showRaffle && <div className="w-full relative sm:h-[600px] h-[840px] rounded-xl overflow-hidden">
-                    <Image width={1080} height={1080} src={item.image == "" ? defaultimage : item.image} className="w-full h-full object-cover relative z-10" />
+                    <Image width={1080} height={1080} src={item.image == "" ? defImg : item.image} className="w-full h-full object-cover relative z-10" />
                     <div className="z-20 absolute w-full h-full bg-black/40 top-0 left-0 backdrop-blur-lg sm:p-16 p-8 sm:grid sm:grid-cols-2 items-center justify-center gap-0">
                         <div className="sm:h-96 sm:w-96 w-fit max-sm:mb-5 mx-auto aspect-square overflow-hidden rounded-xl ">
-                            <Image width={1080} height={1080} src={item.image == "" ? defaultimage : item.image} className="sm:w-full sm:h-full rounded-xl object-cover" />
+                            <Image width={1080} height={1080} src={item.image == "" ? defImg : item.image} className="sm:w-full sm:h-full rounded-xl object-cover" />
                         </div>
 
                         <div className="w-full">
