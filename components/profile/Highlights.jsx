@@ -7,10 +7,7 @@ import Image from 'next/image';
 
 import { useGlobalContext } from "@/context/MainContext"
 import { useEffect, useState } from "react";
-import { contractAdds } from "@/utils/contractAdds";
-import jlemaFetcher from "@/utils/abis/jlemaFetcher";
-import { ethers } from "ethers";
-import axios from "axios"
+
 import { useAccount } from "wagmi";
 import nftData from "../../utils/mapNfts.json"
 
@@ -56,6 +53,17 @@ const Highlights = () => {
     // useEffect(()=>{
     //   console.log("currrr: ", displayNFT[currentNft]);
     // }, [displayNFT, currentNft])
+
+    useEffect(()=>{
+      if(displayNFT.length > 1){
+        console.log("next");
+          const interval = setInterval(()=>{
+              // if(!showBuyModal)
+              next();
+          }, 4000)
+          return ()=>clearInterval(interval);
+      }
+  }, [])
 
     const next = () => {
       const start = 0;
