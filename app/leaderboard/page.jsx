@@ -122,7 +122,7 @@ const Leaderboard = () => {
                   router.push("/profile");
                 }}} className="col-span-10 grid grid-cols-10 hover:cursor-crosshair duration-100 hover:bg-black/10 md:hidden">
               <div  className="col-span-1 flex items-center justify-center max-md:justify-start"><h3 className=" font-semibold text-base text-black">{holder?.rank}</h3></div>
-              <div className="col-span-5 flex flex-row justify-start items-center p-2">
+              <div className="col-span-8 flex flex-row justify-start items-center p-2">
                 <div className="border-[1px] overflow-hidden rounded-md border-jel-gray-3 w-16 h-16 aspect-square">
                   <Image src={holder?.dp == null ? defImg : holder.dp} width={300} height={300} className=" object-contain w-full h-full"/>
                 </div>
@@ -131,8 +131,8 @@ const Leaderboard = () => {
                   <h3 className=" text-jel-gray-4  font-normal text-sm flex flex-row gap-1 items-center justify-center "> <span> <Image src={twitter} className="w-4 opacity-70"/> </span> {holder?.twitter} </h3>
                 </div>
               </div>
-              <div className="col-span-1 flex items-center justify-center"><h3 className=" font-semibold text-base text-black max-md:hidden">{holder?.badges}</h3></div>
-              <div className="col-span-3 flex items-center justify-center max-md:justify-end"><h3 className=" font-semibold text-base text-black max-md:text-right">{holder?.points}</h3></div>
+              <div className="col-span-1 flex items-center justify-center max-md:hidden"><h3 className=" font-semibold text-base text-black ">{holder?.badges}</h3></div>
+              <div className="col-span-1 flex items-center justify-center max-md:justify-end"><h3 className=" font-semibold text-base text-black max-md:text-right">{holder?.points}</h3></div>
             </div>
             ))}
         
