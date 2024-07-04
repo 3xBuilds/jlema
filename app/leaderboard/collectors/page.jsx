@@ -8,6 +8,20 @@ import { useRouter } from "next/navigation";
 import Footer from "@/components/Footer";
 import defImg from "@/assets/defImg.png"
 
+const extractUsername = (input) => {
+    if (!input) return '';
+    // Remove URL prefix if present
+    const urlRegex = /https?:\/\/(www\.)?(x\.com|twitter\.com)\//i;
+    if (urlRegex.test(input)) {
+      input = input.replace(urlRegex, '');
+    }
+    // Remove '@' prefix if present
+    if (input.startsWith('@')) {
+      input = input.substring(1);
+    }
+    return input;
+  };
+
 const Collectors = () => {
 
     const [leaderboard, setLeaderboard] = useState();
@@ -69,31 +83,31 @@ const Collectors = () => {
 
                 {/* Header */}
                 <div className=" col-span-1 border-b-[1px] pb-3 border-jel-gray-3 px-2"><h3 className="text-center font-normal text-sm text-jel-gray-4">Rank</h3></div>
-                <div className=" col-span-3 border-b-[1px] pb-3 border-jel-gray-3 px-2"><h3 className="text-left font-normal text-sm text-jel-gray-4">Collector</h3></div>
-                <div className=" col-span-3 border-b-[1px] pb-3 border-jel-gray-3 px-2"><h3 className="text-center font-normal text-sm text-jel-gray-4">Total Jlema</h3></div>
+                <div className=" col-span-5 border-b-[1px] pb-3 border-jel-gray-3 px-2"><h3 className="text-left font-normal text-sm text-jel-gray-4">Collector</h3></div>
+                <div className=" col-span-2 border-b-[1px] pb-3 border-jel-gray-3 px-2"><h3 className="text-center font-normal text-sm text-jel-gray-4">Total Jlema</h3></div>
                 <div className=" col-span-3 border-b-[1px] pb-3 border-jel-gray-3 px-2"><h3 className="text-center font-normal text-sm text-jel-gray-4">Total Jlema Legendary</h3></div>
                 <div className=" col-span-3 border-b-[1px] pb-3 border-jel-gray-3 px-2"><h3 className="text-center font-normal text-sm text-jel-gray-4">Total Special Editions</h3></div>
                 <div className=" col-span-3 border-b-[1px] pb-3 border-jel-gray-3 px-2"><h3 className="text-center font-normal text-sm text-jel-gray-4">Badges</h3></div>
-                <div className=" col-span-3 border-b-[1px] pb-3 border-jel-gray-3 px-2"><h3 className="text-center font-normal text-sm text-jel-gray-4">Points</h3></div>
+                <div className=" col-span-2 border-b-[1px] pb-3 border-jel-gray-3 px-2"><h3 className="text-center font-normal text-sm text-jel-gray-4">Points</h3></div>
 
 
                 {filteredLeaderboard?.map((holder)=>(
                 <>
                 <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-1 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.rank}</h3></div>
-                <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-3 flex flex-row justify-start items-center p-2">
+                <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-5 flex flex-row justify-start items-center p-2">
                     <div className="border-[1px] overflow-hidden rounded-md border-jel-gray-3 w-16 h-16 aspect-square">
                     <Image src={holder?.dp == null ? defImg : holder.dp} width={300} height={300} className=" object-contain w-full h-full"/>
                     </div>
                     <div className="pl-2">
                     <h3 className="text-black  font-semibold text-base "> {holder?.username} </h3>
-                    <h3 className=" text-jel-gray-4  font-normal text-sm flex flex-row gap-1 items-center justify-center "> <span> <Image src={twitter} className="w-4 opacity-70"/> </span> {holder?.twitter} </h3>
+                    <h3 className=" text-jel-gray-4  font-normal text-sm flex flex-row gap-1 items-center justify-center "> <span> <Image src={twitter} className="w-4 opacity-70"/> </span> {extractUsername(holder?.twitter)} </h3>
                     </div>
                 </div>
-                <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-3 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.jlema || "--"}</h3></div>
+                <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-2 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.jlema || "--"}</h3></div>
                 <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-3 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.jlemalegendary || "--"}</h3></div>
                 <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-3 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.specialEdition || "--"}</h3></div>
                 <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-3 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.badges.length || "--"}</h3></div>
-                <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-3 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.points || "--"}</h3></div>
+                <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-2 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.points || "--"}</h3></div>
                 </>
                 ))}
 
@@ -107,25 +121,23 @@ const Collectors = () => {
             <div className="grid grid-cols-10 max-md:col-span-full h-fit md:hidden">
                 <div className=" col-span-1 border-b-[1px] pb-3 border-jel-gray-3 px-2 max-md:hidden"><h3 className="text-center font-normal text-sm text-jel-gray-4 ">Rank</h3></div>
                 <div className=" col-span-1 border-b-[1px] pb-3 border-jel-gray-3 md:hidden"><h3 className=" font-normal text-sm text-jel-gray-4 text-left">#</h3></div>
-                <div className=" col-span-5 border-b-[1px] pb-3 border-jel-gray-3 px-2"><h3 className="text-left font-normal text-sm text-jel-gray-4">Collector</h3></div>
-                <div className=" col-span-1 border-b-[1px] pb-3 border-jel-gray-3 px-2 "><h3 className="text-center font-normal text-sm text-jel-gray-4 max-md:hidden">Badges</h3></div>
-                <div className=" col-span-3 border-b-[1px] pb-3 border-jel-gray-3 px-2"><h3 className="text-center font-normal text-sm text-jel-gray-4 max-md:text-right">Points</h3></div>
+                <div className=" col-span-7 border-b-[1px] pb-3 border-jel-gray-3 px-2"><h3 className="text-left font-normal text-sm text-jel-gray-4">Collector</h3></div>
+                <div className=" col-span-2 border-b-[1px] pb-3 border-jel-gray-3 px-2"><h3 className="text-center font-normal text-sm text-jel-gray-4 max-md:text-right">Points</h3></div>
             </div>
 
             {filteredLeaderboard?.map((holder)=>(
             <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className="col-span-10 grid grid-cols-10 hover:cursor-crosshair duration-100 hover:bg-black/10 md:hidden">
               <div  className="col-span-1 flex items-center justify-center max-md:justify-start"><h3 className=" font-semibold text-base text-black">{holder?.rank}</h3></div>
-              <div className="col-span-5 flex flex-row justify-start items-center p-2">
+              <div className="col-span-7 flex flex-row justify-start items-center p-2">
                 <div className="border-[1px] overflow-hidden rounded-md border-jel-gray-3 w-16 h-16 aspect-square">
                   <Image src={holder?.dp == null ? defImg : holder.dp} width={300} height={300} className=" object-contain w-full h-full"/>
                 </div>
                 <div className="pl-2">
                   <h3 className="text-black  font-semibold text-base "> {holder?.username} </h3>
-                  <h3 className=" text-jel-gray-4  font-normal text-sm flex flex-row gap-1 items-center justify-center "> <span> <Image src={twitter} className="w-4 opacity-70"/> </span> {holder?.twitter} </h3>
+                  <h3 className=" text-jel-gray-4  font-normal text-sm flex flex-row gap-1 items-center justify-center "> <span> <Image src={twitter} className="w-4 opacity-70"/> </span> {extractUsername(holder?.twitter)} </h3>
                 </div>
               </div>
-              <div className="col-span-1 flex items-center justify-center"><h3 className=" font-semibold text-base text-black max-md:hidden">{holder?.badges ? holder.badges.length: "--"}</h3></div>
-              <div className="col-span-3 flex items-center justify-center max-md:justify-end"><h3 className=" font-semibold text-base text-black max-md:text-right">{holder?.points || "--"}</h3></div>
+              <div className="col-span-2 flex items-center justify-center max-md:justify-end"><h3 className=" font-semibold text-base text-black max-md:text-right">{holder?.points || "--"}</h3></div>
             </div>
             ))}
 
