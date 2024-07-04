@@ -13,6 +13,20 @@ import axios from 'axios'
 import nftData from "@/utils/mapNfts.json"
 import { toast } from 'react-toastify'
 
+const extractUsername = (input) => {
+  if (!input) return '';
+  // Remove URL prefix if present
+  const urlRegex = /https?:\/\/(www\.)?(x\.com|twitter\.com)\//i;
+  if (urlRegex.test(input)) {
+    input = input.replace(urlRegex, '');
+  }
+  // Remove '@' prefix if present
+  if (input.startsWith('@')) {
+    input = input.substring(1);
+  }
+  return input;
+};
+
 const SettingsModal = () => {
 
   const [settingType, setSettingType] = useState(0);
@@ -79,7 +93,7 @@ const SettingsModal = () => {
       const res = await axios.post("/api/user/create", {
         wallet: address,
         username: username,
-        twitter: twitter,
+        twitter: extractUsername(twitter),
         dp: selectedImage
       });
       console.log("user created successfully", res.data);
@@ -95,7 +109,7 @@ const SettingsModal = () => {
     try{
       const res = await axios.patch(`/api/user/${user?.username}`, {
         username: username,
-        twitter: twitter,
+        twitter: extractUsername(twitter),
         dp: selectedImage
       });
       console.log("user updated successfully", res.data);
@@ -183,7 +197,7 @@ const SettingsModal = () => {
                     <h3 className='text-base font-normal mt-4'>Name</h3>
                     <input value={username} onChange={(e)=>{setUsername(e.target.value)}} className='border-jel-gray-3 px-4 outline-black border-[1px] rounded-xl w-full h-12 mt-2 flex items-center justify-center '/>
                     
-                    <h3 className='text-base font-normal mt-4'>Twitter/X id</h3>
+                    <h3 className='text-base font-normal mt-4'>Twitter/X</h3>
                     <input value={twitter} onChange={(e)=>{setTwitter(e.target.value)}} className='border-jel-gray-3 px-4 outline-black border-[1px] rounded-xl w-full h-12 mt-2 flex items-center justify-center '/>
                         
                     <h3 className='text-sm font-normal mt-4 text-red-500'>{error}</h3>

@@ -12,6 +12,19 @@ import { useGlobalContext } from "@/context/MainContext";
 import { useAccount } from "wagmi";
 import defImg from "@/assets/defImg.png"
 
+const extractUsername = (input) => {
+  if (!input) return '';
+  // Remove URL prefix if present
+  const urlRegex = /https?:\/\/(www\.)?(x\.com|twitter\.com)\//i;
+  if (urlRegex.test(input)) {
+    input = input.replace(urlRegex, '');
+  }
+  // Remove '@' prefix if present
+  if (input.startsWith('@')) {
+    input = input.substring(1);
+  }
+  return input;
+};
 const Leaderboard = () => {
 
   const {user, setUser} = useGlobalContext();
@@ -106,7 +119,7 @@ const Leaderboard = () => {
                 </div>
                 <div className="pl-2">
                   <h3 className="text-black  font-semibold text-base "> {holder?.username} </h3>
-                  <h3 className=" text-jel-gray-4  font-normal text-sm flex flex-row gap-1 items-center justify-center "> <span> <Image src={twitter} className="w-4 opacity-70"/> </span> {holder?.twitter} </h3>
+                  <h3 className=" text-jel-gray-4  font-normal text-sm flex flex-row gap-1 items-center justify-center "> <span> <Image src={twitter} className="w-4 opacity-70"/> </span> {extractUsername(holder?.twitter)} </h3>
                 </div>
               </div>
               <div className="col-span-1 flex items-center justify-center"><h3 className=" font-semibold text-base text-black max-md:hidden">{holder?.badges.length}</h3></div>
@@ -128,7 +141,7 @@ const Leaderboard = () => {
                 </div>
                 <div className="pl-2">
                   <h3 className="text-black  font-semibold text-base "> {holder?.username} </h3>
-                  <h3 className=" text-jel-gray-4  font-normal text-sm flex flex-row gap-1 items-center justify-center "> <span> <Image src={twitter} className="w-4 opacity-70"/> </span> {holder?.twitter} </h3>
+                  <h3 className=" text-jel-gray-4  font-normal text-sm flex flex-row gap-1 items-center justify-center "> <span> <Image src={twitter} className="w-4 opacity-70"/> </span> {extractUsername(holder?.twitter)} </h3>
                 </div>
               </div>
               <div className="col-span-1 flex items-center justify-center max-md:hidden"><h3 className=" font-semibold text-base text-black ">{holder?.badges}</h3></div>
@@ -159,7 +172,7 @@ const Leaderboard = () => {
                 </div>
                 <div className="pl-2">
                   <h3 className="text-black  font-semibold text-base "> {holder?.username} </h3>
-                  <h3 className=" text-jel-gray-4  font-normal text-sm flex flex-row gap-1 items-center justify-center "> <span> <Image src={twitter} className="w-4 opacity-70"/> </span> {holder?.twitter} </h3>
+                  <h3 className=" text-jel-gray-4  font-normal text-sm flex flex-row gap-1 items-center justify-center "> <span> <Image src={twitter} className="w-4 opacity-70"/> </span> {extractUsername(holder?.twitter)} </h3>
                 </div>
               </div>
               <div className="col-span-1 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.badges.length}</h3></div>
@@ -268,7 +281,7 @@ const TopperCard = ({holder, ind}) => {
 
           <div className="bottom-4 left-5 absolute z-20">
             <h3 className="text-black  font-bold text-xl "> {holder?.username} </h3>
-            <h3 className=" text-jel-gray-4  font-medium text-base flex flex-row gap-2 items-center justify-center "> <span> <Image src={twitter} className="w-4 opacity-70"/> </span> {holder?.twitter} </h3>
+            <h3 className=" text-jel-gray-4  font-medium text-base flex flex-row gap-2 items-center justify-center "> <span> <Image src={twitter} className="w-4 opacity-70"/> </span> {extractUsername(holder?.twitter)} </h3>
           </div>
 
           <div className="bottom-4 right-5 absolute z-20">
