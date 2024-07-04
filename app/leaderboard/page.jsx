@@ -145,7 +145,7 @@ const Leaderboard = () => {
           <div className=" col-span-1 border-b-[1px] pb-3 border-jel-gray-3 px-2"><h3 className="text-center font-normal text-sm text-jel-gray-4">Badges</h3></div>
           <div className=" col-span-3 border-b-[1px] pb-3 border-jel-gray-3 px-2"><h3 className="text-center font-normal text-sm text-jel-gray-4">Points</h3></div>
         
-          {leaderboard?.slice(6,10)?.map((holder)=>(
+          {leaderboard?.slice(5,10)?.map((holder)=>(
             <div onClick={()=>{if(holder?.username != user?.username)
               {router.push(`/profile/${holder?.username}`)}
                 
