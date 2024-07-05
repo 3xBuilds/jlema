@@ -64,11 +64,11 @@ const Leaderboard = () => {
     // getUser();
   }, [])
 
-  useEffect(()=>{
-    if(!isConnected){
-      router.push("/")
-    }
-  },[address])
+  // useEffect(()=>{
+  //   if(!isConnected){
+  //     router.push("/")
+  //   }
+  // },[address])
 
   return (
     <div className="w-[97%] max-md:w-[90%] mx-auto">
