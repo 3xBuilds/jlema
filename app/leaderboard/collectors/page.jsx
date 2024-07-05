@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Footer from "@/components/Footer";
 import defImg from "@/assets/defImg.png"
+import { useAccount } from "wagmi";
 
 const extractUsername = (input) => {
     if (!input) return '';
@@ -27,7 +28,7 @@ const Collectors = () => {
     const [leaderboard, setLeaderboard] = useState();
     const [search, setSearch] = useState();
     const router = useRouter();
-
+    const {address, isConnected} = useAccount();
     const handleSearch = (e) => {
         setSearch(e.target.value);
     }
@@ -61,6 +62,12 @@ const Collectors = () => {
     useEffect(()=>{
         getLeaderboard();
     }, [])
+
+    useEffect(()=>{
+      if(!isConnected){
+        router.push("/")
+      }
+    },[address])
 
     return (
         <>

@@ -48,7 +48,7 @@ const SettingsModal = () => {
   const getUser = async () => {
     try{
       const res = await axios.get(`/api/user/${address}`);
-      console.log("user", res.data);
+      // console.log("user", res.data);
       if(res.data.user==null){
         setOpenSettings(true);
       }
@@ -78,7 +78,7 @@ const SettingsModal = () => {
       const res = await axios.patch(`/api/user/${user?.username}/highlight`, {
         highlights: highlights
       });
-      console.log("highlights updated successfully", res.data);
+      // console.log("highlights updated successfully", res.data);
       toast.success("Highlights updated successfully");
       setOpenSettings(false);
       getUser();
@@ -96,7 +96,7 @@ const SettingsModal = () => {
         twitter: extractUsername(twitter),
         dp: selectedImage
       });
-      console.log("user created successfully", res.data);
+      // console.log("user created successfully", res.data);
       setOpenSettings(false);
       getUser();
     }
@@ -112,7 +112,7 @@ const SettingsModal = () => {
         twitter: extractUsername(twitter),
         dp: selectedImage
       });
-      console.log("user updated successfully", res.data);
+      // console.log("user updated successfully", res.data);
       setOpenSettings(false);
       getUser();
     }
@@ -122,7 +122,7 @@ const SettingsModal = () => {
   }
 
   useEffect(()=>{
-    console.log("highlights::::", highlights);
+    // console.log("highlights::::", highlights);
   }, [highlights, user])
 
   useEffect(()=>{
@@ -165,9 +165,9 @@ const SettingsModal = () => {
                     <button onClick={()=>{setSettingType(1)}} className={`cursor-pointer rounded-lg text-base px-4 py-2 ${settingType ==1 ? "bg-jel-gray-1 font-semibold text-black" : " font-medium text-jel-gray-4" }`}>
                       <h3 className="">NFT Highlights</h3>
                     </button>
-                    <button onClick={()=>{setSettingType(2)}} className={`cursor-pointer rounded-lg text-base px-4 py-2 ${settingType ==2 ? "bg-jel-gray-1 font-semibold text-black" : " font-medium text-jel-gray-4" }`}>
+                    {/* <button onClick={()=>{setSettingType(2)}} className={`cursor-pointer rounded-lg text-base px-4 py-2 ${settingType ==2 ? "bg-jel-gray-1 font-semibold text-black" : " font-medium text-jel-gray-4" }`}>
                       <h3 className="">Badge Highlights</h3>
-                    </button>
+                    </button> */}
                   </div>
 
                 <div className="p-4 w-full sm:hidden overflow-hidden noscr">
@@ -222,7 +222,7 @@ const SettingsModal = () => {
                     </div>
                   }
 
-                  {settingType == 2 && 
+                  {/* {settingType == 2 && 
                     <div className='pt-6 flex flex-col w-full gap-2'>
                       <div className='flex flex-row items-center justify-between'>
                         <h3 className='text-base font-normal'>Highlight 1</h3>
@@ -241,7 +241,7 @@ const SettingsModal = () => {
                         <button className='bg-jel-gray-1 font-semibold hover:bg-jel-gray-2 text-black rounded-xl cursor-pointer py-3 px-6'>Select</button>
                       </div>
                     </div>
-                  }
+                  } */}
 
                   <div className='pt-4 flex flex-row gap-4'>
                     <button onClick={()=>{
@@ -304,7 +304,7 @@ const SelectNFT = ({setSelectedImage, setShowNftSelectModal}) => {
           const res = await contract.tokenOfOwnerJlema(multiplier, address);
           res.map((item)=>{
               if(item != 0){
-                  console.log(Number(item));
+                  // console.log(Number(item));
                   dataProvider(Number(item));
               }
           })
@@ -355,7 +355,7 @@ const SelectHighLight = ({highlights, setHighlights, highNumber, setShowHighligh
   async function dataProvider(tokenId){
     try{
         var img = "https://metadata.jlema.xyz/api/jlema/image/" + tokenId;
-        console.log(img, tokenId)
+        // console.log(img, tokenId)
         setDisplayNFT(oldArray => [...oldArray, {img, tokenId}]);
     }
     catch(err){
@@ -389,7 +389,7 @@ async function fetchJlema(multiplier){
         const res = await contract.tokenOfOwnerJlema(multiplier, address);
         res.map((item)=>{
             if(item != 0){
-                console.log(Number(item));
+                // console.log(Number(item));
                 dataProvider(Number(item));
             }
         })

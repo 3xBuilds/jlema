@@ -20,13 +20,22 @@ import { useParams } from 'next/navigation';
 import axios from 'axios';
 import Highlights from '@/components/profile/Highlights';
 import { useAccount } from 'wagmi';
+import { useRouter } from 'next/router';
 
 const Profile = () => {
 
-  const {address} = useAccount();
+  const {address, isConnected} = useAccount();
   const [selectedSort, setSelectedSort] = useState(null);
   const [openSort, setOpenSort] = useState(false);
   const {user, setUser} = useGlobalContext();
+
+  const router = useRouter();
+
+  useEffect(()=>{
+    if(!isConnected){
+      router.push("/")
+    }
+  },[address])
 
   const path = useParams();
 

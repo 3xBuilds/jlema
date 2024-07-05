@@ -30,7 +30,7 @@ const Leaderboard = () => {
   const {user, setUser} = useGlobalContext();
   // console.log(user);
 
-  const{address} = useAccount();
+  const{address, isConnected} = useAccount();
 
   const [leaderboard, setLeaderboard] = useState();
   const router = useRouter();
@@ -63,6 +63,12 @@ const Leaderboard = () => {
     getLeaderboard();
     // getUser();
   }, [])
+
+  useEffect(()=>{
+    if(!isConnected){
+      router.push("/")
+    }
+  },[address])
 
   return (
     <div className="w-[97%] max-md:w-[90%] mx-auto">
