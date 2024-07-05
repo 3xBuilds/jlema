@@ -12,6 +12,7 @@ import { ethers } from 'ethers'
 import axios from 'axios'
 import nftData from "@/utils/mapNfts.json"
 import { toast } from 'react-toastify'
+import { useRouter } from 'next/navigation'
 
 const extractUsername = (input) => {
   if (!input) return '';
@@ -28,6 +29,8 @@ const extractUsername = (input) => {
 };
 
 const SettingsModal = () => {
+
+  const router = useRouter();
 
   const [settingType, setSettingType] = useState(0);
   const {setOpenSettings, user, setUser, balances, selected} = useGlobalContext();
@@ -139,7 +142,7 @@ const SettingsModal = () => {
           </div>
             <div className='p-6 flex items-center gap-5 justify-center'>
                 <a href="https://app.komet.me/nfts/Jlema/415"><button className='bg-black text-white font-semibold rounded-xl cursor-pointer py-3 px-12'>Buy NFTs</button></a>
-                <button onClick={()=>{Router.push("/leaderboard")}} className='bg-jel-gray-1 hover:bg-jel-gray-2 text-black duration-200 font-semibold rounded-xl cursor-pointer py-3 px-12'>Leaderboard</button>
+                <button onClick={()=>{router.push("/leaderboard")}} className='bg-jel-gray-1 hover:bg-jel-gray-2 text-black duration-200 font-semibold rounded-xl cursor-pointer py-3 px-12'>Leaderboard</button>
             </div>
         </div>
       </div>
