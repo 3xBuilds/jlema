@@ -585,7 +585,7 @@ const ProfileInfo = () => {
 
         {displayArr?.map((item, i)=>(
             <div>
-            {item != "" && i<4 && <div className='relative group'>
+            {item != "" && i<4 && <button onClick={()=>{bringModal()}} className='relative group'>
                     <div className='absolute opacity-0 duration-300 w-20 group-hover:opacity-100 z-10 left-1/2 -translate-x-1/2 -top-8 flex flex-col items-center justify-center'>
                         <h3 className='text-sm font-medium text-black bg-white px-2 py-1 rounded shadow-black/10 shadow-lg'>{item}</h3>
                         <svg width="10" height="5" viewBox="0 0 10 5" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -595,7 +595,7 @@ const ProfileInfo = () => {
                     <div className='w-16 h-16 -ml-2 cursor-pointer  bg-white text-jel-gray-4 rounded-full shadow-jel-badge flex items-center justify-center'>
                         <Image src={require(`../../assets/badges/${item}.png`)} className='w-8'/>
                     </div>
-                </div>}
+                </button>}
                 {i == 4 && <button onClick={()=>{bringModal()}} className='relative group'>
                 <div className='absolute opacity-0 duration-300 w-24 group-hover:opacity-100 z-50 left-1/2 -translate-x-1/2 -top-8 flex flex-col items-center justify-center'>
                     <h3 className='text-sm font-medium text-black bg-white px-2 py-1 rounded shadow-black/10 shadow-lg'>View More</h3>
