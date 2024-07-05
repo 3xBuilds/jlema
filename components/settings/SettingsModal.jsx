@@ -139,7 +139,7 @@ const SettingsModal = () => {
           </div>
             <div className='p-6 flex items-center gap-5 justify-center'>
                 <a href="https://app.komet.me/nfts/Jlema/415"><button className='bg-black text-white font-semibold rounded-xl cursor-pointer py-3 px-12'>Buy NFTs</button></a>
-                <button onClick={()=>{Router.push("/leaderboard")}} className='bg-black text-white font-semibold rounded-xl cursor-pointer py-3 px-12'>Buy NFTs</button>
+                <button onClick={()=>{Router.push("/leaderboard")}} className='bg-jel-gray-1 hover:bg-jel-gray-2 text-black duration-200 font-semibold rounded-xl cursor-pointer py-3 px-12'>Leaderboard</button>
             </div>
         </div>
       </div>
