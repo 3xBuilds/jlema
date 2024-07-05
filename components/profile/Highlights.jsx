@@ -69,8 +69,6 @@ const Highlights = () => {
       const start = 0;
       const end = displayNFT.length-1;
 
-      console.log(currentNft);
-
       if(currentNft>=end){
         setCurrentNft(start);
       }

@@ -354,8 +354,8 @@ const ProfileInfo = () => {
                                     <button onClick={()=>{badgeInfoSetter(item)}} className="flex flex-col justify-center items-center">
                                         <div className=' group'>
                                         
-                                            <div className=' cursor-pointer text-jel-gray-4 rounded-full shadow-black/10 shadow-xl group-hover:shadow-black/20 duration-200 flex items-center justify-center'>
-                                                <Image src={require(`../../assets/badges/${item}.png`)} className='w-12'/>
+                                            <div className=' cursor-pointer w-12 h-12 text-jel-gray-4 rounded-full shadow-black/10 shadow-xl group-hover:shadow-black/20 duration-200 flex items-center justify-center'>
+                                                <Image src={require(`../../assets/badges/${item}.png`)} className='w-8'/>
                                             </div>
                                         </div>
                                         {/* <div>
@@ -371,8 +371,8 @@ const ProfileInfo = () => {
                                     <button onClick={()=>{badgeInfoSetter(item)}} className="flex flex-col justify-center items-center">
                                         <div className=' group'>
                                         
-                                            <div className=' cursor-pointer text-jel-gray-4 rounded-full shadow-black/10 shadow-xl group-hover:shadow-black/20 duration-200 flex items-center justify-center'>
-                                                <Image src={require(`../../assets/badges/${item}.png`)} className='w-12'/>
+                                            <div className=' cursor-pointer w-12 h-12 text-jel-gray-4 rounded-full shadow-black/10 shadow-xl group-hover:shadow-black/20 duration-200 flex items-center justify-center'>
+                                                <Image src={require(`../../assets/badges/${item}.png`)} className='w-8'/>
                                             </div>
                                         </div>
                                         {/* <div>
@@ -388,8 +388,8 @@ const ProfileInfo = () => {
                                     <button onClick={()=>{badgeInfoSetter(item)}} className="flex flex-col justify-center items-center">
                                         <div className=' group'>
                                         
-                                            <div className=' cursor-pointer text-jel-gray-4 rounded-full shadow-black/10 shadow-xl group-hover:shadow-black/20 duration-200 flex items-center justify-center'>
-                                                <Image src={require(`../../assets/badges/${item}.png`)} className='w-12'/>
+                                            <div className=' cursor-pointer w-12 h-12 text-jel-gray-4 rounded-full shadow-black/10 shadow-xl group-hover:shadow-black/20 duration-200 flex items-center justify-center'>
+                                                <Image src={require(`../../assets/badges/${item}.png`)} className='w-8'/>
                                             </div>
                                         </div>
                                         {/* <div>
@@ -405,8 +405,8 @@ const ProfileInfo = () => {
                                     <button onClick={()=>{badgeInfoSetter(item)}} className="flex flex-col justify-center items-center">
                                         <div className=' group'>
                                         
-                                            <div className=' cursor-pointer text-jel-gray-4 rounded-full shadow-black/10 shadow-xl group-hover:shadow-black/20 duration-200 flex items-center justify-center'>
-                                                <Image src={require(`../../assets/badges/${item}.png`)} className='w-12'/>
+                                            <div className=' cursor-pointer w-12 h-12 text-jel-gray-4 rounded-full shadow-black/10 shadow-xl group-hover:shadow-black/20 duration-200 flex items-center justify-center'>
+                                                <Image src={require(`../../assets/badges/${item}.png`)} className='w-8'/>
                                             </div>
                                         </div>
                                         {/* <div>
@@ -422,8 +422,8 @@ const ProfileInfo = () => {
                                     <button className="flex flex-col justify-center items-center">
                                         <div className=' group'>
                                         
-                                            <div className=' cursor-pointer text-jel-gray-4 rounded-full shadow-black/10 shadow-xl group-hover:shadow-black/20 duration-200 flex items-center justify-center'>
-                                                <Image src={require(`../../assets/badges/${item}.png`)} className='w-12'/>
+                                            <div className=' cursor-pointer w-12 h-12 text-jel-gray-4 rounded-full shadow-black/10 shadow-xl group-hover:shadow-black/20 duration-200 flex items-center justify-center'>
+                                                <Image src={require(`../../assets/badges/${item}.png`)} className='w-8'/>
                                             </div>
                                         </div>
                                         {/* <div>
@@ -439,8 +439,8 @@ const ProfileInfo = () => {
                                             <button onClick={()=>{badgeInfoSetter(item)}} className="flex flex-col justify-center items-center">
                                                 <div className=' group'>
                                                 
-                                                    <div className=' cursor-pointer text-jel-gray-4 rounded-full shadow-black/10 shadow-xl group-hover:shadow-black/20 duration-200 flex items-center justify-center'>
-                                                        <Image src={require(`../../assets/badges/${item}.png`)} className='w-12'/>
+                                                    <div className=' cursor-pointer w-12 h-12 text-jel-gray-4 rounded-full shadow-black/10 shadow-xl group-hover:shadow-black/20 duration-200 flex items-center justify-center'>
+                                                        <Image src={require(`../../assets/badges/${item}.png`)} className='w-8'/>
                                                     </div>
                                                 </div>
                                                 {/* <div>
@@ -460,8 +460,8 @@ const ProfileInfo = () => {
                                     <button onClick={()=>{badgeInfoSetter(item)}} className="flex flex-col justify-center items-center">
                                         <div className=' group'>
                                         
-                                            <div className=' h-12 w-12 opacity-50 cursor-pointer bg-white text-jel-gray-4 rounded-full shadow-black/10 shadow-xl group-hover:shadow-black/20 duration-200 flex items-center justify-center'>
-                                                <Image src={require(`../../assets/badges/${item}.png`)} className='w-12'/>
+                                            <div className=' opacity-50 cursor-pointer w-12 h-12 text-jel-gray-4 rounded-full shadow-black/10 shadow-xl group-hover:shadow-black/20 duration-200 flex items-center justify-center'>
+                                                <Image src={require(`../../assets/badges/${item}.png`)} className='w-8'/>
                                             </div>
                                         </div>
                                         {/* <div>
@@ -477,8 +477,8 @@ const ProfileInfo = () => {
                                     <button onClick={()=>{badgeInfoSetter(item)}} className="flex flex-col justify-center items-center">
                                         <div className=' group'>
                                         
-                                            <div className=' h-12 w-12 opacity-50 cursor-pointer bg-white text-jel-gray-4 rounded-full shadow-black/10 shadow-xl group-hover:shadow-black/20 duration-200 flex items-center justify-center'>
-                                                <Image src={require(`../../assets/badges/${item}.png`)} className='w-12'/>
+                                            <div className='opacity-50 cursor-pointer w-12 h-12 text-jel-gray-4 rounded-full shadow-black/10 shadow-xl group-hover:shadow-black/20 duration-200 flex items-center justify-center'>
+                                                <Image src={require(`../../assets/badges/${item}.png`)} className='w-8'/>
                                             </div>
                                         </div>
                                         {/* <div>
@@ -494,8 +494,8 @@ const ProfileInfo = () => {
                                     <button onClick={()=>{badgeInfoSetter(item)}} className="flex flex-col justify-center items-center">
                                         <div className=' group'>
                                         
-                                            <div className=' h-12 w-12 opacity-50 cursor-pointer bg-white text-jel-gray-4 rounded-full shadow-black/10 shadow-xl group-hover:shadow-black/20 duration-200 flex items-center justify-center'>
-                                                <Image src={require(`../../assets/badges/${item}.png`)} className='w-12'/>
+                                            <div className='opacity-50 cursor-pointer w-12 h-12 text-jel-gray-4 rounded-full shadow-black/10 shadow-xl group-hover:shadow-black/20 duration-200 flex items-center justify-center'>
+                                                <Image src={require(`../../assets/badges/${item}.png`)} className='w-8'/>
                                             </div>
                                         </div>
                                         {/* <div>
@@ -511,8 +511,8 @@ const ProfileInfo = () => {
                                     <button onClick={()=>{badgeInfoSetter(item)}} className="flex flex-col justify-center items-center">
                                         <div className=' group'>
                                         
-                                            <div className=' h-12 w-12 opacity-50 cursor-pointer bg-white text-jel-gray-4 rounded-full shadow-black/10 shadow-xl group-hover:shadow-black/20 duration-200 flex items-center justify-center'>
-                                                <Image src={require(`../../assets/badges/${item}.png`)} className='w-12'/>
+                                            <div className='opacity-50 cursor-pointer w-12 h-12 text-jel-gray-4 rounded-full shadow-black/10 shadow-xl group-hover:shadow-black/20 duration-200 flex items-center justify-center'>
+                                                <Image src={require(`../../assets/badges/${item}.png`)} className='w-8'/>
                                             </div>
                                         </div>
                                         {/* <div>
@@ -528,8 +528,8 @@ const ProfileInfo = () => {
                                     <button onClick={()=>{badgeInfoSetter(item)}} className="flex flex-col justify-center items-center">
                                         <div className=' group'>
                                         
-                                            <div className=' h-12 w-12 opacity-50 cursor-pointer bg-white text-jel-gray-4 rounded-full shadow-black/10 shadow-xl group-hover:shadow-black/20 duration-200 flex items-center justify-center'>
-                                                <Image src={require(`../../assets/badges/${item}.png`)} className='w-12'/>
+                                            <div className='  opacity-50 cursor-pointer w-12 h-12 text-jel-gray-4 rounded-full shadow-black/10 shadow-xl group-hover:shadow-black/20 duration-200 flex items-center justify-center'>
+                                                <Image src={require(`../../assets/badges/${item}.png`)} className='w-8'/>
                                             </div>
                                         </div>
                                         {/* <div>
@@ -547,7 +547,7 @@ const ProfileInfo = () => {
                             {showBadgeInfo &&
                             
                             <div className='flex flex-col items-center justify-center'>
-                                <Image className='w-36 h-36 mx-auto' src={require(`../../assets/badges/${showBadgeInfo.image}.png`)} />
+                                <Image className='w-24 h-24 p-4 rounded-full shadow-xl my-5 mx-auto' src={require(`../../assets/badges/${showBadgeInfo.image}.png`)} />
                                 <h3 className='font-semibold text-[1.5rem]'>{showBadgeInfo.name}</h3>
                                 <h3 className='text-sm text-center h-[2rem] w-full'>{showBadgeInfo.description}</h3>
                                 <h5 className='bg-jel-gray-4/30 px-5 py-2 rounded-xl font-bold my-5'>+{showBadgeInfo.points}</h5>
@@ -592,8 +592,8 @@ const ProfileInfo = () => {
                             <path d="M5 5L0 0L10 0L5 5Z" fill="white"/>
                         </svg>
                     </div>
-                    <div className='w-16 h-16 -ml-2 cursor-pointer bg-white text-jel-gray-4 rounded-full shadow-jel-badge flex items-center justify-center'>
-                        <Image src={require(`../../assets/badges/${item}.png`)} className='w-20'/>
+                    <div className='w-16 h-16 -ml-2 cursor-pointer  bg-white text-jel-gray-4 rounded-full shadow-jel-badge flex items-center justify-center'>
+                        <Image src={require(`../../assets/badges/${item}.png`)} className='w-8'/>
                     </div>
                 </div>}
                 {i == 4 && <button onClick={()=>{bringModal()}} className='relative group'>
@@ -603,7 +603,7 @@ const ProfileInfo = () => {
                         <path d="M5 5L0 0L10 0L5 5Z" fill="white"/>
                     </svg>
                 </div>
-                <div className='w-16 h-16 -ml-2 cursor-pointer bg-white text-jel-gray-4 rounded-full shadow-jel-badge flex items-center justify-center'>
+                <div className='w-16 h-16 -ml-2 cursor-pointer  bg-white text-jel-gray-4 rounded-full shadow-jel-badge flex items-center justify-center'>
                     <h3 className='font-medium text-base'>+{displayArr.length - 4}</h3>
                 </div>
             </button> }
