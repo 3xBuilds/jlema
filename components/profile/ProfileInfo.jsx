@@ -335,8 +335,8 @@ const ProfileInfo = () => {
   return (
     < >
         <div id="badges" className="flex sm:items-start sm:justify-start justify-center items-center fixed -translate-y-[60rem] duration-500 top-[40px] z-50 sm:left-1 max-sm:left-0 max-sm:w-full">
-            <div className="rounded-xl p-4 bg-white shadow-xl h-[92vh] sm:w-[20rem] mx-auto w-[100%] max-sm:mx-auto shadow-black/20">
-                <div className="flex flex-row border-b-[1px] pb-2 border-black  items-center justify-center gap-10">
+            <div className="rounded-xl px-4 bg-white shadow-xl h-[92vh] sm:w-[20rem] mx-auto w-[100%] max-sm:mx-auto shadow-black/20">
+                <div className="flex flex-row border-b-[1px] pb-2 border-black  items-center justify-center gap-5">
                     <h3 className="text-[1.5rem] font-bold">Badges</h3>
                     <div className="w-full">
                         <button onClick={()=>{removeModal()}} className="float-right">
@@ -346,7 +346,7 @@ const ProfileInfo = () => {
                 </div>
                 <div className='grid grid-flow-row grid-rows-11 h-full'>
                     <div className='row-span-6 border-b-2 border-black'>
-                        <div className="flex flex-col gap-2 sm:items-start items-center justify-start  my-3">
+                        <div className="flex flex-col gap-1 sm:items-start items-center justify-start  my-1">
                             <h2 className='font-semibold'>Collected</h2>
                             {displayArr.length == 0 ? "None" : <div>
                                 <div className='flex gap-2 items-center justify-center'>
@@ -453,7 +453,7 @@ const ProfileInfo = () => {
                             </div>}
                         </div>
 
-                        <div className="flex flex-col gap-2 sm:items-start items-center justify-start  my-3">
+                        <div className="flex flex-col gap-1 sm:items-start items-center justify-start  my-1">
                             <h2 className='font-semibold'>Locked</h2>
                             <div className='flex gap-2 items-center justify-center'>
                                     {lockedArr?.slice(0,5).map((item)=>(
@@ -547,7 +547,7 @@ const ProfileInfo = () => {
                             {showBadgeInfo &&
                             
                             <div className='flex flex-col items-center justify-center'>
-                                <Image className='w-24 h-24 p-4 rounded-full shadow-xl my-5 mx-auto' src={require(`../../assets/badges/${showBadgeInfo.image}.png`)} />
+                                <Image className='w-24 h-24 p-4 rounded-full shadow-xl my-3 mx-auto' src={require(`../../assets/badges/${showBadgeInfo.image}.png`)} />
                                 <h3 className='font-semibold text-[1.5rem]'>{showBadgeInfo.name}</h3>
                                 <h3 className='text-sm text-center h-[2rem] w-full'>{showBadgeInfo.description}</h3>
                                 <h5 className='bg-jel-gray-4/30 px-5 py-2 rounded-xl font-bold my-5'>+{showBadgeInfo.points}</h5>
