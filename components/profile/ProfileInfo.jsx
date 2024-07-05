@@ -19,7 +19,7 @@ import { FaCross } from 'react-icons/fa'
 import BadgesModal from './BadgesModal'
 import cross from '@/assets/icons/cross.svg'
 import { usePathname, useRouter } from 'next/navigation'
-import defImg from "@/assets/defImg.png"
+import defaultImage from "@/assets/defImg.png"
 
 
 const ProfileInfo = () => {
@@ -31,7 +31,37 @@ const ProfileInfo = () => {
     const {address} = useAccount();
     const [isClient, setIsClient] = useState(false)
     const [displayArr, setDisplayArr] = useState([])
-    const [expandBadges, setExpandBadges] = useState(false)
+
+    const [lockedArr, setLockedArr] = useState([])
+    const[showBadgeInfo, setShowBadgeInfo] = useState(null)
+
+    const badges = [
+        'Jlema',
+        'Legendary',
+        'Edition',
+        'Homies',
+        'Fren',
+        'XGang',
+        'MiniWhale',
+        'Whale',
+        'LegendShrimp',
+        'LegendDolphin',
+        'LegendWhale',
+        'XEditions',
+        'OneofOne',
+        'Snake',
+        'Hero',
+        'Space',
+        'Peace',
+        'King',
+        'Penguin',
+        'Punker',
+        'Romeo',
+        'Yakkuza',
+        'Special',
+        'Collab',
+        'Unique'
+      ];
 
     async function copyToClip() {
         await navigator.clipboard.writeText(location.href + "/" + user?.username);
@@ -70,21 +100,242 @@ const ProfileInfo = () => {
     },[user])
 
     function bringModal(){
-        document.getElementById("badges").classList.remove("-translate-y-[30rem]");
-        document.getElementById("badges").classList.add("translate-y-0");
+        document.getElementById("badges").classList.remove("-translate-y-[60rem]");
+        document.getElementById("badges").classList.add("translate-y-5");
     }
 
     function removeModal(){
-        document.getElementById("badges").classList.remove("translate-y-0");
-        document.getElementById("badges").classList.add("-translate-y-[30rem]");
+        document.getElementById("badges").classList.remove("translate-y-5");
+        document.getElementById("badges").classList.add("-translate-y-[60rem]");
 
     }
+
+    function removeDuplicates(badges, displayArr) {
+        setLockedArr(badges.filter(badge => !displayArr.includes(badge)));
+      }
+
+    function badgeInfoSetter(badge){
+        switch (badge) {
+            case 'Jlema':
+              setShowBadgeInfo({
+                name: 'Jlema',
+                description: 'Own one Jlema NFT',
+                points: 1000,
+                image: badge
+              });
+              break;
+            case 'Legendary':
+              setShowBadgeInfo({
+                name: 'Legendary',
+                description: 'Own one Jlema Legendary NFT',
+                points: 1000,
+                image: badge
+              });
+              break;
+            case 'Edition':
+              setShowBadgeInfo({
+                name: 'Edition',
+                description: 'Own one Jlema Special Editions NFT',
+                points: 100,
+                image: badge
+              });
+              break;
+            case 'Homies':
+              setShowBadgeInfo({
+                name: 'Homies',
+                description: 'Own one Jlema, Jlema Legendary, and Jlema Special Editions NFT',
+                points: 2000,
+                image: badge
+              });
+              break;
+            case 'Fren':
+              setShowBadgeInfo({
+                name: 'Fren',
+                description: 'Own 5 Jlema NFT or more',
+                points: 1000,
+                image: badge
+              });
+              break;
+            case 'XGang':
+              setShowBadgeInfo({
+                name: 'X Gang',
+                description: 'Own 10 Jlema NFT or more',
+                points: 2000,
+                image: badge
+              });
+              break;
+            case 'MiniWhale':
+              setShowBadgeInfo({
+                name: 'Mini Whale',
+                description: 'Own 20 Jlema NFT or more',
+                points: 4000,
+                image: badge
+              });
+              break;
+            case 'Whale':
+              setShowBadgeInfo({
+                name: 'Whale',
+                description: 'Own 40 Jlema NFT or more',
+                points: 8000,
+                image: badge
+              });
+              break;
+            case 'LegendShrimp':
+              setShowBadgeInfo({
+                name: 'Legend Shrimp',
+                description: 'Own 10 Jlema Legendary NFT or more',
+                points: 2000,
+                image: badge
+              });
+              break;
+            case 'LegendDolphin':
+              setShowBadgeInfo({
+                name: 'Legend Dolphin',
+                description: 'Own 20 Jlema Legendary NFT or more',
+                points: 4000,
+                image: badge
+              });
+              break;
+            case 'LegendWhale':
+              setShowBadgeInfo({
+                name: 'Legend Whale',
+                description: 'Own 40 Jlema Legendary NFT or more',
+                points: 8000,
+                image: badge
+              });
+              break;
+            case 'XEditions':
+              setShowBadgeInfo({
+                name: 'X Editions',
+                description: 'Own 10 Jlema Special Editions NFT or more',
+                points: 1000,
+                image: badge
+              });
+              break;
+            case 'OneofOne':
+              setShowBadgeInfo({
+                name: '1 of 1',
+                description: 'Own a Jlema NFT with 1 of 1 trait',
+                points: 5000,
+                image: badge
+              });
+              break;
+            case 'Snake':
+              setShowBadgeInfo({
+                name: 'Snake',
+                description: 'Own a Jlema NFT with Snake trait',
+                points: 200,
+                image: badge
+              });
+              break;
+            case 'Hero':
+              setShowBadgeInfo({
+                name: 'Hero',
+                description: 'Own a Jlema NFT with Superhero trait',
+                points: 200,
+                image: badge
+              });
+              break;
+            case 'Space':
+              setShowBadgeInfo({
+                name: 'Space',
+                description: 'Own a Jlema NFT with Astronaut trait',
+                points: 200,
+                image: badge
+              });
+              break;
+            case 'Peace':
+              setShowBadgeInfo({
+                name: 'Peace',
+                description: 'Own a Jlema NFT with Graphic Tee Peace',
+                points: 200,
+                image: badge
+              });
+              break;
+            case 'King':
+              setShowBadgeInfo({
+                name: 'King',
+                description: 'Own a Jlema NFT with Crown trait',
+                points: 200,
+                image: badge
+              });
+              break;
+            case 'Penguin':
+              setShowBadgeInfo({
+                name: 'Penguin',
+                description: 'Own a Jlema NFT with Penguin Hat trait',
+                points: 200,
+                image: badge
+              });
+              break;
+            case 'Punker':
+              setShowBadgeInfo({
+                name: 'Punker',
+                description: 'Own a Jlema NFT with Punk hair trait',
+                points: 200,
+                image: badge
+              });
+              break;
+            case 'Romeo':
+              setShowBadgeInfo({
+                name: 'Romeo',
+                description: 'Own a Jlema NFT with Rose trait',
+                points: 200,
+                image: badge
+              });
+              break;
+            case 'Yakkuza':
+              setShowBadgeInfo({
+                name: 'Yakkuza',
+                description: 'Own 5 Old School Tattoos trait from Jlema NFT',
+                points: 1000,
+                image: badge
+              });
+              break;
+            case 'Special':
+              setShowBadgeInfo({
+                name: 'Special',
+                description: 'Own one Special trait from Jlema Legendary NFT',
+                points: 5000,
+                image: badge
+              });
+              break;
+            case 'Collab':
+              setShowBadgeInfo({
+                name: 'Collab',
+                description: 'Own one Collaboration trait from Jlema Legendary NFT',
+                points: 1000,
+                image: badge
+              });
+              break;
+            case 'Unique':
+              setShowBadgeInfo({
+                name: 'Unique',
+                description: 'Own one Uncommon trait from Jlema Legendary NFT',
+                points: 800,
+                image: badge
+              });
+              break;
+            default:
+              setShowBadgeInfo({
+                name: '',
+                description: 'Unknown badge',
+                points: 0,
+                image: badge
+              });
+              break;
+          }
+    }
+
     
+    useEffect(()=>{
+        removeDuplicates(badges, displayArr)
+    },[displayArr])
 
   return (
     < >
-        <div id="badges" className="flex items-start justify-start fixed -translate-y-[30rem] duration-500 top-[40px] z-50 sm:left-1 max-sm:left-0">
-            <div className="rounded-xl p-6 bg-white shadow-xl sm:w-[20rem] w-[90%] max-sm:mx-auto shadow-black/20">
+        <div id="badges" className="flex sm:items-start sm:justify-start justify-center items-center fixed -translate-y-[60rem] duration-500 top-[40px] z-50 sm:left-1 max-sm:left-0 max-sm:w-full">
+            <div className="rounded-xl p-4 bg-white shadow-xl h-[92vh] sm:w-[20rem] mx-auto w-[100%] max-sm:mx-auto shadow-black/20">
                 <div className="flex flex-row border-b-[1px] pb-2 border-black  items-center justify-center gap-10">
                     <h3 className="text-[1.5rem] font-bold">Badges</h3>
                     <div className="w-full">
@@ -93,33 +344,223 @@ const ProfileInfo = () => {
                         </button>
                     </div>
                 </div>
-                <div className="flex gap-2 flex-wrap mt-4 items-center justify-center">
-                    {displayArr?.map((item)=>(
-                        <div className="flex flex-col justify-center items-center">
-                            <div className=' group'>
-                                <div className='absolute opacity-0 duration-300 w-20 group-hover:opacity-100 z-50 left-1/2 -translate-x-1/2 -top-8 flex flex-col items-center justify-center'>
-                                    <h3 className='text-sm font-medium text-black bg-white px-2 py-1 rounded shadow-black/10 shadow-lg'>{item}</h3>
-                                    <svg width="10" height="5" viewBox="0 0 10 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M5 5L0 0L10 0L5 5Z" fill="white"/>
-                                    </svg>
-                                </div>
-                                <div className='w-16 h-16  cursor-pointer bg-white text-jel-gray-4 rounded-full shadow-jel-badge flex items-center justify-center'>
-                                    <Image src={require(`../../assets/badges/${item}.png`)} className='w-9'/>
-                                </div>
+                <div className='grid grid-flow-row grid-rows-11 h-full'>
+                    <div className='row-span-6 border-b-2 border-black'>
+                        <div className="flex flex-col gap-2 sm:items-start items-center justify-start  my-3">
+                            <h2 className='font-semibold'>Collected</h2>
+                            {displayArr.length == 0 ? "None" : <div>
+                                <div className='flex gap-2 items-center justify-center'>
+                                    {displayArr?.slice(0,5).map((item)=>(
+                                    <button onClick={()=>{badgeInfoSetter(item)}} className="flex flex-col justify-center items-center">
+                                        <div className=' group'>
+                                        
+                                            <div className=' cursor-pointer text-jel-gray-4 rounded-full shadow-black/10 shadow-xl group-hover:shadow-black/20 duration-200 flex items-center justify-center'>
+                                                <Image src={require(`../../assets/badges/${item}.png`)} className='w-12'/>
+                                            </div>
+                                        </div>
+                                        {/* <div>
+                                            <h3>{item}</h3>
+                                            </div> */}
+                                        
+                                        </button>
+                                ))}
+                                    </div>
+
+                                    <div className='flex gap-2 items-center justify-center'>
+                                    {displayArr?.slice(5,10).map((item)=>(
+                                    <button onClick={()=>{badgeInfoSetter(item)}} className="flex flex-col justify-center items-center">
+                                        <div className=' group'>
+                                        
+                                            <div className=' cursor-pointer text-jel-gray-4 rounded-full shadow-black/10 shadow-xl group-hover:shadow-black/20 duration-200 flex items-center justify-center'>
+                                                <Image src={require(`../../assets/badges/${item}.png`)} className='w-12'/>
+                                            </div>
+                                        </div>
+                                        {/* <div>
+                                            <h3>{item}</h3>
+                                            </div> */}
+                                        
+                                        </button>
+                                ))}
+                                    </div>
+
+                                    <div className='flex gap-2 items-center justify-center'>
+                                    {displayArr?.slice(10,15).map((item)=>(
+                                    <button onClick={()=>{badgeInfoSetter(item)}} className="flex flex-col justify-center items-center">
+                                        <div className=' group'>
+                                        
+                                            <div className=' cursor-pointer text-jel-gray-4 rounded-full shadow-black/10 shadow-xl group-hover:shadow-black/20 duration-200 flex items-center justify-center'>
+                                                <Image src={require(`../../assets/badges/${item}.png`)} className='w-12'/>
+                                            </div>
+                                        </div>
+                                        {/* <div>
+                                            <h3>{item}</h3>
+                                            </div> */}
+                                        
+                                        </button>
+                                ))}
+                                    </div>
+
+                                    <div className='flex gap-2 items-center justify-center'>
+                                    {displayArr?.slice(15,20).map((item)=>(
+                                    <button onClick={()=>{badgeInfoSetter(item)}} className="flex flex-col justify-center items-center">
+                                        <div className=' group'>
+                                        
+                                            <div className=' cursor-pointer text-jel-gray-4 rounded-full shadow-black/10 shadow-xl group-hover:shadow-black/20 duration-200 flex items-center justify-center'>
+                                                <Image src={require(`../../assets/badges/${item}.png`)} className='w-12'/>
+                                            </div>
+                                        </div>
+                                        {/* <div>
+                                            <h3>{item}</h3>
+                                            </div> */}
+                                        
+                                        </button>
+                                ))}
+                                    </div>
+
+                                    <div className='flex gap-2 items-center justify-center'>
+                                    {displayArr?.slice(20,26).map((item)=>(
+                                    <button className="flex flex-col justify-center items-center">
+                                        <div className=' group'>
+                                        
+                                            <div className=' cursor-pointer text-jel-gray-4 rounded-full shadow-black/10 shadow-xl group-hover:shadow-black/20 duration-200 flex items-center justify-center'>
+                                                <Image src={require(`../../assets/badges/${item}.png`)} className='w-12'/>
+                                            </div>
+                                        </div>
+                                        {/* <div>
+                                            <h3>{item}</h3>
+                                            </div> */}
+                                        
+                                        </button>
+                                ))}
+                                    </div>
+
+                                    <div className='flex gap-2 items-center justify-center'>
+                                            {displayArr?.slice(20,25).map((item)=>(
+                                            <button onClick={()=>{badgeInfoSetter(item)}} className="flex flex-col justify-center items-center">
+                                                <div className=' group'>
+                                                
+                                                    <div className=' cursor-pointer text-jel-gray-4 rounded-full shadow-black/10 shadow-xl group-hover:shadow-black/20 duration-200 flex items-center justify-center'>
+                                                        <Image src={require(`../../assets/badges/${item}.png`)} className='w-12'/>
+                                                    </div>
+                                                </div>
+                                                {/* <div>
+                                                    <h3>{item}</h3>
+                                                    </div> */}
+                                                
+                                                </button>
+                                        ))}
+                                            </div>
+                            </div>}
+                        </div>
+
+                        <div className="flex flex-col gap-2 sm:items-start items-center justify-start  my-3">
+                            <h2 className='font-semibold'>Locked</h2>
+                            <div className='flex gap-2 items-center justify-center'>
+                                    {lockedArr?.slice(0,5).map((item)=>(
+                                    <button onClick={()=>{badgeInfoSetter(item)}} className="flex flex-col justify-center items-center">
+                                        <div className=' group'>
+                                        
+                                            <div className=' h-12 w-12 opacity-50 cursor-pointer bg-white text-jel-gray-4 rounded-full shadow-black/10 shadow-xl group-hover:shadow-black/20 duration-200 flex items-center justify-center'>
+                                                <Image src={require(`../../assets/badges/${item}.png`)} className='w-12'/>
+                                            </div>
+                                        </div>
+                                        {/* <div>
+                                            <h3>{item}</h3>
+                                            </div> */}
+                                        
+                                        </button>
+                                ))}
                             </div>
-                            <div>
-                                <h3>{item}</h3>
-                                </div>
+
+                            <div className='flex gap-2 items-center justify-center'>
+                                    {lockedArr?.slice(5,10).map((item)=>(
+                                    <button onClick={()=>{badgeInfoSetter(item)}} className="flex flex-col justify-center items-center">
+                                        <div className=' group'>
+                                        
+                                            <div className=' h-12 w-12 opacity-50 cursor-pointer bg-white text-jel-gray-4 rounded-full shadow-black/10 shadow-xl group-hover:shadow-black/20 duration-200 flex items-center justify-center'>
+                                                <Image src={require(`../../assets/badges/${item}.png`)} className='w-12'/>
+                                            </div>
+                                        </div>
+                                        {/* <div>
+                                            <h3>{item}</h3>
+                                            </div> */}
+                                        
+                                        </button>
+                                ))}
+                            </div>
+
+                            <div className='flex gap-2 items-center justify-center'>
+                                    {lockedArr?.slice(10,15).map((item)=>(
+                                    <button onClick={()=>{badgeInfoSetter(item)}} className="flex flex-col justify-center items-center">
+                                        <div className=' group'>
+                                        
+                                            <div className=' h-12 w-12 opacity-50 cursor-pointer bg-white text-jel-gray-4 rounded-full shadow-black/10 shadow-xl group-hover:shadow-black/20 duration-200 flex items-center justify-center'>
+                                                <Image src={require(`../../assets/badges/${item}.png`)} className='w-12'/>
+                                            </div>
+                                        </div>
+                                        {/* <div>
+                                            <h3>{item}</h3>
+                                            </div> */}
+                                        
+                                        </button>
+                                ))}
+                            </div>
+
+                            <div className='flex gap-2 items-center justify-center'>
+                                    {lockedArr?.slice(15,20).map((item)=>(
+                                    <button onClick={()=>{badgeInfoSetter(item)}} className="flex flex-col justify-center items-center">
+                                        <div className=' group'>
+                                        
+                                            <div className=' h-12 w-12 opacity-50 cursor-pointer bg-white text-jel-gray-4 rounded-full shadow-black/10 shadow-xl group-hover:shadow-black/20 duration-200 flex items-center justify-center'>
+                                                <Image src={require(`../../assets/badges/${item}.png`)} className='w-12'/>
+                                            </div>
+                                        </div>
+                                        {/* <div>
+                                            <h3>{item}</h3>
+                                            </div> */}
+                                        
+                                        </button>
+                                ))}
+                            </div>
+
+                            <div className='flex gap-2 items-center justify-center'>
+                                    {lockedArr?.slice(20,26).map((item)=>(
+                                    <button onClick={()=>{badgeInfoSetter(item)}} className="flex flex-col justify-center items-center">
+                                        <div className=' group'>
+                                        
+                                            <div className=' h-12 w-12 opacity-50 cursor-pointer bg-white text-jel-gray-4 rounded-full shadow-black/10 shadow-xl group-hover:shadow-black/20 duration-200 flex items-center justify-center'>
+                                                <Image src={require(`../../assets/badges/${item}.png`)} className='w-12'/>
+                                            </div>
+                                        </div>
+                                        {/* <div>
+                                            <h3>{item}</h3>
+                                            </div> */}
+                                        
+                                        </button>
+                                ))}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div className='row-span-5'>
+                            {showBadgeInfo &&
                             
-                            </div>
-                    ))}
+                            <div className='flex flex-col items-center justify-center'>
+                                <Image className='w-36 h-36 mx-auto' src={require(`../../assets/badges/${showBadgeInfo.image}.png`)} />
+                                <h3 className='font-semibold text-[1.5rem]'>{showBadgeInfo.name}</h3>
+                                <h3 className='text-sm text-center h-[2rem] w-full'>{showBadgeInfo.description}</h3>
+                                <h5 className='bg-jel-gray-4/30 px-5 py-2 rounded-xl font-bold my-5'>+{showBadgeInfo.points}</h5>
+
+                                </div>}
+                    </div>
                 </div>
             </div>
         </div>
 
 
         <div className='w-[120px] h-[120px] mx-auto border-[1px] border-jel-gray-3 rounded-full overflow-hidden'>
-            {user && <Image width={1000} height={1000} src={user?.dp == null ? defImg : user.dp} className='w-full h-full object-cover'/>}
+            {user && <Image width={1000} height={1000} src={user?.dp == null ? defaultImage : user.dp} className='w-full h-full object-cover'/>}
         </div>
         <div>
             <h2 className=' font-medium text-2xl text-center mt-5'>{user?.username || "---"}</h2>
@@ -145,14 +586,14 @@ const ProfileInfo = () => {
         {displayArr?.map((item, i)=>(
             <div>
             {item != "" && i<4 && <div className='relative group'>
-                    <div className='absolute opacity-0 duration-300 w-20 group-hover:opacity-100 z-50 left-1/2 -translate-x-1/2 -top-8 flex flex-col items-center justify-center'>
+                    <div className='absolute opacity-0 duration-300 w-20 group-hover:opacity-100 z-10 left-1/2 -translate-x-1/2 -top-8 flex flex-col items-center justify-center'>
                         <h3 className='text-sm font-medium text-black bg-white px-2 py-1 rounded shadow-black/10 shadow-lg'>{item}</h3>
                         <svg width="10" height="5" viewBox="0 0 10 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5 5L0 0L10 0L5 5Z" fill="white"/>
                         </svg>
                     </div>
                     <div className='w-16 h-16 -ml-2 cursor-pointer bg-white text-jel-gray-4 rounded-full shadow-jel-badge flex items-center justify-center'>
-                        <Image src={require(`../../assets/badges/${item}.png`)} className='w-7'/>
+                        <Image src={require(`../../assets/badges/${item}.png`)} className='w-20'/>
                     </div>
                 </div>}
                 {i == 4 && <button onClick={()=>{bringModal()}} className='relative group'>

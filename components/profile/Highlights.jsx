@@ -56,18 +56,20 @@ const Highlights = () => {
 
     useEffect(()=>{
       if(displayNFT.length > 1){
-        console.log("next");
+      
           const interval = setInterval(()=>{
-              // if(!showBuyModal)
-              next();
-          }, 4000)
+
+            next()
+          }, 3000)
           return ()=>clearInterval(interval);
       }
-  }, [])
+  }, [currentNft, displayNFT])
 
     const next = () => {
       const start = 0;
       const end = displayNFT.length-1;
+
+      console.log(currentNft);
 
       if(currentNft>=end){
         setCurrentNft(start);
