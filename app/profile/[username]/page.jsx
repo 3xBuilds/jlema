@@ -20,7 +20,7 @@ import { useParams } from 'next/navigation';
 import axios from 'axios';
 import Highlights from '@/components/profile/Highlights';
 import { useAccount } from 'wagmi';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 const Profile = () => {
 
