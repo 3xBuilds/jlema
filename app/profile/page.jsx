@@ -109,7 +109,7 @@ const ProfileUser = () => {
                 </div>
               </div>
 
-                <div className="w-full relative">
+                {/* <div className="w-full relative">
                   <button onClick={()=>{setOpenSort((prev)=>!prev)}} className={`bg-white w-full hover:border-black duration-200 cursor-pointer border-[1px] group group-focus:border-black ${openSort && " border-black "} h-12 border-jel-gray-3 rounded-xl flex flex-row gap-2 px-5 justify-between items-center`}>
                     <h3 className="text-black font-semibold">{selectedSort!=null ? selectedSort.label : "Sort By..."}</h3>
                       <Image src={arrowd} className={`w-5 duration-300 ${openSort ? "rotate-180" : "rotate-0"}`}/>
@@ -122,7 +122,7 @@ const ProfileUser = () => {
                       </div>
                     </button>))}
                   </div>}
-                </div>
+                </div> */}
               </div>
             <NFTFetcher/>
           </div>
@@ -150,7 +150,7 @@ const ProfileUser = () => {
                 </button>
               </div>
 
-              <div className="relative">
+              {/* <div className="relative">
                 <button onClick={()=>{setOpenSort((prev)=>!prev)}} className={`bg-white hover:border-black duration-200 cursor-pointer border-[1px] group group-focus:border-black ${openSort && " border-black "} h-12 border-jel-gray-3 rounded-xl flex flex-row gap-2 px-5 justify-between items-center`}>
                   <h3 className="text-black font-semibold">{selectedSort!=null ? selectedSort.label : "Sort By ..."}</h3>
                     <Image src={arrowd} className={`w-5 duration-300 ${openSort ? "rotate-180" : "rotate-0"}`}/>
@@ -163,7 +163,7 @@ const ProfileUser = () => {
                     </div>
                   </button>))}
                 </div>}
-              </div>
+              </div> */}
             </div>
 
 
