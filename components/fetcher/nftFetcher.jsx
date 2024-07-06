@@ -212,7 +212,7 @@ export default function NFTFetcher({wallet}){
     if(selected != 2)
     return (
         <div className="flex flex-wrap gap-4 relative justify-start ml-3 mt-4">
-            {displayNFT.length < 1 && <div className="w-full h-[30rem] gap-4 flex items-center justify-center absolute">
+            {displayNFT.length == 0 && <div className="w-full h-[30rem] gap-4 flex items-center justify-center absolute">
                 <RiLoader5Fill className="text-6xl animate-spin" />
                 <h3 className="font-semibold" >Fetching</h3>
             </div>}
