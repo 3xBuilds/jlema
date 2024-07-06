@@ -16,6 +16,7 @@ import lunarNY from "@/assets/lunarNY.png";
 import christmas from "@/assets/christmas.png"
 import nftData from "../../utils/mapNfts.json"
 import nftDataLeg from "../../utils/mapLegendary.json"
+import { RiLoader5Fill } from "react-icons/ri";
 
 export default function NFTFetcher({wallet}){
 
@@ -155,8 +156,6 @@ export default function NFTFetcher({wallet}){
     
         try {
           const contract = new ethers.Contract(contractAdds.JlemaFetcher, jlemaFetcher, signer);
-        //   setLoader(false);
-    
           return contract;
         }
         catch(err){
@@ -168,12 +167,12 @@ export default function NFTFetcher({wallet}){
         try{
             const contract = await jlemaFetcherSetup();
             const res = await contract.tokenOfOwnerJlema(multiplier, user);
-            res.map((item)=>{
+            res.map(async(item)=>{
                 if(item != 0){
-
-                    dataProvider(Number(item));
+                    await dataProvider(Number(item));
                 }
             })
+
         }
         catch(err){
 
@@ -182,7 +181,6 @@ export default function NFTFetcher({wallet}){
 
     async function fetch(){
         try{
-
             if(selected == 1){
                 jlemaLegendaryFetcher();
             }
@@ -213,7 +211,11 @@ export default function NFTFetcher({wallet}){
 
     if(selected != 2)
     return (
-        <div className="flex flex-wrap gap-4 justify-start ml-3 mt-4">
+        <div className="flex flex-wrap gap-4 relative justify-start ml-3 mt-4">
+            {displayNFT.length < 1 && <div className="w-full h-[30rem] gap-4 flex items-center justify-center absolute">
+                <RiLoader5Fill className="text-6xl animate-spin" />
+                <h3 className="font-semibold" >Fetching</h3>
+            </div>}
             {displayNFT.map((nft, index) => (
                   <div onClick={()=>{setShowNftInfo(nft)}} key={index} className="rounded-xl hover:shadow-jel-nft duration-200 w-44 h-[12.5rem] cursor-pointer border-[1px] border-jel-gray-3 overflow-hidden flex flex-col">
                     <div className="h-40 w-full">
