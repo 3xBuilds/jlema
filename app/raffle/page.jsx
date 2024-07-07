@@ -158,7 +158,7 @@ const Raffle = () => {
   return (
     <div className="w-[95%] max-md:w-[90%] mx-auto">
 
-      {<div className='w-screen h-screen flex items-center bg-black/30 justify-center fixed z-50 top-0 left-0 '>
+      {!connected && <div className='w-screen h-screen flex items-center bg-black/30 justify-center fixed z-50 top-0 left-0 '>
           <div className='bg-white border-t-[1px] border-r-[1px] max-sm:w-[95%] shadow-xl shadow-black/20 border-jel-gray-2 flex flex-col justify-center items-center p-5 rounded-xl'>
               <h3 className='mb-5 font-semibold text-lg'>Please connect your wallet</h3>
               <WalletConnectButton/>
