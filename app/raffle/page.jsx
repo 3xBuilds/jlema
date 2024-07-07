@@ -28,8 +28,8 @@ const Raffle = () => {
     const [endedRaffleInfo, setEndedRaffleInfo] = useState([]);
     const [active, setActive] = useState(0);
     const [ended, setEnded] = useState(0);
-    const {isConnected} = useAccount();
-
+    const {isConnected, address} = useAccount();
+    const [connected, setConnected] = useState(true);
     const [showBuyModal, setShowBuyModal] = useState(false);
     const [buttonModalInfo, setButtonModalInfo] = useState({});
     const [showRaffle, setShowRaffle] = useState(0);
@@ -144,10 +144,27 @@ const Raffle = () => {
     useEffect(()=>{
         fetchActive();
         fetchEnded();
+        if(!isConnected){
+          setConnected(false);
+        }
     },[])
+
+    useEffect(()=>{
+      if(isConnected){
+        setConnected(true);
+      }
+    },[isConnected])
 
   return (
     <div className="w-[95%] max-md:w-[90%] mx-auto">
+
+      {<div className='w-screen h-screen flex items-center bg-black/30 justify-center fixed z-50 top-0 left-0 '>
+          <div className='bg-white border-t-[1px] border-r-[1px] shadow-xl shadow-black/20 border-jel-gray-2 flex flex-col justify-center items-center p-5 rounded-xl'>
+              <h3 className='mb-5 font-semibold text-xl'>Please connect your wallet</h3>
+              <WalletConnectButton/>
+          </div>
+      </div>}
+
         <div className="mt-24 max-md:w-full flex flex-row items-center justify-between border-b-[1px] border-jel-gray-3 pb-2">
             <div className='max-md:hidden'>
                 <h1 className=" font-bold text-black text-2xl max-md:text-xl">Raffles</h1>
