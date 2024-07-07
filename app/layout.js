@@ -16,9 +16,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      {/* <head>
-        <link rel="favicon" href="/favicon.ico" sizes="any" /> */}
-      {/* </head> */}
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </head>
       <body className={inter.className + ""}>
         <Providers>
           <ToastContainer />
