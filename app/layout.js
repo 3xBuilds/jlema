@@ -6,7 +6,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import Navbar from "@/components/Navbar";
 import Watermark from "@/components/watermark";
 
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -17,6 +16,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      {/* <head>
+        <link rel="favicon" href="/favicon.ico" sizes="any" /> */}
+      {/* </head> */}
       <body className={inter.className + ""}>
         <Providers>
           <ToastContainer />
