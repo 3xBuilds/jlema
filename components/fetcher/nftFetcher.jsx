@@ -20,7 +20,7 @@ import { RiLoader5Fill } from "react-icons/ri";
 
 export default function NFTFetcher({wallet}){
 
-    const{selected, setShowNftInfo, setBalances, user:mainUser, setOpenSettings} = useGlobalContext();
+    const{selected, setShowNftInfo, setBalances, user:mainUser, setOpenSettings, balances} = useGlobalContext();
     const{address} = useAccount();
     const[balance, setBalance] = useState([])
     const add = [contractAdds.Jlema, contractAdds.JlemaLegendary, contractAdds.JlemaSE];
@@ -211,13 +211,13 @@ export default function NFTFetcher({wallet}){
 
     if(selected != 2)
     return (
-        <div className="flex flex-wrap gap-4 relative justify-start ml-3 mt-4">
-            {displayNFT.length == 0 && <div className="w-full h-[30rem] gap-4 flex items-center justify-center absolute">
+        <div className="flex flex-wrap gap-2 max-sm:justify-center relative justify-start ml-1 mt-4">
+            {displayNFT.length == 0 && balances[0] != 0 && <div className="w-full h-[30rem] gap-4 flex items-center justify-center absolute">
                 <RiLoader5Fill className="text-6xl animate-spin" />
                 <h3 className="font-semibold" >Fetching</h3>
             </div>}
             {displayNFT.map((nft, index) => (
-                  <div onClick={()=>{setShowNftInfo(nft)}} key={index} className="rounded-xl hover:shadow-jel-nft duration-200 w-44 h-[12.5rem] cursor-pointer border-[1px] border-jel-gray-3 overflow-hidden flex flex-col">
+                  <div onClick={()=>{setShowNftInfo(nft)}} key={index} className="rounded-xl hover:shadow-jel-nft duration-200 sm:w-[10.6rem] sm:h-[12.5rem] w-36 h-[11.8rem] cursor-pointer border-[1px] border-jel-gray-3 overflow-hidden flex flex-col">
                     <div className="h-40 w-full">
                       <Image width={1920} height={1080} src={nft.img} className="object-cover w-full h-full"/>
                     </div>
