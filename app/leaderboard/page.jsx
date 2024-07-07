@@ -62,6 +62,7 @@ const Leaderboard = () => {
   useEffect(()=>{
     getLeaderboard();
     // getUser();
+    // test change
   }, [])
 
   // useEffect(()=>{
