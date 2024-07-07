@@ -136,13 +136,13 @@ const SettingsModal = () => {
     <>
       <div className='w-screen h-screen top-0 left-0 fixed z-40 flex flex-col'>
         <div onClick={()=>{setOpenSettings(false)}} className='fixed w-screen h-screen bg-black/50'></div>
-        <div className='fixed w-[30%] bg-white rounded-xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
+        <div className='fixed sm:w-[30%] w-[90%] bg-white rounded-xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
           <div className='w-full flex flex-row items-center justify-center p-6 border-b-[1px] border-jel-gray-3'>
             <h2 className='text-black font-bold text-xl text-center'>You dont have any NFTs</h2>
           </div>
             <div className='p-6 flex items-center gap-5 justify-center'>
-                <a href="https://app.komet.me/nfts/Jlema/415"><button className='bg-black text-white font-semibold rounded-xl cursor-pointer py-3 px-12'>Buy NFTs</button></a>
-                <button onClick={()=>{router.push("/leaderboard")}} className='bg-jel-gray-1 hover:bg-jel-gray-2 text-black duration-200 font-semibold rounded-xl cursor-pointer py-3 px-12'>Leaderboard</button>
+                <a href="https://app.komet.me/nfts/Jlema/415"><button className='bg-black text-white font-semibold rounded-xl cursor-pointer py-3 sm:px-12 px-3'>Buy NFTs</button></a>
+                <button onClick={()=>{router.push("/leaderboard")}} className='bg-jel-gray-1 hover:bg-jel-gray-2 text-black duration-200 font-semibold rounded-xl cursor-pointer py-3 sm:px-12 px-3'>Leaderboard</button>
             </div>
         </div>
       </div>
@@ -154,7 +154,7 @@ const SettingsModal = () => {
     <>
     {showNftSelectModal && <SelectNFT setSelectedImage={setSelectedImage} setShowNftSelectModal={setShowNftSelectModal}/>}
     {showHighlighSelectModal && <SelectHighLight highlights={highlights} setHighlights={setHighlights} highNumber={highNumber} setShowHighlighSelectModal={setShowHighlighSelectModal}/>}
-        <div className='w-screen h-screen top-0 left-0 fixed z-40 flex flex-col'>
+        <div className='w-screen h-[100dvh] overflow-y-scroll top-0 left-0 fixed z-40 flex flex-col'>
             <div onClick={()=>{setOpenSettings(false)}} className='fixed w-screen h-screen bg-black/50'></div>
             <div className='fixed sm:w-[50%] w-[95%] h-[98%] bg-white rounded-xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
                 <div className='w-full flex flex-row items-center justify-between p-6 border-b-[1px] border-jel-gray-3'>

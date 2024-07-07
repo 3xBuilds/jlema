@@ -20,7 +20,7 @@ import { RiLoader5Fill } from "react-icons/ri";
 
 export default function NFTFetcher({wallet}){
 
-    const{selected, setShowNftInfo, setBalances, user:mainUser} = useGlobalContext();
+    const{selected, setShowNftInfo, setBalances, user:mainUser, setOpenSettings} = useGlobalContext();
     const{address} = useAccount();
     const[balance, setBalance] = useState([])
     const add = [contractAdds.Jlema, contractAdds.JlemaLegendary, contractAdds.JlemaSE];
