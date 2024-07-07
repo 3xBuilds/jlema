@@ -37,7 +37,7 @@ const Navbar = () => {
 
           {!path.includes("admin") && <>
             <ul className='flex flex-row gap-2 font-semibold items-center max-md:hidden'>
-                <li className='px-6 py-2 cursor-pointer hover:bg-jel-gray-2 duration-200 rounded-xl'>Home</li>
+                <li className='px-6 py-2 cursor-pointer hover:bg-jel-gray-2 duration-200 rounded-xl'><a href='https://jlema.xyz' target='_blank' >Home</a></li>
                 <li className='px-6 py-2 cursor-pointer hover:bg-jel-gray-2 duration-200 rounded-xl'><button onClick={()=>{router.push("/leaderboard")}}>Leaderboard</button></li>
                 <li className='px-6 py-2 cursor-pointer hover:bg-jel-gray-2 duration-200 rounded-xl'>Ecosystem</li>
                 <li className='px-6 py-2 cursor-pointer hover:bg-jel-gray-2 duration-200 rounded-xl'>Community</li>
