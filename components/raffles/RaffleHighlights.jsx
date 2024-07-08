@@ -86,7 +86,7 @@ const RaffleHighlights = ({fetchActive, goToMyTickets, setShowBuyModal, showBuyM
                 }
 
                 <div className="flex flex-row gap-2 w-fit mx-auto mt-5">
-                    {activeArr.map((ob,index)=>(<div className={`w-12 h-1 ${showRaffle==index ? "bg-jel-gray-4" : "bg-jel-gray-3"} rounded-full`}></div>))}
+                    {activeArr.map((ob,index)=>(<div className={`sm:w-12 w-2 h-1 ${showRaffle==index ? "bg-jel-gray-4" : "bg-jel-gray-3"} rounded-full`}></div>))}
                 </div>
             </div>
         </>
