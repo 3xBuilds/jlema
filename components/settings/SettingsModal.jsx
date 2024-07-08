@@ -199,7 +199,7 @@ const SettingsModal = () => {
                     </div>
 
                     <h3 className='text-base font-normal mt-4'>Name</h3>
-                    <input value={username} onChange={(e)=>{setUsername(e.target.value)}} className='border-jel-gray-3 px-4 outline-black border-[1px] rounded-xl w-full h-12 mt-2 flex items-center justify-center '/>
+                    <input value={username} onKeyDown={(e)=>{if(e.key == " "){e.preventDefault(); setUsername(prev=>prev+"-")}}} onChange={(e)=>{ console.log(e.target.value); setUsername(e.target.value.replace(/\s/g, '-'))}} className='border-jel-gray-3 px-4 outline-black border-[1px] rounded-xl w-full h-12 mt-2 flex items-center justify-center '/>
                     
                     <h3 className='text-base font-normal mt-4'>Twitter/X</h3>
                     <input value={twitter} onChange={(e)=>{setTwitter(e.target.value)}} className='border-jel-gray-3 px-4 outline-black border-[1px] rounded-xl w-full h-12 mt-2 flex items-center justify-center '/>
@@ -249,7 +249,7 @@ const SettingsModal = () => {
 
                   <div className='pt-4 flex flex-row gap-4'>
                     <button onClick={()=>{
-                      settingType==0 ? (user? updateUserDetails() : createUser()) : settingType==1? updateHighlights(highlights) : null;
+                      settingType==0 ? (user? updateUserDetails() : createUser()) : settingType==1? updateHighlights(highlights) : null; window.location.reload();
                     }} className='bg-black text-white font-semibold rounded-xl cursor-pointer py-3 px-6'>Save</button>
                     <button onClick={()=>{
                       (address && user?.username) ? setOpenSettings(false) : setError("Set Profile Details First");
