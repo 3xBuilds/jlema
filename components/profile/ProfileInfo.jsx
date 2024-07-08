@@ -335,7 +335,7 @@ const ProfileInfo = () => {
   return (
     < >
         <div id="badges" className="flex sm:items-start sm:justify-start justify-center items-center fixed -translate-y-[60rem] duration-500 top-[40px] z-50 sm:left-1 max-sm:left-0 max-sm:w-full">
-            <div className="rounded-xl px-4 bg-white shadow-xl h-[92vh] sm:w-[20rem] mx-auto w-[100%] max-sm:mx-auto shadow-black/20">
+            <div className="rounded-xl px-5 bg-white shadow-xl h-[92vh] sm:w-[20rem] mx-auto w-[100%] max-sm:mx-auto shadow-black/20">
                 <div className="flex flex-row border-b-[1px] pb-2 border-black  items-center justify-center gap-5">
                     <h3 className="text-[1.5rem] font-bold">Badges</h3>
                     <div className="w-full">

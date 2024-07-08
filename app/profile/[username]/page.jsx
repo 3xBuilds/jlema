@@ -83,7 +83,7 @@ const Profile = () => {
 
     {showNftInfo && <NftInfoModal showNftInfo={showNftInfo} setShowNftInfo={setShowNftInfo}/>}
       <div className="flex flex-row mt-16 pt-1">
-       <div className='w-[328px] max-md:w-screen pb-20 h-full fixed noscr bg-white top-14 left-0 shadow-jel-card items-center py-10 px-2'>
+       <div className='w-[328px] max-md:w-screen pb-20 h-full fixed noscr bg-white top-14 left-0 shadow-jel-card items-center py-10 max-sm:px-2 px-4'>
           <ProfileInfo/>
           <div className="sm:hidden my-4">
             <Highlights/>
