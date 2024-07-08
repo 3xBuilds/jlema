@@ -152,6 +152,8 @@ const Raffle = () => {
     useEffect(()=>{
       if(isConnected){
         setConnected(true);
+        fetchActive();
+        fetchEnded()
       }
     },[isConnected])
 
