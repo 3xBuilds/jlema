@@ -155,12 +155,80 @@ export default async function pointsFetcher(user){
                             const attributes = nftData[tokenId].attributes[0];
                             // console.log (attributes.value);
                             switch(attributes.value){
-                                case "1 of 1":
+                                case "Skeleton":
+                                    console.log(attributes.value);
                                     badges[5] = "OneofOne";
                                     badge += 1;
 
                                     points+=5000;
                                     break;
+                                case "Ninja":
+                                    console.log(attributes.value);
+                                    badges[5] = "OneofOne";
+                                    badge += 1;
+
+                                    points+=5000;
+                                    break;
+
+                                case "Ghost":
+                                    console.log(attributes.value);
+                                    badges[5] = "OneofOne";
+                                    badge += 1;
+
+                                    points+=5000;
+                                    break;
+                                case "Hacker":
+                                    console.log(attributes.value);
+                                    badges[5] = "OneofOne";
+                                    badge += 1;
+
+                                    points+=5000;
+                                    break;
+                                case "Yin Yang":
+                                    console.log(attributes.value);
+                                    badges[5] = "OneofOne";
+                                    badge += 1;
+
+                                    points+=5000;
+                                    break;
+                                case "Flame":
+                                    console.log(attributes.value);
+                                    badges[5] = "OneofOne";
+                                    badge += 1;
+
+                                    points+=5000;
+                                    break;
+
+                                case "Tribe":
+                                    console.log(attributes.value);
+                                    badges[5] = "OneofOne";
+                                    badge += 1;
+
+                                    points+=5000;
+                                    break;
+                                case "Banana":
+                                    console.log(attributes.value);
+                                    badges[5] = "OneofOne";
+                                    badge += 1;
+
+                                    points+=5000;
+                                    break;
+
+                                case "Wood":
+                                    console.log(attributes.value);
+                                    badges[5] = "OneofOne";
+                                    badge += 1;
+
+                                    points+=5000;
+                                    break;
+                                case "Banana":
+                                    console.log(attributes.value);
+                                    badges[5] = "OneofOne";
+                                    badge += 1;
+
+                                    points+=5000;
+                                    break;
+                                
                                 case "Snake":
                                     badges[6] = "Snake";
                                     badge += 1;
