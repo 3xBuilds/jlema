@@ -221,7 +221,7 @@ export default async function pointsFetcher(user){
 
                                     points+=5000;
                                     break;
-                                case "Banana":
+                                case "Spirit":
                                     console.log(attributes.value);
                                     badges[5] = "OneofOne";
                                     badge += 1;
