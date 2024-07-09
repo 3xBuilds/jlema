@@ -215,8 +215,7 @@ export default async function pointsFetcher(user){
                                     points+=200;
                                     break;
                                 case "Old School Tattoos":
-                                    badges[14] = "Yakkuza";
-                                    badge += 1;
+                                    
 
                                     oldSchool++;
                                     break;
@@ -228,6 +227,8 @@ export default async function pointsFetcher(user){
                         })
     
                         if(oldSchool >=5){
+                            badges[14] = "Yakkuza";
+                            badge += 1;
                             points += 1000;
                         }
                         // console.log(points);

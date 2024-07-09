@@ -118,7 +118,7 @@ const Leaderboard = () => {
               else{
                 router.push("/profile");
               }
-            }} className="col-span-10 grid grid-cols-10 hover:cursor-crosshair duration-100 hover:bg-black/10 max-md:hidden">
+            }} className="col-span-10 grid grid-cols-10 hover:cursor-pointer duration-100 hover:bg-black/10 max-md:hidden">
               <div  className="col-span-1 flex items-center justify-center max-md:justify-start"><h3 className=" font-semibold text-base text-black">{holder?.rank}</h3></div>
               <div className="col-span-5 flex flex-row justify-start items-center p-2">
                 <div className="border-[1px] overflow-hidden rounded-md border-jel-gray-3 w-16 h-16 aspect-square">
@@ -140,7 +140,7 @@ const Leaderboard = () => {
                 
                 else{
                   router.push("/profile");
-                }}} className="col-span-10 grid grid-cols-10 hover:cursor-crosshair duration-100 hover:bg-black/10 md:hidden">
+                }}} className="col-span-10 grid grid-cols-10 hover:cursor-pointer duration-100 hover:bg-black/10 md:hidden">
               <div  className="col-span-1 flex items-center justify-center max-md:justify-start"><h3 className=" font-semibold text-base text-black">{holder?.rank}</h3></div>
               <div className="col-span-8 flex flex-row justify-start items-center p-2">
                 <div className="border-[1px] overflow-hidden rounded-md border-jel-gray-3 w-16 h-16 aspect-square">
@@ -171,7 +171,7 @@ const Leaderboard = () => {
                 
                 else{
                   router.push("/profile");
-                }}} className="col-span-10 grid grid-cols-10 hover:cursor-crosshair duration-100 hover:bg-black/10">
+                }}} className="col-span-10 grid grid-cols-10 hover:cursor-pointer duration-100 hover:bg-black/10">
               <div className="col-span-1 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.rank}</h3></div>
               <div className="col-span-5 flex flex-row justify-start items-center p-2">
                 <div className="border-[1px] overflow-hidden rounded-md border-jel-gray-3 w-16 h-16 aspect-square">
@@ -206,7 +206,7 @@ const TopperCard = ({holder, ind}) => {
             
             else{
               router.push("/profile");
-            }}} className="border-[1px] hover:cursor-cell border-jel-gray-3 rounded-xl flex items-end justify-center overflow-hidden relative">
+            }}} className="border-[1px] hover:cursor-pointer border-jel-gray-3 rounded-xl flex items-end justify-center overflow-hidden relative">
           <Image src={holder?.dp == null ? defImg : holder.dp} width={1000} height={1000} className=" h-full object-contain" />
           <div className="absolute bottom-0 left-0 bg-gradient-to-t from-white via-transparent to-transparent z-10 w-full h-full"></div>
           <h3 className="text-black top-4 left-5 font-semibold text-lg absolute z-20">
