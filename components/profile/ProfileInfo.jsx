@@ -550,7 +550,7 @@ const ProfileInfo = () => {
                                 <Image className='w-24 h-24 p-4 rounded-full shadow-xl my-3 mx-auto' src={require(`../../assets/badges/${showBadgeInfo.image}.png`)} />
                                 <h3 className='font-semibold text-[1.5rem]'>{showBadgeInfo.name}</h3>
                                 <h3 className='text-sm text-center h-[2rem] w-full'>{showBadgeInfo.description}</h3>
-                                <h5 className='bg-jel-gray-4/30 px-5 py-2 rounded-xl font-bold my-5'>+{showBadgeInfo.points}</h5>
+                                <h5 className='bg-jel-gray-4/30 px-5 py-2 rounded-xl font-bold my-5'>+{showBadgeInfo.points.toLocaleString()}</h5>
 
                                 </div>}
                     </div>
@@ -573,7 +573,7 @@ const ProfileInfo = () => {
             </div>
             <div className='flex flex-col items-center justify-center gap-1 py-4'>
                 <h2 className=' font-normal text-xs text-jel-gray-4 text-center'>Points</h2>
-                <h3 className=' font-medium text-sm text-black text-center'>{user?.points}</h3>
+                <h3 className=' font-medium text-sm text-black text-center'>{user?.points.toLocaleString()}</h3>
             </div>
             <div className='flex flex-col items-center justify-center gap-1 py-4'>
                 <h2 className=' font-normal text-xs text-jel-gray-4 text-center'>Badges</h2>

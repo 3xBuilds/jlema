@@ -131,7 +131,7 @@ const Leaderboard = () => {
                 </div>
               </div>
               <div className="col-span-1 flex items-center justify-center"><h3 className=" font-semibold text-base text-black max-md:hidden">{holder?.badges.length}</h3></div>
-              <div className="col-span-3 flex items-center justify-center max-md:justify-end"><h3 className=" font-semibold text-base text-black max-md:text-right">{holder?.points}</h3></div>
+              <div className="col-span-3 flex items-center justify-center max-md:justify-end"><h3 className=" font-semibold text-base text-black max-md:text-right">{holder?.points.toLocaleString()}</h3></div>
             </div>
             ))}
 
@@ -153,7 +153,7 @@ const Leaderboard = () => {
                 </div>
               </div>
               <div className="col-span-1 flex items-center justify-center max-md:hidden"><h3 className=" font-semibold text-base text-black ">{holder?.badges}</h3></div>
-              <div className="col-span-1 flex items-center justify-center max-md:justify-end"><h3 className=" font-semibold text-base text-black max-md:text-right">{holder?.points}</h3></div>
+              <div className="col-span-1 flex items-center justify-center max-md:justify-end"><h3 className=" font-semibold text-base text-black max-md:text-right">{holder?.points.toLocaleString()}</h3></div>
             </div>
             ))}
         
@@ -184,7 +184,7 @@ const Leaderboard = () => {
                 </div>
               </div>
               <div className="col-span-1 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.badges.length}</h3></div>
-              <div className="col-span-3 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.points}</h3></div>
+              <div className="col-span-3 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.points.toLocaleString()}</h3></div>
             </div>
             ))}
         
@@ -293,7 +293,7 @@ const TopperCard = ({holder, ind}) => {
           </div>
 
           <div className="bottom-4 right-5 absolute z-20">
-            <h3 className="text-black  font-bold text-xl "> {holder?.points} </h3>
+            <h3 className="text-black  font-bold text-xl "> {holder?.points.toLocaleString()} </h3>
             <h3 className=" text-jel-gray-4  font-medium text-base flex flex-row gap-2 items-center justify-center "> Points </h3>
           </div>
 
