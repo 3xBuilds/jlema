@@ -25,8 +25,8 @@ import { useRouter } from 'next/navigation';
 const Profile = () => {
 
   const {address, isConnected} = useAccount();
-  const [selectedSort, setSelectedSort] = useState(null);
-  const [openSort, setOpenSort] = useState(false);
+  // const [selectedSort, setSelectedSort] = useState(null);
+  // const [openSort, setOpenSort] = useState(false);
   const {user, setUser} = useGlobalContext();
 
   const router = useRouter();

@@ -84,7 +84,7 @@ async function specialEditionFetcher(address){
 
 export default async function pointsFetcher(user){
 
-    
+    console.log("GO");
 
     try{
         var points = 0;
@@ -152,8 +152,11 @@ export default async function pointsFetcher(user){
     
                         //trait based
                         final.map((tokenId)=>{
-                            const attributes = nftData[tokenId].attributes[0];
-                            // console.log (attributes.value);
+                            const attributeArr = nftData[tokenId].attributes;
+
+                            attributeArr.map((attributes)=>{
+                                console.log(attributes.value, tokenId);
+
                             switch(attributes.value){
                                 case "Skeleton":
                                     console.log(attributes.value);
@@ -251,7 +254,7 @@ export default async function pointsFetcher(user){
                                     break;
                                 case "Graphic Tee Peace":
                                     badges[9] = "Peace";
-
+                                    console.log("hello");
                                     badge += 1;
 
                                     points+=200;
@@ -291,6 +294,8 @@ export default async function pointsFetcher(user){
                                 default:
                                     // console.log("ok bye");
                             }
+                            })
+                            
     
                         })
     

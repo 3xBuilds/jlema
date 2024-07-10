@@ -75,12 +75,12 @@ const ProfileInfo = () => {
     const params = useParams();
 
     async function points(){
-        
-            const response = await pointsFetcher(user);
-            console.log(response);
+      console.log("Fetching for ", user);
+      const response = await pointsFetcher(user);
+      console.log(response);
 
-            
-                    setDisplayArr(response) ;  
+      
+              setDisplayArr(response) ;  
                 
             }
     
@@ -93,8 +93,8 @@ const ProfileInfo = () => {
                 points();
             }
             else{
-    
                 setDisplayArr(user?.badges)
+                points();
             }
         }
     },[user])
@@ -597,8 +597,8 @@ const ProfileInfo = () => {
                     </div>
                 </button>}
                 {i == 4 && <button onClick={()=>{bringModal()}} className='relative group'>
-                <div className='absolute opacity-0 duration-300 w-24 group-hover:opacity-100 z-50 left-1/2 -translate-x-1/2 -top-8 flex flex-col items-center justify-center'>
-                    <h3 className='text-sm font-medium text-black bg-white px-2 py-1 rounded shadow-black/10 shadow-lg'>View More</h3>
+                <div className='absolute opacity-0 duration-300 w-20 group-hover:opacity-100 z-10 left-1/2 -translate-x-1/2 -top-8 flex flex-col items-center justify-center'>
+                <h3 className='text-sm font-medium text-black bg-white px-2 py-1 rounded shadow-black/10 shadow-lg'>View More</h3>
                     <svg width="10" height="5" viewBox="0 0 10 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5 5L0 0L10 0L5 5Z" fill="white"/>
                     </svg>
