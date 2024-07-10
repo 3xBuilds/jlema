@@ -111,7 +111,7 @@ const ProfileInfo = () => {
     }
 
     function removeDuplicates(badges, displayArr) {
-        setLockedArr(badges.filter(badge => !displayArr.includes(badge)));
+        setLockedArr(badges.filter(badge => !displayArr?.includes(badge)));
       }
 
     function badgeInfoSetter(badge){
