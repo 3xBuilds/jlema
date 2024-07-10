@@ -115,7 +115,7 @@ const Collectors = () => {
                   <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-3 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.jlemalegendary || "--"}</h3></div>
                   <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-3 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.specialEdition || "--"}</h3></div>
                   <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-3 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.badges.length || "--"}</h3></div>
-                  <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-2 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.points || "--"}</h3></div>
+                  <div onClick={()=>{router.push(`/profile/${holder?.username}`)}} className=" cursor-pointer col-span-2 flex items-center justify-center"><h3 className=" font-semibold text-base text-black">{holder?.points.toLocaleString() || "--"}</h3></div>
                   </div>
                   ))}
                 {
@@ -148,7 +148,7 @@ const Collectors = () => {
                   <h3 className=" text-jel-gray-4  font-normal text-sm flex flex-row gap-1 items-center justify-center "> <span> <Image src={twitter} className="w-4 opacity-70"/> </span> {extractUsername(holder?.twitter)} </h3>
                 </div>
               </div>
-              <div className="col-span-2 flex items-center justify-center max-md:justify-end"><h3 className=" font-semibold text-base text-black max-md:text-right">{holder?.points || "--"}</h3></div>
+              <div className="col-span-2 flex items-center justify-center max-md:justify-end"><h3 className=" font-semibold text-base text-black max-md:text-right">{holder?.points.toLocaleString() || "--"}</h3></div>
             </div>
             ))}
 
