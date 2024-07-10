@@ -79,7 +79,7 @@ const Leaderboard = () => {
 
       ))}
       </div>}
-      <div className="md:hidden w-full overflow-scroll noscr">
+      <div className="sm:hidden w-full overflow-scroll noscr">
       {loading && 
         <div className="h-96 sm:hidden gap-10 ">
          
@@ -89,7 +89,7 @@ const Leaderboard = () => {
 
           </div>
       }
-      {!loading && <div className="grid grid-cols-3 gap-4 h-96 max-sm:hidden">
+      {!loading && <div className="grid grid-cols-3 gap-4 h-96 sm:hidden w-[1200px]">
       {leaderboard?.map((holder, i)=>(
 
           <TopperCard holder={holder} ind = {i}/>
