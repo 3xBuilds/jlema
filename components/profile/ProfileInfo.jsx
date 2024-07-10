@@ -348,7 +348,7 @@ const ProfileInfo = () => {
                     <div className='row-span-6 border-b-2 border-black'>
                         <div className="flex flex-col gap-1 sm:items-start items-center justify-start  my-1">
                             <h2 className='font-semibold'>Collected</h2>
-                            {displayArr.length == 0 ? "None" : <div>
+                            {displayArr?.length == 0 ? "None" : <div>
                                 <div className='flex gap-2 items-center justify-center'>
                                     {displayArr?.slice(0,5).map((item)=>(
                                     <button onClick={()=>{badgeInfoSetter(item)}} className="flex flex-col justify-center items-center">
