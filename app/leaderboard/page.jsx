@@ -31,7 +31,7 @@ const Leaderboard = () => {
   // console.log(user);
 
   const{address, isConnected} = useAccount();
-
+  const [loading, setLoading] = useState(true);
   const [leaderboard, setLeaderboard] = useState();
   const router = useRouter();
 
@@ -39,6 +39,7 @@ const Leaderboard = () => {
     try{
       const res = await axios.get("/api/leaderboard");
       setLeaderboard(res.data.leaderboard);
+      setLoading(false);
       console.log("LEAD", res.data.leaderboard);
     }
     catch(err){
@@ -47,29 +48,11 @@ const Leaderboard = () => {
 
   }
 
-  // const getUser = async () => {
-  //   try{
-  //     const res = await axios.get(`/api/user/${address}`);
-  //     console.log("user", res.data);
-      
-  //     setUser(res.data.user);
-  //   }
-  //   catch(err){
-  //     console.log("Error", err);
-  //   }
-  // }
-
   useEffect(()=>{
     getLeaderboard();
-    // getUser();
-    // test change
+    
   }, [])
 
-  // useEffect(()=>{
-  //   if(!isConnected){
-  //     router.push("/")
-  //   }
-  // },[address])
 
   return (
     <div className="w-[97%] max-md:w-[90%] mx-auto">
@@ -80,21 +63,39 @@ const Leaderboard = () => {
         </h2>
       </div>
       <div className="w-full h-[1px] bg-jel-gray-3 my-4"></div>
-      <div className="grid grid-cols-3 gap-4 h-96 max-sm:hidden">
+      {loading && 
+        <div className="h-96 flex max-sm:hidden gap-10 overflow-x-scroll">
+          {[1,2,3].map(()=>(
+            <div className="w-[30rem] h-96 animate-pulse bg-jel-gray-2/70 rounded-xl">
+              
+              </div>
+          ))}
+          </div>
+      }
+      {!loading && <div className="grid grid-cols-3 gap-4 h-96 max-sm:hidden">
       {leaderboard?.map((holder, i)=>(
 
           <TopperCard holder={holder} ind = {i}/>
 
       ))}
-      </div>
+      </div>}
       <div className="md:hidden w-full overflow-scroll noscr">
-      <div className="flex flex-row gap-5 h-96 w-[1000px]">
+      {loading && 
+        <div className="h-96 sm:hidden gap-10 ">
+         
+            <div className="w-[24rem] h-96 animate-pulse bg-jel-gray-2/70 rounded-xl">
+              
+              </div>
+
+          </div>
+      }
+      {!loading && <div className="grid grid-cols-3 gap-4 h-96 max-sm:hidden">
       {leaderboard?.map((holder, i)=>(
 
           <TopperCard holder={holder} ind = {i}/>
 
       ))}
-      </div>
+      </div>}
       </div>
       <div className="mt-10 flex flex-row justify-between items-center">
         <h1 className="font-bold text-black text-2xl">Collectors</h1>
