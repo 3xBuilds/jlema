@@ -86,8 +86,8 @@ const ProfileInfo = () => {
     
 
     useEffect(()=>{
+      setDisplayArr([])
         if(user != null){
-            setDisplayArr([])
 
             if(user?.wallet == address && path.substring(1, path.length) == "profile"){
                 points();
