@@ -344,7 +344,9 @@ const ProfileInfo = () => {
                         </button>
                     </div>
                 </div>
-                <div className='grid grid-flow-row grid-rows-11 h-full'>
+
+                {/* DESKTOP */}
+                <div className='grid grid-flow-row grid-rows-11 max-sm:hidden h-full'>
                     <div className='row-span-6 border-b-2 border-black'>
                         <div className="flex flex-col gap-1 sm:items-start items-center justify-start  my-1">
                             <h2 className='font-semibold'>Collected</h2>
@@ -555,9 +557,69 @@ const ProfileInfo = () => {
                                 </div>}
                     </div>
                 </div>
+
+                {/* MOBILE */}
+                <div className='grid grid-flow-row grid-rows-5 sm:hidden h-full'>
+                    <div className='row-span-2'>
+                          <div className='my-2'>
+                            <h2 className='font-semibold'>Collected</h2>
+                            <div className='w-[90vw] bg-jel-gray-2 p-2 rounded-xl overflow-x-scroll mt-2 flex gap-2' >
+                              {
+                                displayArr?.map((item)=>(
+                                  <button onClick={()=>{badgeInfoSetter(item)}} className="flex flex-col justify-center items-center">
+                                        <div className=' group'>
+                                        
+                                            <div className=' cursor-pointer w-12 h-12 text-jel-gray-4 rounded-full border-[1px bg-white border-black/20 duration-200 flex items-center justify-center'>
+                                                <Image src={require(`../../assets/badges/${item}.png`)} className='w-8'/>
+                                            </div>
+                                        </div>
+                                        {/* <div>
+                                            <h3>{item}</h3>
+                                            </div> */}
+                                        
+                                        </button>
+                                ))
+                              }
+                            </div>
+                          </div>
+                          <div className='my-2'>
+                            <h2 className='font-semibold'>Locked</h2>
+                            <div className='w-[90vw] bg-jel-gray-2 p-2 rounded-xl overflow-x-scroll mt-2 flex gap-2' >
+                              {
+                                lockedArr?.map((item)=>(
+                                  <button onClick={()=>{badgeInfoSetter(item)}} className="flex flex-col justify-center items-center">
+                                        <div className=' group'>
+                                        
+                                            <div className=' cursor-pointer w-12 h-12 text-jel-gray-4 rounded-full border-[1px bg-white border-black/20 duration-200 flex items-center justify-center'>
+                                                <Image src={require(`../../assets/badges/${item}.png`)} className='w-8'/>
+                                            </div>
+                                        </div>
+                                        {/* <div>
+                                            <h3>{item}</h3>
+                                            </div> */}
+                                        
+                                        </button>
+                                ))
+                              }
+                            </div>
+                          </div>
+                    </div>
+
+                    <div className='row-span-3'>
+                            {showBadgeInfo &&
+                            
+                            <div className='flex flex-col items-center justify-center'>
+                                <Image className='w-24 h-24 p-4 rounded-full shadow-xl my-3 mx-auto' src={require(`../../assets/badges/${showBadgeInfo.image}.png`)} />
+                                <h3 className='font-semibold text-[1.5rem]'>{showBadgeInfo.name}</h3>
+                                <h3 className='text-sm text-center h-[2rem] w-full'>{showBadgeInfo.description}</h3>
+                                <h5 className='bg-jel-gray-4/30 px-5 py-2 rounded-xl font-bold my-5'>+{showBadgeInfo.points.toLocaleString()}</h5>
+
+                                </div>}
+                    </div>
+                </div>
+
             </div>
         </div>
-
 
         <div className='w-[120px] h-[120px] mx-auto border-[1px] border-jel-gray-3 rounded-full overflow-hidden'>
             {user && <Image width={1000} height={1000} src={user?.dp == null ? defaultImage : user.dp} className='w-full h-full object-cover'/>}
