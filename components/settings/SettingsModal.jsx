@@ -156,7 +156,7 @@ const SettingsModal = () => {
     {showHighlighSelectModal && <SelectHighLight highlights={highlights} setHighlights={setHighlights} highNumber={highNumber} setShowHighlighSelectModal={setShowHighlighSelectModal}/>}
         <div className='w-screen h-[100dvh] overflow-y-scroll top-0 left-0 fixed z-40 flex flex-col'>
             <div onClick={()=>{setOpenSettings(false)}} className='fixed w-screen h-screen bg-black/50'></div>
-            <div className='fixed sm:w-[50%] w-[95%] h-[98%] bg-white rounded-xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
+            <div className='fixed sm:w-[50%] w-[95%] h-[98%] bg-white rounded-xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-y-scroll'>
                 <div className='w-full flex flex-row items-center justify-between p-6 border-b-[1px] border-jel-gray-3'>
                   <h2 className='text-black font-bold text-xl'>Settings</h2>
                   <Image onClick={()=>{(address && user?.username) ? setOpenSettings(false) : setError("Set Profile Details First")}} src={cross}/>
