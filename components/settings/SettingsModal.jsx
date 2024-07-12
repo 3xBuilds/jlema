@@ -247,7 +247,7 @@ const SettingsModal = () => {
                     </div>
                   } */}
 
-                  <div className='pt-4 flex flex-row gap-4 fixed bg-slate-300 bottom-5'>
+                  <div className='pt-4 flex flex-row gap-4 fixed bottom-5'>
                     <button onClick={()=>{
                       settingType==0 ? (user? updateUserDetails() : createUser()) : settingType==1? updateHighlights(highlights) : null; window.location.reload();
                     }} className='bg-black text-white font-semibold rounded-xl cursor-pointer py-3 px-6'>Save</button>

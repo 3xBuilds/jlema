@@ -217,10 +217,18 @@ export default function NFTFetcher({wallet}){
     if(selected != 2)
     return (
         <div className="flex flex-wrap gap-2 max-sm:justify-center relative justify-start ml-1 mt-4">
-            {displayNFT.length == 0 && ( balances[0] != 0 || balances[1]) != 0 && <div className="w-full h-[30rem] gap-4 flex items-center z-50 justify-center absolute">
-                <RiLoader5Fill className="text-6xl animate-spin" />
-                <h3 className="font-semibold" >Fetching</h3>
-            </div>}
+            {displayNFT.length == 0 && ( balances[0] != 0 || balances[1]) != 0 && <div>
+                {[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].map((nft, index) => (
+                  <div onClick={()=>{setShowNftInfo(nft)}} key={index} className="rounded-xl hover:shadow-jel-nft duration-200 sm:w-[10.6rem] sm:h-[12.5rem] w-36 h-[11.8rem] cursor-pointer border-[1px] border-jel-gray-3 overflow-hidden flex flex-col">
+                    <div className="h-40 w-full">
+                      <Image width={1920} height={1080} src={nft.img} className="object-cover w-full h-full"/>
+                    </div>
+                    <div className="bg-white text-center py-2">
+                      <h3 className="text-sm font-normal text-black">{`${nft.name} #`}{nft.tokenId}</h3>
+                    </div>
+                </div>
+              ))}
+                </div>}
             {displayNFT.map((nft, index) => (
                   <div onClick={()=>{setShowNftInfo(nft)}} key={index} className="rounded-xl hover:shadow-jel-nft duration-200 sm:w-[10.6rem] sm:h-[12.5rem] w-36 h-[11.8rem] cursor-pointer border-[1px] border-jel-gray-3 overflow-hidden flex flex-col">
                     <div className="h-40 w-full">
