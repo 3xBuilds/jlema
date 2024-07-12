@@ -195,18 +195,22 @@ export default function NFTFetcher({wallet}){
     }
 
     useEffect(()=>{
+
+        if(user){
         setDisplayNFT([])
-        if(user)
-        balanceFetchers();
-        if(selected == 0){
-            fetchJlema(0);
-            fetchJlema(1);
-            fetchJlema(2);
-            fetchJlema(3);
-            fetchJlema(4);
-        }
-        else{
-            fetch();
+
+            balanceFetchers();
+            if(selected == 0){
+                fetchJlema(0);
+                fetchJlema(1);
+                fetchJlema(2);
+                fetchJlema(3);
+                fetchJlema(4);
+            }
+            else{
+                fetch();
+            }
+
         }
     },[selected, user]);
 
