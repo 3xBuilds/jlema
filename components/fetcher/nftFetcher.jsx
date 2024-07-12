@@ -27,6 +27,8 @@ export default function NFTFetcher({wallet}){
     const abi = [jlemaabi, jlemaLegendary, jlemaSE];
     const[user, setUser] = useState(null);
     const [displayNFT, setDisplayNFT] = useState([]);
+
+    const[fetched, setFetched] = useState(false);
  
     var counter = 0;
 
@@ -206,9 +208,12 @@ export default function NFTFetcher({wallet}){
                 fetchJlema(2);
                 fetchJlema(3);
                 fetchJlema(4);
+                setFetched(true);
             }
             else{
                 fetch();
+                setFetched(true);
+
             }
 
         }
@@ -216,31 +221,30 @@ export default function NFTFetcher({wallet}){
 
     if(selected != 2)
     return (
-        <div className="flex flex-wrap gap-2 max-sm:justify-center relative justify-start ml-1 mt-4">
-            {displayNFT.length == 0 && ( balances[0] != 0 || balances[1]) != 0 && <div>
-                {[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].map((nft, index) => (
-                  <div onClick={()=>{setShowNftInfo(nft)}} key={index} className="rounded-xl hover:shadow-jel-nft duration-200 sm:w-[10.6rem] sm:h-[12.5rem] w-36 h-[11.8rem] cursor-pointer border-[1px] border-jel-gray-3 overflow-hidden flex flex-col">
-                    <div className="h-40 w-full">
-                      <Image width={1920} height={1080} src={nft.img} className="object-cover w-full h-full"/>
-                    </div>
-                    <div className="bg-white text-center py-2">
-                      <h3 className="text-sm font-normal text-black">{`${nft.name} #`}{nft.tokenId}</h3>
-                    </div>
-                </div>
-              ))}
-                </div>}
-            {displayNFT.map((nft, index) => (
-                  <div onClick={()=>{setShowNftInfo(nft)}} key={index} className="rounded-xl hover:shadow-jel-nft duration-200 sm:w-[10.6rem] sm:h-[12.5rem] w-36 h-[11.8rem] cursor-pointer border-[1px] border-jel-gray-3 overflow-hidden flex flex-col">
-                    <div className="h-40 w-full">
-                      <Image width={1920} height={1080} src={nft.img} className="object-cover w-full h-full"/>
-                    </div>
-                    <div className="bg-white text-center py-2">
-                      <h3 className="text-sm font-normal text-black">{`${nft.name} #`}{nft.tokenId}</h3>
-                    </div>
-                </div>
-              ))}
+    <div>
+    {displayNFT.length == 0 && balances[selected] != 0 ?<div className="flex flex-wrap gap-2 max-sm:justify-center relative justify-start ml-1 mt-4">
+        {[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].map((nft, index) => (
+              <div key={index} className="rounded-xl hover:shadow-jel-nft duration-200 sm:w-[10.6rem] sm:h-[12.5rem] w-36 h-[11.8rem] bg-jel-gray-2/50 animate-pulse cursor-pointer border-[1px] border-jel-gray-3 overflow-hidden flex flex-col">
+               
+            </div>
+          ))}
 
-        </div>
+    </div>
+         :<div className="flex flex-wrap gap-2 max-sm:justify-center relative justify-start ml-1 mt-4">
+        {displayNFT.map((nft, index) => (
+              <div onClick={()=>{setShowNftInfo(nft)}} key={index} className="rounded-xl hover:shadow-jel-nft duration-200 sm:w-[10.6rem] sm:h-[12.5rem] w-36 h-[11.8rem] cursor-pointer border-[1px] border-jel-gray-3 overflow-hidden flex flex-col">
+                <div className="h-40 w-full">
+                  <Image width={1920} height={1080} src={nft.img} className="object-cover w-full h-full"/>
+                </div>
+                <div className="bg-white text-center py-2">
+                  <h3 className="text-sm font-normal text-black">{`${nft.name} #`}{nft.tokenId}</h3>
+                </div>
+            </div>
+          ))}
+
+    </div>}
+
+</div>
     )
 
     if(selected == 2)
