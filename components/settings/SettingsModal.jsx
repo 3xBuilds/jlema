@@ -331,20 +331,34 @@ const SelectNFT = ({setSelectedImage, setShowNftSelectModal}) => {
       <>
         <div className='w-screen h-screen top-0 left-0 fixed z-50 flex flex-col'>
             <div onClick={()=>{setShowNftSelectModal(false)}} className='fixed w-screen h-screen bg-black/70'></div>
-            <div className='fixed w-[70%] bg-white rounded-xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden'>
+            <div className='fixed w-[20rem] overflow-clip bg-white rounded-xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
                 <div className='w-full flex flex-row items-center justify-between p-6 border-b-[1px] border-jel-gray-3'>
                   <h2 className='text-black font-bold text-xl'>Select NFT</h2>
                   <Image onClick={()=>{setShowNftSelectModal(false)}} src={cross}/>
                 </div>
-                <div className=" p-4 grid max-sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 items-start justify-between gap-4">
+                <div className='overflow-x-scroll'>
+
+                {displayNFT?.length <= 0 ? 
+                <div className=" p-4 flex items-start w-fit justify-center gap-4">
+                  {[0,1,2].map((nft, index) => (
+                      <div key={index} className="rounded-xl hover:shadow-jel-nft duration-200 cursor-pointer border-[1px] border-jel-gray-3 overflow-hidden flex flex-col">
+                        <div className="h-[8rem] w-[8rem] bg-black/30 animate-pulse">
+                          
+                        </div>
+                    </div>
+                  ))}
+                </div>:
+                <div className=" p-4 flex items-start w-fit justify-center gap-4">
                 {displayNFT.map((nft, index) => (
-                      <div onClick={()=>{setSelectedImage(nft.img); setShowNftSelectModal(false)}} key={index} className="rounded-xl hover:shadow-jel-nft duration-200 cursor-pointer border-[1px] border-jel-gray-3 overflow-hidden flex flex-col">
-                        <div className="h-40 w-full">
-                          <Image alt="" width={1920} height={1080} src={nft.img} className="object-cover w-full h-full"/>
+                      <div onClick={()=>{setSelectedImage(nft.img); setShowNftSelectModal(false)}} key={index} className="rounded-xl hover:shadow-jel-nft duration-200 cursor-pointer border-[1px] border-jel-gray-3 overflow-hidden">
+                        <div className="w-[8rem] h-[8rem]">
+                          <Image alt="" width={1920} height={1080} src={nft.img} className="object-cover"/>
                         </div>
                     </div>
                   ))}
             </div>
+                }
+                </div>
             </div>           
         </div>
     </>
@@ -419,7 +433,7 @@ async function fetchJlema(multiplier){
           <div className='fixed w-[70%] bg-white rounded-xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden'>
               <div className='w-full flex flex-row items-center justify-between p-6 border-b-[1px] border-jel-gray-3'>
                 <h2 className='text-black font-bold text-xl'>Select NFT</h2>
-                <Image onClick={()=>{setShowHighlighSelectModal(false)}} src={cross}/>
+                <Image className='cursor-pointer' onClick={()=>{setShowHighlighSelectModal(false)}} src={cross}/>
               </div>
               <div className=" p-4 grid max-sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 items-start justify-between gap-4">
               {displayNFT.map((nft, index) => (
