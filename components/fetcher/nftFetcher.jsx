@@ -178,6 +178,7 @@ export default function NFTFetcher({wallet}){
 
         }
         catch(err){
+            fetchJlema(multiplier);
 
         }
     }
@@ -192,6 +193,7 @@ export default function NFTFetcher({wallet}){
             }
         }
         catch(err){
+            setTimeout(fetch, 1000)
             console.log(err);
         }
     }
@@ -199,10 +201,11 @@ export default function NFTFetcher({wallet}){
     useEffect(()=>{
 
         if(user){
-        setDisplayNFT([])
 
             balanceFetchers();
             if(selected == 0){
+        setDisplayNFT([])
+
                 fetchJlema(0);
                 fetchJlema(1);
                 fetchJlema(2);
@@ -211,6 +214,8 @@ export default function NFTFetcher({wallet}){
                 setFetched(true);
             }
             else{
+        setDisplayNFT([])
+
                 fetch();
                 setFetched(true);
 
