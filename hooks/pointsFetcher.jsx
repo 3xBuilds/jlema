@@ -273,7 +273,7 @@ export default async function pointsFetcher(user){
 
                                     points+=200;
                                     break;
-                                case "Punk hair":
+                                case "Punk":
                                     badges[12] = "Punker";
                                     badge += 1;
 
