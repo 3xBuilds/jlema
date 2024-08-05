@@ -75,7 +75,7 @@ const CurrentRaffles = ({selected, setSelected, activeArr, endArr}) => {
                       <Image width={1080} height={1080} src={trophy} className="w-4" alt="Trophy" />
                       <h3 className="text-sm font-normal text-black">Winner</h3>
                     </div>
-                    <h3 className="text-sm font-bold text-black">{ob.winner.substring(0,5)+"..."+ob.winner.substring(ob.winner.length-4,ob.winner.length)}</h3>
+                    <a href={"https://polygonscan.com/address/"+ob.winner} target="_blank" className="text-sm underline font-bold text-black">{ob.winner.substring(0,5)+"..."+ob.winner.substring(ob.winner.length-4,ob.winner.length)}</a>
                   </div>
                 </div>
               )):
