@@ -186,6 +186,18 @@ const RaffleAdmin = () => {
         }
     }
 
+    async function withdraw(){
+        try{
+            const contract = await contractSetup();
+            await contract.withdraw().then((res)=>{
+                console.log(res);
+            })
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+
     async function fetchEnded(){
         try{
         setEndedRaffleInfo([]);
@@ -263,7 +275,7 @@ const RaffleAdmin = () => {
 
     // ------------------------------------------------------------------------
     
-if(admin)
+// if(admin)
   return (
     <div className='grid grid-cols-12 '>
         <div className=' col-span-2 border-r-[1px] border-jel-gray-3 h-screen flex flex-col gap-2 items-center justify-start pt-20 p-4'>
@@ -273,7 +285,7 @@ if(admin)
 
 
         {selected==0 ? <div className='relative col-span-10  p-10 pt-20 w-full'>
-            <div className='grid grid-cols-3 gap-5 w-full'>
+            <div className='grid grid-cols-4 gap-5 w-full'>
                 <div className=' border-[1px] border-jel-gray-3 rounded-lg w-full h-24 p-5 px-10 flex flex-col items-start justify-center'>
                     <h3 className='text-sm text-jel-gray-4'>Total Raffles</h3>
                     <h3 className='text-2xl font-semibold'>{active+ended}</h3>
@@ -286,6 +298,7 @@ if(admin)
                     <h3 className='text-sm text-jel-gray-4'>Total Ended Raffles</h3>
                     <h3 className='text-2xl font-semibold'>{ended}</h3>
                 </div>
+                <button onClick={()=>{withdraw()}} className='bg-purple-600 rounded-xl w-full h-16 text-white text-2xl hover:-translate-y-1 duration-300 brightness-105 font-bold'>Withdraw</button>
             </div>
             <h2 className='text-jel-gray-4 font-bold text-2xl w-full text-left mt-5'>Live</h2>
             <div className='px-8 py-4 text-center '>
