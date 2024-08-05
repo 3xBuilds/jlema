@@ -275,7 +275,7 @@ const RaffleAdmin = () => {
 
     // ------------------------------------------------------------------------
     
-// if(admin)
+if(admin)
   return (
     <div className='grid grid-cols-12 '>
         <div className=' col-span-2 border-r-[1px] border-jel-gray-3 h-screen flex flex-col gap-2 items-center justify-start pt-20 p-4'>
